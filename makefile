@@ -8,6 +8,7 @@ OBJS		= ${SRC:.c=.o}
 HEADER		= -Iheader
 CC			= gcc
 CFLAGS		= -Werror -Wall -Wextra
+RLFLAGS		= -Wimplicit-function-declaration
 RM			= rm -rf
 
 # COLOUR DEFINITION #
@@ -28,7 +29,7 @@ endif
 # BUILDS
 
 .c.o:		%.o : %.c
-					@${CC} ${CFLAGS} ${HEADER} -c $< -o $(<:.c=.o)
+					@${CC} ${CFLAGS} ${RLFLAGS} ${HEADER} -c $< -o $(<:.c=.o)
 
 all:		${NAME}
 
