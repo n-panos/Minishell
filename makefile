@@ -8,7 +8,8 @@ OBJS		= ${SRC:.c=.o}
 HEADER		= -Iheader
 CC			= gcc
 CFLAGS		= -Werror -Wall -Wextra
-RLFLAGS		= -Wimplicit-function-declaration
+CPPFLAGS	= -I/Users/ipanos-o/.brew/opt/readline/include
+LDFLAGS		= -L/Users/ipanos-o/.brew/opt/readline/lib
 RM			= rm -rf
 
 # COLOUR DEFINITION #
@@ -23,18 +24,18 @@ RESET   := \033[0m
 ifdef DEBUG
     CFLAGS += -g3 -fsanitize=address
 else
-    CFLAGS += -O3
+    CFLAGS += -g
 endif
 
 # BUILDS
 
 .c.o:		%.o : %.c
-					@${CC} ${CFLAGS} ${RLFLAGS} ${HEADER} -c $< -o $(<:.c=.o)
+					@${CC} ${CFLAGS} ${CPPFLAGS} ${HEADER} -c $< -o $(<:.c=.o)
 
 all:		${NAME}
 
 ${NAME}:	${OBJS}
-					@${CC} ${CFLAGS} ${OBJS} -o ${NAME}
+					@${CC} ${CFLAGS} -lreadline ${LDFLAGS} ${OBJS} -o ${NAME}
 					@echo "${GREEN}<---> Minishell executor Compiled! ⌐(ಠ۾ಠ)¬ <--->${RESET}"
 
 clean:
