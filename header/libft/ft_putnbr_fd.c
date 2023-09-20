@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   eminishell.h                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/09/20 12:52:32 by ipanos-o         ###   ########.fr       */
+/*   Created: 2019/11/20 11:57:37 by ipanos-o          #+#    #+#             */
+/*   Updated: 2020/12/23 14:15:45 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EMINISHELL_H
-# define EMINISHELL_H
-# include <stdio.h>
-# include <unistd.h>
-# include "libft/libft.h"
-# include <readline/history.h>
-# include <readline/readline.h>
+#include "libft.h"
 
-//      HAND CRAFTED FUNCTIONS -- BUILTINS
+//escribe en el fd el numero "n"
 
-int		ft_exec_pwd(void);
-int		ft_exec_echo(char *str, int flag);
-int		ft_exec_env(char **env);
-int		ft_exec_export(char **env);
+void	ft_putnbr_fd(int n, int fd)
+{
+	char			c;
+	unsigned int	nb;
 
-#endif
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		nb = (unsigned int)(n * -1);
+	}
+	else
+		nb = (unsigned int)n;
+	if (nb > 9)
+		ft_putnbr_fd(nb / 10, fd);
+	c = (nb % 10) + 48;
+	ft_putchar_fd(c, fd);
+}

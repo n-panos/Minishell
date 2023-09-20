@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   eminishell.h                                       :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/09/20 12:52:32 by ipanos-o         ###   ########.fr       */
+/*   Created: 2023/09/20 12:20:35 by ipanos-o          #+#    #+#             */
+/*   Updated: 2023/09/20 12:50:36 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EMINISHELL_H
-# define EMINISHELL_H
-# include <stdio.h>
-# include <unistd.h>
-# include "libft/libft.h"
-# include <readline/history.h>
-# include <readline/readline.h>
+#include "eminishell.h"
 
-//      HAND CRAFTED FUNCTIONS -- BUILTINS
+int	ft_exec_env(char **env)
+{
+	int	i;
 
-int		ft_exec_pwd(void);
-int		ft_exec_echo(char *str, int flag);
-int		ft_exec_env(char **env);
-int		ft_exec_export(char **env);
-
-#endif
+	i = 0;
+	if (env == NULL)
+		return (1);
+	while (env[i])
+	{
+		printf("%s\n", env[i]);
+		i++;
+	}
+	return (0);
+}

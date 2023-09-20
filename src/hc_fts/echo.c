@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   eminishell.h                                       :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/09/20 12:52:32 by ipanos-o         ###   ########.fr       */
+/*   Created: 2023/09/20 12:12:03 by ipanos-o          #+#    #+#             */
+/*   Updated: 2023/09/20 12:15:59 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EMINISHELL_H
-# define EMINISHELL_H
-# include <stdio.h>
-# include <unistd.h>
-# include "libft/libft.h"
-# include <readline/history.h>
-# include <readline/readline.h>
+#include "eminishell.h"
 
-//      HAND CRAFTED FUNCTIONS -- BUILTINS
+//	revisar la flag a ver como se recibe, en este 
+//	caso 0 es sin flag, y 1 es con flag -n
 
-int		ft_exec_pwd(void);
-int		ft_exec_echo(char *str, int flag);
-int		ft_exec_env(char **env);
-int		ft_exec_export(char **env);
-
-#endif
+int	ft_exec_echo(char *str, int flag)
+{
+	if (str == NULL)
+		return (1);
+	if (flag == 0)
+		printf("%s\n", str);
+	if (flag == 1)
+		printf("%s", str);
+	return (0);
+}

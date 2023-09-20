@@ -1,11 +1,12 @@
 # PROG DEFINITION
 
 NAME		= e_minishell
-
 SRC			= src/main.c
+BSRC		= src/hc_fts/pwd.c src/hc_fts/echo.c src/hc_fts/env.c src/hc_fts/export.c
 
-OBJS		= ${SRC:.c=.o}
+OBJS		= ${SRC:.c=.o} ${BSRC:.c=.o}
 HEADER		= -Iheader
+LIBS		= -Lheader/libft -lft
 CC			= gcc
 CFLAGS		= -Werror -Wall -Wextra
 CPPFLAGS	= -I/Users/ipanos-o/.brew/opt/readline/include
@@ -35,13 +36,16 @@ endif
 all:		${NAME}
 
 ${NAME}:	${OBJS}
-					@${CC} ${CFLAGS} -lreadline ${LDFLAGS} ${OBJS} -o ${NAME}
+					@echo "${GREEN}<---> Compiling Libft <--->${RESET}"
+					@make -C header/libft
+					@${CC} ${CFLAGS} -lreadline ${LDFLAGS} ${OBJS} ${LIBS} -o ${NAME}
 					@echo "${GREEN}<---> Minishell executor Compiled! ⌐(ಠ۾ಠ)¬ <--->${RESET}"
 
 clean:
 					@${RM} ${OBJS}
 
 fclean:		clean
+					@make -C header/libft fclean
 					@${RM} ${NAME}
 					@echo "$(GREEN)<==========> ALL REMOVED <==========>${RESET}"
 

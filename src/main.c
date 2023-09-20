@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 13:17:09 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/09/14 11:18:45 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/09/20 12:26:48 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ int	main(int argc, char **argv, char **envp)
 		prompt = readline("\033[0;32mminishell % \033[0;0m");
 		if (prompt[0] != '\0')
 			add_history(prompt);
+		if (ft_strncmp(prompt, "pwd", ft_strlen(prompt)) == 0)
+			ft_exec_pwd();
+		if (ft_strncmp(prompt, "env", ft_strlen(prompt)) == 0)
+			ft_exec_env(envp);
 	}
 	cmd = argv[1];
 	return (0);

@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   eminishell.h                                       :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/09/20 12:52:32 by ipanos-o         ###   ########.fr       */
+/*   Created: 2019/11/14 18:22:37 by ipanos-o          #+#    #+#             */
+/*   Updated: 2020/12/23 13:07:48 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EMINISHELL_H
-# define EMINISHELL_H
-# include <stdio.h>
-# include <unistd.h>
-# include "libft/libft.h"
-# include <readline/history.h>
-# include <readline/readline.h>
+#include "libft.h"
 
-//      HAND CRAFTED FUNCTIONS -- BUILTINS
+//revisa si el caracter es letra mayuscula o miniscula en el codigo ascii
 
-int		ft_exec_pwd(void);
-int		ft_exec_echo(char *str, int flag);
-int		ft_exec_env(char **env);
-int		ft_exec_export(char **env);
-
-#endif
+int	ft_isalpha(int c)
+{
+	if ((65 <= c && c <= 90) || (97 <= c && c <= 122))
+		return (1);
+	return (0);
+}

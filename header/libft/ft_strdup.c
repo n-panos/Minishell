@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   eminishell.h                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/09/20 12:52:32 by ipanos-o         ###   ########.fr       */
+/*   Created: 2019/11/14 17:23:14 by ipanos-o          #+#    #+#             */
+/*   Updated: 2022/09/14 12:33:30 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EMINISHELL_H
-# define EMINISHELL_H
-# include <stdio.h>
-# include <unistd.h>
-# include "libft/libft.h"
-# include <readline/history.h>
-# include <readline/readline.h>
+#include "libft.h"
 
-//      HAND CRAFTED FUNCTIONS -- BUILTINS
+//copia string 
 
-int		ft_exec_pwd(void);
-int		ft_exec_echo(char *str, int flag);
-int		ft_exec_env(char **env);
-int		ft_exec_export(char **env);
+char	*ft_strdup(const char *s1)
+{
+	int		i;
+	char	*copy;
+	int		j;
 
-#endif
+	i = ft_strlen(s1) + 1;
+	j = 0;
+	copy = malloc(i);
+	if (!copy)
+		return (NULL);
+	while (s1[j] != '\0')
+	{
+		copy[j] = s1[j];
+		j++;
+	}
+	copy[j] = '\0';
+	return (copy);
+}

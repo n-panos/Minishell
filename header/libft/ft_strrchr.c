@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   eminishell.h                                       :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/09/20 12:52:32 by ipanos-o         ###   ########.fr       */
+/*   Created: 2019/11/08 13:05:56 by ipanos-o          #+#    #+#             */
+/*   Updated: 2022/10/19 10:10:46 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EMINISHELL_H
-# define EMINISHELL_H
-# include <stdio.h>
-# include <unistd.h>
-# include "libft/libft.h"
-# include <readline/history.h>
-# include <readline/readline.h>
+#include "libft.h"
 
-//      HAND CRAFTED FUNCTIONS -- BUILTINS
+char	*ft_strrchr(const char *s, int c)
+{
+	char	*str;
+	int		i;
 
-int		ft_exec_pwd(void);
-int		ft_exec_echo(char *str, int flag);
-int		ft_exec_env(char **env);
-int		ft_exec_export(char **env);
-
-#endif
+	i = 0;
+	if (c == '\0')
+		return (ft_strchr(s, '\0'));
+	if (s == NULL)
+		return (NULL);
+	str = NULL;
+	while (s[i] != '\0')
+	{
+		if (s[i] == c)
+			str = (char *)&s[i];
+		i++;
+	}
+	return (str);
+}

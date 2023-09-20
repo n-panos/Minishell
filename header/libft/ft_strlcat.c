@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   eminishell.h                                       :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/09/20 12:52:32 by ipanos-o         ###   ########.fr       */
+/*   Created: 2019/11/14 15:07:21 by ipanos-o          #+#    #+#             */
+/*   Updated: 2020/12/23 14:46:14 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EMINISHELL_H
-# define EMINISHELL_H
-# include <stdio.h>
-# include <unistd.h>
-# include "libft/libft.h"
-# include <readline/history.h>
-# include <readline/readline.h>
+#include "libft.h"
 
-//      HAND CRAFTED FUNCTIONS -- BUILTINS
+//concatena dos strings en dst (añada lo que haya en src al final de dst)
 
-int		ft_exec_pwd(void);
-int		ft_exec_echo(char *str, int flag);
-int		ft_exec_env(char **env);
-int		ft_exec_export(char **env);
+size_t	ft_strlcat(char *dst, const char *src, size_t len)
+{
+	size_t	d;
+	size_t	s;
+	size_t	i;
 
-#endif
+	d = ft_strlen(dst);
+	s = ft_strlen(src);
+	if (len <= d)
+		s += len;
+	else
+		s += d;
+	i = 0;
+	while (src[i] != '\0' && d + 1 < len)
+	{
+		dst[d] = src[i];
+		i++;
+		d++;
+	}
+	dst[d] = '\0';
+	return (s);
+}
