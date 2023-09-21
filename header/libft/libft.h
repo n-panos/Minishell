@@ -6,15 +6,13 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 18:15:46 by ipanos-o          #+#    #+#             */
-/*   Updated: 2022/09/19 11:44:00 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/09/21 11:51:55 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+# include "get_next_line.h"
 
 typedef struct s_list
 {
@@ -23,6 +21,7 @@ typedef struct s_list
 }				t_list;
 void			*ft_memset(void *str, int c, size_t len);
 void			ft_bzero(void *str, size_t n);
+void			ft_free_mtx(char **mtx);
 void			*ft_memcpy(void	*dst, const	void *src, size_t len);
 void			*ft_memccpy(void *dst, const void *src, int c, size_t len);
 void			*ft_memmove(void *dst, const void *src, size_t len);
@@ -43,11 +42,13 @@ size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t			ft_strlcat(char *dst, const char *src, size_t dstsize);
 char			*ft_strnstr(const char *haystack,
 					const char *needle, size_t len);
+long int		ft_atoli(const char *str);					
 int				ft_atoi(const char *str);
 void			*ft_calloc(size_t count, size_t size);
 char			*ft_strdup(const char *s1);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strfjoin(char *s1, char const *s2);
 char			*ft_strtrim(char const *s1, char const *set);
 char			**ft_split(char const *s, char c);
 char			*ft_itoa(int n);

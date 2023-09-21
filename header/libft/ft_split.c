@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 11:42:25 by ipanos-o          #+#    #+#             */
-/*   Updated: 2022/10/19 10:12:45 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/04/19 10:43:59 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	ft_count_words(const char *str, char c)
 	int	count;
 
 	count = 0;
-	while (*str)
+	while (*str != '\0')
 	{
 		while (*str && *str == c)
 			str++;
@@ -62,7 +62,7 @@ char	**ft_split(const char *s, char c)
 	int		i;
 
 	i = 0;
-	if (s == NULL)
+	if (s == '\0')
 		return (NULL);
 	arr = (char **)malloc(sizeof(char *) * (ft_count_words(s, c) + 1));
 	if (!arr)

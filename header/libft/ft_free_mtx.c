@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_free_mtx.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/14 18:37:14 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/06/26 11:06:48 by ipanos-o         ###   ########.fr       */
+/*   Created: 2023/09/21 11:51:06 by ipanos-o          #+#    #+#             */
+/*   Updated: 2023/09/21 11:51:29 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-//busca el caracter "c" en el string y devuelve su posicion
-
-char	*ft_strchr(const char *str, int c)
+void	ft_free_mtx(char **mtx)
 {
-	char	*s;
+	int	i;
 
-	s = (char *)str;
-	while (*s != '\0')
+	i = 0;
+	while (mtx[i])
 	{
-		if (*s == c)
-			return (s);
-		s++;
+		free(mtx[i]);
+		mtx[i] = NULL;
+		i++;
 	}
-	if (c == '\0')
-		return (s);
-	return (NULL);
+	free(mtx);
+	mtx = NULL;
 }
