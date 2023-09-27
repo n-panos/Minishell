@@ -6,13 +6,13 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:20:35 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/09/20 12:50:36 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/09/27 11:10:31 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "eminishell.h"
 
-int	ft_exec_env(char **env)
+int	ft_exec_env(char **env, int flag)
 {
 	int	i;
 
@@ -21,8 +21,13 @@ int	ft_exec_env(char **env)
 		return (1);
 	while (env[i])
 	{
-		printf("%s\n", env[i]);
-		i++;
+		if (flag == 1 && ft_strncmp(env[i], "_=/", 3) == 0)
+			i++;
+		else
+		{
+			printf("%s\n", env[i]);
+			i++;
+		}
 	}
 	return (0);
 }

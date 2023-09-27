@@ -1,53 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 12:12:03 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/09/27 11:47:07 by ipanos-o         ###   ########.fr       */
+/*   Created: 2023/09/27 12:09:06 by ipanos-o          #+#    #+#             */
+/*   Updated: 2023/09/27 12:33:56 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "eminishell.h"
 
-//	revisar la flag a ver como se recibe, en este 
-//	caso 0 es sin flag, y 1 es con flag -n
+char	*ft_get_dir(char *dir);
 
-int	ft_print_echo(char *str, int flag);
-
-int	ft_exec_echo(char *str)
+int	ft_exec_cd(char *str)
 {
 	char	**aux;
 	int		i;
-	int		ret;
-
+	char	*dir;
 
 	if (str == NULL)
 		return (1);
 	aux = ft_split(str, ' ');
 	i = 0;
-	ret = 0;
 	while (aux[i])
 		i++;
-	if (i == 1)
-		ft_print_echo(" ", 0);
 	if (i == 2)
-		ft_print_echo(aux[1], 0);
-	else if (i == 3 && ft_strncmp(aux[1], "-n", ft_strlen("-n")) == 0)
-		ft_print_echo(aux[2], 1);
+		dir = ft_get_dir(aux[1]);
 	else
-		ret = 2;
-	ft_free_mtx(aux);
-	return (ret);
+		return (0);
+	return (chdir(dir));
 }
 
-int	ft_print_echo(char *str, int flag)
+char	*ft_get_dir(char *dir)
 {
-	if (flag == 0)
-		printf("%s\n", str);
-	else if (flag == 1)
-		printf("%s", str);
-	return (0);
+	char	str[FILENAME_MAX];
+	char	*ret;
+
+	if (ft_strncmp(dir, "/", ft_strlen("/")) == 0)
+		ret = dir;
+	else
+	{
+		getcwd(str, sizeof(str));
+		ret = ft_strjoin(str, "/");
+		ret = ft_strfjoin(ret, dir);
+	}
+	return (ret);
 }

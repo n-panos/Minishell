@@ -1,8 +1,9 @@
 # PROG DEFINITION
 
 NAME		= e_minishell
-SRC			= src/main.c
-BSRC		= src/hc_fts/pwd.c src/hc_fts/echo.c src/hc_fts/env.c src/hc_fts/export.c
+SRC			= src/builtins.c
+BSRC		= src/hc_fts/pwd.c src/hc_fts/echo.c src/hc_fts/env.c \
+				src/hc_fts/export.c src/hc_fts/cd.c src/hc_fts/unset.c
 
 OBJS		= ${SRC:.c=.o} ${BSRC:.c=.o}
 HEADER		= -Iheader
