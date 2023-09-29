@@ -19,11 +19,15 @@ git push origin 'name'->	push a una branch
 
 git add
 
+git reset "filename" ->		deshacer git add "file"
+
 git commit -m "comment"
 
 git status
 
 git log
+
+.gitignore
 
 
 ## Referencias :
