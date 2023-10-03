@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/09/29 10:17:45 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/10/03 20:13:25 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,18 @@
 # include <readline/readline.h>
 
 //      HAND CRAFTED FUNCTIONS -- BUILTINS
+
+enum	node
+{
+	NODE_COMMAND,
+	NODE_PIPE,
+	NODE_ARGUMENT,
+	NODE_REDIRECT_INPUT,
+	NODE_REDIRECT_OUTPUT,
+	NODE_REDIRECT_APPEND,
+	NODE_HERE_DOC,
+	NODE_DELIMITER
+}	node_types;
 
 typedef struct s_prg
 {

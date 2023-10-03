@@ -6,11 +6,13 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:50:28 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/09/27 11:10:45 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/10/03 19:14:39 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "eminishell.h"
+
+//AÑADIR NUEVAS VARIABLES
 
 static int	*ft_add_used(int *prev_used, int new_used);
 static int	ft_check_list(int *list, int n);
