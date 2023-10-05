@@ -6,13 +6,13 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 09:25:43 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/05 12:22:53 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/06 00:09:00 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
-# include "../libft/includes/libft.h"
+# include "../src/libft/includes/libft.h"
 /*
 *	Estructura con variables utiles
 */

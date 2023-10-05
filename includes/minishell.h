@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/05 12:42:44 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/06 00:08:23 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
-# include "../libft/includes/libft.h"
+# include "../src/libft/includes/libft.h"
 # define PROMPT "\033[0;92mMinishell> \033[0m"
 # define DELIMITERS	"<>|"
 # include "parser.h"
