@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 14:16:31 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/06 00:05:36 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/08 17:27:21 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,24 +55,27 @@ char	*ft_createpid(char *str, int index)
 	return (result);
 }
 
+/*
+*	Retorna -1 en caso de error
+*/
 int	ft_tr_status(t_parser *tools, int index)
 {
 	t_truncate	*tr;
 
 	tr = malloc(sizeof(t_truncate));
 	if (tr == NULL)
-		return (0);
+		return (-1);
 	tr->str1 = ft_substr(tools->input, 0, index);
 	tr->str2 = ft_substr(tools->input, index + 2, ft_strlen(tools->input));
 	tr->var1 = ft_itoa(tools->status);
 	if (!tr->str1 || !tr->str2 || !tr->var1)
-		return (ft_free_tr(tr), 0);
+		return (ft_free_tr(tr), -1);
 	tr->tmp = ft_strjoin(tr->str1, tr->var1);
 	if (tr->tmp == NULL)
-		return (ft_free_tr(tr), 0);
+		return (ft_free_tr(tr), -1);
 	tr->result = ft_strjoin(tr->tmp, tr->str2);
 	if (tr->result == NULL)
-		return (ft_free_tr(tr), 0);
+		return (ft_free_tr(tr), -1);
 	free(tools->input);
 	tools->input = tr->result;
 	return (index);
@@ -98,7 +101,7 @@ int	ft_tr_env(t_parser *tools, int index)
 	{
 		tr->tmp = ft_strjoin(tr->str1, tr->var2);
 		tr->result = ft_strjoin(tr->tmp, tr->str2);
-		sum = ft_strlen(tr->var2);
+		sum = ft_strlen(tr->var2) - 1;
 	}
 	if (tr->result == NULL)
 		return (ft_free_tr(tr), -1);

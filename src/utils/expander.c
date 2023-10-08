@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:37:30 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/06 00:05:36 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/08 17:23:00 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/*
+*	Retorna -1 en caso de error
+*/
 int	ft_expander(t_parser *tools, int index)
 {
 	char	*str;
@@ -27,7 +30,7 @@ int	ft_expander(t_parser *tools, int index)
 			index = ft_expand_env(tools, index);
 	}
 	else
-		index++;
+		index = ft_not_expand(tools, index);
 	return (index);
 }
 
@@ -48,23 +51,34 @@ char	*ft_get_env(char *str, int index)
 	return (env);
 }
 
+/*
+*	Retorna -1 en caso de error
+*/
 int	ft_getstatus(t_parser *tools, int index)
 {
-	if (ft_tr_status(tools, index) == 0)
+	if (ft_tr_status(tools, index) == -1)
 	{
 		free(tools->input);
 		tools->input = NULL;
-		return (0);
+		return (-1);
 	}
 	return (index);
 }
 
+/*
+* Retorna -1 en caso de error
+*/
 int	ft_getpid(t_parser *tools, int index)
 {
 	tools->input = ft_createpid(tools->input, index);
+	if (tools->input == NULL)
+		return (-1);
 	return (index);
 }
 
+/*
+*	Retorna -1 en caso de error
+*/
 int	ft_expand_env(t_parser *tools, int index)
 {
 	int	i_env;
@@ -74,7 +88,7 @@ int	ft_expand_env(t_parser *tools, int index)
 	{
 		free(tools->input);
 		tools->input = NULL;
-		return (0);
+		return (-1);
 	}
 	return (index + i_env);
 }

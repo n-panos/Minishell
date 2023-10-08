@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   puterror.c                                         :+:      :+:    :+:   */
+/*   ft_free_all_tokens.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 13:12:54 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/08 18:07:47 by erick            ###   ########.fr       */
+/*   Created: 2023/10/06 13:37:36 by erick             #+#    #+#             */
+/*   Updated: 2023/10/08 18:06:56 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ft_parser_error(char *err, char c)
+void	ft_free_all_tokens(t_tokens **lst, void (*del)(void *))
 {
-	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	if (c != 0)
+	t_tokens	*node;
+	t_tokens	*tmp;
+
+	if (!lst || !del)
+		return ;
+	tmp = *lst;
+	while (tmp)
 	{
-		ft_putstr_fd(err, STDERR_FILENO);
-		write(2, "'", 1);
-		write(2, &c, 1);
-		write(2, "'\n", 2);
+		node = tmp->next;
+		del(tmp->value);
+		del(tmp);
+		tmp = node;
 	}
-	else
-		ft_putendl_fd(err, STDERR_FILENO);
-	return (1);
+	*lst = NULL;
 }

@@ -6,12 +6,12 @@ RM 			=	rm -rf
 
 LIBFT		=	src/libft/libft.a
 
-LIST		=	ft_add_back_token.c	ft_new_token.c
+LIST		=	ft_add_back_token.c	ft_new_token.c ft_free_all_tokens.c
 
 MAIN		=	src/main.c
 PARSER		=	loop.c list.c
 EXEC		=
-UTILS		=	input.c tokenizer_utils.c expander.c expander_utils.c inquote.c expander_utils2.c typed.c
+UTILS		=	input.c tokenizer_utils.c expander.c expander_utils.c inquote.c expander_utils2.c typed.c tokenizer.c
 ERROR		=	puterror.c
 
 LIST_PATH	=	$(addprefix src/list/, $(LIST))

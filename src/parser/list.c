@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 11:41:57 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/06 00:05:36 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/08 18:12:07 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_lst_doble(t_tokens *lst)
 		printf("Token %d\n", ++i);
 		printf("NEXT: %p\n", current->next);
 		printf("PREV: %p\n", current->prev);
-		printf("VALUE: %s\n", current->value);
+		printf("VALUE: %s LEN: %zu\n", current->value, ft_strlen(current->value));
 		if (current->type == NODE_ARGUMENT)
 			printf("TYPE: ARGUMENT\n");
 		else if (current->type == NODE_COMMAND)
@@ -82,6 +82,7 @@ static t_tokens	*ft_create(t_parser *tools)
 	t_list		*current_list;
 	t_tokens	*list;
 	t_tokens	*node;
+	char		*value;
 
 	list = NULL;
 	current_list = tools->tokenlst;
@@ -89,10 +90,15 @@ static t_tokens	*ft_create(t_parser *tools)
 		return (NULL);
 	while (current_list)
 	{
-		node = ft_new_token(current_list->content);
+		value = ft_strdup(current_list->content);
+		if (value == NULL)
+			break ;
+		node = ft_new_token(value);
 		ft_add_back_token(&list, node);
 		current_list = current_list->next;
 	}
+	if (current_list != NULL)
+		ft_free_all_tokens(&list, free);
 	return (list);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 20:08:07 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/06 00:05:36 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/08 17:27:07 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ int	ft_delimiters(t_parser *tools, int index)
 	return (index);
 }
 
+/*
+*	Retorna -1 en caso de error
+*/
 int	ft_arguments(t_parser *tools, int index)
 {
 	char	*str;
@@ -44,21 +47,35 @@ int	ft_arguments(t_parser *tools, int index)
 	str = tools->input;
 	while (str[index])
 	{
-		if (str[index] == '"' || str[index] == '\'')
+		if (index > -1 && (str[index] == '"' || str[index] == '\''))
 		{
 			index = ft_in_quote(tools, index);
 			str = tools->input;
 		}
-		if (str[index] == '$')
+		if (index > -1 && str[index] == '$')
 		{
 			index = ft_expander(tools, index);
 			str = tools->input;
 		}
-		if (str[index] == ' ' || str[index] == '\t')
+		if (index > -1 && (str[index] == ' ' || str[index] == '\t'))
 			break ;
-		if (ft_strchr(DELIMITERS, str[index]))
+		if (index == -1 || (ft_strchr(DELIMITERS, str[index])))
 			break ;
 		index++;
 	}
+	if (index == -1)
+		tools->error = 1;
 	return (index);
+}
+
+int	ft_is_empty(char *str)
+{
+	if (ft_strlen(str) == 2)
+	{
+		if (str[0] == ' ' && str[1] == '\0')
+			return (1);
+	}
+	else if (str[0] == '\0')
+		return (1);
+	return (0);
 }

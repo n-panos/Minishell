@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/06 00:08:23 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/06 13:41:43 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@
 # define PROMPT "\033[0;92mMinishell> \033[0m"
 # define DELIMITERS	"<>|"
 # include "parser.h"
-
-typedef struct s_tools
-{
-	int	prueba;
-}	t_tools;
 
 /*
 *	Estructura de tipos de nodos:
@@ -63,11 +58,17 @@ typedef struct s_tokens
 	struct s_tokens		*prev;
 }	t_tokens;
 
+typedef struct s_mini
+{
+	t_tokens	*tk_lst;
+}	t_mini;
+
 /*
 *	Funciones de lista doblemente enlazadas
 */
 t_tokens	*ft_new_token(char	*value);
 void		ft_add_back_token(t_tokens **list, t_tokens *new);
+void		ft_free_all_tokens(t_tokens **lst, void (*del)(void *));
 
 //ERROR
 int			ft_parser_error(char *err, char c);

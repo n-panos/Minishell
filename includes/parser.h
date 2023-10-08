@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 09:25:43 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/06 00:09:00 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/08 18:11:10 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ typedef struct t_parser
 {
 	char				*input;
 	char				**envp;
-	char				**path;
 	t_list				*tokenlst;
 	int					index;
 	int					start;
@@ -63,6 +62,8 @@ int		ft_space_char(t_parser *tools, int index);
 int		ft_delimiters(t_parser *tools, int index);
 int		ft_in_quote(t_parser *tools, int index);
 int		ft_arguments(t_parser *tools, int index);
+t_list	*create_token(t_parser *tools, int index);
+int		ft_is_empty(char *str);
 /* expander_utils.c */
 char	*ft_get_env(char *str, int index);
 char	*ft_createpid(char *str, int index);
@@ -78,5 +79,8 @@ int		ft_getstatus(t_parser *tools, int index);
 int		ft_in_quote(t_parser *tools, int index);
 /* expander_utils2.c */
 int		ft_is_operator(t_parser *tools, int index);
-
+int		ft_not_expand(t_parser *tools, int index);
+/* tokenizer.c */
+t_list	*get_token(t_parser *tools);
+t_list	*create_token(t_parser *tools, int index);
 #endif
