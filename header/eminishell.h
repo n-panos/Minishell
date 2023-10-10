@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/03 20:13:25 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/10/04 09:20:39 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,13 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 
-//      HAND CRAFTED FUNCTIONS -- BUILTINS
+# define COMMAND			1
+# define PIPE				2
+# define ARGUMENT			3
+# define REDIRECT_INPUT		4
+# define REDIRECT_OUTPUT	5
+# define HERE_DOC			6
+# define DELIMITER			7
 
 enum	node
 {
@@ -36,6 +42,8 @@ typedef struct s_prg
 {
 	char	**env;
 }			t_prg;
+
+//      HAND CRAFTED FUNCTIONS -- BUILTINS
 
 int		ft_builtins(t_prg *prg, char *prompt);
 int		ft_exec_pwd(void);

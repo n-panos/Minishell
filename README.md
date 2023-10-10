@@ -29,6 +29,17 @@ git log
 
 .gitignore
 
+### Bash test
+
+heredoc:
+
+<<eof >salida -> no saca nada, heredoc es un almacen temporal
+
+cat <<eof >salida	-> mete a salida lo estrito en el heredoc
+
+ls <<eof >salida	->obvia heredoc y saca por salida solo ls
+
+->heredoc es la combinacion de cat + <<
 
 ## Referencias :
 

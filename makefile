@@ -2,8 +2,8 @@
 
 NAME		= e_minishell
 SRC			= src/builtins.c
-BSRC		= src/hc_fts/pwd.c src/hc_fts/echo.c src/hc_fts/env.c \
-				src/hc_fts/export.c src/hc_fts/cd.c src/hc_fts/unset.c
+BSRC		= src/builtins/pwd.c src/builtins/echo.c src/builtins/env.c \
+				src/builtins/export.c src/builtins/cd.c src/builtins/unset.c
 
 OBJS		= ${SRC:.c=.o} ${BSRC:.c=.o}
 HEADER		= -Iheader
