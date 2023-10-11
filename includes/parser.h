@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 09:25:43 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/08 18:11:10 by erick            ###   ########.fr       */
+/*   Updated: 2023/10/11 11:27:19 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /*
 *	Estructura con variables utiles
 */
-typedef struct t_parser
+typedef struct s_parser
 {
 	char				*input;
 	char				**envp;
@@ -83,4 +83,5 @@ int		ft_not_expand(t_parser *tools, int index);
 /* tokenizer.c */
 t_list	*get_token(t_parser *tools);
 t_list	*create_token(t_parser *tools, int index);
+int		ft_check_nodes(t_parser *tools);
 #endif

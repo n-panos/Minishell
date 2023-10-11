@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mini.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 12:14:02 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/09 20:41:59 by erick            ###   ########.fr       */
+/*   Created: 2023/10/09 19:39:12 by erick             #+#    #+#             */
+/*   Updated: 2023/10/11 11:37:32 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-// void	leaks(void)
-// {
-// 	system("leaks -q minishell");
-// }
-int	main(int argc, char **argv, char **envp)
+void	ft_mini_vars(t_mini	*mini)
 {
-	t_mini		mini;
+	t_tokens	*current;
 
-	mini.tools = malloc(sizeof(t_parser));
-	if (mini.tools == NULL)
-		return (1);
-	if (argc != 1 || argv[1] != NULL)
+	mini->nb_forks = 1;
+	current = mini->tk_lst;
+	while (current)
 	{
-		printf("No se admiten argumentos\n");
-		exit(EXIT_FAILURE);
+		if (current->type == NODE_PIPE)
+			mini->nb_forks++;
+		current = current->next;
 	}
-	(void)envp;
-	minishell_loop(&mini);
-	free_all(&mini);
-	return (0);
 }

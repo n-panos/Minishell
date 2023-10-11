@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/06 13:41:43 by erick            ###   ########.fr       */
+/*   Updated: 2023/10/11 11:37:44 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 # include <readline/history.h>
 # include <signal.h>
 # include "../src/libft/includes/libft.h"
-# define PROMPT "\033[0;92mMinishell> \033[0m"
+# define NOC "\001\e[0m\002"
+# define PROMPT "\001\033[0;92m\002Minishell> \001\033[0m\002"
 # define DELIMITERS	"<>|"
 # include "parser.h"
 
@@ -60,7 +61,9 @@ typedef struct s_tokens
 
 typedef struct s_mini
 {
-	t_tokens	*tk_lst;
+	t_tokens		*tk_lst;
+	int				nb_forks;
+	struct s_parser	*tools;
 }	t_mini;
 
 /*
@@ -75,12 +78,18 @@ int			ft_parser_error(char *err, char c);
 
 // PARSER
 /**/
-void		minishell_loop(t_parser *tools);
+void		minishell_loop(t_mini *mini);
 /**/
 t_tokens	*create_list(t_parser *tools);
+/* mini.c */
+void		ft_mini_vars(t_mini	*mini);
+
 /* typed.c */
 int			ft_is_command(t_tokens *token);
 int			ft_is_op(t_tokens *token);
 int			ft_is_delimiter(t_tokens *token);
 int			ft_is_argument(t_tokens *token);
+/* free.c */
+void		ft_free_loop(t_parser *tools, t_mini *mini);
+void		free_all(t_mini *mini);
 #endif
