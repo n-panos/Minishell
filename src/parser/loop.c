@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:20:40 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/12 18:54:42 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/12 19:00:46 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	minishell_loop(t_mini *mini)
 			if (tools->error)
 				break ;
 			ft_mini_vars(mini);
-			/*EXECUTOR*/
+			ft_exec(mini);
 			ft_free_loop(tools, mini);
 		}
 		else

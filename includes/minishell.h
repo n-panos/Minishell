@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/12 18:50:53 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/12 19:39:41 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
-# include "../src/libft/includes/libft.h"
+#include <fcntl.h>
 # define NOC "\001\e[0m\002"
 # define PROMPT "\001\033[0;92m\002Minishell> \001\033[0m\002"
 # define DELIMITERS	"<>|"
@@ -49,6 +49,7 @@ typedef enum s_type
 
 /*
 *	Estructura de lista doblemente enlazadas de tokens
+*	type == NODE_HEREDOC -> value == Path heredoc
 */
 typedef struct s_tokens
 {
@@ -96,4 +97,7 @@ int			ft_is_argument(t_tokens *token);
 /* free.c */
 void		ft_free_loop(t_parser *tools, t_mini *mini);
 void		free_all(t_mini *mini);
+// EXEC
+void	ft_exec(t_mini *mini);
+void	ft_check_heredoc(t_mini *mini);
 #endif

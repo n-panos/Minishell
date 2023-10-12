@@ -8,8 +8,10 @@ LIBFT		=	src/libft/libft.a
 
 LIST		=	ft_add_back_token.c	ft_new_token.c ft_free_all_tokens.c
 
+HERE		=	get_heredoc.c
+
 MAIN		=	src/main.c
-PARSER		=	loop.c list.c mini.c
+PARSER		=	loop.c list.c mini.c exec.c
 EXEC		=
 UTILS		=	input.c tokenizer_utils.c expander.c expander_utils.c inquote.c expander_utils2.c typed.c tokenizer.c free.c
 ERROR		=	puterror.c
@@ -17,9 +19,10 @@ ERROR		=	puterror.c
 LIST_PATH	=	$(addprefix src/list/, $(LIST))
 PARSER_PATH	=	$(addprefix src/parser/, $(PARSER))
 UTILS_PATH	=	$(addprefix src/utils/, $(UTILS))
+HERE_PATH	=	$(addprefix src/heredoc/, $(HERE))
 ERROR_PATH	=	$(addprefix src/error/, $(ERROR))
 
-OBJS		=	$(MAIN:.c=.o) $(PARSER_PATH:.c=.o) $(UTILS_PATH:.c=.o) $(ERROR_PATH:.c=.o) $(LIST_PATH:.c=.o)
+OBJS		=	$(MAIN:.c=.o) $(PARSER_PATH:.c=.o) $(UTILS_PATH:.c=.o) $(ERROR_PATH:.c=.o) $(LIST_PATH:.c=.o) $(HERE_PATH:.c=.o)
 
 all: $(NAME)
 
