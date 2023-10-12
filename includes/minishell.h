@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/11 11:37:44 by erick            ###   ########.fr       */
+/*   Updated: 2023/10/11 11:48:38 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ typedef struct s_tokens
 	struct s_tokens		*prev;
 }	t_tokens;
 
+/*
+*	Estructura de herramientas de la minishell
+*/
 typedef struct s_mini
 {
 	t_tokens		*tk_lst;
