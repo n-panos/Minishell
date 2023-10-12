@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:03:11 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/12 19:21:07 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/12 21:31:31 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	*ft_get_line(char *annex_ptr)
 	if (annex_ptr[index_a] == '\n')
 		index_a++;
 	line = (char *)malloc (sizeof(char) * (index_a + 1));
-	line = ft_memmove(line, annex_ptr, (size_t)index_a);
+	line = ft_memmove_gnl(line, annex_ptr, (size_t)index_a);
 	line[index_a] = '\0';
 	return (line);
 }
@@ -47,7 +47,8 @@ static char	*ft_clean_annex(char *annex_ptr)
 		free(annex_ptr);
 		return (NULL);
 	}
-	sub = (char *)malloc (sizeof(char) * (ft_strlen(annex_ptr) + 1 - index_a));
+	sub = (char *)malloc (sizeof(char)
+			*(ft_strlen_gnl(annex_ptr) + 1 - index_a));
 	if (sub == NULL)
 		return (NULL);
 	index_a++;
@@ -85,14 +86,14 @@ char	*get_next_line(int fd)
 	{
 		n_read = (int)read(fd, buffer, BUFFER_SIZE);
 		if (n_read == -1)
-		{	
+		{
 			free(annex);
 			annex = NULL;
 			free(buffer);
 			return (NULL);
 		}
 		buffer[n_read] = '\0';
-		annex = ft_strjoin(annex, buffer);
+		annex = ft_strjoin_gnl(annex, buffer);
 	}
 	free (buffer);
 	return (ft_gen_one_line(&annex));

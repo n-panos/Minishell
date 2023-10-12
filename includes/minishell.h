@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/12 19:39:41 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/12 21:33:48 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
-#include <fcntl.h>
+# include <fcntl.h>
 # define NOC "\001\e[0m\002"
 # define PROMPT "\001\033[0;92m\002Minishell> \001\033[0m\002"
 # define DELIMITERS	"<>|"
@@ -98,6 +98,9 @@ int			ft_is_argument(t_tokens *token);
 void		ft_free_loop(t_parser *tools, t_mini *mini);
 void		free_all(t_mini *mini);
 // EXEC
-void	ft_exec(t_mini *mini);
-void	ft_check_heredoc(t_mini *mini);
+void		ft_exec(t_mini *mini);
+void		ft_check_heredoc(t_mini *mini);
+
+/* Pintar nodos */
+void		print_lst_doble(t_tokens *lst);
 #endif

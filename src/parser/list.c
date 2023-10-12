@@ -6,14 +6,11 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 11:41:57 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/08 18:12:07 by erick            ###   ########.fr       */
+/*   Updated: 2023/10/12 21:33:10 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-static t_tokens	*ft_create(t_parser *tools);
-static void		ft_add_type(t_tokens *lst);
 
 /*pinta la información de los tokens*/
 void	print_lst_doble(t_tokens *lst)
@@ -29,6 +26,7 @@ void	print_lst_doble(t_tokens *lst)
 		printf("NEXT: %p\n", current->next);
 		printf("PREV: %p\n", current->prev);
 		printf("VALUE: %s LEN: %zu\n", current->value, ft_strlen(current->value));
+		printf("TOOLS: %s\n", current->tool);
 		if (current->type == NODE_ARGUMENT)
 			printf("TYPE: ARGUMENT\n");
 		else if (current->type == NODE_COMMAND)
@@ -110,6 +108,5 @@ t_tokens	*create_list(t_parser *tools)
 	if (lst == NULL)
 		return (NULL);
 	ft_add_type(lst);
-	print_lst_doble(lst);
 	return (lst);
 }

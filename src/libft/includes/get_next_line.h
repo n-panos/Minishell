@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:01:33 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/04/06 14:02:01 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/12 21:13:58 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ char	*ft_gen_one_line(char **annex_ptr);
 
 // get_next_line_utils.c
 int		ft_found_new_line(char *str);
-void	*ft_memmove(void *dst, const void *src, size_t len);
-char	*ft_strjoin(char const *s1, char const *s2);
-size_t	ft_strlen(const char *s);
+void	*ft_memmove_gnl(void *dst, const void *src, size_t len);
+char	*ft_strjoin_gnl(char const *s1, char const *s2);
+size_t	ft_strlen_gnl(const char *s);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:00:51 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/12 19:25:32 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/12 21:33:27 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,4 +15,5 @@
 void	ft_exec(t_mini *mini)
 {
 	ft_check_heredoc(mini);
+	print_lst_doble(mini->tk_lst);
 }
