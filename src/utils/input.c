@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:05:52 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/09 20:55:02 by erick            ###   ########.fr       */
+/*   Updated: 2023/10/12 18:45:51 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	ft_check_op(char *input)
 	return (0);
 }
 
+/*TODO << >>*/
 int	ft_check_input(char *input)
 {
 	int		i;
@@ -71,7 +72,7 @@ int	ft_check_input(char *input)
 		exit(0);
 	while (input[++i])
 	{
-		if (i == 0 && (input[i] == '|' || input[i] == '>'))
+		if (i == 0 && input[i] == '|')
 			return (ft_parser_error("parse error near ", input[i]));
 		if (input[i] == '"' || input[i] == '\'')
 		{

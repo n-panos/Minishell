@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 09:25:43 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/11 11:27:19 by erick            ###   ########.fr       */
+/*   Updated: 2023/10/12 18:43:15 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int		ft_delimiters(t_parser *tools, int index);
 int		ft_in_quote(t_parser *tools, int index);
 int		ft_arguments(t_parser *tools, int index);
 t_list	*create_token(t_parser *tools, int index);
+
 int		ft_is_empty(char *str);
 /* expander_utils.c */
 char	*ft_get_env(char *str, int index);
@@ -82,6 +83,4 @@ int		ft_is_operator(t_parser *tools, int index);
 int		ft_not_expand(t_parser *tools, int index);
 /* tokenizer.c */
 t_list	*get_token(t_parser *tools);
-t_list	*create_token(t_parser *tools, int index);
-int		ft_check_nodes(t_parser *tools);
 #endif

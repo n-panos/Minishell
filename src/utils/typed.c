@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   typed.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:56:01 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/06 00:05:36 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/12 18:45:22 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,15 @@
 
 int	ft_is_command(t_tokens *token)
 {
+	if (token->value[0] == '>' || token->value[0] == '<')
+		return (0);
 	if (token->prev == NULL)
+		return (1);
+	if (token->prev->type == NODE_ARGUMENT
+		&& token->prev->prev->type == NODE_REDIRECT_INPUT)
+		return (1);
+	if (token->prev->type == NODE_ARGUMENT
+		&& token->prev->prev->type == NODE_REDIRECT_OUTPUT)
 		return (1);
 	else if (token->prev->type == NODE_PIPE)
 		return (1);

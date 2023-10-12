@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:20:40 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/11 11:37:11 by erick            ###   ########.fr       */
+/*   Updated: 2023/10/12 18:54:42 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ t_tokens	*parser(t_parser *tools)
 	tokenizer(tools);
 	if (tools->tokenlst == NULL || tools->error)
 		return (NULL);
-	if (ft_check_nodes(tools) == 0)
-		return (NULL);
 	tokens = create_list(tools);
 	if (tokens == NULL || tools->error)
 		return (NULL);
@@ -72,7 +70,8 @@ void	minishell_loop(t_mini *mini)
 		tools->input = get_input();
 		if (tools->input == NULL)
 			exit(ft_parser_error("Error", STDERR_FILENO));
-		add_history(tools->input);
+		if (tools->input[0] != '\0')
+			add_history(tools->input);
 		if (tools->input[0] != '\0' && ft_check_input(tools->input) == 0)
 		{
 			mini->tk_lst = parser(tools);
