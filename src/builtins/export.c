@@ -19,22 +19,20 @@ static int	ft_check_list(int *list, int n);
 static char	*ft_orden(char **env, int env_len, char *str_exp, int *used);
 static char	*ft_str_construct(int ref, char **env, char *str_exp);
 
-int	ft_exec_export(char **env)
+int	ft_exec_export(char **env, char **cmd_mtx)
 {
 	char	**aux;
 	char	*str_exp;
 	int		*used;
 
-	if (!env)
-		return (1);
 	used = malloc(sizeof(int *));
 	if (!used)
-		return (1);
+		return (-1);
 	used[0] = '\0';
 	str_exp = ft_strdup("");
 	str_exp = ft_orden(env, 0, str_exp, used);
 	aux = ft_split(str_exp, '\n');
-	ft_exec_env(aux, 1);
+	ft_exec_env(aux, cmd_mtx); // cambiar
 	free(str_exp);
 	ft_free_mtx(aux);
 	return (0);
@@ -83,6 +81,8 @@ static char	*ft_str_construct(int ref, char **env, char *str_exp)
 {
 	char	*aux;
 
+	if (ft_strncmp(env[i], "_=/", 3) == 0)
+		return (str_exp);
 	aux = ft_strfjoin(str_exp, env[ref]);
 	aux = ft_strfjoin(aux, "\n");
 	return (aux);

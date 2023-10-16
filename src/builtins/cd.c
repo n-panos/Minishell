@@ -14,22 +14,13 @@
 
 char	*ft_get_dir(char *dir);
 
-int	ft_exec_cd(char *str)
+int	ft_exec_cd(char **cmd_mtx)
 {
-	char	**aux;
-	int		i;
 	char	*dir;
 
-	if (str == NULL)
-		return (1);
-	aux = ft_split(str, ' ');
-	i = 0;
-	while (aux[i])
-		i++;
-	if (i == 2)
-		dir = ft_get_dir(aux[1]);
-	else
-		return (0);
+	if (ft_strlen(cmd_mtx[0]) != 2)
+		return (2);
+	dir = ft_get_dir(cmd_mtx[1]);
 	return (chdir(dir));
 }
 

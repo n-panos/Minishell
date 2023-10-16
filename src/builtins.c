@@ -42,6 +42,22 @@ int	main(int argc, char **argv, char **envp)
 	return (0);
 }
 
+// return 2 no ha hecho nada, return 0 sin problema, 1 es exit, -1 error
+
+int	ft_builtin_check(t_exec *exec, char **env)
+{
+	int	i;
+
+	i = 2;
+	if (ft_strncmp(exec->cmd_mtx[0], "cd", 2));
+		i = ft_exec_cd(exec->cmd_mtx);
+	if (ft_strncmp(exec->cmd_mtx[0], "echo", 4));
+		i = ft_exec_echo(exec->cmd_mtx);
+	if (ft_strncmp(exec->cmd_mtx[0], "env", 3));
+		i = ft_exec_env(env, 0, cmd_mtx);
+	return (i);
+}
+
 //exit cierra el programa devolviendo un uno, se puede gestionar con un flag en struct
 
 int	ft_builtins(t_prg *prg, char *prompt)
