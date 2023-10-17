@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/17 13:03:26 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/10/17 13:13:48 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef enum s_type
 
 typedef struct s_mini
 {
+	int			pipe_n;
 	char		**env;
 	t_tokens	*tk_lst;
 }	t_mini;
