@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:40:09 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/09/29 10:50:28 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:59:03 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	ft_builtin_check(t_exec *exec, char **env)
 	if (ft_strncmp(exec->cmd_mtx[0], "echo", 4));
 		i = ft_exec_echo(exec->cmd_mtx);
 	if (ft_strncmp(exec->cmd_mtx[0], "env", 3));
-		i = ft_exec_env(env, 0, cmd_mtx);
+		i = ft_exec_env(env, cmd_mtx);
 	return (i);
 }
 

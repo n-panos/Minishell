@@ -1,9 +1,9 @@
 # PROG DEFINITION
 
 NAME		= e_minishell
-SRC			= src/builtins.c
-BSRC		= src/builtins/pwd.c src/builtins/echo.c src/builtins/env.c \
-				src/builtins/export.c src/builtins/cd.c src/builtins/unset.c
+SRC			= exec/builtins.c
+BSRC		= exec/builtins/pwd.c exec/builtins/echo.c exec/builtins/env.c \
+				exec/builtins/export.c exec/builtins/cd.c exec/builtins/unset.c
 
 OBJS		= ${SRC:.c=.o} ${BSRC:.c=.o}
 HEADER		= -Iheader

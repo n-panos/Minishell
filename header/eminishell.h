@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/04 09:20:39 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/10/17 13:03:26 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,37 +18,53 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 
-# define COMMAND			1
-# define PIPE				2
-# define ARGUMENT			3
-# define REDIRECT_INPUT		4
-# define REDIRECT_OUTPUT	5
-# define HERE_DOC			6
-# define DELIMITER			7
-
-enum	node
+typedef enum s_type
 {
-	NODE_COMMAND,
-	NODE_PIPE,
-	NODE_ARGUMENT,
-	NODE_REDIRECT_INPUT,
-	NODE_REDIRECT_OUTPUT,
-	NODE_REDIRECT_APPEND,
-	NODE_HERE_DOC,
-	NODE_DELIMITER
-}	node_types;
+	COMMAND,	
+	ARGUMENT,	
+	PIPE,
+	REDIRECT_INPUT,
+	REDIRECT_OUTPUT,
+	REDIRECT_APPEND,
+	HEREDOC,
+	DELIMITER
+}	t_type;
 
-typedef struct s_prg
+typedef struct s_mini
 {
-	char	**env;
-}			t_prg;
+	char		**env;
+	t_tokens	*tk_lst;
+}	t_mini;
+
+typedef struct s_exec
+{
+	char	*path;
+	char	**cmd_mtx;
+	int		fd_in;
+	int		fd_out;
+}	t_exec;
+
+typedef struct s_pipe
+{
+	t_exec	**cmd;
+	int		**fd;
+}	t_pipe;
+
+typedef struct s_tokens
+{
+	char				*value;
+	t_type				type;
+	char				*tool;
+	struct s_tokens		*next;
+	struct s_tokens		*prev;
+}	t_tokens;
 
 //      HAND CRAFTED FUNCTIONS -- BUILTINS
 
 int		ft_builtins(t_prg *prg, char *prompt);
 int		ft_exec_cd(char **cmd_mtx);
 int		ft_exec_echo(char **cmd_mtx);
-int		ft_exec_env(char **env, int flag);
+int		ft_exec_env(char **env, char **cmd_mtx);
 int		ft_exec_pwd(void);
 int		ft_exec_export(char **env);
 int		ft_exec_unset(t_prg *prg, char *str);

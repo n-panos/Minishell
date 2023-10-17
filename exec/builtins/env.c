@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:20:35 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/09/27 11:10:31 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/10/17 13:02:21 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_exec_env(char **env, char **cmd_mtx)
 		return (2);
 	while (env[i])
 	{
-		if (ft_compare(cmd_mtx, env[i]) == 0)
+		if (ft_compare(aux_mtx, env[i]) == 0)
 			printf("%s\n", env[i]);
 		i++;
 	}
