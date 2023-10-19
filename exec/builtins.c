@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:40:09 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/17 11:59:03 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/10/18 11:34:45 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,6 @@ int	main(int argc, char **argv, char **envp)
 	}
 	cmd = argv[0];
 	return (0);
-}
-
-// return 2 no ha hecho nada, return 0 sin problema, 1 es exit, -1 error
-
-int	ft_builtin_check(t_exec *exec, char **env)
-{
-	int	i;
-
-	i = 2;
-	if (ft_strncmp(exec->cmd_mtx[0], "cd", 2));
-		i = ft_exec_cd(exec->cmd_mtx);
-	if (ft_strncmp(exec->cmd_mtx[0], "echo", 4));
-		i = ft_exec_echo(exec->cmd_mtx);
-	if (ft_strncmp(exec->cmd_mtx[0], "env", 3));
-		i = ft_exec_env(env, cmd_mtx);
-	return (i);
 }
 
 //exit cierra el programa devolviendo un uno, se puede gestionar con un flag en struct

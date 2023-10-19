@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:12:03 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/09/27 11:47:07 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:10:15 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 //	revisar la flag a ver como se recibe, en este 
 //	caso 0 es sin flag, y 1 es con flag -n
 
-int	ft_exec_echo(char **cmd_mtx)
+int	ft_echo(char **cmd_mtx)
 {
-	int		i;
+	int	i;
+	int	f;
+	int	j;
 
 	i = 0;
 	if (ft_strlen(cmd_mtx[0]) != 4)
@@ -25,13 +27,34 @@ int	ft_exec_echo(char **cmd_mtx)
 	while (cmd_mtx[i])
 		i++;
 	if (i == 1)
-		printf(" \n");
-	if (i == 2)
-		printf("%s\n", cmd_mtx[1]);
-	else if (i == 3 && ft_strncmp(cmd_mtx[1], "-n", ft_strlen("-n")) == 0)
-		printf("%s", cmd_mtx[2]);
-	else
-		ret = 2;
-	ft_free_mtx(aux);
+		printf("\n");
+	f = ft_echo_args(cmd_mtx[1]);
+	if (f == 5 || (f == 1 && i == 2))
+		return (0);
+	j = 1 + f;
+	while (j < i - 1)
+	{
+		printf("%s ", cmd_mtx[j]);
+		j++;
+	}
+	printf("%s", cmd_mtx[j]);
+	if (f == 1)
+		printf("\n");
+	return (0);
+}
+
+int	ft_echo_args(char *arg)
+{
+	int	flag;
+
+	flag = ft_strncmp(arg, "-n", 2);
+	if (flag == 0 && ft_strlen(arg) != 2)
+	{
+		printf("cat: illegal option -- a");
+		printf("usage: cat [-belnstuv] [file ...]");
+		return (5);
+	}
+	if (flag == 0)
+		return (1);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:09:06 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/09/27 12:33:56 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/10/18 11:35:58 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_get_dir(char *dir);
 
-int	ft_exec_cd(char **cmd_mtx)
+int	ft_cd(char **cmd_mtx)
 {
 	char	*dir;
 

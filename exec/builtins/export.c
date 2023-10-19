@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:50:28 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/03 19:14:39 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/10/18 11:36:27 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	ft_check_list(int *list, int n);
 static char	*ft_orden(char **env, int env_len, char *str_exp, int *used);
 static char	*ft_str_construct(int ref, char **env, char *str_exp);
 
-int	ft_exec_export(char **env, char **cmd_mtx)
+int	ft_export(char **env, char **cmd_mtx)
 {
 	char	**aux;
 	char	*str_exp;

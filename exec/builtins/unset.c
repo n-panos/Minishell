@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:37:50 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/09/29 10:35:24 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/10/18 11:36:44 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void		ft_env_delete(t_prg *prg, int erase);
 static int	ft_search_igual(char *str);
 void		ft_env_rm(t_prg *prg, char *str);
 
-int	ft_exec_unset(t_prg *prg, char *str)
+int	ft_unset(t_prg *prg, char *str)
 {
 	char	**aux;
 	int		i;

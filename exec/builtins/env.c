@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:20:35 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/17 13:02:21 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/10/18 11:36:18 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "eminishell.h"
 
-int	ft_exec_env(char **env, char **cmd_mtx)
+int	ft_env(char **env, char **cmd_mtx)
 {
 	int		i;
 	char	**aux_mtx;
