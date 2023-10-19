@@ -14,9 +14,9 @@
 
 int	ft_preprocess_pipe(t_mini *mini)
 {
-	t_pipe	*pipes;
+	t_pipe		*pipes;
     t_tokens	*aux_token;
-	int		i;
+	int			i;
 
 	aux_token = mini->tk_lst;
 	pipes = ft_pipe_init(mini->pipe_n);
@@ -32,15 +32,14 @@ int	ft_preprocess_pipe(t_mini *mini)
 		aux_token = aux_token->next;
 	}
 	ft_exec_pipe(pipes, mini);
-	ft_free_pipes(pipes);
+	ft_free_pipes(pipes, mini->pipe_n);
 	return (0);
 }
 
 void	ft_exec_pipe(t_pipe *pipes, t_mini *mini)
 {
-	pid_t	*pidc;
+	pid_t	pidc;
 	int		i;
-	pid_t	*pidc;
 	int		ret;
 
 	i = 0;

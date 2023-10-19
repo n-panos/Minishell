@@ -6,11 +6,13 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:33:45 by nacho             #+#    #+#             */
-/*   Updated: 2023/10/18 12:23:29 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/19 13:23:01 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "eminishell.h"
+
+static int	ft_more_args(char *arg, int flag);
 
 int	ft_exit(char **cmd_mtx)
 {
@@ -27,7 +29,7 @@ int	ft_exit(char **cmd_mtx)
 	return (ft_more_args(cmd_mtx[1], i));
 }
 
-int	ft_more_args(char *arg, int flag)
+static int	ft_more_args(char *arg, int flag)
 {
 	int	i;
 

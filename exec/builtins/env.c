@@ -6,11 +6,13 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:20:35 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/18 11:36:18 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/19 13:14:40 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "eminishell.h"
+
+static int	ft_compare(char **cmd_mtx, char *env);
 
 int	ft_env(char **env, char **cmd_mtx)
 {
@@ -18,7 +20,7 @@ int	ft_env(char **env, char **cmd_mtx)
 	char	**aux_mtx;
 
 	i = 0;
-	aux_mtx = ft_cpy_mtx(cmd_mtx);
+	aux_mtx = ft_mtx_cpy(cmd_mtx);
 	if (ft_strlen(cmd_mtx[0]) != 3)
 		return (2);
 	while (env[i])
@@ -30,15 +32,15 @@ int	ft_env(char **env, char **cmd_mtx)
 	i = 1;
 	while (aux_mtx[i])
 	{
-		if (ft_strchr(aux_mtx[i], "=") != aux_mtx[i])
+		if (ft_strchr(aux_mtx[i], '=') != aux_mtx[i])
 			printf("%s\n", aux_mtx[i]);
 		i++;
 	}
-	ft_free_mtx(aux_mtx);
+	ft_mtx_free(aux_mtx);
 	return (0);
 }
 
-int	ft_compare(char **cmd_mtx, char *env)
+static int	ft_compare(char **cmd_mtx, char *env)
 {
 	int	i;
 	int	c;
@@ -54,7 +56,7 @@ int	ft_compare(char **cmd_mtx, char *env)
 				if (ft_strncmp(cmd_mtx[i], env, c) == 0)
 				{
 					printf("%s\n", cmd_mtx[i]);
-					cmd_mtx = ft_cut_mtx(cmd_mtx, i);
+					cmd_mtx = ft_mtx_cut(cmd_mtx, i);
 					return (1);
 				}
 			}
@@ -65,24 +67,3 @@ int	ft_compare(char **cmd_mtx, char *env)
 	}
 	return (0);
 }
-
-char	**ft_cut_mtx(char **mtx, int cut)
-{
-	char	**ret_mtx;
-	int		i;
-	int		mtx_height;
-
-	mtx_height = ft_mtx_line_cnt(mtx) - 1;
-	ret_mtx = (char **)malloc(sizeof(char *) * mtx_height + 1);
-	i = 0;
-	while (mtx[i])
-	{
-		if (i != cut)
-			ret_mtx[i] = ft_strdup(mtx[i]);
-		i++;
-	}
-	ret_mtx[i - 1] = NULL;
-	return (ret_mtx);
-}
-}
-

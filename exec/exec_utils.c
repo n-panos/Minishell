@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:17:46 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/19 11:21:18 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/19 13:12:13 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	here_doc(char *limiter)
 	int		fd[2];
 
 	if (pipe(fd) == -1)
-		error();
+		return (-1);
 	line = get_next_line(0);
 	while (line)
 	{
@@ -57,7 +57,7 @@ char	*ft_find_path(char **envp, char *cmd)
 			{
 				pos_paths = ft_split(envp[i] + 6, ':');
 				path = ft_no_path(cmd, pos_paths);
-				ft_free_mtx(pos_paths);
+				ft_mtx_free(pos_paths);
 				break ;
 			}
 			i++;

@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/19 12:01:33 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/19 13:20:25 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,15 @@ typedef enum s_type
 	DELIMITER
 }	t_type;
 
+typedef struct s_tokens
+{
+	char				*value;
+	t_type				type;
+	char				*tool;
+	struct s_tokens		*next;
+	struct s_tokens		*prev;
+}	t_tokens;
+
 typedef struct s_mini
 {
 	int			pipe_n;
@@ -51,15 +60,6 @@ typedef struct s_pipe
 	int		**fd;
 }	t_pipe;
 
-typedef struct s_tokens
-{
-	char				*value;
-	t_type				type;
-	char				*tool;
-	struct s_tokens		*next;
-	struct s_tokens		*prev;
-}	t_tokens;
-
 //		Funciones temporales para testeo en builtins.c
 
 int		ft_builtins(t_mini *mini, char *prompt);
@@ -73,12 +73,12 @@ int		ft_env(char **env, char **cmd_mtx);
 int		ft_exit(char **cmd_mtx);
 int		ft_pwd(void);
 int		ft_export(char **env);
-int		ft_unset(t_prg *prg, char *str);
+int		ft_unset(t_mini *mini, char *str);
 
 //		SOLO FTS
 
 int		ft_preprocess_solo(t_mini *mini);
-pid_t	*ft_exec_solo(char **env, t_exec *exec);
+pid_t	ft_exec_solo(char **env, t_exec *exec);
 t_exec	*ft_init_exec(t_tokens *token, char **env);
 void	ft_in_out_type(t_tokens *token, t_exec *exec);
 

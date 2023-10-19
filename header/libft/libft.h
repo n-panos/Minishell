@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 18:15:46 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/03 11:58:44 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/10/19 13:24:50 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@ typedef struct s_list
 }				t_list;
 void			*ft_memset(void *str, int c, size_t len);
 void			ft_bzero(void *str, size_t n);
-char			**ft_cpy_mtx(char **mtx);
-void			ft_free_mtx(char **mtx);
 void			*ft_memcpy(void	*dst, const	void *src, size_t len);
 void			*ft_memccpy(void *dst, const void *src, int c, size_t len);
 void			*ft_memmove(void *dst, const void *src, size_t len);
 void			*ft_memchr(const void *str, int c, size_t len);
 int				ft_memcmp(const void *str1, const void *str2, size_t len);
+char			**ft_mtx_cpy(char **mtx);
+int				ft_mtx_line_cnt(char **mtx);
+void			ft_mtx_free(char **mtx);
+char			**ft_mtx_cut(char **mtx, int cut);
 size_t			ft_strlen(const char *s);
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);

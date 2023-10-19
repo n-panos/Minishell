@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:50:28 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/18 11:36:27 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/19 13:20:16 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@
 static int	*ft_add_used(int *prev_used, int new_used);
 static int	ft_check_list(int *list, int n);
 static char	*ft_orden(char **env, int env_len, char *str_exp, int *used);
-static char	*ft_str_construct(int ref, char **env, char *str_exp);
+static char	*ft_str_construct(int ref, char **env, char *str_exp, int i);
 
-int	ft_export(char **env, char **cmd_mtx)
+// int	ft_export(char **env, char **cmd_mtx)
+
+int	ft_export(char **env)
 {
 	char	**aux;
 	char	*str_exp;
@@ -32,9 +34,8 @@ int	ft_export(char **env, char **cmd_mtx)
 	str_exp = ft_strdup("");
 	str_exp = ft_orden(env, 0, str_exp, used);
 	aux = ft_split(str_exp, '\n');
-	ft_exec_env(aux, cmd_mtx); // cambiar
 	free(str_exp);
-	ft_free_mtx(aux);
+	ft_mtx_free(aux);
 	return (0);
 }
 
@@ -77,7 +78,7 @@ static int	ft_check_list(int *list, int n)
 	return (0);
 }
 
-static char	*ft_str_construct(int ref, char **env, char *str_exp)
+static char	*ft_str_construct(int ref, char **env, char *str_exp, int i)
 {
 	char	*aux;
 
@@ -111,7 +112,7 @@ static char	*ft_orden(char **env, int j, char *str_exp, int *used)
 			i++;
 		}
 		used = ft_add_used(used, ref);
-		str_exp = ft_str_construct(ref, env, str_exp);
+		str_exp = ft_str_construct(ref, env, str_exp, i);
 		j++;
 	}
 	return (str_exp);

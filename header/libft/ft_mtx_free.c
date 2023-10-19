@@ -1,42 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_free.c                                        :+:      :+:    :+:   */
+/*   ft_mtx_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/19 11:19:21 by nacho             #+#    #+#             */
-/*   Updated: 2023/10/19 13:12:40 by nacho            ###   ########.fr       */
+/*   Created: 2023/09/21 11:51:06 by ipanos-o          #+#    #+#             */
+/*   Updated: 2023/10/19 13:06:04 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "eminishell.h"
+#include "libft.h"
 
-void	ft_free_pipes(t_pipe *pipes, int pipe_n)
+void	ft_mtx_free(char **mtx)
 {
 	int	i;
 
 	i = 0;
-	while (i <= pipe_n)
+	while (mtx[i])
 	{
-		ft_free_exec(pipes->cmd[i]);
+		free(mtx[i]);
+		mtx[i] = NULL;
 		i++;
 	}
-	i = 0;
-	while (i < pipe_n)
-	{
-		free(pipes->fd[i]);
-		i++;
-	}
-	free(pipes->fd);
-	free(pipes);
-}
-
-void	ft_free_exec(t_exec *exec)
-{
-	close (exec->fd_in);
-	close (exec->fd_out);
-	free(exec->path);
-	ft_mtx_free(exec->cmd_mtx);
-	free(exec);
+	free(mtx);
+	mtx = NULL;
 }

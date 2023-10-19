@@ -6,14 +6,13 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:12:03 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/18 13:10:15 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/19 13:00:58 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "eminishell.h"
 
-//	revisar la flag a ver como se recibe, en este 
-//	caso 0 es sin flag, y 1 es con flag -n
+int	ft_echo_args(char *arg);
 
 int	ft_echo(char **cmd_mtx)
 {
