@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/19 13:20:25 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/20 12:48:20 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,20 @@ int		ft_builtins(t_mini *mini, char *prompt);
 
 //      HAND CRAFTED FUNCTIONS -- BUILTINS
 
-int		ft_builtin_check(t_exec *exec, char **env);
+int		ft_builtin_check(t_exec *exec, t_mini *mini);
 int		ft_cd(char **cmd_mtx);
 int		ft_echo(char **cmd_mtx);
 int		ft_env(char **env, char **cmd_mtx);
 int		ft_exit(char **cmd_mtx);
-int		ft_pwd(void);
-int		ft_export(char **env);
-int		ft_unset(t_mini *mini, char *str);
+int		ft_export(t_mini *mini, char **cmd_mtx);
+int		ft_pwd(char **cmd_mtx);
+int		ft_unset(t_mini *mini, char **cmd_mtx);
+
+//		BUILTINS UTILS
+
+int		ft_search_c(char *str, char c);
+int		*ft_add_used(int *prev_used, int new_used);
+int		ft_check_list(int *list, int n);
 
 //		SOLO FTS
 

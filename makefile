@@ -5,7 +5,7 @@ SRC			= exec/builtins.c exec/exec.c exec/exec_solo.c exec/exec_pipe.c \
 				exec/exec_utils.c exec/exec_free.c
 BSRC		= exec/builtins/pwd.c exec/builtins/echo.c exec/builtins/env.c \
 				exec/builtins/export.c exec/builtins/cd.c exec/builtins/unset.c \
-				exec/builtins/exit.c
+				exec/builtins/exit.c exec/builtins/b_utils.c
 
 OBJS		= ${SRC:.c=.o} ${BSRC:.c=.o}
 HEADER		= -Iheader

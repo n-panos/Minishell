@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:40:09 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/19 13:20:32 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/20 10:54:38 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	ft_builtins(t_mini *mini, char *prompt)
 	i = 0;
 	aux_mtx = ft_split(prompt, ' ');
 	if (ft_strncmp(prompt, "pwd", ft_strlen("pwd")) == 0)
-		i = ft_pwd();
+		i = ft_pwd(aux_mtx);
 	else if (ft_strncmp(prompt, "env", ft_strlen("env")) == 0)
 		i = ft_env(mini->env, aux_mtx);
 	else if (ft_strncmp(prompt, "export", ft_strlen("export")) == 0)

@@ -6,37 +6,57 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:37:50 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/19 13:22:09 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/20 12:29:22 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "eminishell.h"
 
-void		ft_env_delete(t_mini *mini, int erase);
-static int	ft_search_igual(char *str);
-void		ft_env_rm(t_mini *mini, char *str);
+int	ft_env_rm(t_mini *mini, char *str);
+int	ft_env_delete(t_mini *mini, int erase);
 
-int	ft_unset(t_mini *mini, char *str)
+int	ft_unset(t_mini *mini, char **cmd_mtx)
 {
-	char	**aux;
 	int		i;
 
-	if (str == NULL)
-		return (0);
-	aux = ft_split(str, ' ');
-	i = 0;
-	while (aux[i])
+	if (ft_strlen(cmd_mtx[0]) != 5)
+		return (2);
+	i = 1;
+	while (cmd_mtx[i])
 	{
-		if (i >= 1)
-			ft_env_rm(mini, aux[i]);
+		ft_env_rm(mini, cmd_mtx[i]);
 		i++;
 	}
-	if (i == 1)
-		printf("unset: not enough arguments\n");
 	return (0);
 }
 
-void	ft_env_delete(t_mini *mini, int erase)
+int	ft_env_rm(t_mini *mini, char *str)
+{
+	int		i;
+	int		len;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isalpha(str[i]) == 0)
+		{
+			printf("minishell: unset: `%s': not a valid identifier", str);
+			return (0);
+		}
+		i++;
+	}
+	i = 0;
+	while (mini->env[i])
+	{
+		len = ft_search_c(mini->env[i], '=');
+		if (ft_strlen(str) == len && ft_strncmp(mini->env[i], str, len) == 0)
+			return (ft_env_delete(mini, i));
+		i++;
+	}
+	return (0);
+}
+
+int	ft_env_delete(t_mini *mini, int erase)
 {
 	char	*aux;
 	int		i;
@@ -54,36 +74,20 @@ void	ft_env_delete(t_mini *mini, int erase)
 			i++;
 		}
 	}
+	ft_mtx_free(mini->env);
 	mini->env = ft_split(aux, '\n');
 	free(aux);
+	return (0);
 }
 
-void	ft_env_rm(t_mini *mini, char *str)
-{
-	int		i;
-	int		len;
-
-	i = 0;
-	while (mini->env[i])
-	{
-		len = ft_search_igual(mini->env[i]);
-		if (ft_strncmp(mini->env[i], str, len) == 0)
-		{
-			ft_env_delete(mini, i);
-			break ;
-		}
-		i++;
-	}
-}
-
-static int	ft_search_igual(char *str)
+int	ft_search_c(char *str, char c)
 {
 	int	i;
 
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '=')
+		if (str[i] == c)
 			return (i);
 		i++;
 	}

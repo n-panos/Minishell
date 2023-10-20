@@ -6,86 +6,74 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:50:28 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/19 13:20:16 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/20 13:18:28 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "eminishell.h"
 
-//AÑADIR NUEVAS VARIABLES
+// La logica de ordenacion cuando hay que añadir variables no la tengo clara
 
-static int	*ft_add_used(int *prev_used, int new_used);
-static int	ft_check_list(int *list, int n);
 static char	*ft_orden(char **env, int env_len, char *str_exp, int *used);
 static char	*ft_str_construct(int ref, char **env, char *str_exp, int i);
 
-// int	ft_export(char **env, char **cmd_mtx)
-
-int	ft_export(char **env)
+int	ft_export(t_mini *mini, char **cmd_mtx)
 {
-	char	**aux;
 	char	*str_exp;
 	int		*used;
+	int		i;
 
+	if (ft_strlen(cmd_mtx[0]) != 6)
+		return (2);
+	i = 1;
+	while (cmd_mtx[i])
+	{
+		if (i > 1)
+		{
+			ft_export_more_args(mini, cmd_mtx[i]);
+			return (0);
+		}
+		i++;
+	}
 	used = malloc(sizeof(int *));
 	if (!used)
 		return (-1);
 	used[0] = '\0';
 	str_exp = ft_strdup("");
 	str_exp = ft_orden(env, 0, str_exp, used);
-	aux = ft_split(str_exp, '\n');
+	printf("%s", str_exp);
 	free(str_exp);
-	ft_mtx_free(aux);
 	return (0);
 }
 
-static int	*ft_add_used(int *prev_used, int new_used)
+int	ft_export_more_args(t_mini *mini, char *cmd_mtx)
 {
-	int	*aux;
-	int	i;
+	char	*aux;
+	int		i;
 
-	i = 0;
-	while (prev_used[i])
-		i++;
-	i++;
-	aux = malloc(sizeof(int) * (i + 1));
-	aux[i] = '\0';
-	i--;
-	if (new_used == 0)
-		aux[i] = -1;
-	else
-		aux[i] = new_used;
-	while (i > 0)
+	i = ft_search_c(cmd_mtx, '=');
+	if (i == -1)
+		return (0);
+	while (i >= 0)
 	{
+		if (ft_isalpha(cmd_mtx[i]) == 0)
+		{
+			printf("minishell: export: `%s': not a valid identifier", cmd_mtx)
+			return (0);
+		}
 		i--;
-		aux[i] = prev_used[i];
 	}
-	free(prev_used);
-	return (aux);
-}
-
-static int	ft_check_list(int *list, int n)
-{
-	int	i;
-
-	i = 0;
-	while (list[i])
-	{
-		if (list[i] == n)
-			return (1);
-		i++;
-	}
+	aux = ft_add_to_env(mini->env, cmd_mtx);
+	ft_mtx_free(mini->env);
+	mini->env = ft_split(aux, '\n');
+	free(aux);
 	return (0);
 }
 
-static char	*ft_str_construct(int ref, char **env, char *str_exp, int i)
+char	*ft_add_to_env(char **env, char *add)
 {
 	char	*aux;
 
-	if (ft_strncmp(env[i], "_=/", 3) == 0)
-		return (str_exp);
-	aux = ft_strfjoin(str_exp, env[ref]);
-	aux = ft_strfjoin(aux, "\n");
 	return (aux);
 }
 
@@ -116,4 +104,21 @@ static char	*ft_orden(char **env, int j, char *str_exp, int *used)
 		j++;
 	}
 	return (str_exp);
+}
+
+static char	*ft_str_construct(int ref, char **env, char *str_exp, int i)
+{
+	char	*aux;
+	char	**comillas;
+
+	if (ft_strncmp(env[i], "_=/", 3) == 0)
+		return (str_exp);
+	comillas = ft_split(env[ref], '=');
+	aux = ft_strfjoin(str_exp, "declare -x ");
+	aux = ft_strfjoin(aux, comillas[0]);
+	aux = ft_strfjoin(aux, "='");
+	aux = ft_strfjoin(aux, comillas[1]);
+	aux = ft_strfjoin(aux, "'\n");
+	ft_mtx_free(comillas);
+	return (aux);
 }

@@ -46,7 +46,7 @@ void	ft_exec_pipe(t_pipe *pipes, t_mini *mini)
 	while (i <= mini->pipe_n)
 	{
 		pidc = -1;
-		ret = ft_builtin_check(pipes->cmd[i], mini->env);
+		ret = ft_builtin_check(pipes->cmd[i], mini);
 		if (ret == -1)
 			ft_error_cmd(pipes->cmd[i]->cmd_mtx[0]);
 		else if (ret == 2)

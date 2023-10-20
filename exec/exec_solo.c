@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by nacho             #+#    #+#             */
-/*   Updated: 2023/10/19 12:57:18 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/20 11:26:24 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_preprocess_solo(t_mini *mini)
 	ft_in_out_type(mini->tk_lst, exec);
 	if (exec == NULL)
 		return (-1);
-	ret = ft_builtin_check(exec, mini->env);
+	ret = ft_builtin_check(exec, mini);
 	if (ret == 2)
 	{
 		if (exec->path == NULL)
