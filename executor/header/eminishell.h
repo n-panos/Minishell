@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eminishell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/22 12:33:11 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/22 13:24:28 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define EMINISHELL_H
 # include <stdio.h>
 # include <unistd.h>
-# include "libft/libft.h"
+# include "../../parser/src/libft/includes/libft.h"
 # include <readline/history.h>
 # include <readline/readline.h>
 # include "../../parser/includes/minishell.h"

@@ -18,6 +18,9 @@ BOBJS		=	$(BONUS_DIR:.c=.o)
 INCLUDE		=	../includes/libft.h
 LIB			=	ar -rcs
 
+.c.o:		%.o : %.c
+					@${CC} ${CFLAGS} -c $< -o $(<:.c=.o)
+
 all:	$(NAME)
 
 $(NAME):	$(OBJS)

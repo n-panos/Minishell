@@ -1,7 +1,7 @@
 NAME		=	minishell
 CC			=	gcc
 CFLAGS		=	-g3 -Wall -Werror -Wextra
-READLINE	=	-I/System/Volumes/Data/Users/ediaz--c/.brew/Cellar/readline/8.2.1/include -L/System/Volumes/Data/usr/local/Cellar/readline/8.2.1/lib -lreadline
+READLINE	=	-I/System/Volumes/Data/Users/$(USER)/.brew/Cellar/readline/8.2.1/include -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
 RM 			=	rm -rf
 
 LIBFT		= 	parser/src/libft/libft.a
@@ -21,7 +21,6 @@ UTILS_PATH	=	$(addprefix parser/src/utils/, $(UTILS))
 HERE_PATH	=	$(addprefix parser/src/heredoc/, $(HERE))
 ERROR_PATH	=	$(addprefix parser/src/error/, $(ERROR))
 
-
 ## EXECUTOR
 
 EXEC		=	exec.c exec_solo.c exec_pipe.c exec_utils.c exec_free.c
@@ -30,7 +29,12 @@ BUILTINS	=	pwd.c echo.c env.c cd.c unset.c exit.c b_utils.c #export.c
 EXECUTOR	=	$(addprefix executor/exec/, $(EXEC))
 BUILTINS_PATH	=	$(addprefix executor/exec/builtins/, $(BUILTINS))
 
-
+# COLOUR DEFINITION #
+RED     := \033[0;31m
+BLUE    := \033[0;34m
+GREEN   := \033[1;32m
+WHITE   := \033[0;37m
+RESET   := \033[0m
 
 OBJS		=	$(MAIN:.c=.o) $(PARSER_PATH:.c=.o) $(UTILS_PATH:.c=.o) $(ERROR_PATH:.c=.o) $(LIST_PATH:.c=.o) $(HERE_PATH:.c=.o) $(EXECUTOR:.c=.o) $(BUILTINS_PATH:.c=.o)
 
@@ -39,8 +43,12 @@ all: $(NAME)
 # main/%.o: main/%.c
 # 	@$(CC) $(CFLAGS) -c $< -o $@ 
 
+.c.o:		%.o : %.c
+					@${CC} ${CFLAGS} -c $< -o $(<:.c=.o)
+
 $(NAME): $(OBJS) $(LIBFT)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(READLINE) $(LIBFT)
+	@echo "${GREEN}<---> Minishell Compiled! ⌐(ಠ۾ಠ)¬ <--->${RESET}"
 
 $(LIBFT):
 	@make bonus --directory parser/src/libft
