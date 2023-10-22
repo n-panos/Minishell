@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by nacho             #+#    #+#             */
-/*   Updated: 2023/10/22 11:08:12 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/10/22 12:05:56 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	ft_in_out_type(t_tokens *token, t_exec *exec)
 		if (aux_token->type == HEREDOC)
 		{
 			close(exec->fd_in);
-			exec->fd_in = here_doc(aux_token->value);
+			exec->fd_in = here_doc(aux_token->value); //mirar para poner el siguiente
 		}
 		if (aux_token->type == REDIRECT_INPUT)
 		{
