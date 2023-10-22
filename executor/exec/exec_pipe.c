@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "eminishell.h"
+#include "../header/eminishell.h"
 
 int	ft_preprocess_pipe(t_mini *mini)
 {

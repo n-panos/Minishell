@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:50:28 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/20 13:18:28 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/22 12:04:12 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "eminishell.h"
+#include "../../header/eminishell.h"
 
 // La logica de ordenacion cuando hay que añadir variables no la tengo clara
 

@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_add_back_token.c                                :+:      :+:    :+:   */
+/*   ft_mtx_cut.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 11:48:49 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/22 12:19:43 by ediaz--c         ###   ########.fr       */
+/*   Created: 2023/10/19 13:08:27 by nacho             #+#    #+#             */
+/*   Updated: 2023/10/22 12:29:56 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../executor/header/eminishell.h"
+#include "../includes/libft.h"
 
-void	ft_add_back_token(t_tokens **list, t_tokens *new)
+// hace una copia de la matriz y le corta la linea indicada
+
+char	**ft_mtx_cut(char **mtx, int cut)
 {
-	t_tokens	*current;
+	char	**ret_mtx;
+	int		i;
+	int		mtx_height;
 
-	current = *list;
-	if (!current)
-		*list = new;
-	else
+	mtx_height = ft_mtx_line_cnt(mtx);
+	ret_mtx = (char **)malloc(sizeof(char *) * mtx_height);
+	i = 0;
+	while (mtx[i])
 	{
-		while (current->next)
-			current = current->next;
-		current->next = new;
-		new->prev = current;
+		if (i != cut)
+			ret_mtx[i] = ft_strdup(mtx[i]);
+		i++;
 	}
+	ret_mtx[i - 1] = NULL;
+	return (ret_mtx);
 }

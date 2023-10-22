@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_add_back_token.c                                :+:      :+:    :+:   */
+/*   ft_mtx_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 11:48:49 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/22 12:19:43 by ediaz--c         ###   ########.fr       */
+/*   Created: 2023/09/21 11:51:06 by ipanos-o          #+#    #+#             */
+/*   Updated: 2023/10/22 12:29:56 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../executor/header/eminishell.h"
+#include "../includes/libft.h"
 
-void	ft_add_back_token(t_tokens **list, t_tokens *new)
+void	ft_mtx_free(char **mtx)
 {
-	t_tokens	*current;
+	int	i;
 
-	current = *list;
-	if (!current)
-		*list = new;
-	else
+	i = 0;
+	while (mtx[i])
 	{
-		while (current->next)
-			current = current->next;
-		current->next = new;
-		new->prev = current;
+		free(mtx[i]);
+		mtx[i] = NULL;
+		i++;
 	}
+	free(mtx);
+	mtx = NULL;
 }

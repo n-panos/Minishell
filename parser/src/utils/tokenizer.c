@@ -6,11 +6,11 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 18:09:23 by erick             #+#    #+#             */
-/*   Updated: 2023/10/12 18:44:50 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/22 12:19:43 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../executor/header/eminishell.h"
 
 t_list	*get_token(t_parser *tools)
 {

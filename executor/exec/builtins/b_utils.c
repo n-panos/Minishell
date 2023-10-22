@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   b_utils.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 12:49:01 by nacho             #+#    #+#             */
-/*   Updated: 2023/10/20 12:50:12 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/22 12:03:42 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "eminishell.h"
+#include "../../header/eminishell.h"
 
 int	*ft_add_used(int *prev_used, int new_used)
 {

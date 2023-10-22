@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_free.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 11:19:21 by nacho             #+#    #+#             */
-/*   Updated: 2023/10/19 13:12:40 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/22 11:59:33 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "eminishell.h"
+#include "../header/eminishell.h"
 
 void	ft_free_pipes(t_pipe *pipes, int pipe_n)
 {

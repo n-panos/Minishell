@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/22 11:50:03 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/22 12:03:06 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,34 +23,34 @@
 # define PROMPT "\001\033[0;92m\002Minishell> \001\033[0m\002"
 # define DELIMITERS	"<>|"
 # include "parser.h"
-# include "../../executor/header/eminishell.h"
+// # include "../../executor/header/eminishell.h"
 
 /*
 *	Estructura de tipos de nodos:
-*	NODE_COMMAND			->	Nodo de comando (ls, echo, etc.)
+*	COMMAND			->	Nodo de comando (ls, echo, etc.)
 *	NODE_ARGUMEN			->	Nodo de argumento (argumentos de comandos)
-*	NODE_PIPE				->	Nodo de tubería (|)
-*	NODE_REDIRECT_INPUT		->	Nodo de redirección de entrada (<)
-*	NODE_REDIRECT_OUTPUT	->	Nodo de redirección de salida (>)
-*	NODE_REDIRECT_APPEND	->	Nodo de redirección de salida (>>)
-*	NODE_HEREDOC			->	Nodo de heredoc (<<)
-*	NODE_DELIMITER			->	Nodo de delimitación del heredoc (EOF)
+*	PIPE				->	Nodo de tubería (|)
+*	REDIRECT_INPUT		->	Nodo de redirección de entrada (<)
+*	REDIRECT_OUTPUT	->	Nodo de redirección de salida (>)
+*	REDIRECT_APPEND	->	Nodo de redirección de salida (>>)
+*	HEREDOC			->	Nodo de heredoc (<<)
+*	DELIMITER			->	Nodo de delimitación del heredoc (EOF)
 */
 typedef enum s_type
 {
-	NODE_COMMAND,
-	NODE_ARGUMENT,
-	NODE_PIPE,
-	NODE_REDIRECT_INPUT,
-	NODE_REDIRECT_OUTPUT,
-	NODE_REDIRECT_APPEND,
-	NODE_HEREDOC,
-	NODE_DELIMITER
+	COMMAND,
+	ARGUMENT,
+	PIPE,
+	REDIRECT_INPUT,
+	REDIRECT_OUTPUT,
+	REDIRECT_APPEND,
+	HEREDOC,
+	DELIMITER
 }	t_type;
 
 /*
 *	Estructura de lista doblemente enlazadas de tokens
-*	type == NODE_HEREDOC -> value == Path heredoc
+*	type == HEREDOC -> value == Path heredoc
 */
 typedef struct s_tokens
 {
@@ -67,7 +67,7 @@ typedef struct s_tokens
 typedef struct s_mini
 {
 	t_tokens		*tk_lst;
-	int				nb_forks;
+	int				pipe_n;
 	char			**env; /*TODO*/
 	struct s_parser	*tools;
 }	t_mini;
@@ -99,8 +99,9 @@ int			ft_is_argument(t_tokens *token);
 void		ft_free_loop(t_parser *tools, t_mini *mini);
 void		free_all(t_mini *mini);
 // EXEC
-void		ft_exec(t_mini *mini);
+// void		ft_exec(t_mini *mini);
 void		ft_check_heredoc(t_mini *mini);
+int			ft_execute(t_mini *mini);
 
 /* Pintar nodos */
 void		print_lst_doble(t_tokens *lst);

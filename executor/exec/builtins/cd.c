@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:09:06 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/18 11:35:58 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/22 12:04:00 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "eminishell.h"
+#include "../../header/eminishell.h"
 
 char	*ft_get_dir(char *dir);
 

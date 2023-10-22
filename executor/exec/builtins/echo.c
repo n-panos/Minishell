@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:12:03 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/19 14:02:39 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/22 12:04:03 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "eminishell.h"
+#include "../../header/eminishell.h"
 
 int	ft_echo_args(char *arg);
 

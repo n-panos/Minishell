@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_heredoc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:06:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/12 22:09:37 by erick            ###   ########.fr       */
+/*   Updated: 2023/10/22 12:19:43 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../executor/header/eminishell.h"
 
 void	ft_create_here(char *path, char *del)
 {
@@ -64,7 +64,7 @@ void	ft_check_heredoc(t_mini *mini)
 	current = mini->tk_lst;
 	while (current)
 	{
-		if (current->type == NODE_HEREDOC)
+		if (current->type == HEREDOC)
 			current->tool = ft_get_heredoc(current->next->value);
 		current = current->next;
 	}

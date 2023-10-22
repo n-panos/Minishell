@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_new_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 11:45:35 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/06 13:30:54 by erick            ###   ########.fr       */
+/*   Updated: 2023/10/22 12:19:43 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../executor/header/eminishell.h"
 
 t_tokens	*ft_new_token(char	*value)
 {

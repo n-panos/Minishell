@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:11:50 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/20 11:41:57 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/22 12:33:21 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "eminishell.h"
+#include "../header/eminishell.h"
 
 int	ft_execute(t_mini *mini)
 {
@@ -40,8 +40,8 @@ int	ft_builtin_check(t_exec *exec, t_mini *mini)
 		i = ft_env(mini->env, exec->cmd_mtx);
 	else if (ft_strncmp(exec->cmd_mtx[0], "exit", 4))
 		i = ft_exit(exec->cmd_mtx);
-	else if (ft_strncmp(exec->cmd_mtx[0], "export", 6))
-		i = ft_export(mini, exec->cmd_mtx);
+	// else if (ft_strncmp(exec->cmd_mtx[0], "export", 6))
+	// 	i = ft_export(mini, exec->cmd_mtx);
 	else if (ft_strncmp(exec->cmd_mtx[0], "pwd", 3))
 		i = ft_pwd(exec->cmd_mtx);
 	else if (ft_strncmp(exec->cmd_mtx[0], "unset", 5))

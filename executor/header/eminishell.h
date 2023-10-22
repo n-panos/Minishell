@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/22 11:36:52 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/22 12:33:11 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@
 # include <readline/readline.h>
 # include "../../parser/includes/minishell.h"
 
-typedef enum s_type
-{
-	NODE_COMMAND,
-	NODE_ARGUMENT,
-	NODE_PIPE,
-	NODE_REDIRECT_INPUT,
-	NODE_REDIRECT_OUTPUT,
-	NODE_REDIRECT_APPEND,
-	NODE_HEREDOC,
-	NODE_DELIMITER
-}	t_type;
+// typedef enum s_type
+// {
+// 	COMMAND,
+// 	ARGUMENT,
+// 	PIPE,
+// 	REDIRECT_INPUT,
+// 	REDIRECT_OUTPUT,
+// 	REDIRECT_APPEND,
+// 	HEREDOC,
+// 	DELIMITER
+// }	t_type;
 
 // typedef struct s_tokens
 // {
@@ -40,12 +40,12 @@ typedef enum s_type
 // 	struct s_tokens		*prev;
 // }	t_tokens;
 
-typedef struct s_mini
-{
-	int			pipe_n;
-	char		**env;
-	t_tokens	*tk_lst;
-}	t_mini;
+// typedef struct s_mini
+// {
+// 	int			pipe_n;
+// 	char		**env;
+// 	t_tokens	*tk_lst;
+// }	t_mini;
 
 typedef struct s_exec
 {
@@ -72,7 +72,7 @@ int		ft_cd(char **cmd_mtx);
 int		ft_echo(char **cmd_mtx);
 int		ft_env(char **env, char **cmd_mtx);
 int		ft_exit(char **cmd_mtx);
-int		ft_export(t_mini *mini, char **cmd_mtx);
+// int		ft_export(t_mini *mini, char **cmd_mtx);
 int		ft_pwd(char **cmd_mtx);
 int		ft_unset(t_mini *mini, char **cmd_mtx);
 

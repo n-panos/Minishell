@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 19:33:29 by erick             #+#    #+#             */
-/*   Updated: 2023/10/12 21:36:43 by erick            ###   ########.fr       */
+/*   Updated: 2023/10/22 12:19:43 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../executor/header/eminishell.h"
 
 void	del_file(t_mini *mini)
 {
@@ -19,7 +19,7 @@ void	del_file(t_mini *mini)
 	current = mini->tk_lst;
 	while (current)
 	{
-		if (current->type == NODE_HEREDOC)
+		if (current->type == HEREDOC)
 			unlink(current->tool);
 		current = current->next;
 	}

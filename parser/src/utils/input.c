@@ -6,11 +6,11 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:05:52 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/12 18:45:51 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/22 12:19:43 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../executor/header/eminishell.h"
 
 int	ft_extra_chars(char *input, int index, char specialChar)
 {

@@ -4,7 +4,7 @@ CFLAGS		=	-g3 -Wall -Werror -Wextra
 READLINE	=	-I/System/Volumes/Data/Users/ediaz--c/.brew/Cellar/readline/8.2.1/include -L/System/Volumes/Data/usr/local/Cellar/readline/8.2.1/lib -lreadline
 RM 			=	rm -rf
 
-LIBS		= -Lexecutor/header/libft -lft
+LIBFT		= 	parser/src/libft/libft.a
 
 LIST		=	ft_add_back_token.c	ft_new_token.c ft_free_all_tokens.c
 
@@ -25,7 +25,7 @@ ERROR_PATH	=	$(addprefix parser/src/error/, $(ERROR))
 ## EXECUTOR
 
 EXEC		=	exec.c exec_solo.c exec_pipe.c exec_utils.c exec_free.c
-BUILTINS	=	pwd.c echo.c env.c export.c cd.c unset.c exit.c b_utils.c
+BUILTINS	=	pwd.c echo.c env.c cd.c unset.c exit.c b_utils.c #export.c
 
 EXECUTOR	=	$(addprefix executor/exec/, $(EXEC))
 BUILTINS_PATH	=	$(addprefix executor/exec/builtins/, $(BUILTINS))
@@ -39,19 +39,19 @@ all: $(NAME)
 # main/%.o: main/%.c
 # 	@$(CC) $(CFLAGS) -c $< -o $@ 
 
-$(NAME): $(OBJS) $(LIBS)
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(READLINE) $(LIBS)
+$(NAME): $(OBJS) $(LIBFT)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(READLINE) $(LIBFT)
 
 $(LIBFT):
-	@make bonus --directory src/libft
+	@make bonus --directory parser/src/libft
 
 clean:
 	@$(RM) $(OBJS)
-	@make clean --directory src/libft
+	@make clean --directory parser/src/libft
 
 fclean: clean
 	@$(RM) $(NAME)
-	@make fclean --directory src/libft
+	@make fclean --directory parser/src/libft
 
 re: fclean all
 

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 11:41:57 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/12 21:33:10 by erick            ###   ########.fr       */
+/*   Updated: 2023/10/22 12:19:43 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../executor/header/eminishell.h"
 
 /*pinta la información de los tokens*/
 void	print_lst_doble(t_tokens *lst)
@@ -27,21 +27,21 @@ void	print_lst_doble(t_tokens *lst)
 		printf("PREV: %p\n", current->prev);
 		printf("VALUE: %s LEN: %zu\n", current->value, ft_strlen(current->value));
 		printf("TOOLS: %s\n", current->tool);
-		if (current->type == NODE_ARGUMENT)
+		if (current->type == ARGUMENT)
 			printf("TYPE: ARGUMENT\n");
-		else if (current->type == NODE_COMMAND)
+		else if (current->type == COMMAND)
 			printf("TYPE: COMMAND\n");
-		else if (current->type == NODE_DELIMITER)
+		else if (current->type == DELIMITER)
 			printf("TYPE: DELIMITIER\n");
-		else if (current->type == NODE_HEREDOC)
+		else if (current->type == HEREDOC)
 			printf("TYPE: HEREDOC\n");
-		else if (current->type == NODE_PIPE)
+		else if (current->type == PIPE)
 			printf("TYPE: PIPE\n");
-		else if (current->type == NODE_REDIRECT_APPEND)
+		else if (current->type == REDIRECT_APPEND)
 			printf("TYPE: APPEND\n");
-		else if (current->type == NODE_REDIRECT_INPUT)
+		else if (current->type == REDIRECT_INPUT)
 			printf("TYPE: INPUT\n");
-		else if (current->type == NODE_REDIRECT_OUTPUT)
+		else if (current->type == REDIRECT_OUTPUT)
 			printf("TYPE: OUTPUT\n");
 		printf("\n");
 		current = current->next;
@@ -56,21 +56,21 @@ static void	ft_add_type(t_tokens *lst)
 	while (current)
 	{
 		if (ft_is_command(current))
-			current->type = NODE_COMMAND;
-		else if (ft_is_op(current) == NODE_PIPE)
-			current->type = NODE_PIPE;
-		else if (ft_is_op(current) == NODE_REDIRECT_INPUT)
-			current->type = NODE_REDIRECT_INPUT;
-		else if (ft_is_op(current) == NODE_REDIRECT_OUTPUT)
-			current->type = NODE_REDIRECT_OUTPUT;
-		else if (ft_is_op(current) == NODE_REDIRECT_APPEND)
-			current->type = NODE_REDIRECT_APPEND;
-		else if (ft_is_op(current) == NODE_HEREDOC)
-			current->type = NODE_HEREDOC;
+			current->type = COMMAND;
+		else if (ft_is_op(current) == PIPE)
+			current->type = PIPE;
+		else if (ft_is_op(current) == REDIRECT_INPUT)
+			current->type = REDIRECT_INPUT;
+		else if (ft_is_op(current) == REDIRECT_OUTPUT)
+			current->type = REDIRECT_OUTPUT;
+		else if (ft_is_op(current) == REDIRECT_APPEND)
+			current->type = REDIRECT_APPEND;
+		else if (ft_is_op(current) == HEREDOC)
+			current->type = HEREDOC;
 		else if (ft_is_delimiter(current))
-			current->type = NODE_DELIMITER;
+			current->type = DELIMITER;
 		else if (ft_is_argument(current))
-			current->type = NODE_ARGUMENT;
+			current->type = ARGUMENT;
 		current = current->next;
 	}
 }

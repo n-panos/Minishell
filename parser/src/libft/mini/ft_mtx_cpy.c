@@ -1,29 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_add_back_token.c                                :+:      :+:    :+:   */
+/*   ft_mtx_cpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 11:48:49 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/22 12:19:43 by ediaz--c         ###   ########.fr       */
+/*   Created: 2023/07/18 18:29:45 by ipanos-o          #+#    #+#             */
+/*   Updated: 2023/10/22 12:32:41 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../executor/header/eminishell.h"
+#include "../includes/libft.h"
 
-void	ft_add_back_token(t_tokens **list, t_tokens *new)
+char	**ft_mtx_cpy(char **mtx)
 {
-	t_tokens	*current;
+	char	**ret_mtx;
+	int		i;
+	int		mtx_height;
 
-	current = *list;
-	if (!current)
-		*list = new;
-	else
+	mtx_height = ft_mtx_line_cnt(mtx);
+	ret_mtx = (char **)malloc(sizeof(char *) * mtx_height + 1);
+	i = 0;
+	while (mtx[i])
 	{
-		while (current->next)
-			current = current->next;
-		current->next = new;
-		new->prev = current;
+		ret_mtx[i] = ft_strdup(mtx[i]);
+		i++;
 	}
+	ret_mtx[i] = NULL;
+	return (ret_mtx);
+}
+
+int	ft_mtx_line_cnt(char **mtx)
+{
+	int	i;
+
+	i = 0;
+	while (mtx[i])
+	{
+		i++;
+	}
+	return (i);
 }

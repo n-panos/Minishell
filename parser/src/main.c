@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:02 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/09 20:41:59 by erick            ###   ########.fr       */
+/*   Updated: 2023/10/22 12:19:02 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../executor/header/eminishell.h"
 
 // void	leaks(void)
 // {
@@ -28,7 +28,7 @@ int	main(int argc, char **argv, char **envp)
 		printf("No se admiten argumentos\n");
 		exit(EXIT_FAILURE);
 	}
-	(void)envp;
+	mini.env = ft_mtx_cpy(envp);
 	minishell_loop(&mini);
 	free_all(&mini);
 	return (0);

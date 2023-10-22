@@ -1,29 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_add_back_token.c                                :+:      :+:    :+:   */
+/*   ft_strfjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 11:48:49 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/22 12:19:43 by ediaz--c         ###   ########.fr       */
+/*   Created: 2023/10/22 12:27:20 by ediaz--c          #+#    #+#             */
+/*   Updated: 2023/10/22 12:29:56 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../executor/header/eminishell.h"
+#include "../includes/libft.h"
 
-void	ft_add_back_token(t_tokens **list, t_tokens *new)
+char	*ft_strfjoin(char *s1, char const *s2)
 {
-	t_tokens	*current;
+	char	*cat;
+	int		i;
+	int		j;
 
-	current = *list;
-	if (!current)
-		*list = new;
-	else
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
+	i = 0;
+	j = 0;
+	cat = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!cat)
+		return (NULL);
+	while (s1[i] != '\0')
 	{
-		while (current->next)
-			current = current->next;
-		current->next = new;
-		new->prev = current;
+		cat[i] = s1[i];
+		i++;
 	}
+	while (s2[j] != '\0')
+	{
+		cat[i] = s2[j];
+		i++;
+		j++;
+	}
+	cat[i] = '\0';
+	free(s1);
+	return (cat);
 }

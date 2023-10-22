@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_solo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by nacho             #+#    #+#             */
-/*   Updated: 2023/10/20 11:26:24 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/22 11:59:33 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "eminishell.h"
+#include "../header/eminishell.h"
 
 int	ft_preprocess_solo(t_mini *mini)
 {

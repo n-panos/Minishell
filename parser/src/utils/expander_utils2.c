@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 17:45:59 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/08 17:24:20 by erick            ###   ########.fr       */
+/*   Updated: 2023/10/22 12:19:43 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../executor/header/eminishell.h"
 
 /*
 *	Retorna 1 si el argumento es un delimitador del heredoc, y no expande

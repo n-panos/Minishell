@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:37:50 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/20 12:29:22 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/22 12:21:35 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "eminishell.h"
+#include "../../header/eminishell.h"
 
 int	ft_env_rm(t_mini *mini, char *str);
 int	ft_env_delete(t_mini *mini, int erase);
@@ -49,7 +49,7 @@ int	ft_env_rm(t_mini *mini, char *str)
 	while (mini->env[i])
 	{
 		len = ft_search_c(mini->env[i], '=');
-		if (ft_strlen(str) == len && ft_strncmp(mini->env[i], str, len) == 0)
+		if (ft_strlen(str) == (size_t)len && ft_strncmp(mini->env[i], str, len) == 0)
 			return (ft_env_delete(mini, i));
 		i++;
 	}
