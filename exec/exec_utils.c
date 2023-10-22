@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:17:46 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/19 13:12:13 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/22 11:17:42 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	here_doc(char *limiter)
 	line = get_next_line(0);
 	while (line)
 	{
-		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
+		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0 && \
+		ft_strlen(line) - 1 == ft_strlen(limiter))
 			break ;
 		write(fd[1], line, ft_strlen(line));
 		free(line);

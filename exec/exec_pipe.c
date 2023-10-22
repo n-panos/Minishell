@@ -24,11 +24,11 @@ int	ft_preprocess_pipe(t_mini *mini)
 	while (aux_token)
 	{
 		if (aux_token->type == COMMAND)
-			{
+		{
 				pipes->cmd[i] = ft_init_exec(aux_token, mini->env);
 				ft_in_out_pipe(pipes->cmd[i], aux_token);
 				i++;
-			}
+		}
 		aux_token = aux_token->next;
 	}
 	ft_exec_pipe(pipes, mini);

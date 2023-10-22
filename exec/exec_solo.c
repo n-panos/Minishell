@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_solo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by nacho             #+#    #+#             */
-/*   Updated: 2023/10/20 11:26:24 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/22 11:08:12 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_preprocess_solo(t_mini *mini)
 	{
 		if (exec->path == NULL)
 			ft_error_cmd(exec->cmd_mtx[0]);
-		else 
+		else
 			ft_exec_solo(mini->env, exec);
 	}
 	ft_free_exec(exec);
@@ -47,7 +47,7 @@ pid_t	ft_exec_solo(char **env, t_exec *exec)
 
 	pidc = fork();
 	if (pidc == -1)
-			exit(EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	if (pidc == 0)
 	{
 		if (exec->fd_in > -1)
