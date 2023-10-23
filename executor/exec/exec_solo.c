@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by nacho             #+#    #+#             */
-/*   Updated: 2023/10/23 11:36:04 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/23 13:03:10 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,14 +97,14 @@ void	ft_in_out_type(t_tokens *token, t_exec *exec)
 		if (a_tkn->type == HEREDOC)
 			exec->fd_in = here_doc(a_tkn->next->value);
 		else if (a_tkn->type == REDIRECT_INPUT)
-			exec->fd_in = open(a_tkn->value, O_RDONLY);
+			exec->fd_in = open(a_tkn->next->value, O_RDONLY);
 		if (a_tkn->type == REDIRECT_OUTPUT || a_tkn->type == REDIRECT_APPEND)
 			close (exec->fd_out);
 		if (a_tkn->type == REDIRECT_OUTPUT)
-			exec->fd_out = open(a_tkn->value, \
+			exec->fd_out = open(a_tkn->next->value, \
 			O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		else if (a_tkn->type == REDIRECT_APPEND)
-			exec->fd_out = open(a_tkn->value, \
+			exec->fd_out = open(a_tkn->next->value, \
 			O_WRONLY | O_CREAT | O_APPEND, 0644);
 		a_tkn = a_tkn->next;
 	}

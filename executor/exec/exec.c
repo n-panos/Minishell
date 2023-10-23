@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:11:50 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/23 11:38:08 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/23 13:16:30 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	ft_execute(t_mini *mini)
 	int	ret;
 
 	ret = 0;
-	if (mini->pipe_n == 0)
+	if (mini->cmd_n == 1)
 		ret = ft_preprocess_solo(mini);
-	else if (mini->pipe_n > 0)
+	else if (mini->cmd_n > 1)
 		ret = ft_preprocess_pipe(mini);
 	return (ret);
 }

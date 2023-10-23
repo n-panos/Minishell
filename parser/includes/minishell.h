@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/22 12:03:06 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/23 13:15:31 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct s_tokens
 typedef struct s_mini
 {
 	t_tokens		*tk_lst;
-	int				pipe_n;
+	int				cmd_n;
 	char			**env; /*TODO*/
 	struct s_parser	*tools;
 }	t_mini;
@@ -88,7 +88,7 @@ void		minishell_loop(t_mini *mini);
 /**/
 t_tokens	*create_list(t_parser *tools);
 /* mini.c */
-void		ft_mini_vars(t_mini	*mini);
+void		ft_cmd_nmb(t_mini	*mini);
 
 /* typed.c */
 int			ft_is_command(t_tokens *token);

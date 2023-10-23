@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   mini.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 19:39:12 by erick             #+#    #+#             */
-/*   Updated: 2023/10/22 12:19:43 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/23 13:16:11 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../executor/header/eminishell.h"
 
-void	ft_mini_vars(t_mini	*mini)
+void	ft_cmd_nmb(t_mini	*mini)
 {
 	t_tokens	*current;
 
-	mini->pipe_n = 0;
+	mini->cmd_n = 0;
 	current = mini->tk_lst;
 	while (current)
 	{
-		if (current->type == PIPE)
-			mini->pipe_n++;
+		if (current->type == COMMAND)
+			mini->cmd_n++;
 		current = current->next;
 	}
 }
