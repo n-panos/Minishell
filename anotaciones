@@ -4,3 +4,7 @@ hay que recibir lo que devuelve el ft_execute,(lo que devuelve viene explicado e
 ademas despues de meter 1 comando se cierra la minishell y enseña un mensaje de error
 aunque se haya ejecutado bien (estuve probando con ls por ejemplo y o hace pero luego
 muestra error y cierra minishell)
+
+y he cambiado el contar pipes a contar commands, que he visto que era una funcion
+a parte, que no lo haces durante durante el parseo y me es mas util nº de comandos 
+que nº de pipes
