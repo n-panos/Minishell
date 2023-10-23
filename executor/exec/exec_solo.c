@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_solo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by nacho             #+#    #+#             */
-/*   Updated: 2023/10/22 11:59:33 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:36:04 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_exec	*ft_init_exec(t_tokens *token, char **env)
 	char		*aux_cmd;
 	t_exec		*exec;
 
-	exec = malloc(sizeof(t_exec *));
+	exec = ft_calloc(1, sizeof(t_exec));
 	if (!exec)
 		return (NULL);
 	exec->fd_in = 0;
@@ -87,27 +87,25 @@ t_exec	*ft_init_exec(t_tokens *token, char **env)
 
 void	ft_in_out_type(t_tokens *token, t_exec *exec)
 {
-	t_tokens	*aux_token;
+	t_tokens	*a_tkn;
 
-	aux_token = token;
-	while (aux_token)
+	a_tkn = token;
+	while (a_tkn)
 	{
-		if (aux_token->type == HEREDOC)
-		{
+		if (a_tkn->type == HEREDOC || a_tkn->type == REDIRECT_INPUT)
 			close(exec->fd_in);
-			exec->fd_in = here_doc(aux_token->value);
-		}
-		if (aux_token->type == REDIRECT_INPUT)
-		{
-			close(exec->fd_in);
-			exec->fd_in = open(aux_token->value, O_RDONLY);
-		}
-		if (aux_token->type == REDIRECT_OUTPUT)
-		{
+		if (a_tkn->type == HEREDOC)
+			exec->fd_in = here_doc(a_tkn->next->value);
+		else if (a_tkn->type == REDIRECT_INPUT)
+			exec->fd_in = open(a_tkn->value, O_RDONLY);
+		if (a_tkn->type == REDIRECT_OUTPUT || a_tkn->type == REDIRECT_APPEND)
 			close (exec->fd_out);
-			exec->fd_out = open(aux_token->value, \
+		if (a_tkn->type == REDIRECT_OUTPUT)
+			exec->fd_out = open(a_tkn->value, \
 			O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		}
-		aux_token = aux_token->next;
+		else if (a_tkn->type == REDIRECT_APPEND)
+			exec->fd_out = open(a_tkn->value, \
+			O_WRONLY | O_CREAT | O_APPEND, 0644);
+		a_tkn = a_tkn->next;
 	}
 }
