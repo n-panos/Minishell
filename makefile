@@ -7,6 +7,8 @@ BSRC		= exec/builtins/pwd.c exec/builtins/echo.c exec/builtins/env.c \
 				exec/builtins/export.c exec/builtins/cd.c exec/builtins/unset.c \
 				exec/builtins/exit.c exec/builtins/b_utils.c
 
+LIST_PATH	=	$(addprefix parser/src/list/, $(LIST))
+
 OBJS		= ${SRC:.c=.o} ${BSRC:.c=.o}
 HEADER		= -Iheader
 LIBS		= -Lheader/libft -lft
