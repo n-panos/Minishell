@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:11:50 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/23 13:31:34 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/24 11:43:11 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,41 @@ int	ft_execute(t_mini *mini)
 
 	ret = 0;
 	//if (mini->cmd_n == 0)
-		//ret = ft_no_cmd(mini);
+	//	ret = ft_no_cmd(mini);
 	if (mini->cmd_n == 1)
 		ret = ft_preprocess_solo(mini);
 	else if (mini->cmd_n > 1)
 		ret = ft_preprocess_pipe(mini);
 	return (ret);
 }
+
+//-2 mensaje de error -1 no son redirect, 0 es ok, ret >1 es id pipe del heredoc
+
+/*int	ft_no_cmd()
+{
+}
+
+int	is_valid_red_here(t_tokens *tkn)
+{
+	t_tokens	*a_tkn;
+	int			ret;
+
+	a_tkn = tkn;
+	if (a_tkn->type == REDIRECT_INPUT || a_tkn->type == REDIRECT_OUTPUT || \
+	a_tkn->type == REDIRECT_APPEND || a_tkn->type == HEREDOC)
+	{
+		if (!a_tkn->next)
+			printf("minishell: syntax error near unexpected token `newline'");
+		else if (a_tkn->next->type == PIPE)
+			printf("minishell: syntax error near unexpected token `|'");
+		else if (a_tkn->next->type == ARGUMENT)
+			return (0);
+		return (-2);
+	}
+	if (a_tkn->type == HEREDOC && a_tkn->next->type == DELIMITER)
+		close(here_doc(tkn->next->value));
+	return (-1);
+}*/
 
 // return 2 si no ha hecho nada, return 0 sin problema, 
 // 1 es exit, -1 error

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/23 13:15:31 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/24 11:41:51 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,9 @@ typedef struct s_tokens
 typedef struct s_mini
 {
 	t_tokens		*tk_lst;
+	int				pipe_n;
 	int				cmd_n;
-	char			**env; /*TODO*/
+	char			**env;
 	struct s_parser	*tools;
 }	t_mini;
 
