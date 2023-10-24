@@ -1,13 +1,11 @@
 # PROG DEFINITION
 
 NAME		= e_minishell
-SRC			= exec/builtins.c exec/exec.c exec/exec_solo.c exec/exec_pipe.c \
-				exec/exec_utils.c exec/exec_free.c
-BSRC		= exec/builtins/pwd.c exec/builtins/echo.c exec/builtins/env.c \
-				exec/builtins/export.c exec/builtins/cd.c exec/builtins/unset.c \
-				exec/builtins/exit.c exec/builtins/b_utils.c
+SRC			= builtins.c exec.c exec_solo.c exec_pipe.c exec_utils.c exec_free.c
+BSRC		= pwd.c echo.c env.c export.c cd.c unset.c exit.c b_utils.c
 
-LIST_PATH	=	$(addprefix parser/src/list/, $(LIST))
+BUILTINS_PATH	=	$(addprefix exec/builtins/, $(BSRC))
+EXEC_PATH		=	$(addprefix exec/, $(SRC))
 
 OBJS		= ${SRC:.c=.o} ${BSRC:.c=.o}
 HEADER		= -Iheader
