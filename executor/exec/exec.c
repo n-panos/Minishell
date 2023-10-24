@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:11:50 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/24 11:43:11 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/10/24 13:12:43 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,44 +18,69 @@
 int	ft_execute(t_mini *mini)
 {
 	int			ret;
-	t_tokens	*a_tkn;
+	//t_tokens	*atkn;
+	//int			i;
 
 	ret = 0;
+	/*i = 0;
+	atkn = mini->tk_lst;
+	while (atkn)
+	{
+		close(i);
+		i = is_valid_redi_here(atkn);
+		if (i == -1)
+			return (0);
+		atkn = atkn->next;
+	}*/
 	//if (mini->cmd_n == 0)
-	//	ret = ft_no_cmd(mini);
-	if (mini->cmd_n == 1)
+		//ret = ft_no_cmd(mini);
+	if (mini->pipe_n == 0)
 		ret = ft_preprocess_solo(mini);
-	else if (mini->cmd_n > 1)
+	else if (mini->pipe_n > 1)
 		ret = ft_preprocess_pipe(mini);
 	return (ret);
 }
 
-//-2 mensaje de error -1 no son redirect, 0 es ok, ret >1 es id pipe del heredoc
+//-1 mensaje de error, 0 es ok,
 
-/*int	ft_no_cmd()
+/*int	ft_no_cmd(t_mini *mini)
 {
+	t_tokens	*atkn;
+	int			i;
+
+	atkn = mini->tk_lst;
+	i = 0;
+	while (atkn->next)
+	{
+		close(i);
+		i = is_valid_redi_here(atkn);
+		if (i == -1)
+			return (0);
+		atkn = atkn->next;
+	}
+	if (atkn->type == PIPE && i >= 0)
+	return (0);
 }
 
-int	is_valid_red_here(t_tokens *tkn)
+int	is_valid_redi_here(t_tokens *tkn)
 {
-	t_tokens	*a_tkn;
-	int			ret;
-
-	a_tkn = tkn;
-	if (a_tkn->type == REDIRECT_INPUT || a_tkn->type == REDIRECT_OUTPUT || \
-	a_tkn->type == REDIRECT_APPEND || a_tkn->type == HEREDOC)
+	if (tkn->type == REDIRECT_INPUT || tkn->type == REDIRECT_OUTPUT || \
+	tkn->type == REDIRECT_APPEND || tkn->type == HEREDOC)
 	{
-		if (!a_tkn->next)
+		if (!tkn->next)
 			printf("minishell: syntax error near unexpected token `newline'");
-		else if (a_tkn->next->type == PIPE)
-			printf("minishell: syntax error near unexpected token `|'");
-		else if (a_tkn->next->type == ARGUMENT)
+		else if (tkn->type == HEREDOC && tkn->next->type == DELIMITER)
+			return (here_doc(tkn->next->value));
+		else if (tkn->type == REDIRECT_INPUT || tkn->next->type == ARGUMENT)
+			return (open(tkn->next->value, O_RDONLY));
+		else if (tkn->next->type == ARGUMENT)
 			return (0);
-		return (-2);
+		else
+			printf("minishell: syntax error near unexpected token `%s'", \
+			tkn->next->value);
+		return (-1);
 	}
-	if (a_tkn->type == HEREDOC && a_tkn->next->type == DELIMITER)
-		close(here_doc(tkn->next->value));
-	return (-1);
+	return (0);
 }*/
 
 // return 2 si no ha hecho nada, return 0 sin problema, 

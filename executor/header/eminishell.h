@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/22 13:24:28 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/10/24 12:59:01 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,10 @@ int		ft_unset(t_mini *mini, char **cmd_mtx);
 int		ft_search_c(char *str, char c);
 int		*ft_add_used(int *prev_used, int new_used);
 int		ft_check_list(int *list, int n);
+
+//		EXECUTE
+
+int		is_valid_redi_here(t_tokens *tkn);
 
 //		SOLO FTS
 
