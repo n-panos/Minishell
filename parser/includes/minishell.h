@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/24 11:41:51 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/10/25 11:17:43 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef enum s_type
 
 /*
 *	Estructura de lista doblemente enlazadas de tokens
-*	type == HEREDOC -> value == Path heredoc
 */
 typedef struct s_tokens
 {
@@ -100,8 +99,6 @@ int			ft_is_argument(t_tokens *token);
 void		ft_free_loop(t_parser *tools, t_mini *mini);
 void		free_all(t_mini *mini);
 // EXEC
-// void		ft_exec(t_mini *mini);
-void		ft_check_heredoc(t_mini *mini);
 int			ft_execute(t_mini *mini);
 
 /* Pintar nodos */

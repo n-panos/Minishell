@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:20:40 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/23 13:15:52 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/25 10:59:18 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,23 @@ void	tokenizer(t_parser *tools)
 	free(tools->input);
 }
 
-t_tokens	*parser(t_parser *tools)
+void	parser(t_mini *mini)
 {
+	t_parser	*tools;
 	t_tokens	*tokens;
 
+	tools = mini->tools;
 	tools->index = 0;
 	tools->error = 0;
 	tools->tokenlst = NULL;
 	tokenizer(tools);
 	if (tools->tokenlst == NULL || tools->error)
-		return (NULL);
+		return ;
 	tokens = create_list(tools);
 	if (tokens == NULL || tools->error)
-		return (NULL);
-	return (tokens);
+		return ;
+	mini->tk_lst = tokens;
+	ft_cmd_nmb(mini);
 }
 
 char	*get_input(void)
@@ -74,10 +77,11 @@ void	minishell_loop(t_mini *mini)
 			add_history(tools->input);
 		if (tools->input[0] != '\0' && ft_check_input(tools->input) == 0)
 		{
-			mini->tk_lst = parser(tools);
+			parser(mini);
 			if (tools->error)
 				break ;
-			ft_execute(mini);
+			if (ft_execute(mini) == 1)
+				break ;
 			ft_free_loop(tools, mini);
 		}
 		else
