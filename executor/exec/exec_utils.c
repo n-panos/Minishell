@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:17:46 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/22 11:59:33 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/25 12:38:24 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_find_path(char **envp, char *cmd)
 	int		i;
 
 	i = 0;
-	if (envp == NULL)
+	if (envp == NULL || cmd == NULL)
 		return (NULL);
 	path = cmd;
 	if (ft_strrchr(cmd, '/') == NULL)

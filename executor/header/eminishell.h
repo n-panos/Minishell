@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eminishell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/24 12:59:01 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/10/25 13:09:10 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int		ft_check_list(int *list, int n);
 
 //		EXECUTE
 
-int		is_valid_redi_here(t_tokens *tkn);
+int		ft_no_cmd(t_mini *mini);
 
 //		SOLO FTS
 

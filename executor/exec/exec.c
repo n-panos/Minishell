@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:11:50 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/25 12:05:14 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/25 13:08:18 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ int	ft_execute(t_mini *mini)
 			return (0);
 		atkn = atkn->next;
 	}*/
-	//if (mini->cmd_n == 0)
-		//ret = ft_no_cmd(mini);
-	if (mini->pipe_n == 0)
+	if (mini->cmd_n == 0)
+		ret = ft_no_cmd(mini);
+	if (mini->cmd_n == 1)
 		ret = ft_preprocess_solo(mini);
 	else if (mini->pipe_n > 1)
 		ret = ft_preprocess_pipe(mini);
@@ -68,26 +68,27 @@ int	ft_builtin_check(t_exec *exec, t_mini *mini)
 
 //-1 mensaje de error, 0 es ok,
 
-/*int	ft_no_cmd(t_mini *mini)
+int	ft_no_cmd(t_mini *mini)
 {
 	t_tokens	*atkn;
 	int			i;
 
-	atkn = mini->tk_lst;
 	i = 0;
+	atkn = mini->tk_lst;
 	while (atkn->next)
 	{
-		close(i);
-		i = is_valid_redi_here(atkn);
-		if (i == -1)
-			return (0);
+		if (atkn->type == HEREDOC)
+			close(here_doc(atkn->next->value));
+		if (atkn->type == REDIRECT_OUTPUT)
+			open(atkn->next->value, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (i > 1)
+			close (i);
 		atkn = atkn->next;
 	}
-	if (atkn->type == PIPE && i >= 0)
 	return (0);
 }
 
-int	is_valid_redi_here(t_tokens *tkn)
+/*int	is_valid_redi_here(t_tokens *tkn)
 {
 	if (tkn->type == REDIRECT_INPUT || tkn->type == REDIRECT_OUTPUT || \
 	tkn->type == REDIRECT_APPEND || tkn->type == HEREDOC)
