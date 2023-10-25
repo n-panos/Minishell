@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:11:50 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/24 13:12:43 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/10/25 13:08:18 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,56 +32,14 @@ int	ft_execute(t_mini *mini)
 			return (0);
 		atkn = atkn->next;
 	}*/
-	//if (mini->cmd_n == 0)
-		//ret = ft_no_cmd(mini);
-	if (mini->pipe_n == 0)
+	if (mini->cmd_n == 0)
+		ret = ft_no_cmd(mini);
+	if (mini->cmd_n == 1)
 		ret = ft_preprocess_solo(mini);
 	else if (mini->pipe_n > 1)
 		ret = ft_preprocess_pipe(mini);
 	return (ret);
 }
-
-//-1 mensaje de error, 0 es ok,
-
-/*int	ft_no_cmd(t_mini *mini)
-{
-	t_tokens	*atkn;
-	int			i;
-
-	atkn = mini->tk_lst;
-	i = 0;
-	while (atkn->next)
-	{
-		close(i);
-		i = is_valid_redi_here(atkn);
-		if (i == -1)
-			return (0);
-		atkn = atkn->next;
-	}
-	if (atkn->type == PIPE && i >= 0)
-	return (0);
-}
-
-int	is_valid_redi_here(t_tokens *tkn)
-{
-	if (tkn->type == REDIRECT_INPUT || tkn->type == REDIRECT_OUTPUT || \
-	tkn->type == REDIRECT_APPEND || tkn->type == HEREDOC)
-	{
-		if (!tkn->next)
-			printf("minishell: syntax error near unexpected token `newline'");
-		else if (tkn->type == HEREDOC && tkn->next->type == DELIMITER)
-			return (here_doc(tkn->next->value));
-		else if (tkn->type == REDIRECT_INPUT || tkn->next->type == ARGUMENT)
-			return (open(tkn->next->value, O_RDONLY));
-		else if (tkn->next->type == ARGUMENT)
-			return (0);
-		else
-			printf("minishell: syntax error near unexpected token `%s'", \
-			tkn->next->value);
-		return (-1);
-	}
-	return (0);
-}*/
 
 // return 2 si no ha hecho nada, return 0 sin problema, 
 // 1 es exit, -1 error
@@ -107,3 +65,46 @@ int	ft_builtin_check(t_exec *exec, t_mini *mini)
 		i = ft_unset(mini, exec->cmd_mtx);
 	return (i);
 }
+
+//-1 mensaje de error, 0 es ok,
+
+int	ft_no_cmd(t_mini *mini)
+{
+	t_tokens	*atkn;
+	int			i;
+
+	i = 0;
+	atkn = mini->tk_lst;
+	while (atkn->next)
+	{
+		if (atkn->type == HEREDOC)
+			close(here_doc(atkn->next->value));
+		if (atkn->type == REDIRECT_OUTPUT)
+			open(atkn->next->value, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (i > 1)
+			close (i);
+		atkn = atkn->next;
+	}
+	return (0);
+}
+
+/*int	is_valid_redi_here(t_tokens *tkn)
+{
+	if (tkn->type == REDIRECT_INPUT || tkn->type == REDIRECT_OUTPUT || \
+	tkn->type == REDIRECT_APPEND || tkn->type == HEREDOC)
+	{
+		if (!tkn->next)
+			printf("minishell: syntax error near unexpected token `newline'");
+		else if (tkn->type == HEREDOC && tkn->next->type == DELIMITER)
+			return (here_doc(tkn->next->value));
+		else if (tkn->type == REDIRECT_INPUT || tkn->next->type == ARGUMENT)
+			return (open(tkn->next->value, O_RDONLY));
+		else if (tkn->next->type == ARGUMENT)
+			return (0);
+		else
+			printf("minishell: syntax error near unexpected token `%s'", \
+			tkn->next->value);
+		return (-1);
+	}
+	return (0);
+}*/
