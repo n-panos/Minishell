@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:20:40 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/25 11:25:49 by erick            ###   ########.fr       */
+/*   Updated: 2023/10/25 16:04:26 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ void	minishell_loop(t_mini *mini)
 	tools = mini->tools;
 	tools->status = 0;
 	while (1)
-	{
-		tools->input = get_input();
+	{		tools->input = get_input();
 		if (tools->input == NULL)
 			exit(ft_parser_error("Error", STDERR_FILENO));
 		if (tools->input[0] != '\0')
@@ -80,8 +79,8 @@ void	minishell_loop(t_mini *mini)
 			parser(mini);
 			if (tools->error)
 				break ;
-			// if (ft_execute(mini) == 1)
-			// 	break ;
+			if (ft_execute(mini) == 1)
+				break ;
 			ft_free_loop(tools, mini);
 		}
 		else

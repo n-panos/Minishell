@@ -1,0 +1,6 @@
+Erick
+*	Al hacer echo "hola", lo pinta sin salto de linea al final, y al ejecutar echo -n "hola"
+	si tiene salto de linea al final. Es al revés.
+*	Al ejecutar "echo" o "cd" sin argumentos da segmentation fault.
+*	Al poner un output, la consola se queda pillada y tanto la salida estandar,
+	como la entrada estandar se guarda en el archivo creado
