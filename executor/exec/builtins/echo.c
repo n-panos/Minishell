@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:12:03 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/22 12:04:03 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/26 12:24:12 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ int	ft_echo(char **cmd_mtx)
 	while (cmd_mtx[i])
 		i++;
 	if (i == 1)
+	{
 		printf("\n");
+		return (0);
+	}
 	f = ft_echo_args(cmd_mtx[1]);
 	if (f == 1 && i == 2)
 		return (0);
@@ -37,7 +40,7 @@ int	ft_echo(char **cmd_mtx)
 		j++;
 	}
 	printf("%s", cmd_mtx[j]);
-	if (f == 1)
+	if (f == 0)
 		printf("\n");
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:09:06 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/22 12:04:00 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/26 12:27:25 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,15 @@ char	*ft_get_dir(char *dir);
 int	ft_cd(char **cmd_mtx)
 {
 	char	*dir;
+	int		i;
 
 	if (ft_strlen(cmd_mtx[0]) != 2)
 		return (2);
+	i = 0;
+	while (cmd_mtx[i])
+		i++;
+	if (i >= 1)
+		return (0);
 	dir = ft_get_dir(cmd_mtx[1]);
 	return (chdir(dir));
 }

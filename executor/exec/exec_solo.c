@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_solo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by nacho             #+#    #+#             */
-/*   Updated: 2023/10/25 16:00:21 by erick            ###   ########.fr       */
+/*   Updated: 2023/10/26 13:25:44 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	ft_preprocess_solo(t_mini *mini)
 	t_tokens	*aux_tkn;
 	t_exec		*exec;
 	int			ret;
+	int			status;
 
 	aux_tkn = mini->tk_lst;
 	while (aux_tkn)
@@ -38,6 +39,7 @@ int	ft_preprocess_solo(t_mini *mini)
 			ft_exec_solo(mini->env, exec);
 	}
 	ft_free_exec(exec);
+	wait(&status);
 	return (ret);
 }
 
@@ -50,10 +52,10 @@ pid_t	ft_exec_solo(char **env, t_exec *exec)
 		exit(EXIT_FAILURE);
 	if (pidc == 0)
 	{
-		if (exec->fd_in > -1)
+		if (exec->fd_in > 0)
 			dup2(exec->fd_in, 0);
-		if (exec->fd_out > -1)
-			// dup2(exec->fd_out, 1);
+		if (exec->fd_out > 1)
+			dup2(exec->fd_out, 1);
 		if (execve(exec->path, exec->cmd_mtx, env) == -1)
 			exit(EXIT_FAILURE);
 	}
@@ -92,13 +94,15 @@ void	ft_in_out_type(t_tokens *token, t_exec *exec)
 	a_tkn = token;
 	while (a_tkn)
 	{
-		if (a_tkn->type == HEREDOC || a_tkn->type == REDIRECT_INPUT)
+		if (exec->fd_in > 0 && (a_tkn->type == HEREDOC \
+		|| a_tkn->type == REDIRECT_INPUT))
 			close(exec->fd_in);
 		if (a_tkn->type == HEREDOC)
 			exec->fd_in = here_doc(a_tkn->next->value);
 		else if (a_tkn->type == REDIRECT_INPUT)
 			exec->fd_in = open(a_tkn->next->value, O_RDONLY);
-		if (a_tkn->type == REDIRECT_OUTPUT || a_tkn->type == REDIRECT_APPEND)
+		if (exec->fd_out > 1 && (a_tkn->type == REDIRECT_OUTPUT \
+		|| a_tkn->type == REDIRECT_APPEND))
 			close (exec->fd_out);
 		if (a_tkn->type == REDIRECT_OUTPUT)
 			exec->fd_out = open(a_tkn->next->value, \
