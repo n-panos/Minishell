@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eminishell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/25 13:09:10 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/27 12:38:07 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int		ft_builtins(t_mini *mini, char *prompt);
 
 //      HAND CRAFTED FUNCTIONS -- BUILTINS
 
-int		ft_builtin_check(t_exec *exec, t_mini *mini);
 int		ft_cd(char **cmd_mtx);
 int		ft_echo(char **cmd_mtx);
 int		ft_env(char **env, char **cmd_mtx);
@@ -84,33 +83,35 @@ int		ft_check_list(int *list, int n);
 
 //		EXECUTE
 
+int		ft_builtin_check(t_exec *exec, t_mini *mini);
 int		ft_no_cmd(t_mini *mini);
+int		here_doc(char *limiter);
 
 //		SOLO FTS
 
 int		ft_preprocess_solo(t_mini *mini);
 pid_t	ft_exec_solo(char **env, t_exec *exec);
-t_exec	*ft_init_exec(t_tokens *token, char **env);
 void	ft_in_out_type(t_tokens *token, t_exec *exec);
 
 //		PIPE FTS
 
 int		ft_preprocess_pipe(t_mini *mini);
+void	ft_in_out_config(t_pipe *pipes, t_mini *mini);
 void	ft_exec_pipe(t_pipe *pipes, t_mini *mini);
-t_pipe	*ft_pipe_init(int pipe_num);
 void	ft_in_out_pipe(t_exec *exec, t_tokens *token);
 void	ft_in_out_default(t_pipe *pipes, int pipe_num);
 
 //		UTILS FTS
 
-int		here_doc(char *limiter);
 void	ft_error_cmd(char *str);
+t_exec	*ft_init_exec(t_tokens *token, char **env);
+t_pipe	*ft_pipe_init(int pipe_num, int cmd_num);
 char	*ft_find_path(char **envp, char *cmd);
 char	*ft_no_path(char *cmd, char **pos_paths);
 
 //		FREE FTS
 
-void	ft_free_pipes(t_pipe *pipes, int pipe_n);
+void	ft_free_pipes(t_pipe *pipes, int pipe_n, int cmd_n);
 void	ft_free_exec(t_exec *exec);
 
 #endif

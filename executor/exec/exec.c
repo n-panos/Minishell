@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:11:50 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/26 13:45:36 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/27 11:55:32 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,8 @@
 int	ft_execute(t_mini *mini)
 {
 	int			ret;
-	//t_tokens	*atkn;
-	//int			i;
 
 	ret = 0;
-	/*i = 0;
-	atkn = mini->tk_lst;
-	while (atkn)
-	{
-		close(i);
-		i = is_valid_redi_here(atkn);
-		if (i == -1)
-			return (0);
-		atkn = atkn->next;
-	}*/
 	if (mini->cmd_n == 0)
 		ret = ft_no_cmd(mini);
 	if (mini->cmd_n == 1)
@@ -88,23 +76,22 @@ int	ft_no_cmd(t_mini *mini)
 	return (0);
 }
 
-/*int	is_valid_redi_here(t_tokens *tkn)
+int	here_doc(char *limiter)
 {
-	if (tkn->type == REDIRECT_INPUT || tkn->type == REDIRECT_OUTPUT || \
-	tkn->type == REDIRECT_APPEND || tkn->type == HEREDOC)
-	{
-		if (!tkn->next)
-			printf("minishell: syntax error near unexpected token `newline'");
-		else if (tkn->type == HEREDOC && tkn->next->type == DELIMITER)
-			return (here_doc(tkn->next->value));
-		else if (tkn->type == REDIRECT_INPUT || tkn->next->type == ARGUMENT)
-			return (open(tkn->next->value, O_RDONLY));
-		else if (tkn->next->type == ARGUMENT)
-			return (0);
-		else
-			printf("minishell: syntax error near unexpected token `%s'", \
-			tkn->next->value);
+	char	*line;
+	int		fd[2];
+
+	if (pipe(fd) == -1)
 		return (-1);
+	line = get_next_line(0);
+	while (line)
+	{
+		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
+			break ;
+		write(fd[1], line, ft_strlen(line));
+		free(line);
+		line = get_next_line(0);
 	}
-	return (0);
-}*/
+	close(fd[1]);
+	return (fd[0]);
+}

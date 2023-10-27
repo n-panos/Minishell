@@ -3,31 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   exec_free.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 11:19:21 by nacho             #+#    #+#             */
-/*   Updated: 2023/10/26 13:26:25 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/27 12:41:04 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/eminishell.h"
 
-void	ft_free_pipes(t_pipe *pipes, int pipe_n)
+void	ft_free_pipes(t_pipe *pipes, int pipe_n, int cmd_n)
 {
 	int	i;
 
 	i = 0;
-	while (i <= pipe_n)
+	while (i < cmd_n)
 	{
 		ft_free_exec(pipes->cmd[i]);
 		i++;
 	}
+	free(pipes->cmd[cmd_n]);
+	free(pipes->cmd);
 	i = 0;
 	while (i < pipe_n)
 	{
 		free(pipes->fd[i]);
 		i++;
 	}
+	free(pipes->fd[pipe_n]);
 	free(pipes->fd);
 	free(pipes);
 }

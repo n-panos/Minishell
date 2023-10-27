@@ -3,40 +3,73 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:17:46 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/25 12:38:24 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/27 11:55:33 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/eminishell.h"
-
-int	here_doc(char *limiter)
-{
-	char	*line;
-	int		fd[2];
-
-	if (pipe(fd) == -1)
-		return (-1);
-	line = get_next_line(0);
-	while (line)
-	{
-		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
-			break ;
-		write(fd[1], line, ft_strlen(line));
-		free(line);
-		line = get_next_line(0);
-	}
-	close(fd[1]);
-	return (fd[0]);
-}
 
 void	ft_error_cmd(char *str)
 {
 	ft_putstr_fd("zsh: command not found: ", 1);
 	ft_putstr_fd(str, 1);
 	ft_putstr_fd("\n", 1);
+}
+
+t_exec	*ft_init_exec(t_tokens *token, char **env)
+{
+	t_tokens	*aux;
+	char		*aux_cmd;
+	t_exec		*exec;
+
+	exec = ft_calloc(1, sizeof(t_exec));
+	if (!exec)
+		return (NULL);
+	exec->fd_in = 0;
+	exec->fd_out = 1;
+	exec->path = ft_find_path(env, token->value);
+	aux = token;
+	aux_cmd = ft_strdup("");
+	while (aux && (aux->type == COMMAND || aux->type == ARGUMENT))
+	{
+		aux_cmd = ft_strfjoin(aux_cmd, aux->value);
+		aux_cmd = ft_strfjoin(aux_cmd, " ");
+		aux = aux->next;
+	}
+	exec->cmd_mtx = ft_split(aux_cmd, ' ');
+	free(aux_cmd);
+	return (exec);
+}
+
+t_pipe	*ft_pipe_init(int pipe_num, int cmd_num)
+{
+	t_pipe	*pipes;
+	int		i;
+
+	i = 0;
+	pipes = ft_calloc(1, sizeof(t_pipe));
+	if (!pipes)
+		return (NULL);
+	pipes->cmd = malloc(sizeof(t_exec *) * (cmd_num + 1));
+	if (!pipes->cmd)
+		return (NULL);
+	pipes->cmd[cmd_num] = NULL;
+	pipes->fd = ft_calloc(pipe_num + 1, sizeof(int *));
+	if (!pipes->fd)
+		return (NULL);
+	i = 0;
+	while (i < pipe_num)
+	{
+		pipes->fd[i] = ft_calloc(2, sizeof(int *));
+		if (pipe(pipes->fd[i]) == -1)
+			exit(EXIT_FAILURE);
+		i++;
+	}
+	pipes->fd[pipe_num] = NULL;
+	return (pipes);
 }
 
 char	*ft_find_path(char **envp, char *cmd)

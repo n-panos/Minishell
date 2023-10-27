@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_solo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by nacho             #+#    #+#             */
-/*   Updated: 2023/10/26 13:25:44 by nacho            ###   ########.fr       */
+/*   Updated: 2023/10/27 11:55:31 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,31 +62,6 @@ pid_t	ft_exec_solo(char **env, t_exec *exec)
 	return (pidc);
 }
 
-t_exec	*ft_init_exec(t_tokens *token, char **env)
-{
-	t_tokens	*aux;
-	char		*aux_cmd;
-	t_exec		*exec;
-
-	exec = ft_calloc(1, sizeof(t_exec));
-	if (!exec)
-		return (NULL);
-	exec->fd_in = 0;
-	exec->fd_out = 1;
-	exec->path = ft_find_path(env, token->value);
-	aux = token;
-	aux_cmd = ft_strdup("");
-	while (aux && (aux->type == COMMAND || aux->type == ARGUMENT))
-	{
-		aux_cmd = ft_strfjoin(aux_cmd, aux->value);
-		aux_cmd = ft_strfjoin(aux_cmd, " ");
-		aux = aux->next;
-	}
-	exec->cmd_mtx = ft_split(aux_cmd, ' ');
-	free(aux_cmd);
-	return (exec);
-}
-
 void	ft_in_out_type(t_tokens *token, t_exec *exec)
 {
 	t_tokens	*a_tkn;
@@ -94,6 +69,8 @@ void	ft_in_out_type(t_tokens *token, t_exec *exec)
 	a_tkn = token;
 	while (a_tkn)
 	{
+		if (a_tkn->type == PIPE)
+			break ;
 		if (exec->fd_in > 0 && (a_tkn->type == HEREDOC \
 		|| a_tkn->type == REDIRECT_INPUT))
 			close(exec->fd_in);
