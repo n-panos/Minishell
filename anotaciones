@@ -1,10 +1,5 @@
 Erick
-*	ARREGLADO	Al hacer echo "hola", lo pinta sin salto de linea al final, y al ejecutar echo -n "hola"
-	si tiene salto de linea al final. Es al revés.
-*	ARREGLADO	Al ejecutar "echo" o "cd" sin argumentos da segmentation fault.
-*	ARREGLADO	Al poner un output, la consola se queda pillada y tanto la salida estandar,
-	como la entrada estandar se guarda en el archivo creado
 
 Nacho
 
-- en bash,  "<<eof cat" funciona igual que "cat <<eof" sigue pasando que lo que viene despues de heredoc+delimiter no lo esta tomando como comando, lo pone todo como argumento
+ARREGLADO <!-- en bash, "<<eof cat" funciona igual que "cat <<eof" sigue pasando que lo que viene despues de heredoc+delimiter no lo esta tomando como comando, lo pone todo como argumento -->

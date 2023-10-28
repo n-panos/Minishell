@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   typed.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:56:01 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/22 12:19:43 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/28 11:44:28 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	ft_is_command(t_tokens *token)
 		&& token->prev->prev->type == REDIRECT_OUTPUT)
 		return (1);
 	else if (token->prev->type == PIPE)
+		return (1);
+	else if (token->prev->type == DELIMITER && (token->prev->prev->prev == NULL || token->prev->prev->prev->type == PIPE))
 		return (1);
 	return (0);
 }
