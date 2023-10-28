@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/25 11:17:43 by erick            ###   ########.fr       */
+/*   Updated: 2023/10/28 12:16:12 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@
 
 /*
 *	Estructura de tipos de nodos:
-*	COMMAND			->	Nodo de comando (ls, echo, etc.)
-*	NODE_ARGUMEN			->	Nodo de argumento (argumentos de comandos)
+*	COMMAND				->	Nodo de comando (ls, echo, etc.)
+*	NODE_ARGUMEN		->	Nodo de argumento (argumentos de comandos)
 *	PIPE				->	Nodo de tubería (|)
 *	REDIRECT_INPUT		->	Nodo de redirección de entrada (<)
-*	REDIRECT_OUTPUT	->	Nodo de redirección de salida (>)
-*	REDIRECT_APPEND	->	Nodo de redirección de salida (>>)
-*	HEREDOC			->	Nodo de heredoc (<<)
+*	REDIRECT_OUTPUT		->	Nodo de redirección de salida (>)
+*	REDIRECT_APPEND		->	Nodo de redirección de salida (>>)
+*	HEREDOC				->	Nodo de heredoc (<<)
 *	DELIMITER			->	Nodo de delimitación del heredoc (EOF)
 */
 typedef enum s_type
