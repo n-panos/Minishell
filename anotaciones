@@ -2,4 +2,10 @@ Erick
 
 Nacho
 
-ARREGLADO <!-- en bash, "<<eof cat" funciona igual que "cat <<eof" sigue pasando que lo que viene despues de heredoc+delimiter no lo esta tomando como comando, lo pone todo como argumento -->
+-   Algo no está liberando bien porque hay leaks, si pruebas "exit 2" en la minishell da leaks. prueba un poco y me cuentas, creo que es la copia de las variables de entorno que no la estamos liberando, creo que en el main lo solucionas pero no estoy seguro porque con "exit" no da leaks, bueno cualquier cosa me dices.
+
+Notas: Estoy teniendo problemas con el executor de pipes, he conseguido que funcione pero se me quedan procesos zombies mientras la minishell sigue ejecutando, no consigo encontrar donde dejo algo descolgado que deja el proceso mal cerrado, te voy comentando esta semana, o sino a ver si quedamos y lo miramos juntos que seguro que me vienen bien otros ojos
+
+Nacho to do list:
+-   builtin(export)
+-   procesos zombies residuales

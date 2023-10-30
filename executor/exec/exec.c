@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:11:50 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/27 11:55:32 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/10/30 12:04:36 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int	here_doc(char *limiter)
 		free(line);
 		line = get_next_line(0);
 	}
+	free(line);
 	close(fd[1]);
 	return (fd[0]);
 }

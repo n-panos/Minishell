@@ -14,14 +14,12 @@
 
 int	ft_preprocess_pipe(t_mini *mini)
 {
-	t_pipe		*pipes;	
-	int			status;
+	t_pipe		*pipes;
 
 	pipes = ft_pipe_init(mini->pipe_n, mini->cmd_n);
 	ft_in_out_config(pipes, mini);
 	ft_exec_pipe(pipes, mini);
 	ft_free_pipes(pipes, mini->pipe_n, mini->cmd_n);
-	wait(&status);
 	return (0);
 }
 
@@ -41,7 +39,7 @@ void	ft_exec_pipe(t_pipe *pipes, t_mini *mini)
 			if (pipes->cmd[i]->path == NULL)
 				ft_error_cmd(pipes->cmd[i]->cmd_mtx[0]);
 			else
-				ft_exec_solo(mini->env, pipes->cmd[i]);
+				ft_exec_solo(mini->env, pipes->cmd[i], pipes->fd, mini->pipe_n);
 		}
 		i++;
 	}

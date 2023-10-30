@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eminishell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/27 12:38:07 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/10/30 10:43:52 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int		here_doc(char *limiter);
 //		SOLO FTS
 
 int		ft_preprocess_solo(t_mini *mini);
-pid_t	ft_exec_solo(char **env, t_exec *exec);
+pid_t	ft_exec_solo(char **env, t_exec *exec, int **fd, int pipe_n);
 void	ft_in_out_type(t_tokens *token, t_exec *exec);
 
 //		PIPE FTS
@@ -112,6 +112,8 @@ char	*ft_no_path(char *cmd, char **pos_paths);
 //		FREE FTS
 
 void	ft_free_pipes(t_pipe *pipes, int pipe_n, int cmd_n);
+void	ft_free_pipe_fd(int	**fd, int pipe_n);
+int		ft_close_fd(int **fd, int pipe_n, int in, int out);
 void	ft_free_exec(t_exec *exec);
 
 #endif
