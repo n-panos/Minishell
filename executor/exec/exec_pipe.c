@@ -15,10 +15,18 @@
 int	ft_preprocess_pipe(t_mini *mini)
 {
 	t_pipe		*pipes;
+	int			i;
 
+	i = 0;
 	pipes = ft_pipe_init(mini->pipe_n, mini->cmd_n);
 	ft_in_out_config(pipes, mini);
 	ft_exec_pipe(pipes, mini);
+	/* ERICK */
+	while (i < mini->cmd_n)
+	{
+		wait(NULL);
+		i++;
+	}	
 	ft_free_pipes(pipes, mini->pipe_n, mini->cmd_n);
 	return (0);
 }

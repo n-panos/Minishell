@@ -5,6 +5,9 @@ Erick
 	61208 ttys003    0:00.00 <defunct>
 	61209 ttys003    0:00.00 <defunct>
 
+	He leido que se debe al "wait" o "waitpid" que no se está haciendo bien, lo que podriamos
+	hacer seria una array en el que guardar los pid para luego hacer el wait.
+
 
 Nacho
 
