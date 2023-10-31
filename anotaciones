@@ -7,6 +7,8 @@ Erick
 
 	He leido que se debe al "wait" o "waitpid" que no se está haciendo bien, lo que podriamos
 	hacer seria una array en el que guardar los pid para luego hacer el wait.
+	He añadido un par de lineas en "exec_pipe.c" en la linea 24,
+	(He añadido un comentario que pone 'Erick'). Parece que funciona con eso.
 
 
 Nacho
