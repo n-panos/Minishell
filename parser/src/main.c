@@ -3,23 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:02 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/22 12:19:02 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/10/31 10:14:57 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../executor/header/eminishell.h"
 
-// void	leaks(void)
-// {
-// 	system("leaks -q minishell");
-// }
+void	leaks(void)
+{
+	system("leaks -q minishell");
+}
 int	main(int argc, char **argv, char **envp)
 {
 	t_mini		mini;
 
+	// atexit(leaks);
 	mini.tools = malloc(sizeof(t_parser));
 	if (mini.tools == NULL)
 		return (1);

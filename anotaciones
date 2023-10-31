@@ -1,12 +1,18 @@
 Erick
+	-	Haciendo "ls | ls", el prompt se queda pillado y al hacer ps aparece esto.
+	61193 ttys003    0:00.01 ./minishell
+	61203 ttys003    0:00.00 <defunct>
+	61208 ttys003    0:00.00 <defunct>
+	61209 ttys003    0:00.00 <defunct>
+
 
 Nacho
 
--   Algo no está liberando bien porque hay leaks, si pruebas "exit 2"
-en la minishell da leaks. prueba un poco y me cuentas, creo que es la
-copia de las variables de entorno que no la estamos liberando, creo
-que en el main lo solucionas pero no estoy seguro porque con "exit"
-no da leaks, bueno cualquier cosa me dices.
+ARREGLADO (CREO) # -   Algo no está liberando bien porque hay leaks, si pruebas "exit 2"
+# en la minishell da leaks. prueba un poco y me cuentas, creo que es la
+# copia de las variables de entorno que no la estamos liberando, creo
+# que en el main lo solucionas pero no estoy seguro porque con "exit"
+# no da leaks, bueno cualquier cosa me dices.
 
 Notas: Estoy teniendo problemas con el executor de pipes, he
 conseguido que funcione pero se me quedan procesos zombies mientras

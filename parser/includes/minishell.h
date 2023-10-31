@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/28 12:16:12 by erick            ###   ########.fr       */
+/*   Updated: 2023/10/31 10:05:32 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 *	REDIRECT_OUTPUT		->	Nodo de redirección de salida (>)
 *	REDIRECT_APPEND		->	Nodo de redirección de salida (>>)
 *	HEREDOC				->	Nodo de heredoc (<<)
-*	DELIMITER			->	Nodo de delimitación del heredoc (EOF)
+*	DELIMITER			git pull->	Nodo de delimitación del heredoc (EOF)
 */
 typedef enum s_type
 {
