@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_solo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/31 09:17:46 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/01 10:43:57 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,31 +36,32 @@ int	ft_preprocess_solo(t_mini *mini)
 		if (exec->path == NULL)
 			ft_error_cmd(exec->cmd_mtx[0]);
 		else
-			ft_exec_solo(mini->env, exec, NULL, 0);
+			ft_exec_solo(mini->env, exec);
 	}
 	ft_free_exec(exec);
 	wait(&status);
 	return (ret);
 }
 
-pid_t	ft_exec_solo(char **env, t_exec *exec, int **fd, int pipe_n)
+pid_t	ft_exec_solo(char **env, t_exec *exec)
 {
 	pid_t	pidc;
-	//int		fd_close;
 
 	pidc = fork();
 	if (pidc == -1)
 		exit(EXIT_FAILURE);
 	if (pidc == 0)
 	{
-		//if (fd != NULL)
-		//	fd_close = ft_close_fd(fd, pipe_n, exec->fd_in, exec->fd_out);
-		dup2(exec->fd_in, 0);
-		dup2(exec->fd_out, 1);
-		if (fd != NULL)
-			ft_close_fd(fd, pipe_n, -1, -1);
-		//if (fd != NULL && fd_close > 1)
-		//	close(fd_close);
+		if (exec->fd_in > 0)
+		{
+			dup2(exec->fd_in, 0);
+			close(exec->fd_in);
+		}
+		if (exec->fd_out > 1)
+		{
+			dup2(exec->fd_out, 1);
+			close(exec->fd_out);
+		}
 		if (execve(exec->path, exec->cmd_mtx, env) == -1)
 			exit(EXIT_FAILURE);
 	}

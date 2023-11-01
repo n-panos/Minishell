@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/30 10:43:52 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/01 10:43:46 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int		here_doc(char *limiter);
 //		SOLO FTS
 
 int		ft_preprocess_solo(t_mini *mini);
-pid_t	ft_exec_solo(char **env, t_exec *exec, int **fd, int pipe_n);
+pid_t	ft_exec_solo(char **env, t_exec *exec);
 void	ft_in_out_type(t_tokens *token, t_exec *exec);
 
 //		PIPE FTS
