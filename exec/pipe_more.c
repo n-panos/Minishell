@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_more.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:42:26 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/31 13:00:16 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/01 10:35:48 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 typedef struct s_pope
 {
-	int		out;
 	t_exec	*cmd1;
 	t_exec	*cmd2;
 	int		*fd;
@@ -32,14 +31,18 @@ void	ft_preprocess_pipe(t_mini *mini)
 	in_out = 0;
 	while (atkn && i < mini->cmd_n)
 	{
-		in_out = ft_exec_two();
+		in_out = ft_exec_two(mini, atkn, in_out);
 		i += 2;
-		atkn = ft_check_pipe_type(atkn);
+		atkn = ft_return_pipe(atkn);
 	}
 	if (i == mini->cmd_n)
 	{
-		odd_one = ft_init_exec(atkn, mini->env, in_out, );
+		odd_one = ft_init_exec(atkn, mini->env, in_out, ft_check_out(atkn));
+		ft_exec_solo(mini->env, odd_one);
+		ft_free_exec(odd_one);
 	}
+	else if (in_out > 1)
+		close(in_out);
 }
 
 int	ft_exec_two(t_mini *mini, t_tokens *tkn, int in)
@@ -47,8 +50,10 @@ int	ft_exec_two(t_mini *mini, t_tokens *tkn, int in)
 	t_pope		*pope;
 	int			*fd;
 	t_tokens	*atkn;
+	int			out;
 
 	atkn = tkn;
+	out = 1;
 	pope = ft_config_pipe(atkn, mini->env, in);
 	atkn = ft_return_pipe(tkn);
 	atkn = ft_return_pipe(atkn);
@@ -58,12 +63,14 @@ int	ft_exec_two(t_mini *mini, t_tokens *tkn, int in)
 		if (pipe(fd) == -1)
 			exit(EXIT_FAILURE);
 		pope->cmd2->fd_out = fd[0];
-		pope->out = fd[1];
+		out = fd[1];
 	}
 	ft_exec_solo(mini->env, pope->cmd1);
+	ft_free_exec(pope->cmd1);
 	ft_exec_solo(mini->env, pope->cmd2);
+	ft_free_exec(pope->cmd2);
 	ft_free_pipes(pope);
-	return (pope->out);
+	return (out);
 }
 
 t_pope	*ft_config_pipe(t_tokens *tkn, char **env, int in)
@@ -73,7 +80,6 @@ t_pope	*ft_config_pipe(t_tokens *tkn, char **env, int in)
 	pope = ft_calloc(1, sizeof(t_pope));
 	if (!pope)
 		return (-1);
-	pope->out = 1;
 	pope->cmd1 = ft_add_cmd(tkn, env, in);
 	tkn = ft_return_pipe(tkn);
 	pope->cmd2 = ft_add_cmd(tkn, env, 0);
