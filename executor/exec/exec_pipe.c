@@ -14,104 +14,93 @@
 
 int	ft_preprocess_pipe(t_mini *mini)
 {
-	t_pipe		*pipes;
 	int			i;
+	int			in_out;
+	int			status;
+	t_exec		*odd_one;
+	t_tokens	*atkn;
 
-	i = 0;
-	pipes = ft_pipe_init(mini->pipe_n, mini->cmd_n);
-	ft_in_out_config(pipes, mini);
-	ft_exec_pipe(pipes, mini);
-	/* ERICK */
-	while (i < mini->cmd_n)
+	i = 1;
+	atkn = mini->tk_lst;
+	in_out = 0;
+	while (atkn && i < mini->cmd_n)
 	{
-		wait(NULL);
-		i++;
-	}	
-	ft_free_pipes(pipes, mini->pipe_n, mini->cmd_n);
+		in_out = ft_exec_two(mini, atkn, in_out);
+		i += 2;
+		atkn = ft_return_pipe(atkn);
+		atkn = ft_return_pipe(atkn);
+	}
+	if (i == mini->cmd_n)
+	{
+		odd_one = ft_init_exec(atkn, mini->env, in_out, ft_check_out(atkn));
+		ft_exec_solo(mini->env, odd_one);
+		ft_free_exec(odd_one);
+	}
+	else if (in_out > 1)
+		close(in_out);
+	wait(&status);
+	wait(&status);
 	return (0);
 }
 
-void	ft_exec_pipe(t_pipe *pipes, t_mini *mini)
+int	ft_exec_two(t_mini *mini, t_tokens *tkn, int in)
 {
-	int		i;
-	int		ret;
+	t_pipes		*pipes;
+	int			*fd;
+	t_tokens	*atkn;
+	int			out;
 
-	i = 0;
-	while (i <= mini->pipe_n)
+	atkn = tkn;
+	out = 0;
+	pipes = ft_config_pipe(atkn, mini->env, in);
+	if (pipes->cmd2->fd_out == 1)
 	{
-		ret = ft_builtin_check(pipes->cmd[i], mini);
-		if (ret == -1)
-			ft_error_cmd(pipes->cmd[i]->cmd_mtx[0]);
-		else if (ret == 2)
-		{
-			if (pipes->cmd[i]->path == NULL)
-				ft_error_cmd(pipes->cmd[i]->cmd_mtx[0]);
-			else
-				ft_exec_solo(mini->env, pipes->cmd[i], pipes->fd, mini->pipe_n);
-		}
-		i++;
+		fd = ft_calloc(2, sizeof(int *));
+		if (pipe(fd) == -1)
+			exit(EXIT_FAILURE);
+		pipes->cmd2->fd_out = fd[0];
+		out = fd[1];
 	}
+	ft_exec_solo(mini->env, pipes->cmd1);
+	ft_free_exec(pipes->cmd1);
+	ft_exec_solo(mini->env, pipes->cmd2);
+	ft_free_exec(pipes->cmd2);
+	ft_free_pipes(pipes);
+	return (out);
 }
 
-void	ft_in_out_config(t_pipe *pipes, t_mini *mini)
+t_pipes	*ft_config_pipe(t_tokens *tkn, char **env, int in)
 {
-	t_tokens	*aux_token;
-	int			i;
+	t_pipes		*pipes;
 
-	aux_token = mini->tk_lst;
-	i = 0;
-	while (aux_token)
+	pipes = ft_calloc(1, sizeof(t_pipes));
+	if (!pipes)
+		exit(EXIT_FAILURE);
+	pipes->cmd1 = ft_add_cmd(tkn, env, in);
+	tkn = ft_return_pipe(tkn);
+	pipes->cmd2 = ft_add_cmd(tkn, env, 0);
+	if (pipes->cmd1->fd_out == -1 && pipes->cmd2->fd_in == 0)
 	{
-		if (aux_token->type == COMMAND)
-		{
-			pipes->cmd[i] = ft_init_exec(aux_token, mini->env);
-			i++;
-		}
-		aux_token = aux_token->next;
+		pipes->fd = ft_calloc(2, sizeof(int *));
+		if (pipe(pipes->fd) == -1)
+			exit(EXIT_FAILURE);
+		pipes->cmd1->fd_out = pipes->fd[1];
+		pipes->cmd2->fd_in = pipes->fd[0];
 	}
-	ft_in_out_default(pipes, mini->pipe_n);
-	aux_token = mini->tk_lst;
-	i = 0;
-	while (aux_token)
-	{
-		if (aux_token->type == COMMAND)
-		{
-			ft_in_out_pipe(pipes->cmd[i], aux_token);
-			i++;
-		}
-		aux_token = aux_token->next;
-	}
+	return (pipes);
 }
 
-void	ft_in_out_pipe(t_exec *exec, t_tokens *token)
+t_tokens	*ft_return_pipe(t_tokens *tkn)
 {
-	t_tokens	*aux_token;
-
-	if (token->prev && token->prev->prev)
+	while (tkn)
 	{
-		aux_token = token->prev->prev;
-		if (aux_token->type == REDIRECT_INPUT || aux_token->type == HEREDOC)
-			ft_in_out_type(aux_token, exec);
-		else
-			ft_in_out_type(token, exec);
+		if (tkn->type == PIPE)
+		{
+			if (tkn->next)
+				tkn = tkn->next;
+			break ;
+		}
+		tkn = tkn->next;
 	}
-	else
-		ft_in_out_type(token, exec);
-}
-
-void	ft_in_out_default(t_pipe *pipes, int pipe_num)
-{
-	int	i;
-
-	pipes->cmd[0]->fd_in = 0;
-	pipes->cmd[0]->fd_out = pipes->fd[0][1];
-	i = 1;
-	while (i < (pipe_num))
-	{
-		pipes->cmd[i]->fd_in = pipes->fd[i - 1][0];
-		pipes->cmd[i]->fd_out = pipes->fd[i][1];
-		i++;
-	}
-	pipes->cmd[pipe_num]->fd_in = pipes->fd[i - 1][0];
-	pipes->cmd[pipe_num]->fd_out = 1;
+	return (tkn);
 }

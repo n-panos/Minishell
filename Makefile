@@ -25,7 +25,7 @@ ERROR_PATH	=	$(addprefix parser/src/error/, $(ERROR))
 
 ## EXECUTOR
 
-EXEC		=	exec.c exec_solo.c exec_pipe.c exec_utils.c exec_free.c
+EXEC		=	exec.c exec_solo.c exec_pipe.c exec_utils.c exec_free.c exec_utils_more.c
 BUILTINS	=	pwd.c echo.c env.c cd.c unset.c exit.c b_utils.c #export.c
 
 EXECUTOR	=	$(addprefix executor/exec/, $(EXEC))

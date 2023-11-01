@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/01 10:43:57 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/01 12:08:09 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,8 @@ int	ft_preprocess_solo(t_mini *mini)
 			break ;
 		aux_tkn = aux_tkn->next;
 	}
-	exec = ft_init_exec(aux_tkn, mini->env);
+	exec = ft_init_exec(aux_tkn, mini->env, 0, 1);
 	ft_in_out_type(mini->tk_lst, exec);
-	if (exec == NULL)
-		return (-1);
 	ret = ft_builtin_check(exec, mini);
 	if (ret == 2)
 	{

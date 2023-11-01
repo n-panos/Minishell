@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/31 09:18:00 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/01 11:22:16 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_error_cmd(char *str)
 	ft_putstr_fd("\n", 1);
 }
 
-t_exec	*ft_init_exec(t_tokens *token, char **env)
+t_exec	*ft_init_exec(t_tokens *token, char **env, int in, int out)
 {
 	t_tokens	*aux;
 	char		*aux_cmd;
@@ -27,9 +27,9 @@ t_exec	*ft_init_exec(t_tokens *token, char **env)
 
 	exec = ft_calloc(1, sizeof(t_exec));
 	if (!exec)
-		return (NULL);
-	exec->fd_in = 0;
-	exec->fd_out = 1;
+		exit(EXIT_FAILURE);
+	exec->fd_in = in;
+	exec->fd_out = out;
 	exec->path = ft_find_path(env, token->value);
 	aux = token;
 	aux_cmd = ft_strdup("");
@@ -44,32 +44,24 @@ t_exec	*ft_init_exec(t_tokens *token, char **env)
 	return (exec);
 }
 
-t_pipe	*ft_pipe_init(int pipe_num, int cmd_num)
+t_exec	*ft_add_cmd(t_tokens *tkn, char **env, int in)
 {
-	t_pipe	*pipes;
-	int		i;
+	t_exec	*ret;
+	int		out;
 
-	i = 0;
-	pipes = ft_calloc(1, sizeof(t_pipe));
-	if (!pipes)
-		return (NULL);
-	pipes->cmd = malloc(sizeof(t_exec *) * (cmd_num + 1));
-	if (!pipes->cmd)
-		return (NULL);
-	pipes->cmd[cmd_num] = NULL;
-	pipes->fd = ft_calloc(pipe_num + 1, sizeof(int *));
-	if (!pipes->fd)
-		return (NULL);
-	i = 0;
-	while (i < pipe_num)
+	in = ft_check_in(tkn, in);
+	out = ft_check_out(tkn);
+	ret = NULL;
+	while (tkn)
 	{
-		pipes->fd[i] = ft_calloc(2, sizeof(int *));
-		if (pipe(pipes->fd[i]) == -1)
-			exit(EXIT_FAILURE);
-		i++;
+		if (tkn->type == COMMAND)
+		{
+			ret = ft_init_exec(tkn, env, in, out);
+			break ;
+		}
+		tkn = tkn->next;
 	}
-	pipes->fd[pipe_num] = NULL;
-	return (pipes);
+	return (ret);
 }
 
 char	*ft_find_path(char **envp, char *cmd)

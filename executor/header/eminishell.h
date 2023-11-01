@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/01 10:43:46 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/01 11:21:00 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,65 +55,66 @@ typedef struct s_exec
 	int		fd_out;
 }	t_exec;
 
-typedef struct s_pipe
+typedef struct s_pipes
 {
-	t_exec	**cmd;
-	int		**fd;
-}	t_pipe;
+	t_exec	*cmd1;
+	t_exec	*cmd2;
+	int		*fd;
+}	t_pipes;
 
 //		Funciones temporales para testeo en builtins.c
 
-int		ft_builtins(t_mini *mini, char *prompt);
+int			ft_builtins(t_mini *mini, char *prompt);
 
 //      HAND CRAFTED FUNCTIONS -- BUILTINS
 
-int		ft_cd(char **cmd_mtx);
-int		ft_echo(char **cmd_mtx);
-int		ft_env(char **env, char **cmd_mtx);
-int		ft_exit(char **cmd_mtx);
+int			ft_cd(char **cmd_mtx);
+int			ft_echo(char **cmd_mtx);
+int			ft_env(char **env, char **cmd_mtx);
+int			ft_exit(char **cmd_mtx);
 // int		ft_export(t_mini *mini, char **cmd_mtx);
-int		ft_pwd(char **cmd_mtx);
-int		ft_unset(t_mini *mini, char **cmd_mtx);
+int			ft_pwd(char **cmd_mtx);
+int			ft_unset(t_mini *mini, char **cmd_mtx);
 
 //		BUILTINS UTILS
 
-int		ft_search_c(char *str, char c);
-int		*ft_add_used(int *prev_used, int new_used);
-int		ft_check_list(int *list, int n);
+int			ft_search_c(char *str, char c);
+int			*ft_add_used(int *prev_used, int new_used);
+int			ft_check_list(int *list, int n);
 
 //		EXECUTE
 
-int		ft_builtin_check(t_exec *exec, t_mini *mini);
-int		ft_no_cmd(t_mini *mini);
-int		here_doc(char *limiter);
+int			ft_builtin_check(t_exec *exec, t_mini *mini);
+int			ft_no_cmd(t_mini *mini);
+int			here_doc(char *limiter);
 
 //		SOLO FTS
 
-int		ft_preprocess_solo(t_mini *mini);
-pid_t	ft_exec_solo(char **env, t_exec *exec);
-void	ft_in_out_type(t_tokens *token, t_exec *exec);
+int			ft_preprocess_solo(t_mini *mini);
+pid_t		ft_exec_solo(char **env, t_exec *exec);
+void		ft_in_out_type(t_tokens *token, t_exec *exec);
 
 //		PIPE FTS
 
-int		ft_preprocess_pipe(t_mini *mini);
-void	ft_in_out_config(t_pipe *pipes, t_mini *mini);
-void	ft_exec_pipe(t_pipe *pipes, t_mini *mini);
-void	ft_in_out_pipe(t_exec *exec, t_tokens *token);
-void	ft_in_out_default(t_pipe *pipes, int pipe_num);
+int			ft_preprocess_pipe(t_mini *mini);
+int			ft_exec_two(t_mini *mini, t_tokens *tkn, int in);
+t_pipes		*ft_config_pipe(t_tokens *tkn, char **env, int in);
+t_tokens	*ft_return_pipe(t_tokens *tkn);
 
 //		UTILS FTS
 
-void	ft_error_cmd(char *str);
-t_exec	*ft_init_exec(t_tokens *token, char **env);
-t_pipe	*ft_pipe_init(int pipe_num, int cmd_num);
-char	*ft_find_path(char **envp, char *cmd);
-char	*ft_no_path(char *cmd, char **pos_paths);
+void		ft_error_cmd(char *str);
+t_exec		*ft_init_exec(t_tokens *token, char **env, int in, int out);
+t_exec		*ft_add_cmd(t_tokens *tkn, char **env, int in);
+char		*ft_find_path(char **envp, char *cmd);
+char		*ft_no_path(char *cmd, char **pos_paths);
+
+int			ft_check_out(t_tokens *tkn);
+int			ft_check_in(t_tokens *tkn, int in);
 
 //		FREE FTS
 
-void	ft_free_pipes(t_pipe *pipes, int pipe_n, int cmd_n);
-void	ft_free_pipe_fd(int	**fd, int pipe_n);
-int		ft_close_fd(int **fd, int pipe_n, int in, int out);
-void	ft_free_exec(t_exec *exec);
+void		ft_free_pipes(t_pipes *pipes);
+void		ft_free_exec(t_exec *exec);
 
 #endif
