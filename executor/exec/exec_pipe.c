@@ -16,7 +16,7 @@ int	ft_preprocess_pipe(t_mini *mini)
 {
 	int			i;
 	int			in_out;
-	int			status;
+	//int			status;
 	t_exec		*odd_one;
 	t_tokens	*atkn;
 
@@ -38,8 +38,9 @@ int	ft_preprocess_pipe(t_mini *mini)
 	}
 	else if (in_out > 1)
 		close(in_out);
-	wait(&status);
-	wait(&status);
+	ft_waiting(mini->cmd_n);
+	//wait(&status);
+	//wait(&status);
 	return (0);
 }
 
@@ -53,20 +54,41 @@ int	ft_exec_two(t_mini *mini, t_tokens *tkn, int in)
 	atkn = tkn;
 	out = 0;
 	pipes = ft_config_pipe(atkn, mini->env, in);
-	if (pipes->cmd2->fd_out == 1)
+	if (pipes->cmd2->fd_out == -1)
 	{
 		fd = ft_calloc(2, sizeof(int *));
 		if (pipe(fd) == -1)
 			exit(EXIT_FAILURE);
-		pipes->cmd2->fd_out = fd[0];
-		out = fd[1];
+		pipes->cmd2->fd_out = fd[1];
+		out = fd[0];
 	}
-	ft_exec_solo(mini->env, pipes->cmd1);
+	ft_pipe_exec(mini, pipes);
+	return (out);
+}
+
+void	ft_pipe_exec(t_mini *mini, t_pipes *pipes)
+{
+	int	i;
+
+	i = ft_builtin_check(pipes->cmd1, mini);
+	if (i == 2)
+	{
+		if (pipes->cmd1->path == NULL)
+			ft_error_cmd(pipes->cmd1->cmd_mtx[0]);
+		else
+			ft_exec_solo(mini->env, pipes->cmd1);
+	}
 	ft_free_exec(pipes->cmd1);
-	ft_exec_solo(mini->env, pipes->cmd2);
+	i = ft_builtin_check(pipes->cmd2, mini);
+	if (i == 2)
+	{
+		if (pipes->cmd2->path == NULL)
+			ft_error_cmd(pipes->cmd2->cmd_mtx[0]);
+		else
+			ft_exec_solo(mini->env, pipes->cmd2);
+	}
 	ft_free_exec(pipes->cmd2);
 	ft_free_pipes(pipes);
-	return (out);
 }
 
 t_pipes	*ft_config_pipe(t_tokens *tkn, char **env, int in)

@@ -1,6 +1,17 @@
 
 #include "../header/eminishell.h"
 
+void	ft_waiting(int n)
+{
+	int	status;
+
+	while (n > 0)
+	{
+		wait(&status);
+		n--;
+	}
+}
+
 int	ft_check_out(t_tokens *tkn)
 {
 	t_tokens	*atkn;
