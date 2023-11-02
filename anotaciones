@@ -1,16 +1,8 @@
 Erick
-	-	ARREGLADO(O eso parece, hay que testear un poco)
-    
-    Haciendo "ls | ls", el prompt se queda pillado y al hacer ps aparece esto.
-	61193 ttys003    0:00.01 ./minishell
-	61203 ttys003    0:00.00 <defunct>
-	61208 ttys003    0:00.00 <defunct>
-	61209 ttys003    0:00.00 <defunct>
-
-	He leido que se debe al "wait" o "waitpid" que no se está haciendo bien, lo que podriamos
-	hacer seria una array en el que guardar los pid para luego hacer el wait.
-	He añadido un par de lineas en "exec_pipe.c" en la linea 24,
-	(He añadido un comentario que pone 'Erick'). Parece que funciona con eso.
+	-	probando cosas un poco mas rebuscadas:
+	"<infile sleep 2 | ls >salida | env >salida2"
+	despues de ">salida" la siguiente "|" la toma como COMMAND
+	no como PIPE, echale un ojo.
 
 
 Nacho
