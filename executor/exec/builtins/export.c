@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:50:28 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/02 12:25:51 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/02 12:40:21 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,17 @@ int	ft_export_more_args(t_mini *mini, char *arg)
 	char	*aux;
 	int		i;
 
-	//i = ft_search_c(arg, '=');
-	i = 0;
-	if (i == -1)
-		return (0);
-	while (i >= 0)
+	i = 1;
+	while (arg[i])
 	{
-		if (ft_isalpha(arg[i]) == 0)
+		if (arg[i] == '=')
+			break ;
+		if (ft_isalnum(arg[i]) == 0 || (i == 0 && ft_isalpha(arg[i]) == 0))
 		{
-			printf("minishell: export: `%s': not a valid identifier", arg);
+			printf("minishell: export: `%s': not a valid identifier\n", arg);
 			return (0);
 		}
-		i--;
+		i++;
 	}
 	aux = ft_add_to_env(mini->env, arg);
 	ft_mtx_free(mini->env);
