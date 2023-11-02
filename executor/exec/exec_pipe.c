@@ -52,6 +52,8 @@ int	ft_exec_two(t_mini *mini, t_tokens *tkn, int in)
 	int			out;
 
 	atkn = tkn;
+	//cuando esté arreglado el bug del pipe despues de OUT_REDI
+	//revisar este out default.
 	out = 0;
 	pipes = ft_config_pipe(atkn, mini->env, in);
 	if (pipes->cmd2->fd_out == -1)

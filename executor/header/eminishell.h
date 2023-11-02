@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/02 10:35:55 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/02 10:57:36 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int			ft_cd(char **cmd_mtx);
 int			ft_echo(char **cmd_mtx);
 int			ft_env(char **env, char **cmd_mtx);
 int			ft_exit(char **cmd_mtx);
-// int		ft_export(t_mini *mini, char **cmd_mtx);
+int			ft_export(t_mini *mini, char **cmd_mtx);
 int			ft_pwd(char **cmd_mtx);
 int			ft_unset(t_mini *mini, char **cmd_mtx);
 

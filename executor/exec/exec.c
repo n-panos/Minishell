@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:16:49 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/01 12:08:19 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/02 12:28:04 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	ft_builtin_check(t_exec *exec, t_mini *mini)
 	int	i;
 
 	i = 2;
+	i = ft_strlen(exec->cmd_mtx[0]);
 	if (ft_strncmp(exec->cmd_mtx[0], "cd", 2) == 0)
 		i = ft_cd(exec->cmd_mtx);
 	else if (ft_strncmp(exec->cmd_mtx[0], "echo", 4) == 0)
@@ -45,8 +46,8 @@ int	ft_builtin_check(t_exec *exec, t_mini *mini)
 		i = ft_env(mini->env, exec->cmd_mtx);
 	else if (ft_strncmp(exec->cmd_mtx[0], "exit", 4) == 0)
 		i = ft_exit(exec->cmd_mtx);
-	// else if (ft_strncmp(exec->cmd_mtx[0], "export", 6))
-	// 	i = ft_export(mini, exec->cmd_mtx);
+	 else if (ft_strncmp(exec->cmd_mtx[0], "export", 6) == 0)
+	 	i = ft_export(mini, exec->cmd_mtx);
 	else if (ft_strncmp(exec->cmd_mtx[0], "pwd", 3) == 0)
 		i = ft_pwd(exec->cmd_mtx);
 	else if (ft_strncmp(exec->cmd_mtx[0], "unset", 5) == 0)
