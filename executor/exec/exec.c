@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:16:49 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/02 12:28:04 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/03 11:17:17 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	ft_builtin_check(t_exec *exec, t_mini *mini)
 	int	i;
 
 	i = 2;
-	i = ft_strlen(exec->cmd_mtx[0]);
 	if (ft_strncmp(exec->cmd_mtx[0], "cd", 2) == 0)
 		i = ft_cd(exec->cmd_mtx);
 	else if (ft_strncmp(exec->cmd_mtx[0], "echo", 4) == 0)
