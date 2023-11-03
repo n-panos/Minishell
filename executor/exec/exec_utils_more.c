@@ -22,7 +22,11 @@ int	ft_check_out(t_tokens *tkn)
 	while (atkn)
 	{
 		if (atkn->type == PIPE)
-			return (-1);
+		{
+			if (ret == 1)
+				return (-2);
+			break ;
+		}
 		if (ret > 1 && (atkn->type == REDIRECT_OUTPUT \
 		|| atkn->type == REDIRECT_APPEND))
 			close(ret);
@@ -32,6 +36,8 @@ int	ft_check_out(t_tokens *tkn)
 		else if (atkn->type == REDIRECT_APPEND)
 			ret = open(atkn->next->value, \
 			O_WRONLY | O_APPEND, 0644);
+		if (ret == -1)
+			return (ft_error_cmd(atkn->next->value, -1, 0));
 		atkn = atkn->next;
 	}
 	return (ret);
@@ -55,6 +61,8 @@ int	ft_check_in(t_tokens *tkn, int in)
 			ret = open(atkn->next->value, O_RDONLY);
 		else if (atkn->type == HEREDOC)
 			ret = here_doc(atkn->next->value);
+		if (ret == -1)
+			return (ft_error_cmd(atkn->next->value, -1 , 0));
 		atkn = atkn->next;
 	}
 	return (ret);

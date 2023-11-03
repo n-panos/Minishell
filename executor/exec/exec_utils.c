@@ -6,17 +6,19 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/01 11:22:16 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/03 13:28:57 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/eminishell.h"
 
-void	ft_error_cmd(char *str)
+int	ft_error_cmd(char *str, int in, int out)
 {
-	ft_putstr_fd("zsh: command not found: ", 1);
-	ft_putstr_fd(str, 1);
-	ft_putstr_fd("\n", 1);
+	if (in == -1 || out == -1)
+		printf("minishell: %s: No such file or directory\n", str);
+	else
+		printf("zsh: command not found: %s\n", str);
+	return (-1);
 }
 
 t_exec	*ft_init_exec(t_tokens *token, char **env, int in, int out)
@@ -49,9 +51,9 @@ t_exec	*ft_add_cmd(t_tokens *tkn, char **env, int in)
 	t_exec	*ret;
 	int		out;
 
+	ret = NULL;
 	in = ft_check_in(tkn, in);
 	out = ft_check_out(tkn);
-	ret = NULL;
 	while (tkn)
 	{
 		if (tkn->type == COMMAND)

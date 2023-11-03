@@ -15,14 +15,14 @@
 int	ft_preprocess_pipe(t_mini *mini)
 {
 	int			i;
-	int			in_out;
-	//int			status;
+	int			*in_out;
 	t_exec		*odd_one;
 	t_tokens	*atkn;
 
 	i = 1;
 	atkn = mini->tk_lst;
-	in_out = 0;
+	in_out = ft_calloc(2, sizeof(int *));
+	in_out[0] = 0;
 	while (atkn && i < mini->cmd_n)
 	{
 		in_out = ft_exec_two(mini, atkn, in_out);
@@ -32,40 +32,42 @@ int	ft_preprocess_pipe(t_mini *mini)
 	}
 	if (i == mini->cmd_n)
 	{
-		odd_one = ft_init_exec(atkn, mini->env, in_out, ft_check_out(atkn));
+		odd_one = ft_init_exec(atkn, mini->env, in_out[0], ft_check_out(atkn));
 		ft_exec_solo(mini->env, odd_one);
 		ft_free_exec(odd_one);
 	}
-	else if (in_out > 1)
-		close(in_out);
+	else if (in_out[0] > 1)
+		close(in_out[0]);
+	free(in_out);
 	ft_waiting(mini->cmd_n);
-	//wait(&status);
-	//wait(&status);
 	return (0);
 }
 
-int	ft_exec_two(t_mini *mini, t_tokens *tkn, int in)
+int	*ft_exec_two(t_mini *mini, t_tokens *tkn, int *in)
 {
 	t_pipes		*pipes;
 	int			*fd;
 	t_tokens	*atkn;
-	int			out;
 
 	atkn = tkn;
 	//cuando esté arreglado el bug del pipe despues de OUT_REDI
 	//revisar este out default.
-	out = 0;
-	pipes = ft_config_pipe(atkn, mini->env, in);
-	if (pipes->cmd2->fd_out == -1)
+	pipes = ft_config_pipe(atkn, mini->env, in[0]);
+	free(in);
+	fd = ft_calloc(2, sizeof(int *));
+	if (pipes->cmd2->fd_out == -2 && pipes->cmd2->fd_in != -1)
 	{
-		fd = ft_calloc(2, sizeof(int *));
 		if (pipe(fd) == -1)
 			exit(EXIT_FAILURE);
 		pipes->cmd2->fd_out = fd[1];
-		out = fd[0];
+	}
+	else
+	{
+		fd[0] = -3;
+		fd[1] = '\0';
 	}
 	ft_pipe_exec(mini, pipes);
-	return (out);
+	return (fd);
 }
 
 void	ft_pipe_exec(t_mini *mini, t_pipes *pipes)
@@ -76,17 +78,20 @@ void	ft_pipe_exec(t_mini *mini, t_pipes *pipes)
 	if (i == 2)
 	{
 		if (pipes->cmd1->path == NULL)
-			ft_error_cmd(pipes->cmd1->cmd_mtx[0]);
-		else
+			ft_error_cmd(pipes->cmd1->cmd_mtx[0], pipes->cmd1->fd_in, \
+			pipes->cmd2->fd_out);
+		else if (pipes->cmd1->fd_in != -1 && pipes->cmd1->fd_out != -1)
 			ft_exec_solo(mini->env, pipes->cmd1);
 	}
 	ft_free_exec(pipes->cmd1);
 	i = ft_builtin_check(pipes->cmd2, mini);
 	if (i == 2)
 	{
-		if (pipes->cmd2->path == NULL)
-			ft_error_cmd(pipes->cmd2->cmd_mtx[0]);
-		else
+		if (pipes->cmd2->path == NULL || pipes->cmd2->fd_in == -1 \
+		|| pipes->cmd2->fd_out == -1)
+			ft_error_cmd(pipes->cmd2->cmd_mtx[0], pipes->cmd2->fd_in, \
+			pipes->cmd2->fd_out);
+		else if (pipes->cmd2->fd_in != -1 && pipes->cmd2->fd_out != -1)
 			ft_exec_solo(mini->env, pipes->cmd2);
 	}
 	ft_free_exec(pipes->cmd2);
@@ -103,7 +108,9 @@ t_pipes	*ft_config_pipe(t_tokens *tkn, char **env, int in)
 	pipes->cmd1 = ft_add_cmd(tkn, env, in);
 	tkn = ft_return_pipe(tkn);
 	pipes->cmd2 = ft_add_cmd(tkn, env, 0);
-	if (pipes->cmd1->fd_out == -1 && pipes->cmd2->fd_in == 0)
+	if (pipes->cmd1 == NULL || pipes->cmd2 == NULL)
+		return(pipes);
+	if (pipes->cmd1->fd_out == -2 && pipes->cmd2->fd_in == 0)
 	{
 		pipes->fd = ft_calloc(2, sizeof(int *));
 		if (pipe(pipes->fd) == -1)

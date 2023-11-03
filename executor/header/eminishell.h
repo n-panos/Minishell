@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/02 10:57:36 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/03 14:05:38 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,14 +97,14 @@ void		ft_in_out_type(t_tokens *token, t_exec *exec);
 //		PIPE FTS
 
 int			ft_preprocess_pipe(t_mini *mini);
-int			ft_exec_two(t_mini *mini, t_tokens *tkn, int in);
+int			*ft_exec_two(t_mini *mini, t_tokens *tkn, int *in);
 void		ft_pipe_exec(t_mini *mini, t_pipes *pipes);
 t_pipes		*ft_config_pipe(t_tokens *tkn, char **env, int in);
 t_tokens	*ft_return_pipe(t_tokens *tkn);
 
 //		UTILS FTS
 
-void		ft_error_cmd(char *str);
+int			ft_error_cmd(char *str, int in, int out);
 t_exec		*ft_init_exec(t_tokens *token, char **env, int in, int out);
 t_exec		*ft_add_cmd(t_tokens *tkn, char **env, int in);
 char		*ft_find_path(char **envp, char *cmd);
