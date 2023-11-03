@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:56:01 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/28 11:44:28 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/03 09:30:12 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_is_command(t_tokens *token)
 {
-	if (token->value[0] == '>' || token->value[0] == '<')
+	if (token->value[0] == '>' || token->value[0] == '<' || token->value[0] == '|')
 		return (0);
 	if (token->prev == NULL)
 		return (1);

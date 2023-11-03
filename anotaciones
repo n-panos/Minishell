@@ -1,11 +1,11 @@
 Erick
-	-	probando cosas un poco mas rebuscadas:
+	Arreglado <!-- -	probando cosas un poco mas rebuscadas:
 	"<infile sleep 2 | ls >salida | env >salida2"
 	despues de ">salida" la siguiente "|" la toma como COMMAND
-	no como PIPE, echale un ojo.
+	no como PIPE, echale un ojo. -->
 
 
 Nacho
-
+	- Hay que implementar las salidas de los comandos al poner $?
 Nacho to do list:
 -   builtin(export) Esta funcionando, hay que probarlo y sacarle bugs

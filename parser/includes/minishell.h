@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/31 10:05:32 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/03 09:40:16 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_mini
 	t_tokens		*tk_lst;
 	int				pipe_n;
 	int				cmd_n;
+	int				status;
 	char			**env;
 	struct s_parser	*tools;
 }	t_mini;

@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:20:40 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/25 16:04:26 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/03 09:40:49 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	parser(t_mini *mini)
 	tools = mini->tools;
 	tools->index = 0;
 	tools->error = 0;
+	tools->status = mini->status;
 	tools->tokenlst = NULL;
 	tokenizer(tools);
 	if (tools->tokenlst == NULL || tools->error)
@@ -67,7 +68,7 @@ void	minishell_loop(t_mini *mini)
 	t_parser	*tools;
 
 	tools = mini->tools;
-	tools->status = 0;
+	mini->status = 0;
 	while (1)
 	{		tools->input = get_input();
 		if (tools->input == NULL)
