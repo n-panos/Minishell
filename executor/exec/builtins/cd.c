@@ -3,31 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:18:48 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/31 09:18:51 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/05 12:02:43 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/eminishell.h"
 
 char	*ft_get_dir(char *dir);
+char	*ft_get_zdotdir(char **env);
 
-int	ft_cd(char **cmd_mtx)
+int	ft_cd(char **cmd_mtx, char **env)
 {
 	char	*dir;
 	int		i;
 
 	if (ft_strlen(cmd_mtx[0]) != 2)
 		return (2);
-	i = 0;
-	while (cmd_mtx[i])
-		i++;
-	if (i >= 1)
-		return (0);
-	dir = ft_get_dir(cmd_mtx[1]);
-	return (chdir(dir));
+	if (!cmd_mtx[1])
+		dir = ft_get_zdotdir(env);
+	else
+		dir = ft_get_dir(cmd_mtx[1]);
+	i = chdir(dir);
+	if (i == -1)
+		printf("minishell: cd: %s: No such file or directory\n", dir);
+	free(dir);
+	return (0);
 }
 
 char	*ft_get_dir(char *dir)
@@ -44,4 +47,27 @@ char	*ft_get_dir(char *dir)
 		ret = ft_strfjoin(ret, dir);
 	}
 	return (ret);
+}
+
+char	*ft_get_zdotdir(char **env)
+{
+	char	*dir;
+	int		i;
+	char	**aux;
+
+	i = 0;
+	dir = NULL;
+	while (env[i])
+	{
+		if (ft_strncmp(env[i], "USER_ZDOTDIR", 12) == 0)
+		{
+			aux = ft_split(env[i], '=');
+			dir = aux[1];
+			free(aux[0]);
+			free(aux);
+			break ;
+		}
+		i++;
+	}
+	return (dir);
 }

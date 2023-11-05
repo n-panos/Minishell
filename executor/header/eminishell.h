@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/03 14:05:38 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/05 11:44:57 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ typedef struct s_pipes
 
 //		Funciones temporales para testeo en builtins.c
 
-int			ft_builtins(t_mini *mini, char *prompt);
+//int			ft_builtins(t_mini *mini, char *prompt);
 
 //      HAND CRAFTED FUNCTIONS -- BUILTINS
 
-int			ft_cd(char **cmd_mtx);
+int			ft_cd(char **cmd_mtx, char **env);
 int			ft_echo(char **cmd_mtx);
 int			ft_env(char **env, char **cmd_mtx);
 int			ft_exit(char **cmd_mtx);
