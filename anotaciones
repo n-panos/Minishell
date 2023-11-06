@@ -1,4 +1,11 @@
 Erick
+	No vi nada de "$?" y no se exactamente que implementar.
+	Encontré un problema, cuando solo pasas una variable de entorno,
+	ej.: $PATH
+	como en el parseo ya se expande,llega como un comando al executor
+	el funcionamiento normal en bash es que imprime la variable expandida.
+	Se me ocurren 2 opciones, o creamos algun otro type=VAR_EXPANSE o algo asi,
+	o se gestiona en el parser, igual que el exit cuando va solo, miralo y me dices!
 
 Nacho
 	- Hay que implementar las salidas de los comandos al poner $?
