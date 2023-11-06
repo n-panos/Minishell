@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mtx_cut.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 13:08:27 by nacho             #+#    #+#             */
-/*   Updated: 2023/10/22 12:29:56 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/06 12:07:31 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,22 @@ char	**ft_mtx_cut(char **mtx, int cut)
 {
 	char	**ret_mtx;
 	int		i;
-	int		mtx_height;
+	int		j;
 
-	mtx_height = ft_mtx_line_cnt(mtx);
-	ret_mtx = (char **)malloc(sizeof(char *) * mtx_height);
+	j = ft_mtx_line_cnt(mtx);
+	ret_mtx = (char **)malloc(sizeof(char *) * j);
 	i = 0;
+	j = 0;
 	while (mtx[i])
 	{
 		if (i != cut)
-			ret_mtx[i] = ft_strdup(mtx[i]);
+		{
+			ret_mtx[j] = ft_strdup(mtx[i]);
+			j++;
+		}
 		i++;
 	}
-	ret_mtx[i - 1] = NULL;
+	ret_mtx[j] = NULL;
+	ft_mtx_free(mtx);
 	return (ret_mtx);
 }
