@@ -1,5 +1,7 @@
 Erick
-	No vi nada de "$?" y no se exactamente que implementar.
+	He mirado "$?" y no se exactamente que/como implementarlo. De todas maneras es 
+	algo bastante rebuscado, pero si crees que lo tenemos que implementar lo miro mas a fondo a ver.
+
 	Encontré un problema, cuando solo pasas una variable de entorno,
 	ej.: $PATH
 	como en el parseo ya se expande,llega como un comando al executor
@@ -9,7 +11,5 @@ Erick
 
 Nacho
 	- Hay que implementar las salidas de los comandos al poner $?
-	NO entiendo a que te refieres, no he implementado nada con '$', 
-	ponme algun ejemplo, lo miro y lo implemento.
 Nacho to do list:
 -   builtin(export) Esta funcionando, hay que probarlo y sacarle bugs
