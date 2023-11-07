@@ -1,7 +1,5 @@
 Erick
-	leaks con "$?"
-	ej.: ls >$?
-	ej2.: echo $?
+	(ARREGLADO) - leaks con "$?" 
 	tienes que añadir frees ahora al implementar el recoger el mini->ret
 
 Nacho
