@@ -1,8 +1,8 @@
 Erick
-	Encontré un problema de leaks al probar "$?"
+	leaks con "$?"
 	ej.: ls >$?
 	ej2.: echo $?
-	los tokens no se liberan por alguna razon.
+	tienes que añadir frees ahora al implementar el recoger el mini->ret
 
 Nacho
 	- Hay que implementar las salidas de los comandos al poner $?
