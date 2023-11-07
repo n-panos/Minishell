@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 14:16:31 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/07 12:18:35 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/07 14:48:34 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	ft_tr_env(t_parser *tools, int index)
 		return (-1);
 	sum = 0;
 	tr->var1 = ft_get_env(tools->input, index);
-	tr->var2 = getenv(tr->var1);
+	tr->var2 = get_env(tr->var1, tools);
 	tr->str1 = ft_substr(tools->input, 0, index);
 	tr->str2 = ft_substr(tools->input, index + ft_strlen(tr->var1) + 1,
 			ft_strlen(tools->input));
@@ -103,6 +103,7 @@ int	ft_tr_env(t_parser *tools, int index)
 		tr->tmp = ft_strjoin(tr->str1, tr->var2);
 		tr->result = ft_strjoin(tr->tmp, tr->str2);
 		sum = ft_strlen(tr->var2) - 1;
+		free(tr->var2);
 	}
 	if (tr->result == NULL)
 		return (ft_free_tr(tr), -1);

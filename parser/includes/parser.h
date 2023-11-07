@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 09:25:43 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/12 18:43:15 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/07 14:42:34 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 typedef struct s_parser
 {
 	char				*input;
-	char				**envp;
+	char				**env;
 	t_list				*tokenlst;
 	int					index;
 	int					start;
@@ -81,6 +81,7 @@ int		ft_in_quote(t_parser *tools, int index);
 /* expander_utils2.c */
 int		ft_is_operator(t_parser *tools, int index);
 int		ft_not_expand(t_parser *tools, int index);
+char	*get_env(char *env, t_parser *tools);
 /* tokenizer.c */
 t_list	*get_token(t_parser *tools);
 #endif

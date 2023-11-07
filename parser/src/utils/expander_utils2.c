@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 17:45:59 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/22 12:19:43 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/07 14:43:47 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,40 @@ int	ft_not_expand(t_parser *tools, int index)
 		i++;
 	}
 	return (i);
+}
+
+static void	ft_free_split(char **split)
+{
+	int	i;
+
+	i = -1;
+	while (split[++i])
+		free(split[i]);
+	free(split);
+}
+
+char	*get_env(char *env, t_parser *tools)
+{
+	char	*result;
+	char	**envp;
+	int		i;
+
+	result = getenv(env);
+	if (result != NULL)
+		return (result);
+	i = -1;
+	while (tools->env[++i])
+	{
+		envp = ft_split(tools->env[i], '=');
+		if (ft_strncmp(envp[0], env, ft_strlen(env)) == 0 && ft_strlen(env) == ft_strlen(envp[0]))
+		{
+			result = ft_strdup(envp[1]);
+			break ;
+		}
+		ft_free_split(envp);
+	}
+	if (tools->env[i] == NULL)
+		return (NULL);
+	ft_free_split(envp);
+	return (result);
 }
