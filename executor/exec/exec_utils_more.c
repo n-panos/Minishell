@@ -8,7 +8,6 @@ void	ft_waiting(int n)
 	while (n > 0)
 	{
 		wait(&status);
-		printf("status = %d\n", status);
 		n--;
 	}
 }

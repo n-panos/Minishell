@@ -1,6 +1,4 @@
 Erick
-	(ARREGLADO) - leaks con "$?" 
-	tienes que añadir frees ahora al implementar el recoger el mini->ret
-
+	
 Nacho
 	- Hay que implementar las salidas de los comandos al poner $?
