@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 14:16:31 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/07 14:48:34 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/07 14:49:45 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,8 @@ int	ft_tr_env(t_parser *tools, int index)
 	}
 	if (tr->result == NULL)
 		return (ft_free_tr(tr), -1);
-	free(tools->input);
 	tools->input = tr->result;
-	return (ft_free_tr(tr), sum);
+	return (free(tools->input), ft_free_tr(tr), sum);
 }
 
 void	ft_free_tr(t_truncate *tr)
