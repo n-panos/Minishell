@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:18:48 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/05 12:02:43 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/07 17:58:50 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*ft_get_dir(char *dir)
 	char	*ret;
 
 	if (ft_strncmp(dir, "/", ft_strlen("/")) == 0)
-		ret = dir;
+		ret = ft_strdup(dir);
 	else
 	{
 		getcwd(str, sizeof(str));

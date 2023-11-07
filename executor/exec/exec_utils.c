@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/07 16:44:49 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/07 17:58:10 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,6 @@ char	*ft_find_path(char **envp, char *cmd)
 	}
 	else if (access(path, F_OK) != 0)
 		return (NULL);
-	/*ERICK*/
-	path = ft_strdup(path);
 	return (path);
 }
 
