@@ -27,7 +27,7 @@ int	ft_preprocess_pipe(t_mini *mini)
 	{
 		aux = ft_exec_two(mini, atkn, aux);
 		if (aux == NULL)
-			return (-1);
+			break ;
 		i += 2;
 		atkn = ft_return_pipe(atkn);
 		atkn = ft_return_pipe(atkn);
@@ -35,7 +35,8 @@ int	ft_preprocess_pipe(t_mini *mini)
 	if (i == mini->cmd_n)
 	{
 		odd = ft_add_cmd(atkn, mini, aux[0]);
-		ft_exec_type(mini, odd, odd->fd_in, odd->fd_out);
+		if (odd)
+			ft_exec_type(mini, odd, odd->fd_in, odd->fd_out);
 	}
 	ft_waiting(mini->cmd_n, aux);
 	return (0);
@@ -56,10 +57,20 @@ int	*ft_exec_two(t_mini *mini, t_tokens *tkn, int *in)
 		mini->status = 12;
 		return (NULL);
 	}
+	if (ft_pipe_exec(mini, pipes, fd) == -1)
+		return (NULL);
+	return (fd);
+}
+
+int	ft_pipe_exec(t_mini *mini, t_pipes *pipes, int *fd)
+{
 	if (pipes->cmd2->fd_out == -2 && pipes->cmd2->fd_in != -1)
 	{
 		if (pipe(fd) == -1)
-			exit(EXIT_FAILURE);
+		{
+			free(fd);
+			return (-1);
+		}
 		pipes->cmd2->fd_out = fd[1];
 	}
 	else
@@ -67,15 +78,10 @@ int	*ft_exec_two(t_mini *mini, t_tokens *tkn, int *in)
 		fd[0] = -3;
 		fd[1] = '\0';
 	}
-	ft_pipe_exec(mini, pipes);
-	return (fd);
-}
-
-void	ft_pipe_exec(t_mini *mini, t_pipes *pipes)
-{
 	ft_exec_type(mini, pipes->cmd1, pipes->cmd1->fd_in, pipes->cmd1->fd_out);
 	ft_exec_type(mini, pipes->cmd2, pipes->cmd2->fd_in, pipes->cmd2->fd_out);
 	ft_free_pipes(pipes);
+	return (0);
 }
 
 t_pipes	*ft_config_pipe(t_tokens *tkn, t_mini *mini, int in)
