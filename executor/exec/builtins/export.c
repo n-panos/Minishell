@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:50:28 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/02 12:40:21 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/07 12:48:23 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ int	ft_export_more_args(t_mini *mini, char *arg)
 	char	*aux;
 	int		i;
 
-	i = 1;
+	i = 0;
 	while (arg[i])
 	{
-		if (arg[i] == '=')
+		if (i > 0 && arg[i] == '=')
 			break ;
 		if (ft_isalnum(arg[i]) == 0 || (i == 0 && ft_isalpha(arg[i]) == 0))
 		{
