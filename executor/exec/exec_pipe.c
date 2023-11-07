@@ -26,6 +26,8 @@ int	ft_preprocess_pipe(t_mini *mini)
 	while (atkn && i < mini->cmd_n)
 	{
 		aux = ft_exec_two(mini, atkn, aux);
+		if (aux == NULL)
+			return (-1);
 		i += 2;
 		atkn = ft_return_pipe(atkn);
 		atkn = ft_return_pipe(atkn);
@@ -49,6 +51,11 @@ int	*ft_exec_two(t_mini *mini, t_tokens *tkn, int *in)
 	pipes = ft_config_pipe(atkn, mini, in[0]);
 	free(in);
 	fd = ft_calloc(2, sizeof(int *));
+	if (!pipes || !fd)
+	{
+		mini->status = 12;
+		return (NULL);
+	}
 	if (pipes->cmd2->fd_out == -2 && pipes->cmd2->fd_in != -1)
 	{
 		if (pipe(fd) == -1)
@@ -76,8 +83,8 @@ t_pipes	*ft_config_pipe(t_tokens *tkn, t_mini *mini, int in)
 	t_pipes		*pipes;
 
 	pipes = ft_calloc(1, sizeof(t_pipes));
-	if (!pipes)
-		exit(EXIT_FAILURE);
+	if (!pipes)	
+		return (NULL);
 	pipes->cmd1 = ft_add_cmd(tkn, mini, in);
 	tkn = ft_return_pipe(tkn);
 	pipes->cmd2 = ft_add_cmd(tkn, mini, 0);
