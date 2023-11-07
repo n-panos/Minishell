@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/07 11:30:48 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/07 15:13:17 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int			ft_check_list(int *list, int n);
 
 //		EXECUTE
 
+void		ft_exec_type(t_mini *mini, t_exec *exec, int in, int out);
 int			ft_builtin_check(t_exec *exec, t_mini *mini);
 int			ft_no_cmd(t_mini *mini);
 int			here_doc(char *limiter);
@@ -110,9 +111,9 @@ t_exec		*ft_add_cmd(t_tokens *tkn, t_mini *mini, int in);
 char		*ft_find_path(char **envp, char *cmd);
 char		*ft_no_path(char *cmd, char **pos_paths);
 
-void		ft_waiting(int n);
-int			ft_check_out(t_mini *mini, t_tokens *tkn);
-int			ft_check_in(t_mini *mini, t_tokens *tkn, int in);
+void		ft_waiting(int n, int *fd);
+int			check_out(t_mini *mini, t_tokens *tkn);
+int			check_in(t_mini *mini, t_tokens *tkn, int in);
 
 //		FREE FTS
 

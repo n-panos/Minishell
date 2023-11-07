@@ -6,7 +6,11 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/11/07 16:36:24 by erick            ###   ########.fr       */
+=======
+/*   Updated: 2023/11/07 13:51:50 by nacho            ###   ########.fr       */
+>>>>>>> refs/remotes/origin/main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +39,7 @@ t_exec	*ft_init_exec(t_tokens *token, char **env, int in, int out)
 
 	exec = ft_calloc(1, sizeof(t_exec));
 	if (!exec)
-		exit(EXIT_FAILURE);
+		return (NULL);
 	exec->fd_in = in;
 	exec->fd_out = out;
 	exec->path = ft_find_path(env, token->value);
@@ -58,13 +62,15 @@ t_exec	*ft_add_cmd(t_tokens *tkn, t_mini *mini, int in)
 	int		out;
 
 	ret = NULL;
-	in = ft_check_in(mini, tkn, in);
-	out = ft_check_out(mini, tkn);
+	in = check_in(mini, tkn, in);
+	out = check_out(mini, tkn);
 	while (tkn)
 	{
 		if (tkn->type == COMMAND)
 		{
 			ret = ft_init_exec(tkn, mini->env, in, out);
+			if (ret == NULL)
+				mini->status = 12;
 			break ;
 		}
 		tkn = tkn->next;
