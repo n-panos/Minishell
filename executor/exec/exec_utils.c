@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/07 16:41:06 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/07 16:44:49 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ char	*ft_find_path(char **envp, char *cmd)
 	}
 	else if (access(path, F_OK) != 0)
 		return (NULL);
+	/*ERICK*/
 	path = ft_strdup(path);
 	return (path);
 }
