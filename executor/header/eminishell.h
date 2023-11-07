@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/07 09:52:06 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/07 11:30:48 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_exec
 	char	**cmd_mtx;
 	int		fd_in;
 	int		fd_out;
+	int		ret;
 }	t_exec;
 
 typedef struct s_pipes
@@ -91,31 +92,31 @@ int			here_doc(char *limiter);
 //		SOLO FTS
 
 int			ft_preprocess_solo(t_mini *mini);
-pid_t		ft_exec_solo(char **env, t_exec *exec);
+void		ft_exec_solo(char **env, t_exec *exec);
 
 //		PIPE FTS
 
 int			ft_preprocess_pipe(t_mini *mini);
 int			*ft_exec_two(t_mini *mini, t_tokens *tkn, int *in);
 void		ft_pipe_exec(t_mini *mini, t_pipes *pipes);
-t_pipes		*ft_config_pipe(t_tokens *tkn, char **env, int in);
+t_pipes		*ft_config_pipe(t_tokens *tkn, t_mini *mini, int in);
 t_tokens	*ft_return_pipe(t_tokens *tkn);
 
 //		UTILS FTS
 
-int			ft_error_cmd(char *str, int in, int out);
+int			ft_error_cmd(t_mini *mini, char *str, int in, int out);
 t_exec		*ft_init_exec(t_tokens *token, char **env, int in, int out);
-t_exec		*ft_add_cmd(t_tokens *tkn, char **env, int in);
+t_exec		*ft_add_cmd(t_tokens *tkn, t_mini *mini, int in);
 char		*ft_find_path(char **envp, char *cmd);
 char		*ft_no_path(char *cmd, char **pos_paths);
 
 void		ft_waiting(int n);
-int			ft_check_out(t_tokens *tkn);
-int			ft_check_in(t_tokens *tkn, int in);
+int			ft_check_out(t_mini *mini, t_tokens *tkn);
+int			ft_check_in(t_mini *mini, t_tokens *tkn, int in);
 
 //		FREE FTS
 
 void		ft_free_pipes(t_pipes *pipes);
-void		ft_free_exec(t_exec *exec);
+void		ft_free_exec(t_mini *mini, t_exec *exec);
 
 #endif

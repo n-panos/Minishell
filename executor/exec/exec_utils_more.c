@@ -12,7 +12,7 @@ void	ft_waiting(int n)
 	}
 }
 
-int	ft_check_out(t_tokens *tkn)
+int	ft_check_out(t_mini *mini, t_tokens *tkn)
 {
 	t_tokens	*atkn;
 	int			ret;
@@ -37,13 +37,13 @@ int	ft_check_out(t_tokens *tkn)
 			ret = open(atkn->next->value, \
 			O_WRONLY | O_APPEND, 0644);
 		if (ret == -1)
-			return (ft_error_cmd(atkn->next->value, -1, 0));
+			return (ft_error_cmd(mini, atkn->next->value, 0, -1));
 		atkn = atkn->next;
 	}
 	return (ret);
 }
 
-int	ft_check_in(t_tokens *tkn, int in)
+int	ft_check_in(t_mini *mini, t_tokens *tkn, int in)
 {
 	t_tokens	*atkn;
 	int			ret;
@@ -62,7 +62,7 @@ int	ft_check_in(t_tokens *tkn, int in)
 		else if (atkn->type == HEREDOC)
 			ret = here_doc(atkn->next->value);
 		if (ret == -1)
-			return (ft_error_cmd(atkn->next->value, -1 , 0));
+			return (ft_error_cmd(mini, atkn->next->value, -1 , 0));
 		atkn = atkn->next;
 	}
 	return (ret);

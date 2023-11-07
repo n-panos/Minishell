@@ -6,18 +6,25 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/07 09:58:46 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/07 11:39:51 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/eminishell.h"
 
-int	ft_error_cmd(char *str, int in, int out)
+int	ft_error_cmd(t_mini *mini, char *str, int in, int out)
 {
+	mini->ret = 1;
 	if (in == -1 || out == -1)
+	{
+		mini->ret = 1;
 		printf("minishell: %s: No such file or directory\n", str);
+	}
 	else
+	{
+		mini->ret = 127;
 		printf("minishell: command not found: %s\n", str);
+	}
 	return (-1);
 }
 
@@ -46,19 +53,19 @@ t_exec	*ft_init_exec(t_tokens *token, char **env, int in, int out)
 	return (exec);
 }
 
-t_exec	*ft_add_cmd(t_tokens *tkn, char **env, int in)
+t_exec	*ft_add_cmd(t_tokens *tkn, t_mini *mini, int in)
 {
 	t_exec	*ret;
 	int		out;
 
 	ret = NULL;
-	in = ft_check_in(tkn, in);
-	out = ft_check_out(tkn);
+	in = ft_check_in(mini, tkn, in);
+	out = ft_check_out(mini, tkn);
 	while (tkn)
 	{
 		if (tkn->type == COMMAND)
 		{
-			ret = ft_init_exec(tkn, env, in, out);
+			ret = ft_init_exec(tkn, mini->env, in, out);
 			break ;
 		}
 		tkn = tkn->next;
