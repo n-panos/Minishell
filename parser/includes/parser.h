@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 09:25:43 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/07 14:42:34 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/07 15:18:30 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_truncate
 	char	*str2;
 	char	*var1;
 	char	*var2;
+	int		v2;
 	int		pid;
 }	t_truncate;
 
@@ -81,7 +82,7 @@ int		ft_in_quote(t_parser *tools, int index);
 /* expander_utils2.c */
 int		ft_is_operator(t_parser *tools, int index);
 int		ft_not_expand(t_parser *tools, int index);
-char	*get_env(char *env, t_parser *tools);
+char	*get_env(char *env, t_parser *tools, int *v2);
 /* tokenizer.c */
 t_list	*get_token(t_parser *tools);
 #endif

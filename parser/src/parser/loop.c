@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:20:40 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/07 14:46:20 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/07 15:12:24 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,9 @@ char	*get_input(char	**input_ptr)
 		input = readline(PROMPT);
 		input_tmp = ft_strtrim(input, " \t");
 		free(input);
-			if (input_tmp[0] != '\0')
-				break ;
+		if (input_tmp[0] != '\0')
+			break ;
+		free(input_tmp);
 	}
 	*input_ptr = input_tmp;
 	return (input);

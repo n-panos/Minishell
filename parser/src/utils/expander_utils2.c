@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 17:45:59 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/07 14:43:47 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/07 15:18:56 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,13 @@ static void	ft_free_split(char **split)
 	free(split);
 }
 
-char	*get_env(char *env, t_parser *tools)
+char	*get_env(char *env, t_parser *tools, int *v2)
 {
 	char	*result;
 	char	**envp;
 	int		i;
 
+	*v2 = 0;
 	result = getenv(env);
 	if (result != NULL)
 		return (result);
@@ -84,6 +85,7 @@ char	*get_env(char *env, t_parser *tools)
 	}
 	if (tools->env[i] == NULL)
 		return (NULL);
+	*v2 = 1;
 	ft_free_split(envp);
 	return (result);
 }

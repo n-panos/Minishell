@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 14:16:31 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/07 14:49:45 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/07 15:19:14 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	ft_tr_env(t_parser *tools, int index)
 		return (-1);
 	sum = 0;
 	tr->var1 = ft_get_env(tools->input, index);
-	tr->var2 = get_env(tr->var1, tools);
+	tr->var2 = get_env(tr->var1, tools, &tr->v2);
 	tr->str1 = ft_substr(tools->input, 0, index);
 	tr->str2 = ft_substr(tools->input, index + ft_strlen(tr->var1) + 1,
 			ft_strlen(tools->input));
@@ -103,12 +103,12 @@ int	ft_tr_env(t_parser *tools, int index)
 		tr->tmp = ft_strjoin(tr->str1, tr->var2);
 		tr->result = ft_strjoin(tr->tmp, tr->str2);
 		sum = ft_strlen(tr->var2) - 1;
-		free(tr->var2);
 	}
 	if (tr->result == NULL)
 		return (ft_free_tr(tr), -1);
+	free(tools->input);
 	tools->input = tr->result;
-	return (free(tools->input), ft_free_tr(tr), sum);
+	return (ft_free_tr(tr), sum);
 }
 
 void	ft_free_tr(t_truncate *tr)
@@ -121,5 +121,7 @@ void	ft_free_tr(t_truncate *tr)
 		free(tr->tmp);
 	if (tr->var1 != NULL)
 		free(tr->var1);
+	if (tr->v2)
+		free(tr->var2);
 	free(tr);
 }

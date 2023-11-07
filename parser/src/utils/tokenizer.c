@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 18:09:23 by erick             #+#    #+#             */
-/*   Updated: 2023/10/22 12:19:43 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/07 15:13:02 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ t_list	*get_token(t_parser *tools)
 
 	if (tools->index > (int)ft_strlen(tools->input))
 		return (NULL);
+	if ((int)ft_strlen(tools->input) == tools->index || tools->input == NULL)
+		return (NULL);
 	i = tools->index;
 	if (tools->input[i] == ' ' || tools->input[i] == '\t')
 		i = ft_space_char(tools, i);
@@ -27,8 +29,6 @@ t_list	*get_token(t_parser *tools)
 	else if (!ft_strchr(DELIMITERS, tools->input[i]))
 		i = ft_arguments(tools, i);
 	if (i == -1)
-		return (NULL);
-	if ((int)ft_strlen(tools->input) == tools->index || tools->input == NULL)
 		return (NULL);
 	node = create_token(tools, i);
 	if (node == NULL)
