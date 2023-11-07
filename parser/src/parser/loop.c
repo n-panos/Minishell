@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:20:40 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/03 09:40:49 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/07 12:01:42 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,20 @@ void	parser(t_mini *mini)
 	ft_cmd_nmb(mini);
 }
 
-char	*get_input(void)
+char	*get_input(char	**input_ptr)
 {
 	char	*input;
 	char	*input_tmp;
 
-	input = readline(PROMPT);
-	input_tmp = ft_strtrim(input, " \t");
-	free(input);
-	input = input_tmp;
-	if (input == NULL)
-		return (NULL);
+	while (1)
+	{
+		input = readline(PROMPT);
+		input_tmp = ft_strtrim(input, " \t");
+		free(input);
+			if (input_tmp[0] != '\0')
+				break ;
+	}
+	*input_ptr = input_tmp;
 	return (input);
 }
 
@@ -70,12 +73,11 @@ void	minishell_loop(t_mini *mini)
 	tools = mini->tools;
 	mini->status = 0;
 	while (1)
-	{		tools->input = get_input();
-		if (tools->input == NULL)
+	{	
+		if (get_input(&tools->input) == NULL)
 			exit(ft_parser_error("Error", STDERR_FILENO));
-		if (tools->input[0] != '\0')
-			add_history(tools->input);
-		if (tools->input[0] != '\0' && ft_check_input(tools->input) == 0)
+		add_history(tools->input);
+		if (ft_check_input(tools->input) == 0)
 		{
 			parser(mini);
 			if (tools->error)
