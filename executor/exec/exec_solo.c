@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/03 13:29:22 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/07 09:52:32 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,33 +61,4 @@ pid_t	ft_exec_solo(char **env, t_exec *exec)
 			exit(EXIT_FAILURE);
 	}
 	return (pidc);
-}
-
-void	ft_in_out_type(t_tokens *token, t_exec *exec)
-{
-	t_tokens	*a_tkn;
-
-	a_tkn = token;
-	while (a_tkn)
-	{
-		if (a_tkn->type == PIPE)
-			break ;
-		if (exec->fd_in > 0 && (a_tkn->type == HEREDOC \
-		|| a_tkn->type == REDIRECT_INPUT))
-			close(exec->fd_in);
-		if (a_tkn->type == HEREDOC)
-			exec->fd_in = here_doc(a_tkn->next->value);
-		else if (a_tkn->type == REDIRECT_INPUT)
-			exec->fd_in = open(a_tkn->next->value, O_RDONLY);
-		if (exec->fd_out > 1 && (a_tkn->type == REDIRECT_OUTPUT \
-		|| a_tkn->type == REDIRECT_APPEND))
-			close (exec->fd_out);
-		if (a_tkn->type == REDIRECT_OUTPUT)
-			exec->fd_out = open(a_tkn->next->value, \
-			O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		else if (a_tkn->type == REDIRECT_APPEND)
-			exec->fd_out = open(a_tkn->next->value, \
-			O_WRONLY | O_APPEND, 0644);
-		a_tkn = a_tkn->next;
-	}
 }
