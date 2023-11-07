@@ -1,15 +1,8 @@
 Erick
-	He mirado "$?" y no se exactamente que/como implementarlo. De todas maneras es 
-	algo bastante rebuscado, pero si crees que lo tenemos que implementar lo miro mas a fondo a ver.
-
-	Encontré un problema, cuando solo pasas una variable de entorno,
-	ej.: $PATH
-	como en el parseo ya se expande,llega como un comando al executor
-	el funcionamiento normal en bash es que imprime la variable expandida.
-	Se me ocurren 2 opciones, o creamos algun otro type=VAR_EXPANSE o algo asi,
-	o se gestiona en el parser, igual que el exit cuando va solo, miralo y me dices!
+	Encontré un problema de leaks al probar "$?"
+	ej.: ls >$?
+	ej2.: echo $?
+	los tokens no se liberan por alguna razon.
 
 Nacho
 	- Hay que implementar las salidas de los comandos al poner $?
-Nacho to do list:
--   builtin(export) Esta funcionando, hay que probarlo y sacarle bugs
