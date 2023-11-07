@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:16:49 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/07 12:12:43 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/07 15:14:18 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,21 @@ int	ft_execute(t_mini *mini)
 	else if (mini->pipe_n > 0)
 		ret = ft_preprocess_pipe(mini);
 	return (ret);
+}
+
+void	ft_exec_type(t_mini *mini, t_exec *exec, int in, int out)
+{
+	int	i;
+
+	i = ft_builtin_check(exec, mini);
+	if (i == 2)
+	{
+		if (exec->path == NULL)
+			ft_error_cmd(mini, exec->cmd_mtx[0], in, out);
+		else if (exec->fd_in != -1 && exec->fd_out != -1)
+			ft_exec_solo(mini->env, exec);
+	}
+	ft_free_exec(mini, exec);
 }
 
 // return 2 si no ha hecho nada, return 0 sin problema, 
@@ -56,8 +71,6 @@ int	ft_builtin_check(t_exec *exec, t_mini *mini)
 		i = ft_unset(mini, exec->cmd_mtx);
 	return (i);
 }
-
-//-1 mensaje de error, 0 es ok,
 
 int	ft_no_cmd(t_mini *mini)
 {

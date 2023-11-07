@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/07 12:30:57 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/07 15:14:54 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,15 @@ int	ft_preprocess_solo(t_mini *mini)
 {
 	t_tokens	*aux_tkn;
 	t_exec		*exec;
-	int			ret;
 	int			status;
 
 	aux_tkn = mini->tk_lst;
 	exec = ft_add_cmd(aux_tkn, mini, 0);
 	if (exec == NULL)
 		return (-1);
-	ret = ft_builtin_check(exec, mini);
-	if (ret == 2)
-	{
-		if (exec->path == NULL)
-			ft_error_cmd(mini, exec->cmd_mtx[0], 0, 0);
-		else if (exec->fd_in != -1 && exec->fd_out != -1)
-			ft_exec_solo(mini->env, exec);
-	}
-	ft_free_exec(mini, exec);
+	ft_exec_type(mini, exec, 0, 0);
 	wait(&status);
-	return (ret);
+	return (0);
 }
 
 void	ft_exec_solo(char **env, t_exec *exec)

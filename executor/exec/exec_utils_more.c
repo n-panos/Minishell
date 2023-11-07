@@ -1,10 +1,13 @@
 
 #include "../header/eminishell.h"
 
-void	ft_waiting(int n)
+void	ft_waiting(int n, int *fd)
 {
 	int	status;
 
+	if (fd[0] > 1)
+		close(fd[0]);
+	free(fd);
 	while (n > 0)
 	{
 		wait(&status);
@@ -12,7 +15,7 @@ void	ft_waiting(int n)
 	}
 }
 
-int	ft_check_out(t_mini *mini, t_tokens *tkn)
+int	check_out(t_mini *mini, t_tokens *tkn)
 {
 	t_tokens	*atkn;
 	int			ret;
@@ -43,7 +46,7 @@ int	ft_check_out(t_mini *mini, t_tokens *tkn)
 	return (ret);
 }
 
-int	ft_check_in(t_mini *mini, t_tokens *tkn, int in)
+int	check_in(t_mini *mini, t_tokens *tkn, int in)
 {
 	t_tokens	*atkn;
 	int			ret;
