@@ -33,8 +33,7 @@ int	ft_preprocess_pipe(t_mini *mini)
 	if (i == mini->cmd_n)
 	{
 		odd = ft_add_cmd(atkn, mini, aux[0]);
-		ft_exec_solo(mini->env, odd);
-		ft_free_exec(mini, odd);
+		ft_exec_type(mini, odd, odd->fd_in, odd->fd_out);
 	}
 	ft_waiting(mini->cmd_n, aux);
 	return (0);
