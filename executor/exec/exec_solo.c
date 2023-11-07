@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/07 11:28:25 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/07 12:01:21 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	ft_preprocess_solo(t_mini *mini)
 	}
 	ft_free_exec(mini, exec);
 	wait(&status);
+	printf("status = %d\n", status);
 	return (ret);
 }
 

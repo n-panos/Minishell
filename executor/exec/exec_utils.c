@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/07 11:39:51 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/07 12:08:08 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 int	ft_error_cmd(t_mini *mini, char *str, int in, int out)
 {
-	mini->ret = 1;
 	if (in == -1 || out == -1)
 	{
-		mini->ret = 1;
+		mini->status = 1;
 		printf("minishell: %s: No such file or directory\n", str);
 	}
 	else
 	{
-		mini->ret = 127;
+		mini->status = 127;
 		printf("minishell: command not found: %s\n", str);
 	}
 	return (-1);

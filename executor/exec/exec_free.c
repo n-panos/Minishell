@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:24 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/07 11:41:57 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/07 12:09:03 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	ft_free_pipes(t_pipes *pipes)
 
 void	ft_free_exec(t_mini *mini, t_exec *exec)
 {
-	if (mini->ret == 0)
-		mini->ret = exec->ret;
+	if (mini->status == 0)
+		mini->status = exec->ret;
 	if (exec->fd_in > 0)
 		close (exec->fd_in);
 	if (exec->fd_out > 1)
