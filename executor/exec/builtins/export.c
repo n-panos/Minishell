@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:50:28 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/09 11:39:11 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/09 12:59:20 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,17 +84,16 @@ char	*ft_add_to_env(char **env, char *add)
 	{
 		if (ft_strncmp(env[i], "_=/", 3) == 0)
 			break ;
-		aux = ft_strfjoin(aux, env[i]);
-		aux = ft_strfjoin(aux, "\n");
+		flag = ft_var_exists(env[i], add, flag);
+		if (flag == 1)
+			aux = ft_join_n(aux, add, "\n");
+		else
+			aux = ft_join_n(aux, env[i], "\n");
 		i++;
 	}
 	if (flag == 0)
-	{
-		aux = ft_strfjoin(aux, add);
-		aux = ft_strfjoin(aux, "\n");
-	}
-	aux = ft_strfjoin(aux, env[i]);
-	aux = ft_strfjoin(aux, "\n");
+		aux = ft_join_n(aux, add, "\n");
+	aux = ft_join_n(aux, env[i], "\n");
 	return (aux);
 }
 
@@ -111,13 +110,7 @@ static char	*ft_orden(char **env, int j, char *str_exp, int *used)
 			ref++;
 		while (env[i])
 		{
-			if (ft_check_list(used, i) == 0)
-			{
-				if (ft_check_list(used, -1) == 1 && ref == 0)
-					ref = i;
-				else if (ft_strncmp(env[ref], env[i], ft_strlen(env[ref])) > 0)
-					ref = i;
-			}
+			ref = ft_check_ref(used, i, ref, env);
 			i++;
 		}
 		used = ft_add_used(used, ref);
@@ -141,8 +134,7 @@ static char	*ft_str_construct(int ref, char **env, char *str_exp)
 	if (comillas[1])
 	{
 		aux = ft_strfjoin(aux, "='");
-		aux = ft_strfjoin(aux, comillas[1]);
-		aux = ft_strfjoin(aux, "'\n");
+		aux = ft_join_n(aux, comillas[1], "'\n");
 	}
 	else
 		aux = ft_strfjoin(aux, "\n");

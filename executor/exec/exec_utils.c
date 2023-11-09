@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/07 17:58:10 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/09 13:38:39 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 int	ft_error_cmd(t_mini *mini, char *str, int in, int out)
 {
+	if (in == 3)
+	{
+		printf("Incorrect shlvl, reseting to default\n");
+	}
 	if (in == -1 || out == -1)
 	{
 		mini->status = 1;
@@ -24,7 +28,7 @@ int	ft_error_cmd(t_mini *mini, char *str, int in, int out)
 		mini->status = 127;
 		printf("minishell: command not found: %s\n", str);
 	}
-	return (-1);
+	return (0);
 }
 
 t_exec	*ft_init_exec(t_tokens *token, char **env, int in, int out)

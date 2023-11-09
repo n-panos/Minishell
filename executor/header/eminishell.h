@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/09 11:44:09 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/09 13:57:16 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int			ft_echo(char **cmd_mtx);
 int			ft_env(char **env, char **cmd_mtx);
 int			ft_exit(char **cmd_mtx);
 int			ft_export(t_mini *mini, char **cmd_mtx);
+char		*ft_add_to_env(char **env, char *add);
 int			ft_pwd(char **cmd_mtx);
 int			ft_unset(t_mini *mini, char **cmd_mtx);
 
@@ -82,6 +83,9 @@ int			ft_unset(t_mini *mini, char **cmd_mtx);
 int			ft_search_c(char *str, char c);
 int			*ft_add_used(int *prev_used, int new_used);
 int			ft_check_list(int *list, int n);
+char		*ft_join_n(char *ret, char *add, char *s_add);
+int			ft_var_exists(char *env, char *add, int flag);
+int			ft_check_ref(int *used, int i, int ref, char **env);
 
 //		EXECUTE
 
@@ -114,6 +118,8 @@ char		*ft_no_path(char *cmd, char **pos_paths);
 void		ft_waiting(int n, int *fd);
 int			check_out(t_mini *mini, t_tokens *tkn);
 int			check_in(t_mini *mini, t_tokens *tkn, int in);
+int			ft_is_minishell(t_mini *mini, t_exec *exec);
+char		*ft_get_shlvl(char **env);
 
 //		FREE FTS
 

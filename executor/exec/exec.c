@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:16:49 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/09 11:43:36 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/09 13:58:23 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,15 @@ int	ft_exec_type(t_mini *mini, t_exec *exec, int in, int out)
 	i = ft_builtin_check(exec, mini);
 	if (i == 2)
 	{
+		if (ft_is_minishell(mini, exec) == 0)
+			return (0);
 		if (exec->path == NULL)
-			ft_error_cmd(mini, exec->cmd_mtx[0], in, out);
+			i = ft_error_cmd(mini, exec->cmd_mtx[0], in, out);
 		else if (exec->fd_in != -1 && exec->fd_out != -1)
+		{
 			ft_exec_solo(mini->env, exec);
+			i = 0;
+		}
 	}
 	ft_free_exec(mini, exec);
 	return (i);

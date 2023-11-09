@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   b_utils.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 12:49:01 by nacho             #+#    #+#             */
-/*   Updated: 2023/10/22 12:03:42 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/09 12:46:32 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/eminishell.h"
+
+int	ft_search_c(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
 
 int	*ft_add_used(int *prev_used, int new_used)
 {
@@ -48,5 +62,24 @@ int	ft_check_list(int *list, int n)
 			return (1);
 		i++;
 	}
+	return (0);
+}
+
+char	*ft_join_n(char *ret, char *add, char *s_add)
+{
+	ret = ft_strfjoin(ret, add);
+	ret = ft_strfjoin(ret, s_add);
+	return (ret);
+}
+
+int	ft_var_exists(char *env, char *add, int flag)
+{
+	int	len;
+
+	if (flag > 0)
+		return (2);
+	len = ft_search_c(env, '=');
+	if (ft_strncmp(env, add, len) == 0)
+		return (1);
 	return (0);
 }

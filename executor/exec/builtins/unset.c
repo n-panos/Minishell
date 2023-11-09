@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:37:50 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/31 09:20:14 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/09 12:41:47 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,7 @@ int	ft_env_delete(t_mini *mini, int erase)
 			i++;
 		else
 		{
-			aux = ft_strfjoin(aux, mini->env[i]);
-			aux = ft_strfjoin(aux, "\n");
+			aux = ft_join_n(aux, mini->env[i], "\n");
 			i++;
 		}
 	}
@@ -79,18 +78,4 @@ int	ft_env_delete(t_mini *mini, int erase)
 	mini->env = ft_split(aux, '\n');
 	free(aux);
 	return (0);
-}
-
-int	ft_search_c(char *str, char c)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-			return (i);
-		i++;
-	}
-	return (-1);
 }
