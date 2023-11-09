@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 17:45:59 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/09 11:19:20 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/09 11:59:44 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ char	*get_env(char *env, t_parser *tools, int *v2)
 	while (tools->env[++i])
 	{
 		envp = ft_split(tools->env[i], '=');
-		if (ft_strncmp(envp[0], env, ft_strlen(env)) == 0 && ft_strlen(env) == ft_strlen(envp[0]))
+		if (ft_strncmp(envp[0], env, ft_strlen(env)) == 0
+			&& ft_strlen(env) == ft_strlen(envp[0]))
 		{
 			result = ft_strdup(envp[1]);
 			break ;

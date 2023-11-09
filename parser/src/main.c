@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:02 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/07 12:13:28 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/09 11:59:30 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	leaks(void)
 {
 	system("leaks -q minishell");
 }
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_mini		mini;

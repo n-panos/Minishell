@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 13:37:36 by erick             #+#    #+#             */
-/*   Updated: 2023/11/07 16:31:30 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/09 12:02:08 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	ft_free_all_tokens(t_tokens **lst, void (*del)(void *))
 	{
 		node = tmp->next;
 		del(tmp->value);
-		// if (tmp->tool)
-		// 	free(tmp->tool);
 		del(tmp);
 		tmp = node;
 	}
