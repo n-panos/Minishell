@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eminishell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/09 13:57:16 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:56:28 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,34 +18,6 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include "../../parser/includes/minishell.h"
-
-// typedef enum s_type
-// {
-// 	COMMAND,
-// 	ARGUMENT,
-// 	PIPE,
-// 	REDIRECT_INPUT,
-// 	REDIRECT_OUTPUT,
-// 	REDIRECT_APPEND,
-// 	HEREDOC,
-// 	DELIMITER
-// }	t_type;
-
-// typedef struct s_tokens
-// {
-// 	char				*value;
-// 	t_type				type;
-// 	char				*tool;
-// 	struct s_tokens		*next;
-// 	struct s_tokens		*prev;
-// }	t_tokens;
-
-// typedef struct s_mini
-// {
-// 	int			pipe_n;
-// 	char		**env;
-// 	t_tokens	*tk_lst;
-// }	t_mini;
 
 typedef struct s_exec
 {
@@ -63,16 +35,13 @@ typedef struct s_pipes
 	int		*fd;
 }	t_pipes;
 
-//		Funciones temporales para testeo en builtins.c
-
-//int			ft_builtins(t_mini *mini, char *prompt);
-
 //      HAND CRAFTED FUNCTIONS -- BUILTINS
 
 int			ft_cd(char **cmd_mtx, char **env);
 int			ft_echo(char **cmd_mtx);
 int			ft_env(char **env, char **cmd_mtx);
-int			ft_exit(char **cmd_mtx);
+int			ft_exit(t_mini *mini, char **cmd_mtx);
+void		ft_change_shlvl(t_mini *mini, int flag);
 int			ft_export(t_mini *mini, char **cmd_mtx);
 char		*ft_add_to_env(char **env, char *add);
 int			ft_pwd(char **cmd_mtx);
@@ -119,7 +88,7 @@ void		ft_waiting(int n, int *fd);
 int			check_out(t_mini *mini, t_tokens *tkn);
 int			check_in(t_mini *mini, t_tokens *tkn, int in);
 int			ft_is_minishell(t_mini *mini, t_exec *exec);
-char		*ft_get_shlvl(char **env);
+char		*ft_get_shlvl(char **env, int flag);
 
 //		FREE FTS
 

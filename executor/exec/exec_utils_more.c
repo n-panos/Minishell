@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_more.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:09:25 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/09 14:02:29 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:57:50 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,55 +82,40 @@ int	check_in(t_mini *mini, t_tokens *tkn, int in)
 
 int	ft_is_minishell(t_mini *mini, t_exec *exec)
 {
-	char	*aux;
-	char	*shlvl;
-
 	if (ft_strncmp(exec->cmd_mtx[0], "./minishell", 11) != 0  \
 	|| ft_strlen(exec->cmd_mtx[0]) != 11)
 		return (1);
 	if (exec->cmd_mtx[1])
 		return (ft_error_cmd(mini, exec->cmd_mtx[1], 0, 0));
-	shlvl = ft_get_shlvl(mini->env);
-	if (shlvl == NULL)
-	{
-		ft_error_cmd(mini, exec->cmd_mtx[1], 3, 0);
-		shlvl = ft_strdup("SHLVL=1");
-	}
-	aux = ft_add_to_env(mini->env, shlvl);
-	ft_mtx_free(mini->env);
-	mini->env = ft_split(aux, '\n');
-	free(aux);
+	ft_change_shlvl(mini, 1);
+	ft_mtx_free(exec->cmd_mtx);
+	free(exec);
+	mini->real_shlvl++;
 	return (0);
 }
 
-char	*ft_get_shlvl(char **env)
+char	*ft_get_shlvl(char **env, int flag)
 {
 	char	**aux;
-	char	*shlvl;
+	char	*lvl;
 	int		i;
-	int		lvl;
 
-	shlvl = NULL;
 	i = 0;
+	lvl = NULL;
 	while (env[i])
 	{
 		if (ft_strncmp(env[i], "SHLVL", 5) == 0)
 		{
 			aux = ft_split(env[i], '=');
-			if (ft_all_isdigit(aux[1]) == 0)
+			if (ft_all_isdigit(aux[1]) == 1)
 			{
-				ft_mtx_free(aux);
-				break ;
+				i = ft_atoi(aux[1]) + flag;
+				lvl = ft_itoa(i);
 			}
-			lvl = ft_atoi(aux[1]) + 1;
-			shlvl = aux[0];
-			free(aux[1]);
-			free(aux);
-			shlvl = ft_strfjoin(shlvl, "=");
-			shlvl = ft_strfjoin(shlvl, ft_itoa(lvl));
+			ft_mtx_free(aux);
 			break ;
 		}
 		i++;
 	}
-	return (shlvl);
+	return (lvl);
 }

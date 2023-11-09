@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:16:49 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/09 13:58:23 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:38:00 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_execute(t_mini *mini)
 		ret = ft_no_cmd(mini);
 	if (mini->cmd_n == 1)
 		ret = ft_preprocess_solo(mini);
-	else if (mini->pipe_n > 0)
+	else if (mini->cmd_n > 1)
 		ret = ft_preprocess_pipe(mini);
 	return (ret);
 }
@@ -68,7 +68,7 @@ int	ft_builtin_check(t_exec *exec, t_mini *mini)
 	else if (ft_strncmp(exec->cmd_mtx[0], "env", 3) == 0)
 		i = ft_env(mini->env, exec->cmd_mtx);
 	else if (ft_strncmp(exec->cmd_mtx[0], "exit", 4) == 0)
-		i = ft_exit(exec->cmd_mtx);
+		i = ft_exit(mini, exec->cmd_mtx);
 	else if (ft_strncmp(exec->cmd_mtx[0], "export", 6) == 0)
 		i = ft_export(mini, exec->cmd_mtx);
 	else if (ft_strncmp(exec->cmd_mtx[0], "pwd", 3) == 0)

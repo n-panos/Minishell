@@ -1,11 +1,9 @@
-	Te ocupas tu de las signals? yo estoy pasando normi, buscando mas cosas y haciiendo lo del 
+	Te ocupas tu de las signals? yo estoy pasando normi, buscando cosas y haciiendo lo del 
 	shell level
 
 Erick
 	- Hay que hacer las Signals, ctrl-D, ctrl-C y ctrl-\
 	
 Nacho
-	- Hay que implementar las salidas de los comandos al poner $?
 
-	-Si ejecutas ./minishell, hay que sumar +1 a shell level y en caso de hacer exit habria
-	que restar 1 al shell level hasta estar en lvl 1.
+	-to do : quitar los exit(EXIT) innecesarios

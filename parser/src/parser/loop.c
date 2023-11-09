@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:20:40 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/09 12:01:58 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/09 17:01:43 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	minishell_loop(t_mini *mini)
 
 	tools = mini->tools;
 	mini->status = 0;
+	mini->real_shlvl = 1;
 	while (1)
 	{
 		if (get_input(&tools->input) == NULL)

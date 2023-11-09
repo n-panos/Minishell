@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/07 12:07:42 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/09 16:27:52 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_tokens
 typedef struct s_mini
 {
 	t_tokens		*tk_lst;
-	int				pipe_n;
+	int				real_shlvl;
 	int				cmd_n;
 	int				status;
 	char			**env;
