@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:05:52 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/22 12:19:43 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/09 11:27:23 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ int	ft_check_input(char *input)
 	char	quote_char;
 
 	i = -1;
-	if (ft_strlen(input) == 4 && ft_strncmp(input, "exit", 4) == 0)
-		exit(0);
+	// if (ft_strlen(input) == 4 && ft_strncmp(input, "exit", 4) == 0)
+	// 	return (2);
 	while (input[++i])
 	{
 		if (i == 0 && input[i] == '|')
