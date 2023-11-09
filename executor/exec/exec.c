@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:16:49 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/07 15:14:18 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/09 09:53:28 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int	ft_builtin_check(t_exec *exec, t_mini *mini)
 		i = ft_env(mini->env, exec->cmd_mtx);
 	else if (ft_strncmp(exec->cmd_mtx[0], "exit", 4) == 0)
 		i = ft_exit(exec->cmd_mtx);
-	 else if (ft_strncmp(exec->cmd_mtx[0], "export", 6) == 0)
-	 	i = ft_export(mini, exec->cmd_mtx);
+	else if (ft_strncmp(exec->cmd_mtx[0], "export", 6) == 0)
+		i = ft_export(mini, exec->cmd_mtx);
 	else if (ft_strncmp(exec->cmd_mtx[0], "pwd", 3) == 0)
 		i = ft_pwd(exec->cmd_mtx);
 	else if (ft_strncmp(exec->cmd_mtx[0], "unset", 5) == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_solo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/07 15:14:54 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/09 10:20:12 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	ft_preprocess_solo(t_mini *mini)
 	t_exec		*exec;
 	int			status;
 
+	//	gestion ./minishell
 	aux_tkn = mini->tk_lst;
 	exec = ft_add_cmd(aux_tkn, mini, 0);
 	if (exec == NULL)
