@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eminishell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/07 16:02:33 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/09 11:44:09 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int			ft_check_list(int *list, int n);
 
 //		EXECUTE
 
-void		ft_exec_type(t_mini *mini, t_exec *exec, int in, int out);
+int			ft_exec_type(t_mini *mini, t_exec *exec, int in, int out);
 int			ft_builtin_check(t_exec *exec, t_mini *mini);
 int			ft_no_cmd(t_mini *mini);
 int			here_doc(char *limiter);

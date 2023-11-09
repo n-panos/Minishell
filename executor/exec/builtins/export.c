@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:50:28 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/07 12:48:23 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/09 11:39:11 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,10 @@ char	*ft_add_to_env(char **env, char *add)
 {
 	char	*aux;
 	int		i;
+	int		flag;
 
 	i = 0;
+	flag = 0;
 	aux = ft_strdup("");
 	while (env[i])
 	{
@@ -86,8 +88,11 @@ char	*ft_add_to_env(char **env, char *add)
 		aux = ft_strfjoin(aux, "\n");
 		i++;
 	}
-	aux = ft_strfjoin(aux, add);
-	aux = ft_strfjoin(aux, "\n");
+	if (flag == 0)
+	{
+		aux = ft_strfjoin(aux, add);
+		aux = ft_strfjoin(aux, "\n");
+	}
 	aux = ft_strfjoin(aux, env[i]);
 	aux = ft_strfjoin(aux, "\n");
 	return (aux);

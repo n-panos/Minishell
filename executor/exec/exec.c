@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:16:49 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/09 09:53:28 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/09 11:43:36 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_execute(t_mini *mini)
 	return (ret);
 }
 
-void	ft_exec_type(t_mini *mini, t_exec *exec, int in, int out)
+int	ft_exec_type(t_mini *mini, t_exec *exec, int in, int out)
 {
 	int	i;
 
@@ -43,6 +43,7 @@ void	ft_exec_type(t_mini *mini, t_exec *exec, int in, int out)
 			ft_exec_solo(mini->env, exec);
 	}
 	ft_free_exec(mini, exec);
+	return (i);
 }
 
 // return 2 si no ha hecho nada, return 0 sin problema, 

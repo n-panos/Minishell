@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:20:35 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/06 12:14:08 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/09 11:24:44 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/eminishell.h"
 
 char	**ft_env_compare(char **cmd_mtx, char *env);
-int	ft_env_args(char **cmd);
+int		ft_env_args(char **cmd);
 
 int	ft_env(char **env, char **cmd_mtx)
 {
@@ -84,6 +84,6 @@ char	**ft_env_compare(char **cmd_mtx, char *env)
 		i++;
 	}
 	if (ft_strchr(env, '='))
-	printf("%s\n", env);
+		printf("%s\n", env);
 	return (cmd_mtx);
 }
