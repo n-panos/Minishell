@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_solo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/09 13:55:33 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/09 17:20:29 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void	ft_exec_solo(char **env, t_exec *exec)
 
 	pidc = fork();
 	if (pidc == -1)
+	{
+		printf("minishell: error while forking process\n");
 		exit(EXIT_FAILURE);
+	}
 	if (pidc == 0)
 	{
 		if (exec->fd_in > 0)
@@ -48,7 +51,7 @@ void	ft_exec_solo(char **env, t_exec *exec)
 			close(exec->fd_out);
 		}
 		exec->ret = execve(exec->path, exec->cmd_mtx, env);
-		if (exec->ret == -1)
-			exit(EXIT_FAILURE);
+		printf("minishell: executing error\n");
+		exit(EXIT_FAILURE);
 	}
 }

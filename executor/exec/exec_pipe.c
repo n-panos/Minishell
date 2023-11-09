@@ -99,8 +99,13 @@ t_pipes	*ft_config_pipe(t_tokens *tkn, t_mini *mini, int in)
 	if (pipes->cmd1->fd_out == -2 && pipes->cmd2->fd_in == 0)
 	{
 		pipes->fd = ft_calloc(2, sizeof(int *));
-		if (pipe(pipes->fd) == -1)
-			exit(EXIT_FAILURE);
+		if (!pipes->fd || pipe(pipes->fd) == -1)
+		{
+			ft_free_exec(mini, pipes->cmd1);
+			ft_free_exec(mini, pipes->cmd2);
+			ft_free_pipes(pipes);
+			return (NULL);
+		}
 		pipes->cmd1->fd_out = pipes->fd[1];
 		pipes->cmd2->fd_in = pipes->fd[0];
 	}
