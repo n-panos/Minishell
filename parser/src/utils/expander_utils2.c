@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 17:45:59 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/07 15:18:56 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/09 11:19:20 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,6 @@ char	*get_env(char *env, t_parser *tools, int *v2)
 	int		i;
 
 	*v2 = 0;
-	result = getenv(env);
-	if (result != NULL)
-		return (result);
 	i = -1;
 	while (tools->env[++i])
 	{

@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:20:40 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/07 15:12:24 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/09 11:27:16 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,12 @@ void	minishell_loop(t_mini *mini)
 				break ;
 			if (tools->tokenlst == NULL)
 				continue ;
-			if (ft_execute(mini) == 1)
+			if (ft_execute(mini) != 0)
 				break ;
 			ft_free_loop(tools, mini);
 		}
 		else
 			free(tools->input);
 	}
+	free(tools->input);
 }
