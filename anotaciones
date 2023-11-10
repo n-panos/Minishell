@@ -1,9 +1,14 @@
-	Te ocupas tu de las signals? yo estoy pasando normi, buscando cosas y haciiendo lo del 
-	shell level
-
 Erick
 	- Hay que hacer las Signals, ctrl-D, ctrl-C y ctrl-\
+	- ¿Hay que gestionar ";"?
+	- encontrado doble free en caso muy concreto,
+			ipanos-o@c1r16s2 mini % ./minishell
+			Minishell> unset HOME
+			Minishell> export HOME=
+			Minishell> cd
+			Minishell> $?
+			minishell(86447,0x1157a7dc0) malloc: *** error for object 0xf000000000000000: pointer being freed was not allocated
+			minishell(86447,0x1157a7dc0) malloc: *** set a breakpoint in malloc_error_break to debug
+			zsh: abort      ./minishell
 	
 Nacho
-
-	-to do : quitar los exit(EXIT) innecesarios

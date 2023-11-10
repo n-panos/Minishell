@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:20:40 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/09 17:01:43 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/10 13:21:06 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	minishell_loop(t_mini *mini)
 				break ;
 			if (tools->tokenlst == NULL)
 				continue ;
-			if (ft_execute(mini) != 0)
+			if (ft_execute(mini) == 1)
 				break ;
 			ft_free_loop(tools, mini);
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/09 15:53:37 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/10 13:18:26 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_error_cmd(t_mini *mini, char *str, int in, int out)
 	else
 	{
 		mini->status = 127;
-		printf("minishell: command not found: %s\n", str);
+		printf("minishell: %s: command not found\n", str);
 	}
 	return (0);
 }

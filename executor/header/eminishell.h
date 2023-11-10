@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eminishell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/09 16:56:28 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/10 12:10:45 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ typedef struct s_pipes
 
 //      HAND CRAFTED FUNCTIONS -- BUILTINS
 
-int			ft_cd(char **cmd_mtx, char **env);
-int			ft_echo(char **cmd_mtx);
+int			ft_cd(char **cmd_mtx, t_mini *mini);
+int			ft_echo(char **cmd_mtx, int out);
 int			ft_env(char **env, char **cmd_mtx);
 int			ft_exit(t_mini *mini, char **cmd_mtx);
 void		ft_change_shlvl(t_mini *mini, int flag);
