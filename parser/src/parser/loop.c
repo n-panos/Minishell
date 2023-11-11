@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:20:40 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/11 13:26:25 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/11 15:19:00 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,5 @@ int	minishell_loop(t_mini *mini)
 			break ;
 		ft_free_loop(tools, mini);
 	}
-	return (exit_status);
+	return (mini->status);
 }

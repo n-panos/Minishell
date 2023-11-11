@@ -1,12 +1,7 @@
 Erick
-	- El return de minishell al cerrar, tiene que ser el valor del status
-		return (mini->status);
+	✅	<!-- - El return de minishell al cerrar, tiene que ser el valor del status
+		return (mini->status); -->
 	- Hay que hacer las Signals, ctrl-D, ctrl-C y ctrl-\
-	 (No me hace doble free a mi) <!-- - encontrado doble free en caso muy concreto,
-	- ¿Hay que gestionar ";"?
-	-al parsear-> \\ = \
-	 ej.:	bash-3.2$ echo \\
-			\
 	-  (No me hace doble free a mi) <!-->encontrado doble free en caso muy concreto,
 			ipanos-o@c1r16s2 mini % ./minishell
 			Minishell> unset HOME
@@ -18,13 +13,12 @@ Erick
 			zsh: abort      ./minishell
 
 
-	-Necesito que añadas esta linea de codigo cuando haces la copia de las variables de entorno:
+	✅	<!-- -Necesito que añadas esta linea de codigo cuando haces la copia de las variables de entorno:
 	ft_env_rm(mini, "OLDPWD");
 	Es para evitar que reciba de herencia de la terminal esa variable, se supone que al iniciar esa variable no existe, 
-	el return no tienes que guardarlo ni nada.
+	el return no tienes que guardarlo ni nada. -->
 	
 Nacho
-	- Al usar cd, hay que modificar la variable de entorno "PWD" y "OLDPWD". PWD tiene la ruta actual, y OLDPWD la ruta donde te encontrabas antes de usar cd
 	- en export.c, funcion ft_export, necesito usar la funcion de quitar espacios, 
 	preguntar a Erick.
 	Ej.: export var="  truc"

@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:05:52 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/11 13:25:40 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/11 15:31:43 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ int	ft_check_input(char *input)
 				i++;
 		}
 		if (ft_extra_chars(input, i, input[i]) == 0)
-			return (free(input),
-				ft_parser_error("parse error near ", input[i]));
+			return (ft_parser_error("parse error near ", input[i + 1]),
+				free(input), 1);
 	}
 	if (ft_check_op(input))
 		return (free(input), 1);

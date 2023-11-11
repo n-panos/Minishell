@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:02 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/11 13:27:41 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/11 15:21:06 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(int argc, char **argv, char **envp)
 		exit(EXIT_FAILURE);
 	}
 	mini.env = ft_mtx_cpy(envp);
+	ft_env_rm(&mini, "OLDPWD");
 	exit_status = minishell_loop(&mini);
 	free_all(&mini);
 	return (exit_status);
