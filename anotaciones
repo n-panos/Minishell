@@ -19,6 +19,7 @@ Erick
 	el return no tienes que guardarlo ni nada. -->
 	
 Nacho
+	-
 	- en export.c, funcion ft_export, necesito usar la funcion de quitar espacios, 
 	preguntar a Erick.
 	Ej.: export var="  truc"

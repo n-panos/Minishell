@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 11:41:57 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/11 15:36:01 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/11 16:37:03 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,6 @@ t_tokens	*create_list(t_parser *tools)
 	if (lst == NULL)
 		return (NULL);
 	ft_add_type(lst);
-	print_lst_doble(lst);
+	// print_lst_doble(lst);
 	return (lst);
 }
