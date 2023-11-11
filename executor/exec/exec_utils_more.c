@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:09:25 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/09 16:57:50 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/11 13:24:16 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	check_out(t_mini *mini, t_tokens *tkn)
 		if (atkn->type == REDIRECT_OUTPUT)
 			ret = open(atkn->next->value, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		else if (atkn->type == REDIRECT_APPEND)
-			ret = open(atkn->next->value, O_WRONLY | O_APPEND, 0644);
+			ret = open(atkn->next->value, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (ret == -1)
 			return (ft_error_cmd(mini, atkn->next->value, 0, -1));
 		atkn = atkn->next;
@@ -69,7 +69,9 @@ int	check_in(t_mini *mini, t_tokens *tkn, int in)
 		if (ret > 0 && (atkn->type == HEREDOC \
 		|| atkn->type == REDIRECT_INPUT))
 			close(ret);
-		if (atkn->type == REDIRECT_INPUT)
+		if (atkn->type == REDIRECT_INPUT && atkn->next->type != ARGUMENT)
+			ret = in;
+		else if (atkn->type == REDIRECT_INPUT)
 			ret = open(atkn->next->value, O_RDONLY);
 		else if (atkn->type == HEREDOC)
 			ret = here_doc(atkn->next->value);
