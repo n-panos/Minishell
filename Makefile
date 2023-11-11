@@ -14,7 +14,7 @@ LIST		=	ft_add_back_token.c	ft_new_token.c ft_free_all_tokens.c
 
 MAIN		=	parser/src/main.c
 PARSER		=	loop.c list.c mini.c
-UTILS		=	input.c tokenizer_utils.c expander.c expander_utils.c inquote.c expander_utils2.c typed.c tokenizer.c free.c
+UTILS		=	input.c tokenizer_utils.c expander.c expander_utils.c inquote.c expander_utils2.c typed.c tokenizer.c free.c env_create.c
 ERROR		=	puterror.c
 
 LIST_PATH	=	$(addprefix parser/src/list/, $(LIST))

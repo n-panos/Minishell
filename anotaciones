@@ -19,7 +19,8 @@ Erick
 	el return no tienes que guardarlo ni nada. -->
 	
 Nacho
-	-
+	- He añadido una linea en exec_utils, porque la variable path coge la referencia de una variable de la lista enlazada, y luego cuano liberas tu parte, liberas tambien esa variable.
+	- Tambien he añadido una condición en el mismo archivo. Al no haber path, no igualas la variable a NULL, y al ejecutar estaba cogiendo algun valor extraño y ejecutaba otra minishell.
 	- en export.c, funcion ft_export, necesito usar la funcion de quitar espacios, 
 	preguntar a Erick.
 	Ej.: export var="  truc"

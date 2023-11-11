@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/10 13:18:26 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/11 18:18:29 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,15 @@ char	*ft_find_path(char **envp, char *cmd)
 	i = 0;
 	if (envp == NULL || cmd == NULL)
 		return (NULL);
-	path = cmd;
+	path = ft_strdup(cmd);				 // ERICK
+	// path = cmd;
 	if (ft_strrchr(cmd, '/') == NULL)
 	{
 		while (envp[i])
 		{
 			if (ft_strnstr(envp[i], "PATH", 5) && ft_strlen(envp[i]) > 7)
 			{
+				free(path); 			// ERICK
 				pos_paths = ft_split(envp[i] + 6, ':');
 				path = ft_no_path(cmd, pos_paths);
 				ft_mtx_free(pos_paths);
@@ -97,9 +99,11 @@ char	*ft_find_path(char **envp, char *cmd)
 			}
 			i++;
 		}
+		if (envp[i] == NULL)			//ERICK
+			return (free(path), NULL);	//ERICK
 	}
 	else if (access(path, F_OK) != 0)
-		return (NULL);
+		return (free(path), NULL);
 	return (path);
 }
 

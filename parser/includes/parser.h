@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 09:25:43 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/07 15:18:30 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/11 18:28:16 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,6 @@ int		ft_not_expand(t_parser *tools, int index);
 char	*get_env(char *env, t_parser *tools, int *v2);
 /* tokenizer.c */
 t_list	*get_token(t_parser *tools);
+
+char	**ft_create_env(void);
 #endif

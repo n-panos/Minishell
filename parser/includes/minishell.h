@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/11 13:20:01 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/11 18:28:27 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int			ft_parser_error(char *err, char c);
 
 // PARSER
 /**/
-int		minishell_loop(t_mini *mini);
+int			minishell_loop(t_mini *mini);
 /**/
 t_tokens	*create_list(t_parser *tools);
 /* mini.c */
