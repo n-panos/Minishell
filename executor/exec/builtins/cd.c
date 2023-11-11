@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:18:48 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/10 12:50:07 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/11 14:05:00 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/eminishell.h"
 
-int		ft_get_dir(char *dir);
-int		ft_get_home(char **env, char *str);
-void	ft_change_oldpwd(t_mini *mini, char *prev_dir);
+int		ft_get_standard_dir(char *dir);
+int		ft_cd_env_var(char **env, char *str);
+void	ft_change_old_pwd(t_mini *mini, char *prev_dir);
 
 int	ft_cd(char **cmd_mtx, t_mini *mini)
 {
@@ -24,25 +24,27 @@ int	ft_cd(char **cmd_mtx, t_mini *mini)
 		return (2);
 	getcwd(str, sizeof(str));
 	if (!cmd_mtx[1])
-		mini->status = ft_get_home(mini->env, "HOME");
+		mini->status = ft_cd_env_var(mini->env, "HOME");
 	else if (ft_strncmp(cmd_mtx[1], "-", ft_strlen(cmd_mtx[1])) == 0)
 	{
-		mini->status = ft_get_home(mini->env, "OLDPWD");
+		mini->status = ft_cd_env_var(mini->env, "OLDPWD");
 		if (mini->status == 1)
-			printf("minishell: cd: OLDPWD not set\n");
+			return (printf("minishell: cd: OLDPWD not set\n"));
+		else
+			printf("%s\n", ft_get_env_var(mini->env, "OLDPWD") + 1);
 	}
 	else
-		mini->status = ft_get_dir(cmd_mtx[1]);
+		mini->status = ft_get_standard_dir(cmd_mtx[1]);
 	if (mini->status == -1 && cmd_mtx[1])
 		printf("minishell: cd: %s: No such file or directory\n", cmd_mtx[1]);
 	if (mini->status == -1)
 		mini->status = 1;
 	else
-		ft_change_oldpwd(mini, str);
+		ft_change_old_pwd(mini, str);
 	return (0);
 }
 
-int	ft_get_dir(char *dir)
+int	ft_get_standard_dir(char *dir)
 {
 	char	str[FILENAME_MAX];
 	char	*ret;
@@ -61,7 +63,24 @@ int	ft_get_dir(char *dir)
 	return (i);
 }
 
-int	ft_get_home(char **env, char *str)
+int	ft_cd_env_var(char **env, char *str)
+{
+	char	*dir;
+	int		i;
+
+	dir = ft_get_env_var(env, str);
+	if (dir == NULL)
+		return (1);
+	if (ft_strlen(dir) == 1)
+		return (0);
+	dir++;
+	i = chdir(dir);
+	if (i == -1)
+		printf("minishell: cd: %s: No such file or directory\n", dir);
+	return (i);
+}
+
+char	*ft_get_env_var(char **env, char *str)
 {
 	char	*dir;
 	int		i;
@@ -76,29 +95,25 @@ int	ft_get_home(char **env, char *str)
 		{
 			dir = ft_strchr(env[i], '=');
 			if (ft_strlen(env[i]) <= 5)
-				return (0);
+				return (dir);
 			break ;
 		}
 		i++;
 	}
-	if (dir == NULL)
-		return (1);
-	dir++;
-	i = chdir(dir);
-	if (i == -1)
-		printf("minishell: cd: %s: No such file or directory\n", dir);
-	return (i);
+	return (dir);
 }
 
-void	ft_change_oldpwd(t_mini *mini, char *prev_dir)
+void	ft_change_old_pwd(t_mini *mini, char *prev_dir)
 {
 	char	*aux;
-	char	*add;
+	char	str[FILENAME_MAX];
 
 	aux = ft_strjoin("OLDPWD=", prev_dir);
-	add = ft_add_to_env(mini->env, aux);
+	ft_change_env_var(mini, aux);
 	free(aux);
-	ft_mtx_free(mini->env);
-	mini->env = ft_split(add, '\n');
-	free(add);
+	getcwd(str, sizeof(str));
+	aux = ft_strjoin("PWD=", str);
+	ft_change_env_var(mini, aux);
+	free(aux);
 }
+

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eminishell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/10 12:10:45 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/11 14:08:01 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,15 @@ typedef struct s_pipes
 //      HAND CRAFTED FUNCTIONS -- BUILTINS
 
 int			ft_cd(char **cmd_mtx, t_mini *mini);
-int			ft_echo(char **cmd_mtx, int out);
+char		*ft_get_env_var(char **env, char *str);
+int			ft_echo(t_exec *exec, char *dir);
 int			ft_env(char **env, char **cmd_mtx);
 int			ft_exit(t_mini *mini, char **cmd_mtx);
 void		ft_change_shlvl(t_mini *mini, int flag);
 int			ft_export(t_mini *mini, char **cmd_mtx);
-char		*ft_add_to_env(char **env, char *add);
 int			ft_pwd(char **cmd_mtx);
 int			ft_unset(t_mini *mini, char **cmd_mtx);
+int			ft_env_rm(t_mini *mini, char *str);
 
 //		BUILTINS UTILS
 
@@ -55,6 +56,8 @@ int			ft_check_list(int *list, int n);
 char		*ft_join_n(char *ret, char *add, char *s_add);
 int			ft_var_exists(char *env, char *add, int flag);
 int			ft_check_ref(int *used, int i, int ref, char **env);
+void		ft_change_env_var(t_mini *mini, char *arg);
+char		*ft_add_to_env(char **env, char *add);
 
 //		EXECUTE
 

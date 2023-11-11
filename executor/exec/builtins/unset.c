@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:37:50 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/09 12:41:47 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/11 11:00:39 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/eminishell.h"
 
-int	ft_env_rm(t_mini *mini, char *str);
 int	ft_env_delete(t_mini *mini, int erase);
 
 int	ft_unset(t_mini *mini, char **cmd_mtx)

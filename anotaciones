@@ -1,6 +1,13 @@
 Erick
+	- El return de minishell al cerrar, tiene que ser el valor del status
+		return (mini->status);
 	- Hay que hacer las Signals, ctrl-D, ctrl-C y ctrl-\
 	 (No me hace doble free a mi) <!-- - encontrado doble free en caso muy concreto,
+	- ¿Hay que gestionar ";"?
+	-al parsear-> \\ = \
+	 ej.:	bash-3.2$ echo \\
+			\
+	-  (No me hace doble free a mi) <!-->encontrado doble free en caso muy concreto,
 			ipanos-o@c1r16s2 mini % ./minishell
 			Minishell> unset HOME
 			Minishell> export HOME=
@@ -8,7 +15,24 @@ Erick
 			Minishell> $?
 			minishell(86447,0x1157a7dc0) malloc: *** error for object 0xf000000000000000: pointer being freed was not allocated
 			minishell(86447,0x1157a7dc0) malloc: *** set a breakpoint in malloc_error_break to debug
-			zsh: abort      ./minishell -->
+			zsh: abort      ./minishell
+
+
+	-Necesito que añadas esta linea de codigo cuando haces la copia de las variables de entorno:
+	ft_env_rm(mini, "OLDPWD");
+	Es para evitar que reciba de herencia de la terminal esa variable, se supone que al iniciar esa variable no existe, 
+	el return no tienes que guardarlo ni nada.
 	
 Nacho
 	- Al usar cd, hay que modificar la variable de entorno "PWD" y "OLDPWD". PWD tiene la ruta actual, y OLDPWD la ruta donde te encontrabas antes de usar cd
+	- en export.c, funcion ft_export, necesito usar la funcion de quitar espacios, 
+	preguntar a Erick.
+	Ej.: export var="  truc"
+	export test="  foo    bar  " Quitar espacios de inicio y final y dejar solo 1
+								entre las 2 palabras.
+	- añadir mas casos de status.
+	-ver que se puede hacer con estos ejemplos:
+		ej.:	ls><abc 	->	bash: syntax error near unexpected token `<'
+		ej2.:	ls <> abc	->	only input redirection works, output redirection is ignored
+
+	- (Actualizado, deberia funcionar) Al usar cd, hay que modificar la variable de entorno "PWD" y "OLDPWD". PWD tiene la ruta actual, y OLDPWD la ruta donde te encontrabas antes de usar cd

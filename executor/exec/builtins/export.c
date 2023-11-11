@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:50:28 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/09 12:59:20 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/11 13:46:30 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 static char	*ft_orden(char **env, int env_len, char *str_exp, int *used);
 static char	*ft_str_construct(int ref, char **env, char *str_exp);
 int			ft_export_more_args(t_mini *mini, char *cmd_mtx);
-char		*ft_add_to_env(char **env, char *add);
 
 int	ft_export(t_mini *mini, char **cmd_mtx)
 {
@@ -30,6 +29,7 @@ int	ft_export(t_mini *mini, char **cmd_mtx)
 	i = 1;
 	while (cmd_mtx[i])
 	{
+		//ft_funcion de quitar tabs y espacios(preguntar a EricK)
 		if (i >= 1)
 			ft_export_more_args(mini, cmd_mtx[i]);
 		i++;
@@ -49,7 +49,6 @@ int	ft_export(t_mini *mini, char **cmd_mtx)
 
 int	ft_export_more_args(t_mini *mini, char *arg)
 {
-	char	*aux;
 	int		i;
 
 	i = 0;
@@ -57,44 +56,16 @@ int	ft_export_more_args(t_mini *mini, char *arg)
 	{
 		if (i > 0 && arg[i] == '=')
 			break ;
-		if (ft_isalnum(arg[i]) == 0 || (i == 0 && ft_isalpha(arg[i]) == 0))
+		if (arg[i] != '_' && (ft_isalnum(arg[i]) == 0 || \
+		(i == 0 && ft_isalpha(arg[i]) == 0)))
 		{
 			printf("minishell: export: `%s': not a valid identifier\n", arg);
 			return (0);
 		}
 		i++;
 	}
-	aux = ft_add_to_env(mini->env, arg);
-	ft_mtx_free(mini->env);
-	mini->env = ft_split(aux, '\n');
-	free(aux);
+	ft_change_env_var(mini, arg);
 	return (0);
-}
-
-char	*ft_add_to_env(char **env, char *add)
-{
-	char	*aux;
-	int		i;
-	int		flag;
-
-	i = 0;
-	flag = 0;
-	aux = ft_strdup("");
-	while (env[i])
-	{
-		if (ft_strncmp(env[i], "_=/", 3) == 0)
-			break ;
-		flag = ft_var_exists(env[i], add, flag);
-		if (flag == 1)
-			aux = ft_join_n(aux, add, "\n");
-		else
-			aux = ft_join_n(aux, env[i], "\n");
-		i++;
-	}
-	if (flag == 0)
-		aux = ft_join_n(aux, add, "\n");
-	aux = ft_join_n(aux, env[i], "\n");
-	return (aux);
 }
 
 static char	*ft_orden(char **env, int j, char *str_exp, int *used)
