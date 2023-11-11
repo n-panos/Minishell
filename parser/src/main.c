@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:02 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/11 18:26:42 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/11 18:33:18 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	check_argv(int argc, char **argv, char **envp, char ***env)
 {
 	if (argc != 1 || argv[1] != NULL)
 	{
-		ft_parser_error("No arguments allowed", '0');
+		ft_putendl_fd("Not arguments allowed", 2);
 		exit(EXIT_FAILURE);
 	}
 	if (envp[0] == NULL)
