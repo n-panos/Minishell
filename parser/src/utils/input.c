@@ -6,7 +6,7 @@
 /*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:05:52 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/09 12:00:47 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/11 13:25:40 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,20 +71,22 @@ int	ft_check_input(char *input)
 	while (input[++i])
 	{
 		if (i == 0 && input[i] == '|')
-			return (ft_parser_error("parse error near ", input[i]));
+			return (free(input),
+				ft_parser_error("parse error near ", input[i]));
 		if (input[i] == '"' || input[i] == '\'')
 		{
 			quote_char = input[i++];
 			if (find_quote_close(input, i, quote_char) == 0)
-				return (ft_parser_error("Unclosed quotes", 0));
+				return (free(input), ft_parser_error("Unclosed quotes", 0));
 			while (input[i] != quote_char)
 				i++;
 		}
 		if (ft_extra_chars(input, i, input[i]) == 0)
-			return (ft_parser_error("parse error near ", input[i]));
+			return (free(input),
+				ft_parser_error("parse error near ", input[i]));
 	}
 	if (ft_check_op(input))
-		return (1);
+		return (free(input), 1);
 	return (0);
 }
 

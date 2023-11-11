@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:20:40 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/10 13:21:06 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/11 13:26:25 by erick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,33 +65,34 @@ char	*get_input(char	**input_ptr)
 		free(input_tmp);
 	}
 	*input_ptr = input_tmp;
+	add_history(*input_ptr);
 	return (input);
 }
 
-void	minishell_loop(t_mini *mini)
+int	minishell_loop(t_mini *mini)
 {
 	t_parser	*tools;
+	int			exit_status;
 
 	tools = mini->tools;
 	mini->status = 0;
 	mini->real_shlvl = 1;
+	exit_status = 0;
 	while (1)
 	{
 		if (get_input(&tools->input) == NULL)
 			exit(ft_parser_error("Error", STDERR_FILENO));
-		add_history(tools->input);
-		if (ft_check_input(tools->input) == 0)
-		{
-			parser(mini);
-			if (tools->error)
-				break ;
-			if (tools->tokenlst == NULL)
-				continue ;
-			if (ft_execute(mini) == 1)
-				break ;
-			ft_free_loop(tools, mini);
-		}
-		else
-			free(tools->input);
+		if (ft_check_input(tools->input) != 0)
+			continue ;
+		parser(mini);
+		if (tools->error)
+			break ;
+		if (tools->tokenlst == NULL)
+			continue ;
+		exit_status = ft_execute(mini);
+		if (exit_status > 0)
+			break ;
+		ft_free_loop(tools, mini);
 	}
+	return (exit_status);
 }

@@ -1,6 +1,5 @@
 Erick
 	- Hay que hacer las Signals, ctrl-D, ctrl-C y ctrl-\
-	- ¿Hay que gestionar ";"?
 	 (No me hace doble free a mi) <!-- - encontrado doble free en caso muy concreto,
 			ipanos-o@c1r16s2 mini % ./minishell
 			Minishell> unset HOME
@@ -13,4 +12,3 @@ Erick
 	
 Nacho
 	- Al usar cd, hay que modificar la variable de entorno "PWD" y "OLDPWD". PWD tiene la ruta actual, y OLDPWD la ruta donde te encontrabas antes de usar cd
-	
