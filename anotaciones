@@ -1,32 +1,16 @@
 Erick
-	✅	<!-- - El return de minishell al cerrar, tiene que ser el valor del status
-		return (mini->status); -->
 	- Hay que hacer las Signals, ctrl-D, ctrl-C y ctrl-\
-	-  (No me hace doble free a mi) <!-->encontrado doble free en caso muy concreto,
-			ipanos-o@c1r16s2 mini % ./minishell
-			Minishell> unset HOME
-			Minishell> export HOME=
-			Minishell> cd
-			Minishell> $?
-			minishell(86447,0x1157a7dc0) malloc: *** error for object 0xf000000000000000: pointer being freed was not allocated
-			minishell(86447,0x1157a7dc0) malloc: *** set a breakpoint in malloc_error_break to debug
-			zsh: abort      ./minishell
-
-
-	✅	<!-- -Necesito que añadas esta linea de codigo cuando haces la copia de las variables de entorno:
-	ft_env_rm(mini, "OLDPWD");
-	Es para evitar que reciba de herencia de la terminal esa variable, se supone que al iniciar esa variable no existe, 
-	el return no tienes que guardarlo ni nada. -->
 	
 Nacho
-	- He añadido una linea en exec_utils, porque la variable path coge la referencia de una variable de la lista enlazada, y luego cuano liberas tu parte, liberas tambien esa variable.
-	- Tambien he añadido una condición en el mismo archivo. Al no haber path, no igualas la variable a NULL, y al ejecutar estaba cogiendo algun valor extraño y ejecutaba otra minishell.
-	- en export.c, funcion ft_export, necesito usar la funcion de quitar espacios, 
-	preguntar a Erick.
+	- (Veo que funciona asique quito los comentarios y lo dejo como lo has puesto) He añadido una linea en exec_utils, 
+	porque la variable path coge la referencia de una variable de la lista enlazada, y luego cuano liberas tu parte, liberas tambien esa variable.
+	
+	- en export.c, funcion ft_export, necesito usar la funcion de quitar espacios, preguntar a Erick.
 	Ej.: export var="  truc"
 	export test="  foo    bar  " Quitar espacios de inicio y final y dejar solo 1
 								entre las 2 palabras.
 	- añadir mas casos de status.
+	-leak en ./minishell
 	-ver que se puede hacer con estos ejemplos:
 		ej.:	ls><abc 	->	bash: syntax error near unexpected token `<'
 		ej2.:	ls <> abc	->	only input redirection works, output redirection is ignored

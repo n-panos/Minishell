@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:18:48 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/11 14:05:00 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/12 10:49:12 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_cd(char **cmd_mtx, t_mini *mini)
 	{
 		mini->status = ft_cd_env_var(mini->env, "OLDPWD");
 		if (mini->status == 1)
-			return (printf("minishell: cd: OLDPWD not set\n"));
+			return (0);
 		else
 			printf("%s\n", ft_get_env_var(mini->env, "OLDPWD") + 1);
 	}
@@ -70,7 +70,10 @@ int	ft_cd_env_var(char **env, char *str)
 
 	dir = ft_get_env_var(env, str);
 	if (dir == NULL)
+	{
+		printf("minishell: cd: OLDPWD not set\n");
 		return (1);
+	}
 	if (ft_strlen(dir) == 1)
 		return (0);
 	dir++;

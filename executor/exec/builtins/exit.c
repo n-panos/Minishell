@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:19:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/11 12:36:14 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/12 11:02:25 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ static int	ft_more_args(char *arg, int flag)
 	int	i;
 
 	i = 0;
+	if (arg[0] == '-')
+		i++;
 	while (arg[i])
 	{
 		if (ft_isdigit(arg[i]) == 0)
@@ -58,7 +60,14 @@ static int	ft_more_args(char *arg, int flag)
 		i++;
 	}
 	if (flag == 2)
-		return (atoi(arg));
+	{
+		i = ft_atoi(arg);
+		if (i > 255)
+			i = i % 256;
+		while (i < 0)
+			i = i + 256;
+		return (i);
+	}
 	printf("minishell: exit: too many arguments\n");
 	return (-2);
 }

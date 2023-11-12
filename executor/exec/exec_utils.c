@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/11 18:18:29 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/12 10:52:06 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	*ft_find_path(char **envp, char *cmd)
 	i = 0;
 	if (envp == NULL || cmd == NULL)
 		return (NULL);
-	path = ft_strdup(cmd);				 // ERICK
+	path = ft_strdup(cmd);				 
 	// path = cmd;
 	if (ft_strrchr(cmd, '/') == NULL)
 	{
@@ -91,7 +91,7 @@ char	*ft_find_path(char **envp, char *cmd)
 		{
 			if (ft_strnstr(envp[i], "PATH", 5) && ft_strlen(envp[i]) > 7)
 			{
-				free(path); 			// ERICK
+				free(path);
 				pos_paths = ft_split(envp[i] + 6, ':');
 				path = ft_no_path(cmd, pos_paths);
 				ft_mtx_free(pos_paths);
@@ -99,8 +99,8 @@ char	*ft_find_path(char **envp, char *cmd)
 			}
 			i++;
 		}
-		if (envp[i] == NULL)			//ERICK
-			return (free(path), NULL);	//ERICK
+		if (envp[i] == NULL)			
+			return (free(path), NULL);	
 	}
 	else if (access(path, F_OK) != 0)
 		return (free(path), NULL);
