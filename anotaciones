@@ -2,9 +2,6 @@ Erick
 	- Hay que hacer las Signals, ctrl-D, ctrl-C y ctrl-\
 	
 Nacho
-	- (Veo que funciona asique quito los comentarios y lo dejo como lo has puesto) He añadido una linea en exec_utils, 
-	porque la variable path coge la referencia de una variable de la lista enlazada, y luego cuano liberas tu parte, liberas tambien esa variable.
-	
 	- en export.c, funcion ft_export, necesito usar la funcion de quitar espacios, preguntar a Erick.
 	Ej.: export var="  truc"
 	export test="  foo    bar  " Quitar espacios de inicio y final y dejar solo 1

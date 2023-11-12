@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/11 18:28:27 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/12 15:35:03 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@
 # define PROMPT "\001\033[0;92m\002Minishell> \001\033[0m\002"
 # define DELIMITERS	"<>|"
 # include "parser.h"
+
+/*
+*	0 -> Shell iteractiva
+*	1 -> Shell en ejecucion
+*/
+sig_atomic_t	in_action;
 // # include "../../executor/header/eminishell.h"
 
 /*
@@ -34,9 +40,9 @@
 *	REDIRECT_OUTPUT		->	Nodo de redirección de salida (>)
 *	REDIRECT_APPEND		->	Nodo de redirección de salida (>>)
 *	HEREDOC				->	Nodo de heredoc (<<)
-*	DELIMITER			git pull->	Nodo de delimitación del heredoc (EOF)
+*	DELIMITER			->	Nodo de delimitación del heredoc (EOF)
 */
-typedef enum s_type
+typedef enum
 {
 	COMMAND,
 	ARGUMENT,
@@ -104,4 +110,7 @@ int			ft_execute(t_mini *mini);
 
 /* Pintar nodos */
 void		print_lst_doble(t_tokens *lst);
+
+/* SIGNALS */
+void	signal_handler(void);
 #endif

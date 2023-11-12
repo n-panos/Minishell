@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:02 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/11 18:33:18 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/12 15:00:31 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	main(int argc, char **argv, char **envp)
 	mini.tools = malloc(sizeof(t_parser));
 	if (mini.tools == NULL)
 		return (EXIT_FAILURE);
+	signal_handler();
 	check_argv(argc, argv, envp, &mini.env);
 	ft_env_rm(&mini, "OLDPWD");
 	exit_status = minishell_loop(&mini);
