@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:09:25 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/11 13:24:16 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/13 13:44:20 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,75 +24,28 @@ void	ft_waiting(int n, int *fd)
 		wait(&status);
 		n--;
 	}
+	//ft_check_signals();
 }
 
-int	check_out(t_mini *mini, t_tokens *tkn)
+char	*ft_join_n(char *ret, char *add, char *s_add)
 {
-	t_tokens	*atkn;
-	int			ret;
-
-	atkn = tkn;
-	ret = 1;
-	while (atkn)
-	{
-		if (atkn->type == PIPE)
-		{
-			if (ret == 1)
-				return (-2);
-			break ;
-		}
-		if (ret > 1 && (atkn->type == REDIRECT_OUTPUT \
-		|| atkn->type == REDIRECT_APPEND))
-			close(ret);
-		if (atkn->type == REDIRECT_OUTPUT)
-			ret = open(atkn->next->value, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		else if (atkn->type == REDIRECT_APPEND)
-			ret = open(atkn->next->value, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		if (ret == -1)
-			return (ft_error_cmd(mini, atkn->next->value, 0, -1));
-		atkn = atkn->next;
-	}
+	ret = ft_strfjoin(ret, add);
+	ret = ft_strfjoin(ret, s_add);
 	return (ret);
 }
 
-int	check_in(t_mini *mini, t_tokens *tkn, int in)
+int	ft_error_cmd(t_mini *mini, char *str, int in, int out)
 {
-	t_tokens	*atkn;
-	int			ret;
-
-	atkn = tkn;
-	ret = in;
-	while (atkn)
+	if (in == -1 || out == -1)
 	{
-		if (atkn->type == PIPE)
-			break ;
-		if (ret > 0 && (atkn->type == HEREDOC \
-		|| atkn->type == REDIRECT_INPUT))
-			close(ret);
-		if (atkn->type == REDIRECT_INPUT && atkn->next->type != ARGUMENT)
-			ret = in;
-		else if (atkn->type == REDIRECT_INPUT)
-			ret = open(atkn->next->value, O_RDONLY);
-		else if (atkn->type == HEREDOC)
-			ret = here_doc(atkn->next->value);
-		if (ret == -1)
-			return (ft_error_cmd(mini, atkn->next->value, -1, 0));
-		atkn = atkn->next;
+		mini->status = 1;
+		printf("minishell: %s: No such file or directory\n", str);
 	}
-	return (ret);
-}
-
-int	ft_is_minishell(t_mini *mini, t_exec *exec)
-{
-	if (ft_strncmp(exec->cmd_mtx[0], "./minishell", 11) != 0  \
-	|| ft_strlen(exec->cmd_mtx[0]) != 11)
-		return (1);
-	if (exec->cmd_mtx[1])
-		return (ft_error_cmd(mini, exec->cmd_mtx[1], 0, 0));
-	ft_change_shlvl(mini, 1);
-	ft_mtx_free(exec->cmd_mtx);
-	free(exec);
-	mini->real_shlvl++;
+	else
+	{
+		mini->status = 127;
+		printf("minishell: %s: command not found\n", str);
+	}
 	return (0);
 }
 

@@ -6,14 +6,11 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:19:04 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/11 14:18:59 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/13 13:48:20 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/eminishell.h"
-
-int		ft_echo_args(char *arg);
-void	ft_echo_print(int f, int i, t_exec *exec, char *dir);
 
 int	ft_echo(t_exec *exec, char *dir)
 {
@@ -72,16 +69,4 @@ void	ft_echo_print(int f, int i, t_exec *exec, char *dir)
 		ft_putstr_fd(exec->cmd_mtx[j], exec->fd_out);
 	if (f == 0)
 		ft_putchar_fd('\n', exec->fd_out);
-}
-
-int	ft_check_ref(int *used, int i, int ref, char **env)
-{
-	if (ft_check_list(used, i) == 0)
-	{
-		if (ft_check_list(used, -1) == 1 && ref == 0)
-			ref = i;
-		else if (ft_strncmp(env[ref], env[i], ft_strlen(env[ref])) > 0)
-			ref = i;
-	}
-	return (ref);
 }

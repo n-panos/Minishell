@@ -6,51 +6,11 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/12 10:52:06 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/13 13:43:59 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/eminishell.h"
-
-int	ft_error_cmd(t_mini *mini, char *str, int in, int out)
-{
-	if (in == -1 || out == -1)
-	{
-		mini->status = 1;
-		printf("minishell: %s: No such file or directory\n", str);
-	}
-	else
-	{
-		mini->status = 127;
-		printf("minishell: %s: command not found\n", str);
-	}
-	return (0);
-}
-
-t_exec	*ft_init_exec(t_tokens *token, char **env, int in, int out)
-{
-	t_tokens	*aux;
-	char		*aux_cmd;
-	t_exec		*exec;
-
-	exec = ft_calloc(1, sizeof(t_exec));
-	if (!exec)
-		return (NULL);
-	exec->fd_in = in;
-	exec->fd_out = out;
-	exec->path = ft_find_path(env, token->value);
-	aux = token;
-	aux_cmd = ft_strdup("");
-	while (aux && (aux->type == COMMAND || aux->type == ARGUMENT))
-	{
-		aux_cmd = ft_strfjoin(aux_cmd, aux->value);
-		aux_cmd = ft_strfjoin(aux_cmd, " ");
-		aux = aux->next;
-	}
-	exec->cmd_mtx = ft_split(aux_cmd, ' ');
-	free(aux_cmd);
-	return (exec);
-}
 
 t_exec	*ft_add_cmd(t_tokens *tkn, t_mini *mini, int in)
 {
@@ -74,58 +34,88 @@ t_exec	*ft_add_cmd(t_tokens *tkn, t_mini *mini, int in)
 	return (ret);
 }
 
-char	*ft_find_path(char **envp, char *cmd)
+t_exec	*ft_init_exec(t_tokens *token, char **env, int in, int out)
 {
-	char	**pos_paths;
-	char	*path;
-	int		i;
+	t_tokens	*aux;
+	char		*aux_cmd;
+	t_exec		*exec;
 
-	i = 0;
-	if (envp == NULL || cmd == NULL)
+	exec = ft_calloc(1, sizeof(t_exec));
+	if (!exec)
 		return (NULL);
-	path = ft_strdup(cmd);				 
-	// path = cmd;
-	if (ft_strrchr(cmd, '/') == NULL)
+	exec->fd_in = in;
+	exec->fd_out = out;
+	exec->path = ft_find_path(env, token->value);
+	aux = token;
+	aux_cmd = ft_strdup("");
+	while (aux && (aux->type == COMMAND || aux->type == ARGUMENT))
 	{
-		while (envp[i])
-		{
-			if (ft_strnstr(envp[i], "PATH", 5) && ft_strlen(envp[i]) > 7)
-			{
-				free(path);
-				pos_paths = ft_split(envp[i] + 6, ':');
-				path = ft_no_path(cmd, pos_paths);
-				ft_mtx_free(pos_paths);
-				break ;
-			}
-			i++;
-		}
-		if (envp[i] == NULL)			
-			return (free(path), NULL);	
+		aux_cmd = ft_join_n(aux_cmd, aux->value, " ");
+		aux = aux->next;
 	}
-	else if (access(path, F_OK) != 0)
-		return (free(path), NULL);
-	return (path);
+	exec->cmd_mtx = ft_split(aux_cmd, ' ');
+	free(aux_cmd);
+	return (exec);
 }
 
-char	*ft_no_path(char *cmd, char **pos_paths)
+int	ft_exec_type(t_mini *mini, t_exec *exec, int in, int out)
 {
-	int		i;
-	char	*path;
+	int	i;
 
-	i = 0;
-	while (pos_paths[i])
+	i = ft_builtin_check(exec, mini);
+	if (i == 2)
 	{
-		path = ft_strjoin(pos_paths[i], "/");
-		path = ft_strfjoin(path, cmd);
-		if (access(path, F_OK) == 0)
+		if (ft_is_minishell(mini, exec) == 0)
+			return (0);
+		if (exec->path == NULL)
+			i = ft_error_cmd(mini, exec->cmd_mtx[0], in, out);
+		else if (exec->fd_in != -1 && exec->fd_out != -1)
 		{
-			i = -1;
-			break ;
+			ft_exec_solo(mini->env, exec);
+			i = 0;
 		}
-		free (path);
-		i++;
 	}
-	if (i != -1)
-		path = NULL;
-	return (path);
+	ft_free_exec(mini, exec);
+	return (i);
+}
+
+void	ft_exec_solo(char **env, t_exec *exec)
+{
+	pid_t	pidc;
+
+	pidc = fork();
+	if (pidc == -1)
+	{
+		printf("minishell: error while forking process\n");
+		exit(EXIT_FAILURE);
+	}
+	if (pidc == 0)
+	{
+		if (exec->fd_in > 0)
+		{
+			dup2(exec->fd_in, 0);
+			close(exec->fd_in);
+		}
+		if (exec->fd_out > 1)
+		{
+			dup2(exec->fd_out, 1);
+			close(exec->fd_out);
+		}
+		exec->ret = execve(exec->path, exec->cmd_mtx, env);
+		printf("minishell: executing error\n");
+		exit(EXIT_FAILURE);
+	}
+}
+
+int	ft_is_minishell(t_mini *mini, t_exec *exec)
+{
+	if (ft_strncmp(exec->cmd_mtx[0], "./minishell", 11) != 0  \
+	|| ft_strlen(exec->cmd_mtx[0]) != 11)
+		return (1);
+	if (exec->cmd_mtx[1])
+		return (ft_error_cmd(mini, exec->cmd_mtx[1], 0, 0));
+	ft_change_shlvl(mini, 1);
+	ft_free_exec(mini, exec);
+	mini->real_shlvl++;
+	return (0);
 }

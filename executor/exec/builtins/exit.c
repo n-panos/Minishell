@@ -6,13 +6,11 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:19:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/12 11:02:25 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/13 14:11:59 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/eminishell.h"
-
-static int	ft_more_args(char *arg, int flag);
 
 int	ft_exit(t_mini *mini, char **cmd_mtx)
 {
@@ -28,7 +26,7 @@ int	ft_exit(t_mini *mini, char **cmd_mtx)
 	if (i == 1 && mini->real_shlvl == 1)
 		return (1);
 	if (i > 1)
-		mini->status = ft_more_args(cmd_mtx[1], i);
+		mini->status = ft_exit_more_args(cmd_mtx[1], i);
 	if (mini->status == -2)
 	{
 		mini->status = 1;
@@ -43,7 +41,7 @@ int	ft_exit(t_mini *mini, char **cmd_mtx)
 	return (1);
 }
 
-static int	ft_more_args(char *arg, int flag)
+int	ft_exit_more_args(char *arg, int flag)
 {
 	int	i;
 

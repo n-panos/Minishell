@@ -6,15 +6,11 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:18:48 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/12 10:49:12 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/13 14:16:41 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/eminishell.h"
-
-int		ft_get_standard_dir(char *dir);
-int		ft_cd_env_var(char **env, char *str);
-void	ft_change_old_pwd(t_mini *mini, char *prev_dir);
 
 int	ft_cd(char **cmd_mtx, t_mini *mini)
 {
@@ -34,7 +30,7 @@ int	ft_cd(char **cmd_mtx, t_mini *mini)
 			printf("%s\n", ft_get_env_var(mini->env, "OLDPWD") + 1);
 	}
 	else
-		mini->status = ft_get_standard_dir(cmd_mtx[1]);
+		mini->status = ft_cd_standard_dir(cmd_mtx[1]);
 	if (mini->status == -1 && cmd_mtx[1])
 		printf("minishell: cd: %s: No such file or directory\n", cmd_mtx[1]);
 	if (mini->status == -1)
@@ -44,7 +40,7 @@ int	ft_cd(char **cmd_mtx, t_mini *mini)
 	return (0);
 }
 
-int	ft_get_standard_dir(char *dir)
+int	ft_cd_standard_dir(char *dir)
 {
 	char	str[FILENAME_MAX];
 	char	*ret;
@@ -71,7 +67,10 @@ int	ft_cd_env_var(char **env, char *str)
 	dir = ft_get_env_var(env, str);
 	if (dir == NULL)
 	{
-		printf("minishell: cd: OLDPWD not set\n");
+		if (ft_strlen(str) == 6)
+			printf("minishell: cd: OLDPWD not set\n");
+		if (ft_strlen(str) == 4)
+			printf("minishell: cd: HOME not set\n");
 		return (1);
 	}
 	if (ft_strlen(dir) == 1)
@@ -97,7 +96,7 @@ char	*ft_get_env_var(char **env, char *str)
 		if (ft_strncmp(env[i], str, len) == 0)
 		{
 			dir = ft_strchr(env[i], '=');
-			if (ft_strlen(env[i]) <= 5)
+			if (ft_strlen(env[i]) <= (size_t)len + 1)
 				return (dir);
 			break ;
 		}
@@ -119,4 +118,3 @@ void	ft_change_old_pwd(t_mini *mini, char *prev_dir)
 	ft_change_env_var(mini, aux);
 	free(aux);
 }
-
