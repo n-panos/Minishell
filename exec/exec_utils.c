@@ -3,20 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/31 11:10:34 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/13 13:43:59 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/eminishell.h"
 
-void	ft_error_cmd(char *str)
+t_exec	*ft_add_cmd(t_tokens *tkn, t_mini *mini, int in)
 {
-	ft_putstr_fd("zsh: command not found: ", 1);
-	ft_putstr_fd(str, 1);
-	ft_putstr_fd("\n", 1);
+	t_exec	*ret;
+	int		out;
+
+	ret = NULL;
+	in = check_in(mini, tkn, in);
+	out = check_out(mini, tkn);
+	while (tkn)
+	{
+		if (tkn->type == COMMAND)
+		{
+			ret = ft_init_exec(tkn, mini->env, in, out);
+			if (ret == NULL)
+				mini->status = 12;
+			break ;
+		}
+		tkn = tkn->next;
+	}
+	return (ret);
 }
 
 t_exec	*ft_init_exec(t_tokens *token, char **env, int in, int out)
@@ -35,8 +50,7 @@ t_exec	*ft_init_exec(t_tokens *token, char **env, int in, int out)
 	aux_cmd = ft_strdup("");
 	while (aux && (aux->type == COMMAND || aux->type == ARGUMENT))
 	{
-		aux_cmd = ft_strfjoin(aux_cmd, aux->value);
-		aux_cmd = ft_strfjoin(aux_cmd, " ");
+		aux_cmd = ft_join_n(aux_cmd, aux->value, " ");
 		aux = aux->next;
 	}
 	exec->cmd_mtx = ft_split(aux_cmd, ' ');
@@ -44,82 +58,64 @@ t_exec	*ft_init_exec(t_tokens *token, char **env, int in, int out)
 	return (exec);
 }
 
-t_pipe	*ft_pipe_init(int pipe_num, int cmd_num)
+int	ft_exec_type(t_mini *mini, t_exec *exec, int in, int out)
 {
-	t_pipe	*pipes;
-	int		i;
+	int	i;
 
-	i = 0;
-	pipes = ft_calloc(1, sizeof(t_pipe));
-	if (!pipes)
-		return (NULL);
-	pipes->cmd = malloc(sizeof(t_exec *) * (cmd_num + 1));
-	if (!pipes->cmd)
-		return (NULL);
-	pipes->cmd[cmd_num] = NULL;
-	pipes->fd = ft_calloc(pipe_num + 1, sizeof(int *));
-	if (!pipes->fd)
-		return (NULL);
-	i = 0;
-	while (i < pipe_num)
+	i = ft_builtin_check(exec, mini);
+	if (i == 2)
 	{
-		pipes->fd[i] = ft_calloc(2, sizeof(int *));
-		if (pipe(pipes->fd[i]) == -1)
-			exit(EXIT_FAILURE);
-		i++;
-	}
-	pipes->fd[pipe_num] = NULL;
-	return (pipes);
-}
-
-char	*ft_find_path(char **envp, char *cmd)
-{
-	char	**pos_paths;
-	char	*path;
-	int		i;
-
-	i = 0;
-	if (envp == NULL || cmd == NULL)
-		return (NULL);
-	path = cmd;
-	if (ft_strrchr(cmd, '/') == NULL)
-	{
-		while (envp[i])
+		if (ft_is_minishell(mini, exec) == 0)
+			return (0);
+		if (exec->path == NULL)
+			i = ft_error_cmd(mini, exec->cmd_mtx[0], in, out);
+		else if (exec->fd_in != -1 && exec->fd_out != -1)
 		{
-			if (ft_strnstr(envp[i], "PATH", 5) && ft_strlen(envp[i]) > 7)
-			{
-				pos_paths = ft_split(envp[i] + 6, ':');
-				path = ft_no_path(cmd, pos_paths);
-				ft_mtx_free(pos_paths);
-				break ;
-			}
-			i++;
+			ft_exec_solo(mini->env, exec);
+			i = 0;
 		}
 	}
-	else if (access(path, F_OK) != 0)
-		return (NULL);
-	return (path);
+	ft_free_exec(mini, exec);
+	return (i);
 }
 
-char	*ft_no_path(char *cmd, char **pos_paths)
+void	ft_exec_solo(char **env, t_exec *exec)
 {
-	int		i;
-	char	*path;
+	pid_t	pidc;
 
-	i = 0;
-	while (pos_paths[i])
+	pidc = fork();
+	if (pidc == -1)
 	{
-		path = ft_strjoin(pos_paths[i], "/");
-		path = ft_strfjoin(path, cmd);
-		if (access(path, F_OK) == 0)
-		{
-			i = -1;
-			break ;
-		}
-		free (path);
-		i++;
+		printf("minishell: error while forking process\n");
+		exit(EXIT_FAILURE);
 	}
-	if (i != -1)
-		path = NULL;
-	return (path);
+	if (pidc == 0)
+	{
+		if (exec->fd_in > 0)
+		{
+			dup2(exec->fd_in, 0);
+			close(exec->fd_in);
+		}
+		if (exec->fd_out > 1)
+		{
+			dup2(exec->fd_out, 1);
+			close(exec->fd_out);
+		}
+		exec->ret = execve(exec->path, exec->cmd_mtx, env);
+		printf("minishell: executing error\n");
+		exit(EXIT_FAILURE);
+	}
+}
+
+int	ft_is_minishell(t_mini *mini, t_exec *exec)
+{
+	if (ft_strncmp(exec->cmd_mtx[0], "./minishell", 11) != 0  \
+	|| ft_strlen(exec->cmd_mtx[0]) != 11)
+		return (1);
+	if (exec->cmd_mtx[1])
+		return (ft_error_cmd(mini, exec->cmd_mtx[1], 0, 0));
+	ft_change_shlvl(mini, 1);
+	ft_free_exec(mini, exec);
+	mini->real_shlvl++;
+	return (0);
 }

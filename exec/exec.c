@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:16:49 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/31 09:17:01 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/13 13:43:04 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@ int	ft_execute(t_mini *mini)
 	int			ret;
 
 	ret = 0;
+	mini->status = 0;
 	if (mini->cmd_n == 0)
 		ret = ft_no_cmd(mini);
 	if (mini->cmd_n == 1)
 		ret = ft_preprocess_solo(mini);
-	else if (mini->pipe_n > 0)
+	else if (mini->cmd_n > 1)
 		ret = ft_preprocess_pipe(mini);
 	return (ret);
 }
@@ -37,24 +38,26 @@ int	ft_builtin_check(t_exec *exec, t_mini *mini)
 	int	i;
 
 	i = 2;
-	if (ft_strncmp(exec->cmd_mtx[0], "cd", 2) == 0)
-		i = ft_cd(exec->cmd_mtx);
-	else if (ft_strncmp(exec->cmd_mtx[0], "echo", 4) == 0)
-		i = ft_echo(exec->cmd_mtx);
+	if (exec->fd_in == -1 || exec->fd_out == -1)
+		return (-1);
+	if (ft_strncmp(exec->cmd_mtx[0], "echo", 4) == 0)
+		i = ft_echo(exec, ft_get_env_var(mini->env, "HOME") + 1);
 	else if (ft_strncmp(exec->cmd_mtx[0], "env", 3) == 0)
 		i = ft_env(mini->env, exec->cmd_mtx);
-	else if (ft_strncmp(exec->cmd_mtx[0], "exit", 4) == 0)
-		i = ft_exit(exec->cmd_mtx);
-	// else if (ft_strncmp(exec->cmd_mtx[0], "export", 6))
-	// 	i = ft_export(mini, exec->cmd_mtx);
+	else if (ft_strncmp(exec->cmd_mtx[0], "export", 6) == 0)
+		i = ft_export(mini, exec->cmd_mtx);
 	else if (ft_strncmp(exec->cmd_mtx[0], "pwd", 3) == 0)
 		i = ft_pwd(exec->cmd_mtx);
 	else if (ft_strncmp(exec->cmd_mtx[0], "unset", 5) == 0)
 		i = ft_unset(mini, exec->cmd_mtx);
+	if (i != 2)
+		mini->status = i;
+	if (ft_strncmp(exec->cmd_mtx[0], "cd", 2) == 0)
+		i = ft_cd(exec->cmd_mtx, mini);
+	else if (ft_strncmp(exec->cmd_mtx[0], "exit", 4) == 0)
+		i = ft_exit(mini, exec->cmd_mtx);
 	return (i);
 }
-
-//-1 mensaje de error, 0 es ok,
 
 int	ft_no_cmd(t_mini *mini)
 {

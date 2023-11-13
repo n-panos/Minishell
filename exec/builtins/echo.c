@@ -5,40 +5,32 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 12:12:03 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/19 14:02:39 by nacho            ###   ########.fr       */
+/*   Created: 2023/10/31 09:19:04 by ipanos-o          #+#    #+#             */
+/*   Updated: 2023/11/13 13:48:20 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "eminishell.h"
+#include "../../header/eminishell.h"
 
-int	ft_echo_args(char *arg);
-
-int	ft_echo(char **cmd_mtx)
+int	ft_echo(t_exec *exec, char *dir)
 {
 	int	i;
 	int	f;
-	int	j;
 
 	i = 0;
-	if (ft_strlen(cmd_mtx[0]) != 4)
+	if (ft_strlen(exec->cmd_mtx[0]) != 4)
 		return (2);
-	while (cmd_mtx[i])
+	while (exec->cmd_mtx[i])
 		i++;
 	if (i == 1)
+	{
 		printf("\n");
-	f = ft_echo_args(cmd_mtx[1]);
+		return (0);
+	}
+	f = ft_echo_args(exec->cmd_mtx[1]);
 	if (f == 1 && i == 2)
 		return (0);
-	j = 1 + f;
-	while (j < i - 1)
-	{
-		printf("%s ", cmd_mtx[j]);
-		j++;
-	}
-	printf("%s", cmd_mtx[j]);
-	if (f == 1)
-		printf("\n");
+	ft_echo_print(f, i, exec, dir);
 	return (0);
 }
 
@@ -50,4 +42,31 @@ int	ft_echo_args(char *arg)
 	if (flag == 0 && ft_strlen(arg) == 2)
 		return (1);
 	return (0);
+}
+
+void	ft_echo_print(int f, int i, t_exec *exec, char *dir)
+{
+	int		j;
+
+	j = 1 + f;
+	while (j < i - 1)
+	{
+		if (ft_strncmp(exec->cmd_mtx[j], "~", ft_strlen(exec->cmd_mtx[j])) == 0)
+		{
+			ft_putstr_fd(dir++, exec->fd_out);
+			ft_putchar_fd(' ', exec->fd_out);
+		}
+		else if (ft_strncmp(exec->cmd_mtx[j], "-n", 2) != 0)
+		{
+			ft_putstr_fd(exec->cmd_mtx[j], exec->fd_out);
+			ft_putchar_fd(' ', exec->fd_out);
+		}
+		j++;
+	}
+	if (ft_strncmp(exec->cmd_mtx[j], "~", ft_strlen(exec->cmd_mtx[j])) == 0)
+		ft_putstr_fd(dir++, exec->fd_out);
+	else
+		ft_putstr_fd(exec->cmd_mtx[j], exec->fd_out);
+	if (f == 0)
+		ft_putchar_fd('\n', exec->fd_out);
 }

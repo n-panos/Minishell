@@ -14,96 +14,115 @@
 
 int	ft_preprocess_pipe(t_mini *mini)
 {
-	t_pipe		*pipes;
+	int			i;
+	int			*aux;
+	t_exec		*odd;
+	t_tokens	*atkn;
 
-	pipes = ft_pipe_init(mini->pipe_n, mini->cmd_n);
-	ft_in_out_config(pipes, mini);
-	ft_exec_pipe(pipes, mini);
-	ft_free_pipes(pipes, mini->pipe_n, mini->cmd_n);
+	i = 1;
+	atkn = mini->tk_lst;
+	aux = ft_calloc(2, sizeof(int *));
+	aux[0] = 0;
+	while (atkn && i < mini->cmd_n)
+	{
+		aux = ft_exec_two(mini, atkn, aux);
+		if (aux == NULL)
+			break ;
+		i += 2;
+		atkn = ft_return_pipe(atkn);
+		atkn = ft_return_pipe(atkn);
+	}
+	if (i == mini->cmd_n)
+	{
+		odd = ft_add_cmd(atkn, mini, aux[0]);
+		if (odd)
+			ft_exec_type(mini, odd, odd->fd_in, odd->fd_out);
+	}
+	ft_waiting(mini->cmd_n, aux);
 	return (0);
 }
 
-void	ft_exec_pipe(t_pipe *pipes, t_mini *mini)
+int	*ft_exec_two(t_mini *mini, t_tokens *tkn, int *in)
 {
-	int		i;
-	int		ret;
+	t_pipes		*pipes;
+	int			*fd;
+	t_tokens	*atkn;
 
-	i = 0;
-	while (i <= mini->pipe_n)
+	atkn = tkn;
+	pipes = ft_config_pipe(atkn, mini, in[0]);
+	free(in);
+	fd = ft_calloc(2, sizeof(int *));
+	if (!pipes || !fd)
 	{
-		ret = ft_builtin_check(pipes->cmd[i], mini);
-		if (ret == -1)
-			ft_error_cmd(pipes->cmd[i]->cmd_mtx[0]);
-		else if (ret == 2)
-		{
-			if (pipes->cmd[i]->path == NULL)
-				ft_error_cmd(pipes->cmd[i]->cmd_mtx[0]);
-			else
-				ft_exec_solo(mini->env, pipes->cmd[i], pipes->fd, mini->pipe_n);
-		}
-		i++;
+		mini->status = 12;
+		return (NULL);
 	}
+	if (ft_pipe_exec(mini, pipes, fd) == -1)
+		return (NULL);
+	return (fd);
 }
 
-void	ft_in_out_config(t_pipe *pipes, t_mini *mini)
+int	ft_pipe_exec(t_mini *mini, t_pipes *pipes, int *fd)
 {
-	t_tokens	*aux_token;
-	int			i;
-
-	aux_token = mini->tk_lst;
-	i = 0;
-	while (aux_token)
+	if (pipes->cmd2->fd_out == -2 && pipes->cmd2->fd_in != -1)
 	{
-		if (aux_token->type == COMMAND)
+		if (pipe(fd) == -1)
 		{
-			pipes->cmd[i] = ft_init_exec(aux_token, mini->env);
-			i++;
+			free(fd);
+			return (-1);
 		}
-		aux_token = aux_token->next;
-	}
-	ft_in_out_default(pipes, mini->pipe_n);
-	aux_token = mini->tk_lst;
-	i = 0;
-	while (aux_token)
-	{
-		if (aux_token->type == COMMAND)
-		{
-			ft_in_out_pipe(pipes->cmd[i], aux_token);
-			i++;
-		}
-		aux_token = aux_token->next;
-	}
-}
-
-void	ft_in_out_pipe(t_exec *exec, t_tokens *token)
-{
-	t_tokens	*aux_token;
-
-	if (token->prev && token->prev->prev)
-	{
-		aux_token = token->prev->prev;
-		if (aux_token->type == REDIRECT_INPUT || aux_token->type == HEREDOC)
-			ft_in_out_type(aux_token, exec);
-		else
-			ft_in_out_type(token, exec);
+		pipes->cmd2->fd_out = fd[1];
 	}
 	else
-		ft_in_out_type(token, exec);
+	{
+		fd[0] = -3;
+		fd[1] = '\0';
+	}
+	ft_exec_type(mini, pipes->cmd1, pipes->cmd1->fd_in, pipes->cmd1->fd_out);
+	ft_exec_type(mini, pipes->cmd2, pipes->cmd2->fd_in, pipes->cmd2->fd_out);
+	ft_free_pipes(pipes);
+	return (0);
 }
 
-void	ft_in_out_default(t_pipe *pipes, int pipe_num)
+t_pipes	*ft_config_pipe(t_tokens *tkn, t_mini *mini, int in)
 {
-	int	i;
+	t_pipes		*pipes;
 
-	pipes->cmd[0]->fd_in = 0;
-	pipes->cmd[0]->fd_out = pipes->fd[0][1];
-	i = 1;
-	while (i < (pipe_num))
+	pipes = ft_calloc(1, sizeof(t_pipes));
+	if (!pipes)
+		return (NULL);
+	pipes->cmd1 = ft_add_cmd(tkn, mini, in);
+	tkn = ft_return_pipe(tkn);
+	pipes->cmd2 = ft_add_cmd(tkn, mini, 0);
+	if (pipes->cmd1 == NULL || pipes->cmd2 == NULL)
+		return (pipes);
+	if (pipes->cmd1->fd_out == -2 && pipes->cmd2->fd_in == 0)
 	{
-		pipes->cmd[i]->fd_in = pipes->fd[i - 1][0];
-		pipes->cmd[i]->fd_out = pipes->fd[i][1];
-		i++;
+		pipes->fd = ft_calloc(2, sizeof(int *));
+		if (!pipes->fd || pipe(pipes->fd) == -1)
+		{
+			ft_free_exec(mini, pipes->cmd1);
+			ft_free_exec(mini, pipes->cmd2);
+			ft_free_pipes(pipes);
+			return (NULL);
+		}
+		pipes->cmd1->fd_out = pipes->fd[1];
+		pipes->cmd2->fd_in = pipes->fd[0];
 	}
-	pipes->cmd[pipe_num]->fd_in = pipes->fd[i - 1][0];
-	pipes->cmd[pipe_num]->fd_out = 1;
+	return (pipes);
+}
+
+t_tokens	*ft_return_pipe(t_tokens *tkn)
+{
+	while (tkn)
+	{
+		if (tkn->type == PIPE)
+		{
+			if (tkn->next)
+				tkn = tkn->next;
+			break ;
+		}
+		tkn = tkn->next;
+	}
+	return (tkn);
 }

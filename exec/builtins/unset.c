@@ -6,14 +6,11 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:37:50 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/20 12:29:22 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/13 13:56:18 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "eminishell.h"
-
-int	ft_env_rm(t_mini *mini, char *str);
-int	ft_env_delete(t_mini *mini, int erase);
+#include "../../header/eminishell.h"
 
 int	ft_unset(t_mini *mini, char **cmd_mtx)
 {
@@ -49,7 +46,8 @@ int	ft_env_rm(t_mini *mini, char *str)
 	while (mini->env[i])
 	{
 		len = ft_search_c(mini->env[i], '=');
-		if (ft_strlen(str) == len && ft_strncmp(mini->env[i], str, len) == 0)
+		if (ft_strlen(str) == (size_t)len && \
+		ft_strncmp(mini->env[i], str, len) == 0)
 			return (ft_env_delete(mini, i));
 		i++;
 	}
@@ -69,8 +67,7 @@ int	ft_env_delete(t_mini *mini, int erase)
 			i++;
 		else
 		{
-			aux = ft_strfjoin(aux, mini->env[i]);
-			aux = ft_strfjoin(aux, "\n");
+			aux = ft_join_n(aux, mini->env[i], "\n");
 			i++;
 		}
 	}
@@ -78,18 +75,4 @@ int	ft_env_delete(t_mini *mini, int erase)
 	mini->env = ft_split(aux, '\n');
 	free(aux);
 	return (0);
-}
-
-int	ft_search_c(char *str, char c)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-			return (i);
-		i++;
-	}
-	return (-1);
 }
