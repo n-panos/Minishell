@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/13 00:32:38 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/13 01:51:02 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <signal.h>
 # include <fcntl.h>
 # include <termios.h>
-#include <curses.h>
+# include <curses.h>
 # define NOC "\001\e[0m\002"
 # define PROMPT "\001\033[0;92m\002Minishell> \001\033[0m\002"
 # define DELIMITERS	"<>|"
@@ -30,7 +30,7 @@
 *	0 -> Shell iteractiva
 *	1 -> Shell en ejecucion
 */
-int	signal_status;
+int	g_signal;
 # define ITERATIVE	1
 # define PROCESS	2
 # define HERE_DOC	3
@@ -47,7 +47,7 @@ int	signal_status;
 *	HEREDOC				->	Nodo de heredoc (<<)
 *	DELIMITER			->	Nodo de delimitación del heredoc (EOF)
 */
-typedef enum
+typedef enum s_type
 {
 	COMMAND,
 	ARGUMENT,
@@ -117,5 +117,5 @@ int			ft_execute(t_mini *mini);
 void		print_lst_doble(t_tokens *lst);
 
 /* SIGNALS */
-void	signal_handler(int state);
+void		signal_handler(int state);
 #endif

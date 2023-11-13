@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:19:15 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/13 01:48:04 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/13 01:51:44 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	create_signal(struct sigaction *signal, void (*funct)(int))
 	sigemptyset(&(*signal).sa_mask);
 	signal->sa_flags = 0;
 }
+
 /*
 *	@param state	- ITERATIVE
 *					- PROCESS
@@ -49,7 +50,7 @@ void	create_signal(struct sigaction *signal, void (*funct)(int))
 */
 void	signal_handler(int state)
 {
-	struct	sigaction	sa;
+	struct sigaction	sa;
 
 	if (state == ITERATIVE)
 	{
