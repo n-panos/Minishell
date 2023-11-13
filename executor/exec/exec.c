@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:16:49 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/11 14:15:43 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/13 14:33:49 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int	here_doc(char *limiter)
 
 	if (pipe(fd) == -1)
 		return (-1);
+	signal_handler(HERE_DOC);
 	line = get_next_line(0);
 	while (line)
 	{
@@ -116,6 +117,7 @@ int	here_doc(char *limiter)
 		free(line);
 		line = get_next_line(0);
 	}
+	signal_handler(ITERATIVE);
 	free(line);
 	close(fd[1]);
 	return (fd[0]);
