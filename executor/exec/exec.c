@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:16:49 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/13 14:33:49 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/13 14:38:53 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,6 @@ int	ft_execute(t_mini *mini)
 	else if (mini->cmd_n > 1)
 		ret = ft_preprocess_pipe(mini);
 	return (ret);
-}
-
-int	ft_exec_type(t_mini *mini, t_exec *exec, int in, int out)
-{
-	int	i;
-
-	i = ft_builtin_check(exec, mini);
-	if (i == 2)
-	{
-		if (ft_is_minishell(mini, exec) == 0)
-			return (0);
-		if (exec->path == NULL)
-			i = ft_error_cmd(mini, exec->cmd_mtx[0], in, out);
-		else if (exec->fd_in != -1 && exec->fd_out != -1)
-		{
-			ft_exec_solo(mini->env, exec);
-			i = 0;
-		}
-	}
-	ft_free_exec(mini, exec);
-	return (i);
 }
 
 // return 2 si no ha hecho nada, return 0 sin problema, 

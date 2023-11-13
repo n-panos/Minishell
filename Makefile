@@ -28,11 +28,16 @@ SIG_PATH		=	$(addprefix signal/, $(SIGNAL))
 
 ## EXECUTOR
 
-EXEC			=	exec.c exec_solo.c exec_pipe.c exec_utils.c exec_free.c exec_utils_more.c
-BUILTINS		=	pwd.c echo.c env.c cd.c unset.c exit.c b_utils.c export.c
+EXEC			=	exec.c exec_solo.c exec_pipe.c exec_utils.c find_path.c exec_free.c exec_utils_more.c
+BUILTINS		=	pwd.c echo.c env.c cd.c unset.c exit.c b_utils.c export.c export_utils.c
 
 EXECUTOR		=	$(addprefix executor/exec/, $(EXEC))
 BUILTINS_PATH	=	$(addprefix executor/exec/builtins/, $(BUILTINS))
+
+## REDIRECT
+
+REDIRECT		=	redirect.c
+REDI_PATH		=	$(addprefix redirect/, $(REDIRECT))
 
 # COLOUR DEFINITION #
 RED     := \033[0;31m
@@ -41,7 +46,7 @@ GREEN   := \033[1;32m
 WHITE   := \033[0;37m
 RESET   := \033[0m
 
-OBJS		=	$(MAIN:.c=.o) $(PARSER_PATH:.c=.o) $(UTILS_PATH:.c=.o) $(ERROR_PATH:.c=.o) $(LIST_PATH:.c=.o) $(EXECUTOR:.c=.o) $(BUILTINS_PATH:.c=.o) $(SIG_PATH:.c=.o)
+OBJS		=	$(MAIN:.c=.o) $(PARSER_PATH:.c=.o) $(UTILS_PATH:.c=.o) $(ERROR_PATH:.c=.o) $(LIST_PATH:.c=.o) $(EXECUTOR:.c=.o) $(BUILTINS_PATH:.c=.o) $(SIG_PATH:.c=.o) $(REDI_PATH:.c=.o)
 
 all: $(NAME)
 

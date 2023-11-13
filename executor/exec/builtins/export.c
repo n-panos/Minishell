@@ -6,17 +6,11 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:50:28 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/11 13:46:30 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/13 12:56:31 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/eminishell.h"
-
-// La logica de ordenacion cuando hay que añadir variables no la tengo clara
-
-static char	*ft_orden(char **env, int env_len, char *str_exp, int *used);
-static char	*ft_str_construct(int ref, char **env, char *str_exp);
-int			ft_export_more_args(t_mini *mini, char *cmd_mtx);
 
 int	ft_export(t_mini *mini, char **cmd_mtx)
 {
@@ -66,49 +60,4 @@ int	ft_export_more_args(t_mini *mini, char *arg)
 	}
 	ft_change_env_var(mini, arg);
 	return (0);
-}
-
-static char	*ft_orden(char **env, int j, char *str_exp, int *used)
-{
-	int		ref;
-	int		i;
-
-	while (env[j])
-	{
-		i = 0;
-		ref = 1;
-		while (ft_check_list(used, ref) == 1)
-			ref++;
-		while (env[i])
-		{
-			ref = ft_check_ref(used, i, ref, env);
-			i++;
-		}
-		used = ft_add_used(used, ref);
-		str_exp = ft_str_construct(ref, env, str_exp);
-		j++;
-	}
-	free(used);
-	return (str_exp);
-}
-
-static char	*ft_str_construct(int ref, char **env, char *str_exp)
-{
-	char	*aux;
-	char	**comillas;
-
-	if (ft_strncmp(env[ref], "_=/", 3) == 0)
-		return (str_exp);
-	comillas = ft_split(env[ref], '=');
-	aux = ft_strfjoin(str_exp, "declare -x ");
-	aux = ft_strfjoin(aux, comillas[0]);
-	if (comillas[1])
-	{
-		aux = ft_strfjoin(aux, "='");
-		aux = ft_join_n(aux, comillas[1], "'\n");
-	}
-	else
-		aux = ft_strfjoin(aux, "\n");
-	ft_mtx_free(comillas);
-	return (aux);
 }
