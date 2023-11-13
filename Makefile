@@ -4,7 +4,7 @@ CFLAGS			=	-ggdb -Wall -Werror -Wextra
 READLINE		=	-I/System/Volumes/Data/Users/$(USER)/.brew/Cellar/readline/8.2.1/include -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
 RM 				=	rm -rf
 
-RD_ERICK		=	-I/usr/local/Cellar/readline/8.2.1/include -L/usr/local/Cellar/readline/8.2.1/lib -lreadline
+RD_ERICK		=	-I/usr/local/opt/readline/include -L/usr/local/opt/readline/lib -lreadline
 
 LIBFT			= 	parser/src/libft/libft.a
 
@@ -58,7 +58,7 @@ $(NAME): $(OBJS) $(LIBFT)
 $(LIBFT):
 	@make bonus --directory parser/src/libft
 
-erick: fclean $(OBJS) $(LIBFT)
+erick: $(OBJS) $(LIBFT)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(RD_ERICK) $(LIBFT)
 
 clean:

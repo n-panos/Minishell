@@ -1,5 +1,7 @@
 Erick
 	- Hay que hacer las Signals, ctrl-D, ctrl-C y ctrl-\
+	- De forma iterativa ya funcionan ctrl-C, ctrl-D y ctrl-\
+	- Hay que añadir el uso de señales en el heredoc y en cada proceso hijo.
 	
 Nacho
 	- en export.c, funcion ft_export, necesito usar la funcion de quitar espacios, preguntar a Erick.

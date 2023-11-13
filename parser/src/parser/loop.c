@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:20:40 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/12 15:36:30 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/13 00:03:18 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,20 @@ char	*get_input(char	**input_ptr)
 	char	*input;
 	char	*input_tmp;
 
-	in_action = 0;
 	while (1)
 	{
 		input = readline(PROMPT);
+		if (input == NULL)
+		{
+			ft_putendl_fd("exit", 1);
+			exit(0);
+		}
 		input_tmp = ft_strtrim(input, " \t");
 		free(input);
 		if (input_tmp[0] != '\0')
 			break ;
 		free(input_tmp);
 	}
-	in_action = 1;
 	*input_ptr = input_tmp;
 	add_history(*input_ptr);
 	return (input);

@@ -6,34 +6,34 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:19:15 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/12 15:37:32 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/13 01:48:04 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parser/includes/minishell.h"
 
-void	sigint_handler(int sign)
+void	handler_iterative(int sa)
 {
-	printf ("%d\n", sign);
-	if (in_action == 0)
+	if (sa == SIGINT)
 	{
-		// printf("hola\n");
-		write(STDOUT_FILENO, PROMPT, ft_strlen(PROMPT));
+		/*TODO eliminar ^C*/
+		write(1, "\n", 1);
+		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
 	}
 }
 
-void	sigterm_handler(int sign)
+void	handler_heredoc(int sa)
 {
-	if (sign)
-		return ;
-}
+	char	eof;
 
-void	sigquit_handler(int sign)
-{
-	if (sign)
-		return ;
+	eof = EOF;
+	if (sa == SIGINT)
+	{
+		/*TODO eliminar ^C*/
+		ft_putendl_fd(&eof, 1);
+	}
 }
 
 void	create_signal(struct sigaction *signal, void (*funct)(int))
@@ -42,17 +42,26 @@ void	create_signal(struct sigaction *signal, void (*funct)(int))
 	sigemptyset(&(*signal).sa_mask);
 	signal->sa_flags = 0;
 }
-
-void	signal_handler(void)
+/*
+*	@param state	- ITERATIVE
+*					- PROCESS
+*					- HEREDOC
+*/
+void	signal_handler(int state)
 {
-	struct	sigaction	sa_int;
-	struct	sigaction	sa_term;
-	struct	sigaction	sa_quit;
+	struct	sigaction	sa;
 
-	create_signal(&sa_int, sigint_handler);
-	create_signal(&sa_term, sigterm_handler);
-	create_signal(&sa_quit, sigquit_handler);
-	if (sigaction(SIGINT, &sa_int, NULL) == -1)
+	if (state == ITERATIVE)
+	{
+		signal(SIGQUIT, SIG_IGN);
+		create_signal(&sa, handler_iterative);
+	}
+	if (state == HERE_DOC)
+	{
+		signal(SIGQUIT, SIG_IGN);
+		create_signal(&sa, handler_heredoc);
+	}
+	if (sigaction(SIGINT, &sa, NULL) == -1)
 	{
 		perror("Error handing signal");
 		exit(EXIT_FAILURE);
