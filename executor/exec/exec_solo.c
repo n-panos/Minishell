@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_solo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/13 13:43:58 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/13 18:40:27 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ int	ft_preprocess_solo(t_mini *mini)
 		return (-1);
 	ret = ft_exec_type(mini, exec, 0, 0);
 	wait(&status);
-	//ft_check_signals();
+	signal_handler(ITERATIVE);
 	return (ret);
 }

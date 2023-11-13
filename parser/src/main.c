@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:02 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/13 14:51:32 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/13 17:33:59 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	main(int argc, char **argv, char **envp)
 	int				exit_status;
 
 	atexit(leaks);
+	g_signal = 0;
 	mini.tools = malloc(sizeof(t_parser));
 	if (mini.tools == NULL)
 		return (EXIT_FAILURE);

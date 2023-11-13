@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/13 17:04:59 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/13 18:39:05 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	ft_exec_solo(char **env, t_exec *exec)
 	}
 	if (pidc == 0)
 	{
+		signal_handler(PROCESS);
 		if (exec->fd_in > 0)
 		{
 			dup2(exec->fd_in, 0);
@@ -105,6 +106,8 @@ void	ft_exec_solo(char **env, t_exec *exec)
 		printf("minishell: executing error\n");
 		exit(EXIT_FAILURE);
 	}
+	else
+		off_signals();
 }
 
 int	ft_is_minishell(t_mini *mini, t_exec *exec)
