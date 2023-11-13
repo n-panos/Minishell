@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/10/20 12:48:20 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/13 14:10:13 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,10 @@
 # define EMINISHELL_H
 # include <stdio.h>
 # include <unistd.h>
-# include "libft/libft.h"
+# include "../../parser/src/libft/includes/libft.h"
 # include <readline/history.h>
 # include <readline/readline.h>
-
-typedef enum s_type
-{
-	COMMAND,	
-	ARGUMENT,	
-	PIPE,
-	REDIRECT_INPUT,
-	REDIRECT_OUTPUT,
-	REDIRECT_APPEND,
-	HEREDOC,
-	DELIMITER
-}	t_type;
-
-typedef struct s_tokens
-{
-	char				*value;
-	t_type				type;
-	char				*tool;
-	struct s_tokens		*next;
-	struct s_tokens		*prev;
-}	t_tokens;
-
-typedef struct s_mini
-{
-	int			pipe_n;
-	char		**env;
-	t_tokens	*tk_lst;
-}	t_mini;
+# include "../../parser/includes/minishell.h"
 
 typedef struct s_exec
 {
@@ -52,60 +25,114 @@ typedef struct s_exec
 	char	**cmd_mtx;
 	int		fd_in;
 	int		fd_out;
+	int		ret;
 }	t_exec;
 
-typedef struct s_pipe
+typedef struct s_pipes
 {
-	t_exec	**cmd;
-	int		**fd;
-}	t_pipe;
+	t_exec	*cmd1;
+	t_exec	*cmd2;
+	int		*fd;
+}	t_pipes;
 
-//		Funciones temporales para testeo en builtins.c
+//					BUILTINS
 
-int		ft_builtins(t_mini *mini, char *prompt);
+//			UTILS
 
-//      HAND CRAFTED FUNCTIONS -- BUILTINS
+void		ft_change_env_var(t_mini *mini, char *arg);
+char		*ft_add_to_env(char **env, char *add);
+int			ft_var_exists(char *env, char *add, int flag);
+int			ft_search_c(char *str, char c);
 
-int		ft_builtin_check(t_exec *exec, t_mini *mini);
-int		ft_cd(char **cmd_mtx);
-int		ft_echo(char **cmd_mtx);
-int		ft_env(char **env, char **cmd_mtx);
-int		ft_exit(char **cmd_mtx);
-int		ft_export(t_mini *mini, char **cmd_mtx);
-int		ft_pwd(char **cmd_mtx);
-int		ft_unset(t_mini *mini, char **cmd_mtx);
+//			CD
+int			ft_cd(char **cmd_mtx, t_mini *mini);
+char		*ft_get_env_var(char **env, char *str);
+int			ft_cd_standard_dir(char *dir);
+int			ft_cd_env_var(char **env, char *str);
+void		ft_change_old_pwd(t_mini *mini, char *prev_dir);
 
-//		BUILTINS UTILS
+//			ECHO
 
-int		ft_search_c(char *str, char c);
-int		*ft_add_used(int *prev_used, int new_used);
-int		ft_check_list(int *list, int n);
+int			ft_echo(t_exec *exec, char *dir);
+int			ft_echo_args(char *arg);
+void		ft_echo_print(int f, int i, t_exec *exec, char *dir);
 
-//		SOLO FTS
+//			ENV
 
-int		ft_preprocess_solo(t_mini *mini);
-pid_t	ft_exec_solo(char **env, t_exec *exec);
-t_exec	*ft_init_exec(t_tokens *token, char **env);
-void	ft_in_out_type(t_tokens *token, t_exec *exec);
+int			ft_env(char **env, char **cmd_mtx);
+char		**ft_env_compare(char **cmd_mtx, char *env);
+int			ft_env_args(char **cmd);
 
-//		PIPE FTS
+//			EXIT
 
-int		ft_preprocess_pipe(t_mini *mini);
-void	ft_exec_pipe(t_pipe *pipes, t_mini *mini);
-t_pipe	*ft_pipe_init(int pipe_num);
-void	ft_in_out_pipe(t_exec *exec, t_tokens *token);
-void	ft_in_out_default(t_pipe *pipes, int pipe_num);
+int			ft_exit(t_mini *mini, char **cmd_mtx);
+int			ft_exit_more_args(char *arg, int flag);
+void		ft_change_shlvl(t_mini *mini, int flag);
 
-//		UTILS FTS
+//			EXPORT
 
-int		here_doc(char *limiter);
-void	ft_error_cmd(char *str);
-char	*ft_find_path(char **envp, char *cmd);
-char	*ft_no_path(char *cmd, char **pos_paths);
+int			ft_export(t_mini *mini, char **cmd_mtx);
+int			ft_export_more_args(t_mini *mini, char *cmd_mtx);
+char		*ft_orden(char **env, int env_len, char *str_exp, int *used);
+char		*ft_str_construct(int ref, char **env, char *str_exp);
+int			*ft_add_used(int *prev_used, int new_used);
+int			ft_check_ref(int *used, int i, int ref, char **env);
+int			ft_check_list(int *list, int n);
 
-//		FREE FTS
+//			PWD
 
-void	ft_free_pipes(t_pipe *pipes, int pipe_n);
-void	ft_free_exec(t_exec *exec);
+int			ft_pwd(char **cmd_mtx);
+
+//			UNSET
+
+int			ft_unset(t_mini *mini, char **cmd_mtx);
+int			ft_env_rm(t_mini *mini, char *str);
+int			ft_env_delete(t_mini *mini, int erase);
+
+//					FREE
+
+void		ft_free_pipes(t_pipes *pipes);
+void		ft_free_exec(t_mini *mini, t_exec *exec);
+
+//					EXECUTE
+
+//			PIPE
+
+int			ft_preprocess_pipe(t_mini *mini);
+int			*ft_exec_two(t_mini *mini, t_tokens *tkn, int *in);
+int			ft_pipe_exec(t_mini *mini, t_pipes *pipes, int *fd);
+t_pipes		*ft_config_pipe(t_tokens *tkn, t_mini *mini, int in);
+t_tokens	*ft_return_pipe(t_tokens *tkn);
+
+//			SOLO
+
+int			ft_preprocess_solo(t_mini *mini);
+
+//			EXEC-UTILS
+
+t_exec		*ft_add_cmd(t_tokens *tkn, t_mini *mini, int in);
+t_exec		*ft_init_exec(t_tokens *token, char **env, int in, int out);
+int			ft_exec_type(t_mini *mini, t_exec *exec, int in, int out);
+void		ft_exec_solo(char **env, t_exec *exec);
+int			ft_is_minishell(t_mini *mini, t_exec *exec);
+
+void		ft_waiting(int n, int *fd);
+char		*ft_join_n(char *ret, char *add, char *s_add);
+int			ft_error_cmd(t_mini *mini, char *str, int in, int out);
+char		*ft_get_shlvl(char **env, int flag);
+
+int			ft_builtin_check(t_exec *exec, t_mini *mini);
+int			ft_no_cmd(t_mini *mini);
+int			here_doc(char *limiter);
+
+//					FIND-PATH
+
+char		*ft_find_path(char **envp, char *cmd);
+char		*ft_no_path(char *cmd, char **pos_paths);
+
+//					REDIRECT
+
+int			check_out(t_mini *mini, t_tokens *tkn);
+int			check_in(t_mini *mini, t_tokens *tkn, int in);
 
 #endif
