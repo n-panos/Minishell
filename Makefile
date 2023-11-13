@@ -22,7 +22,7 @@ ERROR_PATH		=	$(addprefix parser/src/error/, $(ERROR))
 
 ## SIGNALS
 
-SIGNAL			=	signal_handler.c
+SIGNAL			=	signal_handler.c signal_functions.c
 
 SIG_PATH		=	$(addprefix signal/, $(SIGNAL))
 

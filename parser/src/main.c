@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:02 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/13 01:47:52 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/13 14:51:32 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static void	check_argv(int argc, char **argv, char **envp, char ***env)
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_mini		mini;
-	int			exit_status;
+	t_mini			mini;
+	int				exit_status;
 
 	atexit(leaks);
 	mini.tools = malloc(sizeof(t_parser));

@@ -6,17 +6,18 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:19:15 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/13 14:34:22 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/13 16:59:40 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parser/includes/minishell.h"
 
+
+
 void	handler_iterative(int sa)
 {
 	if (sa == SIGINT)
 	{
-		/*TODO eliminar ^C*/
 		write(1, "\n", 1);
 		rl_replace_line("", 0);
 		rl_on_new_line();
@@ -26,22 +27,33 @@ void	handler_iterative(int sa)
 
 void	handler_heredoc(int sa)
 {
-	char	eof;
-
-	eof = EOF;
 	if (sa == SIGINT)
+		write(STDOUT_FILENO, "\n", 1);
+}
+
+void	handler_process(int sa)
+{
+	int		kill_result;
+	pid_t	pid;
+
+	pid = getpid();
+	kill_result = kill(pid, sa);
+	if (kill_result == EXIT_SUCCESS)
 	{
-		/*TODO eliminar ^C*/
-		ft_putendl_fd(&eof, 1);
+		if (sa == SIGINT)
+		{
+			g_signal = 130;
+			write(STDOUT_FILENO, "\n", 1);
+		}
+		else if (sa == SIGQUIT)
+		{
+			g_signal = 131;
+			ft_putendl_fd("Quit: 3", STDOUT_FILENO);
+		}
+		exit(1);
 	}
 }
 
-void	create_signal(struct sigaction *signal, void (*funct)(int))
-{
-	signal->sa_handler = funct;
-	sigemptyset(&(*signal).sa_mask);
-	signal->sa_flags = 0;
-}
 
 /*
 *	@param state	- ITERATIVE
@@ -62,6 +74,11 @@ void	signal_handler(int state)
 		signal(SIGQUIT, SIG_IGN);
 		create_signal(&sa, handler_heredoc);
 	}
+	if (state == PROCESS)
+	{
+		create_signal(&sa, handler_process);
+	}
+	show_ctl(0);
 	if (sigaction(SIGINT, &sa, NULL) == -1)
 	{
 		perror("Error handing signal");

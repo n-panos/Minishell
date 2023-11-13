@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:16:49 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/13 14:38:53 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/13 16:23:54 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,15 @@ int	here_doc(char *limiter)
 	if (pipe(fd) == -1)
 		return (-1);
 	signal_handler(HERE_DOC);
-	line = get_next_line(0);
-	while (line)
+	while (1)
 	{
-		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
+		write(STDOUT_FILENO, "> ", 2);
+		line = get_next_line(0);
+		if (line == NULL || (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0
+				&& ft_strlen(limiter) == ft_strlen(line) - 1))
 			break ;
 		write(fd[1], line, ft_strlen(line));
 		free(line);
-		line = get_next_line(0);
 	}
 	signal_handler(ITERATIVE);
 	free(line);

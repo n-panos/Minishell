@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/13 01:51:02 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/13 16:29:26 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,4 +118,6 @@ void		print_lst_doble(t_tokens *lst);
 
 /* SIGNALS */
 void		signal_handler(int state);
+void		show_ctl(int sig);
+void		create_signal(struct sigaction *signal, void (*funct)(int));
 #endif
