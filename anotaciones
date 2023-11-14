@@ -4,11 +4,10 @@ Erick
 	- Hay que añadir el uso de señales en el heredoc y en cada proceso hijo.
 	
 Nacho
-	- He tenido que volver a cambiar la funcion de buscar el path por norminette, se iba a 30 lineas
-		creo que sigue bien, pero me dices o lo cambias si le encuentras alguna cosa
+	- He tenido que volver a cambiar la funcion de buscar el path por norminette, se iba a 30 lineas creo que sigue bien, pero me dices o lo cambias si le encuentras alguna cosa
 	- en export.c, funcion ft_export, necesito usar la funcion de quitar espacios, preguntar a Erick.
 	Ej.: export var="  truc"
-	export test="  foo    bar  " Quitar espacios de inicio y final y dejar solo 1centre las 2 palabras.
+	export test="  foo    bar  " Quitar espacios de inicio y final y dejar solo 1 entre las 2 palabras.
 	-ver que se puede hacer con estos ejemplos:
 		(funciona con fix de Erick en parser) ej.:	ls><abc 	->	bash: syntax error near unexpected token `<'
 		(Fix cutre a falta de encontrar mejor logica) ej2.:	ls <> abc	->	only input redirection works, output redirection is ignored

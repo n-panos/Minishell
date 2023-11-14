@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:50:28 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/13 12:56:31 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/14 13:06:05 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_export(t_mini *mini, char **cmd_mtx)
 	if (!used)
 		return (-1);
 	used[0] = '\0';
-	str_exp = ft_strdup("");
+	str_exp = ft_strdup(" ");
 	str_exp = ft_orden(mini->env, 0, str_exp, used);
 	printf("%s", str_exp);
 	free(str_exp);
