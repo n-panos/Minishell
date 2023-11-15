@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:19:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/13 14:11:59 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/15 10:33:30 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,13 @@ int	ft_exit(t_mini *mini, char **cmd_mtx)
 		i++;
 	printf("exit\n");
 	mini->status = 0;
-	if (i == 1 && mini->real_shlvl == 1)
+	if (i == 1)
 		return (1);
 	if (i > 1)
 		mini->status = ft_exit_more_args(cmd_mtx[1], i);
 	if (mini->status == -2)
 	{
 		mini->status = 1;
-		return (0);
-	}
-	if (mini->real_shlvl > 1)
-	{
-		ft_change_shlvl(mini, -1);
-		mini->real_shlvl--;
 		return (0);
 	}
 	return (1);

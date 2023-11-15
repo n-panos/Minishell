@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:16:49 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/13 16:23:54 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/14 10:57:56 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,18 @@ int	here_doc(char *limiter)
 {
 	char	*line;
 	int		fd[2];
+	int		len;
 
 	if (pipe(fd) == -1)
 		return (-1);
 	signal_handler(HERE_DOC);
+	len = ft_strlen(limiter);
 	while (1)
 	{
 		write(STDOUT_FILENO, "> ", 2);
 		line = get_next_line(0);
-		if (line == NULL || (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0
-				&& ft_strlen(limiter) == ft_strlen(line) - 1))
+		if (line == NULL || (ft_strncmp(line, limiter, len) == 0 \
+		&& (size_t)len == ft_strlen(line)))
 			break ;
 		write(fd[1], line, ft_strlen(line));
 		free(line);

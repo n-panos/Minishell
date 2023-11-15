@@ -1,43 +1,61 @@
 NAME			=	minishell
 CC				=	gcc
-CFLAGS			=	-ggdb -Wall -Werror -Wextra
-READLINE		=	-I/System/Volumes/Data/Users/$(USER)/.brew/Cellar/readline/8.2.1/include -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
 RM 				=	rm -rf
 
-RD_ERICK		=	-I/usr/local/opt/readline/include -L/usr/local/opt/readline/lib -lreadline
+INCLUDES 		=	$(READLINE_INC)
+LIBRARIES		=	$(READLINE_LIB)
 
-LIBFT			= 	parser/src/libft/libft.a
+CFLAGS			=	-Wall -Werror -Wextra $(INCLUDES) $(MAKEDEPENDS)
+LDFLAGS 		= 	$(LIBRARIES)
+MAKEDEPENDS		=	-MMD
+DEBUG			=	-ggdb -g3
+SANITIZE		=	-fsanitize=address
+
+READLINE_LIB	=	-L /Users/$(USER)/.brew/opt/readline/lib -l readline
+READLINE_INC 	=	-I /Users/$(USER)/.brew/opt/readline/include/
+LIBFT			= 	-L parser/src/libft -l ft
 
 LIST			=	ft_add_back_token.c	ft_new_token.c ft_free_all_tokens.c
-
-MAIN			=	parser/src/main.c
-PARSER			=	loop.c list.c mini.c
-UTILS			=	input.c tokenizer_utils.c expander.c expander_utils.c inquote.c expander_utils2.c typed.c tokenizer.c free.c env_create.c
-ERROR			=	puterror.c
-
 LIST_PATH		=	$(addprefix parser/src/list/, $(LIST))
+SRCS			+=	$(LIST_PATH)
+
+MAIN			=	main.c
+MAIN_PATH		=	$(addprefix parser/src/, $(MAIN))
+SRCS			+=	$(MAIN_PATH)
+
+PARSER			=	loop.c list.c mini.c
 PARSER_PATH		=	$(addprefix parser/src/parser/, $(PARSER))
+SRCS			+=	$(PARSER_PATH)
+
+UTILS			=	input.c tokenizer_utils.c expander.c expander_utils.c inquote.c expander_utils2.c typed.c tokenizer.c free.c env_create.c
 UTILS_PATH		=	$(addprefix parser/src/utils/, $(UTILS))
+SRCS			+=	$(UTILS_PATH)
+
+ERROR			=	puterror.c
 ERROR_PATH		=	$(addprefix parser/src/error/, $(ERROR))
+SRCS			+=	$(ERROR_PATH)
 
 ## SIGNALS
 
 SIGNAL			=	signal_handler.c signal_functions.c
-
-SIG_PATH		=	$(addprefix signal/, $(SIGNAL))
+SIGNAL_PATH		=	$(addprefix signal/, $(SIGNAL))
+SRCS			+=	$(SIGNAL_PATH)
 
 ## EXECUTOR
 
 EXEC			=	exec.c exec_solo.c exec_pipe.c exec_utils.c find_path.c exec_free.c exec_utils_more.c
-BUILTINS		=	pwd.c echo.c env.c cd.c unset.c exit.c b_utils.c export.c export_utils.c
+EXEC_PATH		=	$(addprefix executor/exec/, $(EXEC))
+SRCS			+=	$(EXEC_PATH)
 
-EXECUTOR		=	$(addprefix executor/exec/, $(EXEC))
+BUILTINS		=	pwd.c echo.c env.c cd.c unset.c exit.c b_utils.c export.c export_utils.c
 BUILTINS_PATH	=	$(addprefix executor/exec/builtins/, $(BUILTINS))
+SRCS			+=	$(BUILTINS_PATH)
 
 ## REDIRECT
 
 REDIRECT		=	redirect.c
-REDI_PATH		=	$(addprefix redirect/, $(REDIRECT))
+REDIRECT_PATH	=	$(addprefix redirect/, $(REDIRECT))
+SRCS			+=	$(REDIRECT_PATH)
 
 # COLOUR DEFINITION #
 RED     := \033[0;31m
@@ -46,7 +64,8 @@ GREEN   := \033[1;32m
 WHITE   := \033[0;37m
 RESET   := \033[0m
 
-OBJS		=	$(MAIN:.c=.o) $(PARSER_PATH:.c=.o) $(UTILS_PATH:.c=.o) $(ERROR_PATH:.c=.o) $(LIST_PATH:.c=.o) $(EXECUTOR:.c=.o) $(BUILTINS_PATH:.c=.o) $(SIG_PATH:.c=.o) $(REDI_PATH:.c=.o)
+OBJS 			=	$(SRCS:.c=.o)
+DEPS			=	$(SRCS:.c=.d)
 
 all: $(NAME)
 
@@ -54,20 +73,33 @@ all: $(NAME)
 # 	@$(CC) $(CFLAGS) -c $< -o $@ 
 
 .c.o:		%.o : %.c
-					@${CC} ${CFLAGS} -c $< -o $(<:.c=.o)
+	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 $(NAME): $(OBJS) $(LIBFT)
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(READLINE) $(LIBFT)
-	@echo "${GREEN}<---> Minishell Compiled! ⌐(ಠ۾ಠ)¬ <--->${RESET}"
+	@$(CC) $(LDFLAGS) $^ -o $@
+	@echo "$(GREEN)<---> Minishell Compiled! ⌐(ಠ۾ಠ)¬ <--->$(RESET)"
 
 $(LIBFT):
 	@make bonus --directory parser/src/libft
 
-erick: $(OBJS) $(LIBFT)
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(RD_ERICK) $(LIBFT)
+print:
+	echo $(OBJS)
+	echo $(SRCS)
+
+debug: CFLAGS 			+= 	$(DEBUG) $(SANITIZE)
+debug: LDFLAGS			+=	$(SANITIZE)
+debug: re
+
+erick: READLINE_LIB		=	-L/usr/local/opt/readline/lib -lreadline
+erick: READLINE_INC		=	-I/usr/local/opt/readline/include/
+erick: all
+
+nacho: READLINE_LIB		=	-L/usr/local/opt/readline/lib -lreadline
+nacho: READLINE_INC		=	-I/usr/local/opt/readline/include/
+nacho: debug
 
 clean:
-	@$(RM) $(OBJS)
+	@$(RM) $(OBJS) $(DEPS)
 	@make clean --directory parser/src/libft
 
 fclean: clean
@@ -76,4 +108,7 @@ fclean: clean
 
 re: fclean all
 
+-include		$(DEPS)
+
+.SILENT:	print
 .PHONY: re fclean clean

@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:37:50 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/13 13:56:18 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/15 10:46:32 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ int	ft_env_rm(t_mini *mini, char *str)
 	while (mini->env[i])
 	{
 		len = ft_search_c(mini->env[i], '=');
-		if (ft_strlen(str) == (size_t)len && \
-		ft_strncmp(mini->env[i], str, len) == 0)
+		if (ft_strlen(str) == (size_t)len && ft_strncmp(mini->env[i], str, len) == 0)
 			return (ft_env_delete(mini, i));
 		i++;
 	}
@@ -63,13 +62,9 @@ int	ft_env_delete(t_mini *mini, int erase)
 	aux = ft_strdup("");
 	while (mini->env[i])
 	{
-		if (i == erase)
-			i++;
-		else
-		{
+		if (i != erase)
 			aux = ft_join_n(aux, mini->env[i], "\n");
-			i++;
-		}
+		++i;
 	}
 	ft_mtx_free(mini->env);
 	mini->env = ft_split(aux, '\n');
