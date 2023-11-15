@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:16:49 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/15 16:13:06 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/15 17:10:44 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	here_doc(char *limiter)
 		write(STDOUT_FILENO, "> ", 2);
 		line = get_next_line(0);
 		if (line == NULL || (ft_strncmp(line, limiter, len) == 0 \
-		&& (size_t)len == ft_strlen(line)))
+		&& (size_t)(len + 1) == ft_strlen(line)))
 			break ;
 		write(fd[1], line, ft_strlen(line));
 		free(line);

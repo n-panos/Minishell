@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:02 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/15 16:14:43 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/15 17:20:33 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int argc, char **argv, char **envp)
 	t_mini			mini;
 	int				exit_status;
 
-	atexit(leaks);
+	//atexit(leaks);
 	g_signal = 0;
 	mini.tools = malloc(sizeof(t_parser));
 	if (mini.tools == NULL)
@@ -45,6 +45,7 @@ int	main(int argc, char **argv, char **envp)
 	signal_handler(ITERATIVE);
 	check_argv(argc, argv, envp, &mini.env);
 	ft_env_rm(&mini, "OLDPWD");
+	ft_change_env_var(&mini, PATH_VAR);
 	exit_status = minishell_loop(&mini);
 	free_all(&mini);
 	return (exit_status);
