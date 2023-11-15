@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:20:40 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/15 10:43:44 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/15 15:52:01 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,15 @@ char	*get_input(char	**input_ptr)
 	return (input);
 }
 
+void	check_status(t_mini *mini)
+{
+	if (g_signal != 0)
+	{
+		mini->status = g_signal;
+		g_signal = 0;
+	}
+}
+
 int	minishell_loop(t_mini *mini)
 {
 	t_parser	*tools;
@@ -84,6 +93,7 @@ int	minishell_loop(t_mini *mini)
 	exit_status = 0;
 	while (1)
 	{
+		check_status(mini);
 		if (get_input(&tools->input) == NULL)
 			exit(ft_parser_error("Error", STDERR_FILENO));
 		if (ft_check_input(tools->input) != 0)

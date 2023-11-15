@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:19:15 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/15 14:05:16 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/15 16:01:37 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ void	handler_iterative(int sa)
 void	handler_heredoc(int sa)
 {
 	if (sa == SIGINT)
+	{
 		write(STDOUT_FILENO, "\n", 1);
+		g_signal = 1;
+	}
 }
 
 void	handler_process(int sa)

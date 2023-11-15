@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/15 14:47:44 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/15 16:03:03 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	ft_preprocess_solo(t_mini *mini)
 	exec = ft_add_cmd(aux_tkn, mini, 0);
 	if (exec == NULL)
 		return (-1);
+	if (g_signal == 1)
+		return (EXIT_SUCCESS);
 	ret = ft_exec_type(mini, exec, 0, 0);
 	wait(&status);
 	signal_handler(ITERATIVE);
