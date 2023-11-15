@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:19:15 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/13 18:49:59 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/14 00:46:48 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,13 @@ void	handler_heredoc(int sa)
 		write(STDOUT_FILENO, "\n", 1);
 }
 
-void	ctr_c_process(int sa)
+void	handler_process(int sa)
 {
-	printf("a%d\n", sa);
+	if (sa == SIGINT)
+	{
+		signal(sa, SIG_DFL);
+		write(STDOUT_FILENO, "\n\n", 1);
+	}
 	g_signal = 130;
 }
 
@@ -50,26 +54,21 @@ void	signal_handler(int state)
 {
 	struct sigaction	sa;
 
+	if (state == ITERATIVE || state == HERE_DOC)
+		signal(SIGQUIT, SIG_IGN);
 	if (state == ITERATIVE)
-	{
-		signal(SIGQUIT, SIG_IGN);
 		create_signal(&sa, handler_iterative);
-	}
 	else if (state == HERE_DOC)
-	{
-		signal(SIGQUIT, SIG_IGN);
 		create_signal(&sa, handler_heredoc);
-	}
 	else if (state == PROCESS)
 	{
 		signal(SIGINT, SIG_DFL);
-		create_signal(&sa, ctr_c_process);
-		signal(SIGQUIT, SIG_DFL);
-		// return ;
+		write(STDOUT_FILENO, "\n\n", 2);
+		return ;
 	}
+		// create_signal(&sa, handler_process);
 	show_ctl(0);
-	if (sigaction(SIGINT, &sa, NULL) == -1
-		|| sigaction(SIGQUIT, &sa, NULL) == -1)
+	if (sigaction(SIGINT, &sa, NULL) == -1)
 	{
 		perror("Error handing signal");
 		exit(EXIT_FAILURE);

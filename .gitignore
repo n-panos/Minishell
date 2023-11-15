@@ -3,3 +3,5 @@ header/.DS_Store
 .vscode/
 *.o
 e_minishell
+minishell
+parser/src/libft/libft.a
