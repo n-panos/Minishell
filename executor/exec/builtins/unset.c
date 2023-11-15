@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:37:50 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/14 13:55:11 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/15 10:46:32 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int	ft_env_delete(t_mini *mini, int erase)
 		if (i != erase)
 			aux = ft_join_n(aux, mini->env[i], "\n");
 		++i;
-		printf("env[%i] = %p\n", i, mini->env[i]);
 	}
 	ft_mtx_free(mini->env);
 	mini->env = ft_split(aux, '\n');

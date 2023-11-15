@@ -3,7 +3,7 @@ CC				=	gcc
 RM 				=	rm -rf
 
 INCLUDES 		=	$(READLINE_INC)
-LIBRARIES		=	$(LIBFT) $(READLINE_LIB)
+LIBRARIES		=	$(READLINE_LIB)
 
 CFLAGS			=	-Wall -Werror -Wextra $(INCLUDES) $(MAKEDEPENDS)
 LDFLAGS 		= 	$(LIBRARIES)

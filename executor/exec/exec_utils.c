@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/13 18:39:05 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/15 10:51:18 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,10 @@ int	ft_exec_type(t_mini *mini, t_exec *exec, int in, int out)
 	i = ft_builtin_check(exec, mini);
 	if (i == 2)
 	{
-		if (ft_is_minishell(mini, exec) == 0)
-			return (0);
+		i = ft_is_minishell(mini, exec);
 		if (exec->path == NULL)
 			i = ft_error_cmd(mini, exec->cmd_mtx[0], in, out);
-		else if (exec->fd_in != -1 && exec->fd_out != -1)
+		else if (i == 1 && exec->fd_in != -1 && exec->fd_out != -1)
 		{
 			ft_exec_solo(mini->env, exec);
 			i = 0;
@@ -112,13 +111,20 @@ void	ft_exec_solo(char **env, t_exec *exec)
 
 int	ft_is_minishell(t_mini *mini, t_exec *exec)
 {
+	char	*aux;
+	char	*prev_shlvl;
+	int		status;
+
 	if (ft_strncmp(exec->cmd_mtx[0], "./minishell", 11) != 0  \
 	|| ft_strlen(exec->cmd_mtx[0]) != 11)
 		return (1);
-	if (exec->cmd_mtx[1])
-		return (ft_error_cmd(mini, exec->cmd_mtx[1], 0, 0));
+	prev_shlvl = ft_strjoin("SHLVL", ft_get_env_var(mini->env, "SHLVL"));
 	ft_change_shlvl(mini, 1);
-	ft_free_exec(mini, exec);
-	mini->real_shlvl++;
+	aux = ft_get_env_var(mini->env, "PWD");
+	exec->path = ft_strjoin(aux, "./minishell");
+	execve(exec->path, exec->cmd_mtx, mini->env);
+	wait(&status);
+	ft_change_env_var(mini, prev_shlvl);
+	free(prev_shlvl);
 	return (0);
 }

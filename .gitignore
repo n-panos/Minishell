@@ -2,4 +2,5 @@ header/.DS_Store
 .DS_Store 
 .vscode/
 *.o
+*.d
 e_minishell
