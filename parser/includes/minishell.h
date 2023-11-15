@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/15 14:06:02 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/15 15:35:28 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,4 +121,5 @@ void		signal_handler(int state);
 void		show_ctl(int sig);
 void		create_signal(struct sigaction *signal, void (*funct)(int));
 void		ctrl(int sa);
+void		signal_off(void);
 #endif

@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:28:40 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/15 14:05:04 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/15 15:35:21 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,10 @@ void	ctrl(int sa)
 		write(STDOUT_FILENO, "\n", 1);
 	else if (sa == SIGQUIT)
 		ft_putendl_fd("Quit: 3", STDOUT_FILENO);
+}
+
+void	signal_off(void)
+{
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 }
