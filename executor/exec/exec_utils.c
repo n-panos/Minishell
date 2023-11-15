@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/15 10:51:18 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/15 11:55:06 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	ft_exec_solo(char **env, t_exec *exec)
 
 int	ft_is_minishell(t_mini *mini, t_exec *exec)
 {
-	char	*aux;
+	char	str[FILENAME_MAX];
 	char	*prev_shlvl;
 	int		status;
 
@@ -120,9 +120,9 @@ int	ft_is_minishell(t_mini *mini, t_exec *exec)
 		return (1);
 	prev_shlvl = ft_strjoin("SHLVL", ft_get_env_var(mini->env, "SHLVL"));
 	ft_change_shlvl(mini, 1);
-	aux = ft_get_env_var(mini->env, "PWD");
-	exec->path = ft_strjoin(aux, "./minishell");
-	execve(exec->path, exec->cmd_mtx, mini->env);
+	getcwd(str, sizeof(str));
+	exec->path = ft_strjoin(str, "/minishell");
+	ft_exec_solo(mini->env, exec);
 	wait(&status);
 	ft_change_env_var(mini, prev_shlvl);
 	free(prev_shlvl);

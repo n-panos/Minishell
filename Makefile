@@ -93,7 +93,11 @@ debug: re
 erick: READLINE_LIB		=	-L/usr/local/opt/readline/lib -lreadline
 erick: READLINE_INC		=	-I/usr/local/opt/readline/include/
 erick: all
-	
+
+nacho: READLINE_LIB		=	-L/usr/local/opt/readline/lib -lreadline
+nacho: READLINE_INC		=	-I/usr/local/opt/readline/include/
+nacho: debug
+
 clean:
 	@$(RM) $(OBJS) $(DEPS)
 	@make clean --directory parser/src/libft
