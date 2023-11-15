@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 14:16:31 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/07 15:19:14 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/15 14:52:43 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	ft_tr_status(t_parser *tools, int index)
 	tr->str1 = ft_substr(tools->input, 0, index);
 	tr->str2 = ft_substr(tools->input, index + 2, ft_strlen(tools->input));
 	tr->var1 = ft_itoa(tools->status);
+	tr->v2 = 0;
 	if (!tr->str1 || !tr->str2 || !tr->var1)
 		return (ft_free_tr(tr), -1);
 	tr->tmp = ft_strjoin(tr->str1, tr->var1);

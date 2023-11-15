@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/15 13:15:02 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/15 14:46:43 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,13 @@ void	ft_exec_solo(char **env, t_exec *exec)
 {
 	pid_t	pidc;
 
-	// off_signals();
-	signal_handler(PROCESS);
 	pidc = fork();
 	if (pidc == -1)
 	{
 		printf("minishell: error while forking process\n");
 		exit(EXIT_FAILURE);
 	}
+	child_signal();
 	if (pidc == 0)
 	{
 		if (exec->fd_in > 0)

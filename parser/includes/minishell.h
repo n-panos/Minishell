@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/15 10:43:42 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/15 14:06:02 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,9 @@ int			ft_execute(t_mini *mini);
 void		print_lst_doble(t_tokens *lst);
 
 /* SIGNALS */
-void		off_signals(void);
+void		child_signal(void);
 void		signal_handler(int state);
 void		show_ctl(int sig);
 void		create_signal(struct sigaction *signal, void (*funct)(int));
+void		ctrl(int sa);
 #endif

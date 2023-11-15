@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_more.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:09:25 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/13 13:44:20 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/15 14:47:41 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_waiting(int n, int *fd)
 		wait(&status);
 		n--;
 	}
-	//ft_check_signals();
+	signal_handler(ITERATIVE);
 }
 
 char	*ft_join_n(char *ret, char *add, char *s_add)

@@ -6,17 +6,11 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:19:15 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/14 00:46:48 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/15 14:05:16 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parser/includes/minishell.h"
-
-void	off_signals(void)
-{
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
-}
 
 void	handler_iterative(int sa)
 {
@@ -38,37 +32,33 @@ void	handler_heredoc(int sa)
 void	handler_process(int sa)
 {
 	if (sa == SIGINT)
-	{
-		signal(sa, SIG_DFL);
-		write(STDOUT_FILENO, "\n\n", 1);
-	}
-	g_signal = 130;
+		write(STDOUT_FILENO, "\n", 1);
+	else if (sa == SIGQUIT)
+		ft_putendl_fd("Quit: 3", STDOUT_FILENO);
+}
+
+void	child_signal(void)
+{
+	signal(SIGINT, ctrl);
+	signal(SIGQUIT, ctrl);
 }
 
 /*
 *	@param state	- ITERATIVE
-*					- PROCESS
 *					- HEREDOC
+*					- PROCESS
 */
 void	signal_handler(int state)
 {
 	struct sigaction	sa;
 
-	if (state == ITERATIVE || state == HERE_DOC)
-		signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	if (state == ITERATIVE)
 		create_signal(&sa, handler_iterative);
 	else if (state == HERE_DOC)
 		create_signal(&sa, handler_heredoc);
-	else if (state == PROCESS)
-	{
-		signal(SIGINT, SIG_DFL);
-		write(STDOUT_FILENO, "\n\n", 2);
-		return ;
-	}
-		// create_signal(&sa, handler_process);
 	show_ctl(0);
-	if (sigaction(SIGINT, &sa, NULL) == -1)
+	if (state != PROCESS && sigaction(SIGINT, &sa, NULL) == -1)
 	{
 		perror("Error handing signal");
 		exit(EXIT_FAILURE);
