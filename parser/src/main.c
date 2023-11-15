@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:02 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/15 17:20:33 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/15 17:48:08 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 void	leaks(void)
 {
 	system("leaks -q minishell");
+}
+
+void	print_banner(void)
+{
+	printf("**************************\n* BANNER EN CONSTRUCCION *\n**************************\n");
 }
 
 static void	check_argv(int argc, char **argv, char **envp, char ***env)
@@ -42,6 +47,7 @@ int	main(int argc, char **argv, char **envp)
 	mini.tools = malloc(sizeof(t_parser));
 	if (mini.tools == NULL)
 		return (EXIT_FAILURE);
+	print_banner();
 	signal_handler(ITERATIVE);
 	check_argv(argc, argv, envp, &mini.env);
 	ft_env_rm(&mini, "OLDPWD");
