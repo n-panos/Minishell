@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/15 15:35:45 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/15 16:17:58 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,21 @@ int	ft_exec_type(t_mini *mini, t_exec *exec, int in, int out)
 {
 	int	i;
 
-	i = ft_builtin_check(exec, mini);
-	if (i == 2)
+	i = 0;
+	if (g_signal != 1)
 	{
-		i = ft_is_minishell(mini, exec);
-		if (exec->path == NULL)
-			i = ft_error_cmd(mini, exec->cmd_mtx[0], in, out);
-		else if (i == 1 && exec->fd_in != -1 && exec->fd_out != -1)
+		i = ft_builtin_check(exec, mini);
+		if (i == 2)
 		{
-			child_signal();
-			ft_exec_solo(mini->env, exec);
-			i = 0;
+			i = ft_is_minishell(mini, exec);
+			if (exec->path == NULL)
+				i = ft_error_cmd(mini, exec->cmd_mtx[0], in, out);
+			else if (i == 1 && exec->fd_in != -1 && exec->fd_out != -1)
+			{
+				child_signal();
+				ft_exec_solo(mini->env, exec);
+				i = 0;
+			}
 		}
 	}
 	ft_free_exec(mini, exec);
