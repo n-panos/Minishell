@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/13 14:10:13 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/15 16:23:35 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef struct s_exec
 	char	**cmd_mtx;
 	int		fd_in;
 	int		fd_out;
-	int		ret;
 }	t_exec;
 
 typedef struct s_pipes
@@ -92,7 +91,7 @@ int			ft_env_delete(t_mini *mini, int erase);
 //					FREE
 
 void		ft_free_pipes(t_pipes *pipes);
-void		ft_free_exec(t_mini *mini, t_exec *exec);
+void		ft_free_exec(t_exec *exec);
 
 //					EXECUTE
 
@@ -116,7 +115,7 @@ int			ft_exec_type(t_mini *mini, t_exec *exec, int in, int out);
 void		ft_exec_solo(char **env, t_exec *exec);
 int			ft_is_minishell(t_mini *mini, t_exec *exec);
 
-void		ft_waiting(int n, int *fd);
+void		ft_waiting(t_mini *mini, int *fd);
 char		*ft_join_n(char *ret, char *add, char *s_add);
 int			ft_error_cmd(t_mini *mini, char *str, int in, int out);
 char		*ft_get_shlvl(char **env, int flag);

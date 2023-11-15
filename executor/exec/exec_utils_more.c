@@ -3,24 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_more.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:09:25 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/15 14:47:41 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/15 16:42:53 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/eminishell.h"
 
-void	ft_waiting(int n, int *fd)
+void	ft_waiting(t_mini *mini, int *fd)
 {
 	int	status;
+	int	n;
+	int	flag;
 
 	if (fd[0] > 1)
 		close(fd[0]);
 	free(fd);
+	n = mini->cmd_n;
+	flag = 0;
+	if (mini->status == 0)
+		flag = 1;
 	while (n > 0)
 	{
+		if (flag == 1)
+			mini->status = status % 255;
 		wait(&status);
 		n--;
 	}

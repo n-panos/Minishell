@@ -38,7 +38,7 @@ int	ft_preprocess_pipe(t_mini *mini)
 		if (odd)
 			ft_exec_type(mini, odd, odd->fd_in, odd->fd_out);
 	}
-	ft_waiting(mini->cmd_n, aux);
+	ft_waiting(mini, aux);
 	return (0);
 }
 
@@ -101,8 +101,8 @@ t_pipes	*ft_config_pipe(t_tokens *tkn, t_mini *mini, int in)
 		pipes->fd = ft_calloc(2, sizeof(int *));
 		if (!pipes->fd || pipe(pipes->fd) == -1)
 		{
-			ft_free_exec(mini, pipes->cmd1);
-			ft_free_exec(mini, pipes->cmd2);
+			ft_free_exec(pipes->cmd1);
+			ft_free_exec(pipes->cmd2);
 			ft_free_pipes(pipes);
 			return (NULL);
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/15 16:17:58 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/15 16:44:49 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	ft_exec_type(t_mini *mini, t_exec *exec, int in, int out)
 			}
 		}
 	}
-	ft_free_exec(mini, exec);
+	ft_free_exec(exec);
 	return (i);
 }
 
@@ -106,7 +106,7 @@ void	ft_exec_solo(char **env, t_exec *exec)
 			dup2(exec->fd_out, 1);
 			close(exec->fd_out);
 		}
-		exec->ret = execve(exec->path, exec->cmd_mtx, env);
+		execve(exec->path, exec->cmd_mtx, env);
 		printf("minishell: executing error\n");
 		exit(EXIT_FAILURE);
 	}
@@ -128,6 +128,7 @@ int	ft_is_minishell(t_mini *mini, t_exec *exec)
 	signal_off();
 	ft_exec_solo(mini->env, exec);
 	wait(&status);
+	mini->status = status % 255;
 	ft_change_env_var(mini, prev_shlvl);
 	free(prev_shlvl);
 	return (0);
