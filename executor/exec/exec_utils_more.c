@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_more.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:09:25 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/16 13:02:57 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/16 14:34:17 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*ft_join_n(char *ret, char *add, char *s_add)
 
 int	ft_error_cmd(t_mini *mini, char *str, int in, int out)
 {
-	if (in == -1 || out == -1)
+	if (mini->flag_path == -1 || in == -1 || out == -1)
 	{
 		mini->status = 1;
 		printf("minishell: %s: No such file or directory\n", str);

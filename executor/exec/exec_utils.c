@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/16 13:17:50 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/16 14:15:46 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_exec	*ft_add_cmd(t_tokens *tkn, t_mini *mini, int in)
 	{
 		if (tkn->type == COMMAND)
 		{
-			ret = ft_init_exec(tkn, mini->env, in, out);
+			ret = ft_init_exec(tkn, mini, in, out);
 			if (ret == NULL)
 				mini->status = 12;
 			break ;
@@ -34,7 +34,7 @@ t_exec	*ft_add_cmd(t_tokens *tkn, t_mini *mini, int in)
 	return (ret);
 }
 
-t_exec	*ft_init_exec(t_tokens *token, char **env, int in, int out)
+t_exec	*ft_init_exec(t_tokens *token, t_mini *mini, int in, int out)
 {
 	t_tokens	*aux;
 	char		*aux_cmd;
@@ -45,7 +45,7 @@ t_exec	*ft_init_exec(t_tokens *token, char **env, int in, int out)
 		return (NULL);
 	exec->fd_in = in;
 	exec->fd_out = out;
-	exec->path = ft_find_path(env, token->value);
+	exec->path = ft_find_path(mini->env, token->value, mini->flag_path);
 	aux = token;
 	aux_cmd = ft_strdup("");
 	while (aux && (aux->type == COMMAND || aux->type == ARGUMENT))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:37:50 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/16 09:34:40 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/16 14:22:13 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ int	ft_unset(t_mini *mini, char **cmd_mtx)
 	i = 1;
 	while (cmd_mtx[i])
 	{
+		if (ft_strncmp(cmd_mtx[i], "PATH", 4) == 0 && \
+		ft_strlen(cmd_mtx[i]) == 4)
+			mini->flag_path = -1;
 		ft_env_rm(mini, cmd_mtx[i]);
 		i++;
 	}

@@ -2,7 +2,6 @@ Erick
 	
 Nacho
 	cat | cat | cat | ls
+ 
 
-	PATH FAKE, gestionarlo 
-	salida exit en shlvl +2
 	ls | exit

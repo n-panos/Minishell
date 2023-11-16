@@ -1,6 +1,6 @@
 #include "../header/eminishell.h"
 
-char	*ft_find_path(char **envp, char *cmd)
+char	*ft_find_path(char **envp, char *cmd, int flag)
 {
 	char	**pos_paths;
 	char	*path;
@@ -11,6 +11,10 @@ char	*ft_find_path(char **envp, char *cmd)
 	if (ft_strrchr(cmd, '/') == NULL)
 	{
 		aux = ft_get_env_var(envp, "PATH");
+		if (aux == NULL && flag == 0)
+			aux = PATH_VAR;
+		if (aux == NULL)
+			return (NULL);
 		pos_paths = ft_split(aux + 1, ':');
 		path = ft_no_path(cmd, pos_paths);
 		ft_mtx_free(pos_paths);

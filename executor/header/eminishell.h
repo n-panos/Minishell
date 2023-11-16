@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eminishell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/16 13:28:50 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/16 14:15:31 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int			ft_preprocess_solo(t_mini *mini);
 //			EXEC-UTILS
 
 t_exec		*ft_add_cmd(t_tokens *tkn, t_mini *mini, int in);
-t_exec		*ft_init_exec(t_tokens *token, char **env, int in, int out);
+t_exec		*ft_init_exec(t_tokens *token, t_mini *mini, int in, int out);
 int			ft_exec_type(t_mini *mini, t_exec *exec, int in, int out);
 void		ft_exec_solo(char **env, t_exec *exec);
 int			ft_is_minishell(t_mini *mini, t_exec *exec);
@@ -128,7 +128,7 @@ int			here_doc(char *limiter);
 
 //					**FIND-PATH**
 
-char		*ft_find_path(char **envp, char *cmd);
+char		*ft_find_path(char **envp, char *cmd, int flag);
 char		*ft_no_path(char *cmd, char **pos_paths);
 
 //					**REDIRECT**
