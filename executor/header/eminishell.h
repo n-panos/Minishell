@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/16 17:09:49 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/16 17:38:35 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void		ft_change_shlvl(t_mini *mini, int flag);
 
 int			ft_export(t_mini *mini, char **cmd_mtx);
 int			ft_export_more_args(t_mini *mini, char *cmd_mtx);
+int			ft_print_export(t_mini *mini);
+
 char		*ft_orden(char **env, int env_len, char *str_exp, int *used);
 char		*ft_str_construct(int ref, char **env, char *str_exp);
 int			*ft_add_used(int *prev_used, int new_used);
