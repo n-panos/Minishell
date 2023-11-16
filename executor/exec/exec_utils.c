@@ -6,57 +6,11 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/16 14:15:46 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/16 16:58:11 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/eminishell.h"
-
-t_exec	*ft_add_cmd(t_tokens *tkn, t_mini *mini, int in)
-{
-	t_exec	*ret;
-	int		out;
-
-	ret = NULL;
-	in = check_in(mini, tkn, in);
-	out = check_out(mini, tkn);
-	while (tkn)
-	{
-		if (tkn->type == COMMAND)
-		{
-			ret = ft_init_exec(tkn, mini, in, out);
-			if (ret == NULL)
-				mini->status = 12;
-			break ;
-		}
-		tkn = tkn->next;
-	}
-	return (ret);
-}
-
-t_exec	*ft_init_exec(t_tokens *token, t_mini *mini, int in, int out)
-{
-	t_tokens	*aux;
-	char		*aux_cmd;
-	t_exec		*exec;
-
-	exec = ft_calloc(1, sizeof(t_exec));
-	if (!exec)
-		return (NULL);
-	exec->fd_in = in;
-	exec->fd_out = out;
-	exec->path = ft_find_path(mini->env, token->value, mini->flag_path);
-	aux = token;
-	aux_cmd = ft_strdup("");
-	while (aux && (aux->type == COMMAND || aux->type == ARGUMENT))
-	{
-		aux_cmd = ft_join_n(aux_cmd, aux->value, " ");
-		aux = aux->next;
-	}
-	exec->cmd_mtx = ft_split(aux_cmd, ' ');
-	free(aux_cmd);
-	return (exec);
-}
 
 int	ft_exec_type(t_mini *mini, t_exec *exec, int in, int out)
 {
@@ -81,34 +35,6 @@ int	ft_exec_type(t_mini *mini, t_exec *exec, int in, int out)
 	}
 	ft_free_exec(exec);
 	return (i);
-}
-
-void	ft_exec_solo(char **env, t_exec *exec)
-{
-	pid_t	pidc;
-
-	pidc = fork();
-	if (pidc == -1)
-	{
-		printf("minishell: error while forking process\n");
-		exit(EXIT_FAILURE);
-	}
-	if (pidc == 0)
-	{
-		if (exec->fd_in > 0)
-		{
-			dup2(exec->fd_in, 0);
-			close(exec->fd_in);
-		}
-		if (exec->fd_out > 1)
-		{
-			dup2(exec->fd_out, 1);
-			close(exec->fd_out);
-		}
-		execve(exec->path, exec->cmd_mtx, env);
-		printf("minishell: executing error\n");
-		exit(EXIT_FAILURE);
-	}
 }
 
 int	ft_is_minishell(t_mini *mini, t_exec *exec)

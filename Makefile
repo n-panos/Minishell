@@ -43,7 +43,7 @@ SRCS			+=	$(SIGNAL_PATH)
 
 ## EXECUTOR
 
-EXEC			=	exec.c exec_solo.c exec_pipe.c exec_utils.c find_path.c exec_free.c exec_utils_more.c
+EXEC			=	exec.c exec_solo.c exec_pipe.c exec_utils.c find_path.c exec_free.c exec_utils_more.c struc_ex_inits.c
 EXEC_PATH		=	$(addprefix executor/exec/, $(EXEC))
 SRCS			+=	$(EXEC_PATH)
 

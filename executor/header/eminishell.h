@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/16 14:15:31 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/16 17:09:49 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,21 +99,20 @@ void		ft_free_exec(t_exec *exec);
 //			PIPE
 
 int			ft_preprocess_pipe(t_mini *mini);
+int			ft_is_exit(t_tokens *lst);
 int			*ft_exec_two(t_mini *mini, t_tokens *tkn, int *in);
 int			ft_pipe_exec(t_mini *mini, t_pipes *pipes, int *fd);
-t_pipes		*ft_config_pipe(t_tokens *tkn, t_mini *mini, int in);
 t_tokens	*ft_return_pipe(t_tokens *tkn);
 
 //			SOLO
 
 int			ft_preprocess_solo(t_mini *mini);
+void		ft_exec_solo(char **env, t_exec *exec);
+void		ft_child_process(char **env, t_exec *exec);
 
 //			EXEC-UTILS
 
-t_exec		*ft_add_cmd(t_tokens *tkn, t_mini *mini, int in);
-t_exec		*ft_init_exec(t_tokens *token, t_mini *mini, int in, int out);
 int			ft_exec_type(t_mini *mini, t_exec *exec, int in, int out);
-void		ft_exec_solo(char **env, t_exec *exec);
 int			ft_is_minishell(t_mini *mini, t_exec *exec);
 
 void		ft_waiting(t_mini *mini, int *fd);
@@ -126,6 +125,12 @@ int			ft_builtin_check(t_exec *exec, t_mini *mini);
 int			ft_no_cmd(t_mini *mini);
 int			here_doc(char *limiter);
 
+//			STRUCT-INITS
+
+t_pipes		*ft_config_pipe(t_tokens *tkn, t_mini *mini, int in);
+t_exec		*ft_add_cmd(t_tokens *tkn, t_mini *mini, int in);
+t_exec		*ft_init_exec(t_tokens *token, t_mini *mini, int in, int out);
+
 //					**FIND-PATH**
 
 char		*ft_find_path(char **envp, char *cmd, int flag);
@@ -135,5 +140,6 @@ char		*ft_no_path(char *cmd, char **pos_paths);
 
 int			check_out(t_mini *mini, t_tokens *tkn);
 int			check_in(t_mini *mini, t_tokens *tkn, int in);
+int			ft_closed_pipe(int *fd);
 
 #endif
