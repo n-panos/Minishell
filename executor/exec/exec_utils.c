@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/15 16:44:49 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/16 11:54:05 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void	ft_exec_solo(char **env, t_exec *exec)
 		printf("minishell: error while forking process\n");
 		exit(EXIT_FAILURE);
 	}
-	// child_signal();
 	if (pidc == 0)
 	{
 		if (exec->fd_in > 0)

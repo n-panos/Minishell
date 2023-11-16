@@ -1,11 +1,10 @@
 Erick
 	
 Nacho
-	-Preguntar por el path en "env -i"
+	-Preguntar por el path en "env -i" flag path existe
 	
 	-Banner de inicio de Minishell
 
-	- en export.c, funcion ft_export, necesito usar la funcion de quitar espacios, preguntar a Erick.
-	Ej.: export var="  truc"
-	export test="  foo    bar  " Quitar espacios de inicio y final y dejar solo 1 entre las 2 palabras.
-	
+	cat | cat | cat | ls
+
+	PATH FAKE, gestionarlo 
