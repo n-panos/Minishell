@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/16 12:03:30 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/16 12:47:20 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@
 # define PROMPT "\001\033[0;92m\002Minishell> \001\033[0m\002"
 # define DELIMITERS	"<>|"
 # include "parser.h"
+# define OFF "\033[0m"
+# define P "\033[1;95m"
+# define Y "\033[1;5;93m"
+# define R "\033[1;91m"
 
 /*
 *	0 -> Shell iteractiva
