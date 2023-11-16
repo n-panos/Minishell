@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eminishell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/15 16:23:35 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/16 13:28:50 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_pipes
 	int		*fd;
 }	t_pipes;
 
-//					BUILTINS
+//					**BUILTINS**
 
 //			UTILS
 
@@ -66,6 +66,7 @@ int			ft_env_args(char **cmd);
 
 int			ft_exit(t_mini *mini, char **cmd_mtx);
 int			ft_exit_more_args(char *arg, int flag);
+int			ft_status_return(char *arg);
 void		ft_change_shlvl(t_mini *mini, int flag);
 
 //			EXPORT
@@ -93,7 +94,7 @@ int			ft_env_delete(t_mini *mini, int erase);
 void		ft_free_pipes(t_pipes *pipes);
 void		ft_free_exec(t_exec *exec);
 
-//					EXECUTE
+//					**EXECUTE**
 
 //			PIPE
 
@@ -119,17 +120,18 @@ void		ft_waiting(t_mini *mini, int *fd);
 char		*ft_join_n(char *ret, char *add, char *s_add);
 int			ft_error_cmd(t_mini *mini, char *str, int in, int out);
 char		*ft_get_shlvl(char **env, int flag);
+void		ft_pipe_odd(t_mini *mini, t_tokens *atkn, int aux_fd);
 
 int			ft_builtin_check(t_exec *exec, t_mini *mini);
 int			ft_no_cmd(t_mini *mini);
 int			here_doc(char *limiter);
 
-//					FIND-PATH
+//					**FIND-PATH**
 
 char		*ft_find_path(char **envp, char *cmd);
 char		*ft_no_path(char *cmd, char **pos_paths);
 
-//					REDIRECT
+//					**REDIRECT**
 
 int			check_out(t_mini *mini, t_tokens *tkn);
 int			check_in(t_mini *mini, t_tokens *tkn, int in);

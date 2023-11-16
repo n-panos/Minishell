@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:50:28 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/14 13:06:05 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/16 09:34:07 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_export(t_mini *mini, char **cmd_mtx)
 	i = 1;
 	while (cmd_mtx[i])
 	{
-		//ft_funcion de quitar tabs y espacios(preguntar a EricK)
+		//ft_funcion de quitar tabs y espacios
 		if (i >= 1)
 			ft_export_more_args(mini, cmd_mtx[i]);
 		i++;

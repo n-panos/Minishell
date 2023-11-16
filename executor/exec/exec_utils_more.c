@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_more.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:09:25 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/15 16:42:53 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/16 13:02:57 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_waiting(t_mini *mini, int *fd)
 	while (n > 0)
 	{
 		if (flag == 1)
-			mini->status = status % 255;
+			mini->status = status;
 		wait(&status);
 		n--;
 	}
@@ -81,4 +81,13 @@ char	*ft_get_shlvl(char **env, int flag)
 		i++;
 	}
 	return (lvl);
+}
+
+void	ft_pipe_odd(t_mini *mini, t_tokens *atkn, int aux_fd)
+{
+	t_exec	*odd;
+
+	odd = ft_add_cmd(atkn, mini, aux_fd);
+	if (odd)
+		ft_exec_type(mini, odd, odd->fd_in, odd->fd_out);
 }

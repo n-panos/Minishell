@@ -16,7 +16,6 @@ int	ft_preprocess_pipe(t_mini *mini)
 {
 	int			i;
 	int			*aux;
-	t_exec		*odd;
 	t_tokens	*atkn;
 
 	i = 1;
@@ -33,11 +32,7 @@ int	ft_preprocess_pipe(t_mini *mini)
 		atkn = ft_return_pipe(atkn);
 	}
 	if (i == mini->cmd_n)
-	{
-		odd = ft_add_cmd(atkn, mini, aux[0]);
-		if (odd)
-			ft_exec_type(mini, odd, odd->fd_in, odd->fd_out);
-	}
+		ft_pipe_odd(mini, atkn, aux[0]);
 	ft_waiting(mini, aux);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:19:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/15 10:33:30 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/16 13:29:13 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,23 @@ int	ft_exit_more_args(char *arg, int flag)
 	}
 	if (flag == 2)
 	{
-		i = ft_atoi(arg);
-		if (i > 255)
-			i = i % 256;
-		while (i < 0)
-			i = i + 256;
+		i = ft_status_return(arg);
 		return (i);
 	}
 	printf("minishell: exit: too many arguments\n");
 	return (-2);
+}
+
+int	ft_status_return(char *arg)
+{
+	int	i;
+
+	i = ft_atoi(arg);
+	if (i > 255)
+		i = i % 256;
+	while (i < 0)
+		i = i + 256;
+	return (i);
 }
 
 void	ft_change_shlvl(t_mini *mini, int flag)

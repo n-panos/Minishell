@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/16 11:54:05 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/16 13:17:50 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ int	ft_is_minishell(t_mini *mini, t_exec *exec)
 	if (ft_strncmp(exec->cmd_mtx[0], "./minishell", 11) != 0  \
 	|| ft_strlen(exec->cmd_mtx[0]) != 11)
 		return (1);
+	//ft_change_env_var(mini, "SHLVL=1");	//para debuger solo
 	prev_shlvl = ft_strjoin("SHLVL", ft_get_env_var(mini->env, "SHLVL"));
 	ft_change_shlvl(mini, 1);
 	getcwd(str, sizeof(str));
@@ -127,7 +128,7 @@ int	ft_is_minishell(t_mini *mini, t_exec *exec)
 	signal_off();
 	ft_exec_solo(mini->env, exec);
 	wait(&status);
-	mini->status = status % 255;
+	mini->status = status;
 	ft_change_env_var(mini, prev_shlvl);
 	free(prev_shlvl);
 	return (0);
