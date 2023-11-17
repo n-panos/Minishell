@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:24 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/17 11:20:33 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/17 13:28:17 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	ft_free_exec(t_exec *exec)
 		close (exec->fd_in);
 	if (exec->fd_out > 1)
 		close (exec->fd_out);
-	dup2(STDOUT_FILENO, 1);
-	dup2(STDIN_FILENO, 0);
 	if (exec->path)
 		free(exec->path);
 	ft_mtx_free(exec->cmd_mtx);

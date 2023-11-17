@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:00:56 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/16 16:40:29 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/17 13:27:48 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,9 @@ int	check_out(t_mini *mini, t_tokens *tkn)
 			close(ret);
 		if (atkn->type == REDIRECT_OUTPUT)
 		{
+			ret = open(atkn->next->value, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 			if (atkn->prev->type == REDIRECT_INPUT)
-				close(open(atkn->next->value, O_WRONLY | O_CREAT | O_TRUNC, 0644));
-			else
-				ret = open(atkn->next->value, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+				close(ret);
 		}
 		else if (atkn->type == REDIRECT_APPEND)
 			ret = open(atkn->next->value, O_WRONLY | O_CREAT | O_APPEND, 0644);

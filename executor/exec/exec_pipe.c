@@ -106,6 +106,12 @@ int	ft_is_exit(t_tokens *lst)
 		if (tkn->type == COMMAND && ft_strncmp(tkn->value, "exit", 4) == 0 && \
 		ft_strlen(tkn->value) == 4)
 			return (1);
+		if (tkn->type == COMMAND && ft_strncmp(tkn->value, "bash", 4) == 0 && \
+		ft_strlen(tkn->value) == 4)
+			return (1);
+		if (tkn->type == COMMAND && ft_strncmp(tkn->value, "./minishell", 11) \
+		== 0 && ft_strlen(tkn->value) == 11)
+			return (1);
 		tkn = tkn->next;
 	}
 	return (0);
