@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eminishell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/16 17:38:35 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/17 11:43:02 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,16 +95,17 @@ int			ft_env_delete(t_mini *mini, int erase);
 
 void		ft_free_pipes(t_pipes *pipes);
 void		ft_free_exec(t_exec *exec);
+void		ft_close_pipe(int *fd);
 
 //					**EXECUTE**
 
 //			PIPE
 
 int			ft_preprocess_pipe(t_mini *mini);
-int			ft_is_exit(t_tokens *lst);
 int			*ft_exec_two(t_mini *mini, t_tokens *tkn, int *in);
 int			ft_pipe_exec(t_mini *mini, t_pipes *pipes, int *fd);
 t_tokens	*ft_return_pipe(t_tokens *tkn);
+int			ft_is_exit(t_tokens *lst);
 
 //			SOLO
 

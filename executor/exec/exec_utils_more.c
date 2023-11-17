@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_more.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:09:25 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/16 14:34:17 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/17 11:13:18 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ void	ft_waiting(t_mini *mini, int *fd)
 	int	n;
 	int	flag;
 
-	if (fd[0] > 1)
-		close(fd[0]);
-	free(fd);
+	ft_close_pipe(fd);
 	n = mini->cmd_n;
 	flag = 0;
 	if (mini->status == 0)

@@ -39,21 +39,6 @@ int	ft_preprocess_pipe(t_mini *mini)
 	return (0);
 }
 
-int	ft_is_exit(t_tokens *lst)
-{
-	t_tokens	*tkn;
-
-	tkn = lst;
-	while (tkn)
-	{
-		if (tkn->type == COMMAND && ft_strncmp(tkn->value, "exit", 4) == 0 && \
-		ft_strlen(tkn->value) == 4)
-			return (1);
-		tkn = tkn->next;
-	}
-	return (0);
-}
-
 int	*ft_exec_two(t_mini *mini, t_tokens *tkn, int *in)
 {
 	t_pipes		*pipes;
@@ -62,7 +47,7 @@ int	*ft_exec_two(t_mini *mini, t_tokens *tkn, int *in)
 
 	atkn = tkn;
 	pipes = ft_config_pipe(atkn, mini, in[0]);
-	free(in);
+	ft_close_pipe(in);
 	fd = ft_calloc(2, sizeof(int *));
 	if (!pipes || !fd)
 	{
@@ -109,4 +94,19 @@ t_tokens	*ft_return_pipe(t_tokens *tkn)
 		tkn = tkn->next;
 	}
 	return (tkn);
+}
+
+int	ft_is_exit(t_tokens *lst)
+{
+	t_tokens	*tkn;
+
+	tkn = lst;
+	while (tkn)
+	{
+		if (tkn->type == COMMAND && ft_strncmp(tkn->value, "exit", 4) == 0 && \
+		ft_strlen(tkn->value) == 4)
+			return (1);
+		tkn = tkn->next;
+	}
+	return (0);
 }

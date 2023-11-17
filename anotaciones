@@ -1,4 +1,8 @@
 Erick
+	añadir replace readline al salir de signals 
+	probar con top si luego mareas un poco la minishell se acaba rompiendo
+	creo que se puede arreglar reseteando el prompt del readline al volver de las señales
+
 	
 Nacho
 	cat | cat | cat | ls

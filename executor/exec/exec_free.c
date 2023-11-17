@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_free.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:24 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/15 16:23:19 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/17 11:20:33 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,23 @@ void	ft_free_pipes(t_pipes *pipes)
 
 void	ft_free_exec(t_exec *exec)
 {
-	if (exec->fd_in > 0)
+	if (exec->fd_in > 1)
 		close (exec->fd_in);
 	if (exec->fd_out > 1)
 		close (exec->fd_out);
+	dup2(STDOUT_FILENO, 1);
+	dup2(STDIN_FILENO, 0);
 	if (exec->path)
 		free(exec->path);
 	ft_mtx_free(exec->cmd_mtx);
 	free(exec);
+}
+
+void	ft_close_pipe(int *fd)
+{
+	if (fd[0] > 1)
+		close(fd[0]);
+	if (fd[1] > 1)
+		close(fd[1]);
+	free(fd);
 }
