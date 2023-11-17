@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 14:16:31 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/15 14:52:43 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/17 19:22:35 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int	ft_tr_status(t_parser *tools, int index)
 	tr->str2 = ft_substr(tools->input, index + 2, ft_strlen(tools->input));
 	tr->var1 = ft_itoa(tools->status);
 	tr->v2 = 0;
+	tr->var2 = NULL;
 	if (!tr->str1 || !tr->str2 || !tr->var1)
 		return (ft_free_tr(tr), -1);
 	tr->tmp = ft_strjoin(tr->str1, tr->var1);
@@ -92,6 +93,7 @@ int	ft_tr_env(t_parser *tools, int index)
 	if (tr == NULL)
 		return (-1);
 	sum = 0;
+	tr->tmp = NULL;
 	tr->var1 = ft_get_env(tools->input, index);
 	tr->var2 = get_env(tr->var1, tools, &tr->v2);
 	tr->str1 = ft_substr(tools->input, 0, index);
@@ -100,11 +102,7 @@ int	ft_tr_env(t_parser *tools, int index)
 	if (tr->var2 == NULL)
 		tr->result = ft_strjoin(tr->str1, tr->str2);
 	else
-	{
-		tr->tmp = ft_strjoin(tr->str1, tr->var2);
-		tr->result = ft_strjoin(tr->tmp, tr->str2);
-		sum = ft_strlen(tr->var2) - 1;
-	}
+		sum = ft_three_str(tr);
 	if (tr->result == NULL)
 		return (ft_free_tr(tr), -1);
 	free(tools->input);

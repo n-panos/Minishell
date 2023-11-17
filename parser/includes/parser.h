@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 09:25:43 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/11 18:28:16 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/17 19:23:48 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ char	*ft_createpid(char *str, int index);
 void	ft_free_tr(t_truncate *tr);
 int		ft_tr_status(t_parser *tools, int index);
 int		ft_tr_env(t_parser *tools, int index);
+int		ft_three_str(t_truncate *tr);
 /* expander.c */
 int		ft_getpid(t_parser *tools, int index);
 int		ft_expand_env(t_parser *tools, int index);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 17:45:59 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/09 11:59:44 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/17 19:22:18 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,10 @@ char	*get_env(char *env, t_parser *tools, int *v2)
 		if (ft_strncmp(envp[0], env, ft_strlen(env)) == 0
 			&& ft_strlen(env) == ft_strlen(envp[0]))
 		{
-			result = ft_strdup(envp[1]);
+			if (!envp[1])
+				return (ft_free_split(envp), NULL);
+			else
+				result = ft_strdup(envp[1]);
 			break ;
 		}
 		ft_free_split(envp);
@@ -86,4 +89,14 @@ char	*get_env(char *env, t_parser *tools, int *v2)
 	*v2 = 1;
 	ft_free_split(envp);
 	return (result);
+}
+
+int	ft_three_str(t_truncate *tr)
+{
+	int	sum;
+
+	tr->tmp = ft_strjoin(tr->str1, tr->var2);
+	tr->result = ft_strjoin(tr->tmp, tr->str2);
+	sum = ft_strlen(tr->var2) - 1;
+	return (sum);
 }

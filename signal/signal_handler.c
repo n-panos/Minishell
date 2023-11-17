@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:19:15 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/15 16:24:22 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/17 17:23:25 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,21 @@ void	handler_heredoc(int sa)
 void	handler_process(int sa)
 {
 	if (sa == SIGINT)
-		write(STDOUT_FILENO, "\n", 1);
+	{
+		// write(STDOUT_FILENO, "\n", 1);
+		// rl_replace_line("", 0);
+		write(1, "\n", 1);
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+	}
 	else if (sa == SIGQUIT)
+	{
+		rl_replace_line("", 0);
 		ft_putendl_fd("Quit: 3", STDOUT_FILENO);
+		rl_on_new_line();
+		rl_redisplay();
+	}
 }
 
 void	child_signal(void)

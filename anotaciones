@@ -6,4 +6,16 @@ Erick
 	
 Nacho
 	cat | cat | cat | ls
- 
+	ls | wc | wc | wc | wc
+	export hola=$hola
+	
+	En este caso, no deberia imprimir nada, la salida del ls no se guarda en ninguna archivo, y el error es "Permission denied"
+	Minishell> touch 1 2 3 4
+	Minishell> chmod 000 3
+	Minishell> ls >1 >2 >3 >4
+	minishell: 3: No such file or directory
+	1               Makefile        executor        signal
+	2               README.md       minishell
+	3               anotaciones     parser
+	4               archivoediaz--c redirect
+	Minishell> 
