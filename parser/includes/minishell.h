@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/18 16:48:39 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/18 16:57:49 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@
 # define GREEN "\033[0;92m"
 # define YELLOW "\033[0;93m"
 # define OFF "\033[0m"
-
 
 /*
 *	0 -> Shell iteractiva
