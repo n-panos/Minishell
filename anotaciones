@@ -1,13 +1,12 @@
 Erick
-	añadir replace readline al salir de signals 
-	probar con top si luego mareas un poco la minishell se acaba rompiendo
-	creo que se puede arreglar reseteando el prompt del readline al volver de las señales
+	HECHO	# añadir replace readline al salir de signals 
+			# probar con top si luego mareas un poco la minishell se acaba rompiendo
+			# creo que se puede arreglar reseteando el prompt del readline al volver de las señales
 
 	
 Nacho
 	cat | cat | cat | ls
 	ls | wc | wc | wc | wc
-	export hola=$hola
 	
 	En este caso, no deberia imprimir nada, la salida del ls no se guarda en ninguna archivo, y el error es "Permission denied"
 	Minishell> touch 1 2 3 4

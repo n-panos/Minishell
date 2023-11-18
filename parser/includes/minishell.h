@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/16 14:12:27 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/18 16:48:39 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@
 # define P "\033[1;95m"
 # define Y "\033[1;5;93m"
 # define R "\033[1;91m"
+# define GREEN "\033[0;92m"
+# define YELLOW "\033[0;93m"
+# define OFF "\033[0m"
+
 
 /*
 *	0 -> Shell iteractiva
@@ -101,7 +105,8 @@ int			ft_parser_error(char *err, char c);
 
 // PARSER
 /**/
-int			minishell_loop(t_mini *mini);
+char	*create_prompt(void);
+int			minishell_loop(t_mini *mini, t_parser *tools);
 /**/
 t_tokens	*create_list(t_parser *tools);
 /* mini.c */

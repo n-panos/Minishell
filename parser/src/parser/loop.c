@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:20:40 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/15 15:52:01 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/18 16:52:07 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,18 @@ void	parser(t_mini *mini)
 	ft_cmd_nmb(mini);
 }
 
-char	*get_input(char	**input_ptr)
+char	*get_input(char	**input_ptr, struct termios *original)
 {
 	char	*input;
 	char	*input_tmp;
+	char	*prompt;
 
+	tcsetattr(STDIN_FILENO, TCSANOW, original);
 	while (1)
 	{
-		input = readline(PROMPT);
+		prompt = create_prompt();
+		input = readline(prompt);
+		free(prompt);
 		if (input == NULL)
 		{
 			ft_putendl_fd("exit", 1);
@@ -83,18 +87,18 @@ void	check_status(t_mini *mini)
 	}
 }
 
-int	minishell_loop(t_mini *mini)
+int	minishell_loop(t_mini *mini, t_parser *tools)
 {
-	t_parser	*tools;
-	int			exit_status;
+	int				exit_status;
+	struct termios	original;
 
-	tools = mini->tools;
 	mini->status = 0;
 	exit_status = 0;
+	tcgetattr(STDIN_FILENO, &original);
 	while (1)
 	{
 		check_status(mini);
-		if (get_input(&tools->input) == NULL)
+		if (get_input(&tools->input, &original) == NULL)
 			exit(ft_parser_error("Error", STDERR_FILENO));
 		if (ft_check_input(tools->input) != 0)
 			continue ;

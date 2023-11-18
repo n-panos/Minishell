@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:02 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/16 12:53:58 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/18 16:54:12 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,28 @@ void	leaks(void)
 /******************************************************************************/
 void	print_banner(void)
 {
-	printf(P"╔════════════════════════════════════════════════════════════════════════╗\n");
-	printf(P"║                                                                        ║\n");
-	printf(P"║"Y"   ███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗       "OFF P"║\n");
-	printf(P"║"Y"   ████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║       "OFF P"║\n");
-	printf(P"║"Y"   ██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║       "OFF P"║\n");
-	printf(P"║"Y"   ██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║       "OFF P"║\n");
-	printf(P"║"Y"   ██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗  "OFF P"║\n");
-	printf(P"║"Y"   ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝  "OFF P"║\n");
-	printf(P"║"R"    by: ipanos-o                                                        "P"║\n");
-	printf(P"║"R"        ediaz--c                                                        "P"║\n");
-	printf(P"╚════════════════════════════════════════════════════════════════════════╝\n"OFF);
+	printf(P"╔═══════════════════════════════════");
+	printf("═════════════════════════════════════╗\n");
+	printf(P"║                                   ");
+	printf("                                     ║\n");
+	printf(P"║"Y"   ███╗   ███╗██╗███╗   ██╗██╗██");
+	printf("█████╗██╗  ██╗███████╗██╗     ██╗       "OFF P"║\n");
+	printf(P"║"Y"   ████╗ ████║██║████╗  ██║██║██");
+	printf("╔════╝██║  ██║██╔════╝██║     ██║       "OFF P"║\n");
+	printf(P"║"Y"   ██╔████╔██║██║██╔██╗ ██║██║██");
+	printf("█████╗███████║█████╗  ██║     ██║       "OFF P"║\n");
+	printf(P"║"Y"   ██║╚██╔╝██║██║██║╚██╗██║██║╚═");
+	printf("═══██║██╔══██║██╔══╝  ██║     ██║       "OFF P"║\n");
+	printf(P"║"Y"   ██║ ╚═╝ ██║██║██║ ╚████║██║██");
+	printf("█████║██║  ██║███████╗███████╗███████╗  "OFF P"║\n");
+	printf(P"║"Y"   ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚═");
+	printf("═════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝  "OFF P"║\n");
+	printf(P"║"R"    by: ipanos-o                ");
+	printf("                                        "P"║\n");
+	printf(P"║"R"        ediaz--c                ");
+	printf("                                        "P"║\n");
+	printf(P"╚═══════════════════════════════════");
+	printf("═════════════════════════════════════╝\n"OFF);
 }
 
 static void	check_argv(int argc, char **argv, char **envp, t_mini *mini)
@@ -66,12 +77,28 @@ static void	check_argv(int argc, char **argv, char **envp, t_mini *mini)
 	ft_env_rm(mini, "OLDPWD");
 }
 
+char	*create_prompt(void)
+{
+	char	pwd[1024];
+	char	*mini;
+	char	*tmp;
+	char	*prompt;
+
+	mini = "\001"GREEN"[Minishell]"YELLOW" in ";
+	if (getcwd(pwd, sizeof(pwd)) == NULL)
+		exit (1);
+	tmp = ft_strjoin(mini, (const char *)pwd);
+	prompt = ft_strjoin(tmp, " $\002 "OFF);
+	free(tmp);
+	return (prompt);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_mini			mini;
 	int				exit_status;
 
-	//atexit(leaks);
+	atexit(leaks);
 	g_signal = 0;
 	mini.tools = malloc(sizeof(t_parser));
 	if (mini.tools == NULL)
@@ -79,7 +106,7 @@ int	main(int argc, char **argv, char **envp)
 	print_banner();
 	signal_handler(ITERATIVE);
 	check_argv(argc, argv, envp, &mini);
-	exit_status = minishell_loop(&mini);
+	exit_status = minishell_loop(&mini, mini.tools);
 	free_all(&mini);
 	return (exit_status);
 }
