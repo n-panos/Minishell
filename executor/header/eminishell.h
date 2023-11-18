@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eminishell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/17 11:43:02 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/18 10:54:16 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,13 @@ void		ft_close_pipe(int *fd);
 int			ft_preprocess_pipe(t_mini *mini);
 int			*ft_exec_two(t_mini *mini, t_tokens *tkn, int *in);
 int			ft_pipe_exec(t_mini *mini, t_pipes *pipes, int *fd);
+
+//			PIPE-ALTERNATIVE TEST
+
+int			ft_preprocess_pipe_a(t_mini *mini);
+int			ft_forking_a(t_mini *mini, int in, int n);
+int			ft_child_proc_a(t_mini *mini, t_exec *exec, int *fd);
+void		ft_executing_cmds_a(t_exec *exec, int *fd, char **env);
 t_tokens	*ft_return_pipe(t_tokens *tkn);
 int			ft_is_exit(t_tokens *lst);
 
