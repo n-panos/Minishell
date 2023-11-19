@@ -1,12 +1,6 @@
 Erick
-	-Hay que revisar las señales en los procesos hijos del executor, he rehecho el pipe executor y cambiado un poco el solo executor tambien
-	lo miramos juntos porque funciona bastante diferente.
-
 	
 Nacho
-	cat | cat | cat | ls
-	ls | wc | wc | wc | wc
-	
 	(parece ARREGLADO)		En este caso, no deberia imprimir nada, la salida del ls no se guarda en ninguna archivo, y el error es "Permission denied"
 	Minishell> touch 1 2 3 4
 	Minishell> chmod 000 3
