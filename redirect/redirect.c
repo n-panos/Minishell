@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:00:56 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/19 12:47:04 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/19 14:08:54 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	check_out(t_mini *mini, t_tokens *tkn)
 		else if (atkn->type == REDIRECT_APPEND)
 			ret = open(atkn->next->value, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (ret == -1)
-			return (ft_error_cmd(mini, atkn->next->value, 0, -1));
+			return (ft_error_cmd(mini, atkn->next->value, 0, -1), ret);
 		atkn = atkn->next;
 	}
 	return (ret);

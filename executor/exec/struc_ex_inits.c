@@ -45,3 +45,13 @@ t_exec	*ft_init_exec(t_tokens *token, t_mini *mini, int in, int out)
 	free(aux_cmd);
 	return (exec);
 }
+
+void	ft_lost_pipe(t_exec *exec)
+{
+	int	fd[2];
+
+	pipe(fd);
+	close(fd[0]);
+	exec->fd_out = fd[1];
+	close(fd[1]);
+}

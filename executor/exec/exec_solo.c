@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/19 13:49:07 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/19 15:20:11 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	ft_solo_child(t_mini *mini, t_exec *exec)
 
 void	ft_executing_solo_cmds(char **env, t_exec *exec)
 {
+	if (exec->fd_out == -1 || exec->fd_in == -1)
+		exit(EXIT_FAILURE);
 	if (exec->fd_in > 0)
 	{
 		dup2(exec->fd_in, 0);
