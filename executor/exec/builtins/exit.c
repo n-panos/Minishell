@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:19:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/16 13:29:13 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/19 12:40:28 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,32 @@ int	ft_status_return(char *arg)
 	while (i < 0)
 		i = i + 256;
 	return (i);
+}
+
+char	*ft_get_shlvl(char **env, int flag)
+{
+	char	**aux;
+	char	*lvl;
+	int		i;
+
+	i = 0;
+	lvl = NULL;
+	while (env[i])
+	{
+		if (ft_strncmp(env[i], "SHLVL", 5) == 0)
+		{
+			aux = ft_split(env[i], '=');
+			if (ft_all_isdigit(aux[1]) == 1)
+			{
+				i = ft_atoi(aux[1]) + flag;
+				lvl = ft_itoa(i);
+			}
+			ft_mtx_free(aux);
+			break ;
+		}
+		i++;
+	}
+	return (lvl);
 }
 
 void	ft_change_shlvl(t_mini *mini, int flag)

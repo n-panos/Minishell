@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/18 10:54:16 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/19 12:47:21 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,6 @@ typedef struct s_exec
 	int		fd_in;
 	int		fd_out;
 }	t_exec;
-
-typedef struct s_pipes
-{
-	t_exec	*cmd1;
-	t_exec	*cmd2;
-	int		*fd;
-}	t_pipes;
 
 //					**BUILTINS**
 
@@ -67,6 +60,7 @@ int			ft_env_args(char **cmd);
 int			ft_exit(t_mini *mini, char **cmd_mtx);
 int			ft_exit_more_args(char *arg, int flag);
 int			ft_status_return(char *arg);
+char		*ft_get_shlvl(char **env, int flag);
 void		ft_change_shlvl(t_mini *mini, int flag);
 
 //			EXPORT
@@ -93,51 +87,41 @@ int			ft_env_delete(t_mini *mini, int erase);
 
 //					FREE
 
-void		ft_free_pipes(t_pipes *pipes);
 void		ft_free_exec(t_exec *exec);
-void		ft_close_pipe(int *fd);
 
 //					**EXECUTE**
+
+int			ft_no_cmd(t_mini *mini);
 
 //			PIPE
 
 int			ft_preprocess_pipe(t_mini *mini);
-int			*ft_exec_two(t_mini *mini, t_tokens *tkn, int *in);
-int			ft_pipe_exec(t_mini *mini, t_pipes *pipes, int *fd);
+int			ft_forking_pipe(t_mini *mini, int in, int n);
+void		ft_pipe_child(t_mini *mini, t_exec *exec, int *fd);
+void		ft_executing_pipe_cmds(t_exec *exec, int *fd, char **env);
 
-//			PIPE-ALTERNATIVE TEST
-
-int			ft_preprocess_pipe_a(t_mini *mini);
-int			ft_forking_a(t_mini *mini, int in, int n);
-int			ft_child_proc_a(t_mini *mini, t_exec *exec, int *fd);
-void		ft_executing_cmds_a(t_exec *exec, int *fd, char **env);
 t_tokens	*ft_return_pipe(t_tokens *tkn);
 int			ft_is_exit(t_tokens *lst);
 
 //			SOLO
 
 int			ft_preprocess_solo(t_mini *mini);
-void		ft_exec_solo(char **env, t_exec *exec);
-void		ft_child_process(char **env, t_exec *exec);
+int			ft_forking_solo(t_mini *mini);
+void		ft_solo_child(t_mini *mini, t_exec *exec);
+void		ft_executing_solo_cmds(char **env, t_exec *exec);
+int			ft_is_minishell(t_mini *mini, t_exec *exec);
 
 //			EXEC-UTILS
 
-int			ft_exec_type(t_mini *mini, t_exec *exec, int in, int out);
-int			ft_is_minishell(t_mini *mini, t_exec *exec);
-
-void		ft_waiting(t_mini *mini, int *fd);
+void		ft_waiting(t_mini *mini);
 char		*ft_join_n(char *ret, char *add, char *s_add);
 int			ft_error_cmd(t_mini *mini, char *str, int in, int out);
-char		*ft_get_shlvl(char **env, int flag);
-void		ft_pipe_odd(t_mini *mini, t_tokens *atkn, int aux_fd);
 
 int			ft_builtin_check(t_exec *exec, t_mini *mini);
-int			ft_no_cmd(t_mini *mini);
 int			here_doc(char *limiter);
 
 //			STRUCT-INITS
 
-t_pipes		*ft_config_pipe(t_tokens *tkn, t_mini *mini, int in);
 t_exec		*ft_add_cmd(t_tokens *tkn, t_mini *mini, int in);
 t_exec		*ft_init_exec(t_tokens *token, t_mini *mini, int in, int out);
 
@@ -150,6 +134,5 @@ char		*ft_no_path(char *cmd, char **pos_paths);
 
 int			check_out(t_mini *mini, t_tokens *tkn);
 int			check_in(t_mini *mini, t_tokens *tkn, int in);
-int			ft_closed_pipe(int *fd);
 
 #endif

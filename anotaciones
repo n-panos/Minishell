@@ -1,7 +1,6 @@
 Erick
-	HECHO	# añadir replace readline al salir de signals 
-			# probar con top si luego mareas un poco la minishell se acaba rompiendo
-			# creo que se puede arreglar reseteando el prompt del readline al volver de las señales
+	-Hay que revisar las señales en los procesos hijos del executor, he rehecho el pipe executor y cambiado un poco el solo executor tambien
+	lo miramos juntos porque funciona bastante diferente.
 
 	
 Nacho

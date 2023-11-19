@@ -6,56 +6,49 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/16 16:58:11 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/19 12:41:05 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/eminishell.h"
 
-int	ft_exec_type(t_mini *mini, t_exec *exec, int in, int out)
+void	ft_waiting(t_mini *mini)
 {
-	int	i;
+	int	status;
+	int	n;
+	int	flag;
 
-	i = 0;
-	if (g_signal != 1)
+	n = mini->cmd_n;
+	flag = 0;
+	if (mini->status == 0)
+		flag = 1;
+	while (n > 0)
 	{
-		i = ft_builtin_check(exec, mini);
-		if (i == 2)
-		{
-			i = ft_is_minishell(mini, exec);
-			if (exec->path == NULL)
-				i = ft_error_cmd(mini, exec->cmd_mtx[0], in, out);
-			else if (i == 1 && exec->fd_in != -1 && exec->fd_out != -1)
-			{
-				child_signal();
-				ft_exec_solo(mini->env, exec);
-				i = 0;
-			}
-		}
+		if (flag == 1)
+			mini->status = status;
+		wait(&status);
+		n--;
 	}
-	ft_free_exec(exec);
-	return (i);
 }
 
-int	ft_is_minishell(t_mini *mini, t_exec *exec)
+char	*ft_join_n(char *ret, char *add, char *s_add)
 {
-	char	str[FILENAME_MAX];
-	char	*prev_shlvl;
-	int		status;
+	ret = ft_strfjoin(ret, add);
+	ret = ft_strfjoin(ret, s_add);
+	return (ret);
+}
 
-	if (ft_strncmp(exec->cmd_mtx[0], "./minishell", 11) != 0  \
-	|| ft_strlen(exec->cmd_mtx[0]) != 11)
-		return (1);
-	//ft_change_env_var(mini, "SHLVL=1");	//para debuger solo
-	prev_shlvl = ft_strjoin("SHLVL", ft_get_env_var(mini->env, "SHLVL"));
-	ft_change_shlvl(mini, 1);
-	getcwd(str, sizeof(str));
-	exec->path = ft_strjoin(str, "/minishell");
-	signal_off();
-	ft_exec_solo(mini->env, exec);
-	wait(&status);
-	mini->status = status;
-	ft_change_env_var(mini, prev_shlvl);
-	free(prev_shlvl);
+int	ft_error_cmd(t_mini *mini, char *str, int in, int out)
+{
+	if (mini->flag_path == -1 || in == -1 || out == -1)
+	{
+		mini->status = 1;
+		printf("minishell: %s: No such file or directory\n", str);
+	}
+	else
+	{
+		mini->status = 127;
+		printf("minishell: %s: command not found\n", str);
+	}
 	return (0);
 }

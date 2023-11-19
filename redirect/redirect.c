@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:00:56 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/17 13:27:48 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/19 12:47:04 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,4 @@ int	check_in(t_mini *mini, t_tokens *tkn, int in)
 		atkn = atkn->next;
 	}
 	return (ret);
-}
-
-int	ft_closed_pipe(int	*fd)
-{
-	fd = ft_calloc(2, sizeof(int *));
-	if (!fd || pipe(fd) == -1)
-		return (-1);
-	close(fd[1]);
-	return (fd[0]);
 }

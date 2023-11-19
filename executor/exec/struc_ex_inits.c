@@ -1,37 +1,5 @@
 #include "../header/eminishell.h"
 
-t_pipes	*ft_config_pipe(t_tokens *tkn, t_mini *mini, int in)
-{
-	t_pipes		*pipes;
-	int			in_cmd2;
-
-	pipes = ft_calloc(1, sizeof(t_pipes));
-	if (!pipes)
-		return (NULL);
-	pipes->cmd1 = ft_add_cmd(tkn, mini, in);
-	tkn = ft_return_pipe(tkn);
-	in_cmd2 = 0;
-	if (pipes->cmd1->fd_out != -2)
-		in_cmd2 = -5;
-	pipes->cmd2 = ft_add_cmd(tkn, mini, in_cmd2);
-	if (pipes->cmd1 == NULL || pipes->cmd2 == NULL)
-		return (pipes);
-	if (pipes->cmd1->fd_out == -2 && pipes->cmd2->fd_in == 0)
-	{
-		pipes->fd = ft_calloc(2, sizeof(int *));
-		if (!pipes->fd || pipe(pipes->fd) == -1)
-		{
-			ft_free_exec(pipes->cmd1);
-			ft_free_exec(pipes->cmd2);
-			ft_free_pipes(pipes);
-			return (NULL);
-		}
-		pipes->cmd1->fd_out = pipes->fd[1];
-		pipes->cmd2->fd_in = pipes->fd[0];
-	}
-	return (pipes);
-}
-
 t_exec	*ft_add_cmd(t_tokens *tkn, t_mini *mini, int in)
 {
 	t_exec	*ret;
