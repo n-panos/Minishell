@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_functions.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:28:40 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/18 15:12:35 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/19 18:23:02 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ void	ctrl(int sa)
 	if (sa == SIGINT)
 		write(STDOUT_FILENO, "\n", 1);
 	else if (sa == SIGQUIT)
-	{
 		ft_putendl_fd("Quit: 3", STDOUT_FILENO);
-		rl_replace_line("", 0);
-	}
 	g_signal = 128 + sa;
 }
 

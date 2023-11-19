@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 11:49:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/19 15:21:22 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/19 17:45:14 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	ft_forking_pipe(t_mini *mini, int in, int n)
 		exec = ft_add_cmd(aux, mini, in);
 		pipe(fd);
 		pidc = fork();
+		child_signal();
 		if (pidc == -1 || !exec)
 			exit(EXIT_FAILURE);
 		if (pidc == 0)
@@ -65,7 +66,6 @@ void	ft_pipe_child(t_mini *mini, t_exec *exec, int *fd)
 				i = ft_error_cmd(mini, exec->cmd_mtx[0], exec->fd_in, exec->fd_out);
 			else if (exec->fd_in != -1 && exec->fd_out != -1)
 			{
-				child_signal();
 				ft_executing_pipe_cmds(exec, fd, mini->env);
 			}
 		}

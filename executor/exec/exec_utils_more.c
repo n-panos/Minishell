@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_more.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:09:25 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/19 12:42:38 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/19 18:16:07 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ int	here_doc(char *limiter)
 		return (-1);
 	signal_handler(HERE_DOC);
 	len = ft_strlen(limiter);
-	while (1)
+	while (1 && g_signal != 1)
 	{
-		write(STDOUT_FILENO, "> ", 2);
-		line = get_next_line(0);
+		write(STDIN_FILENO, "> ", 2);
+		line = get_next_line(STDIN_FILENO);
 		if (line == NULL || (ft_strncmp(line, limiter, len) == 0 \
 		&& (size_t)(len + 1) == ft_strlen(line)))
 			break ;
@@ -58,7 +58,8 @@ int	here_doc(char *limiter)
 		free(line);
 	}
 	signal_handler(ITERATIVE);
-	free(line);
+	if (g_signal != 1)
+		free(line);
 	close(fd[1]);
 	return (fd[0]);
 }

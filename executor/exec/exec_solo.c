@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_solo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/19 15:20:11 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/19 17:44:05 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	ft_forking_solo(t_mini *mini)
 	if (exec == NULL)
 		return (-1);
 	pidc = fork();
+	child_signal();
 	if (pidc == -1)
 		exit(EXIT_FAILURE);
 	if (pidc == 0)
@@ -59,7 +60,6 @@ void	ft_solo_child(t_mini *mini, t_exec *exec)
 				i = ft_error_cmd(mini, exec->cmd_mtx[0], exec->fd_in, exec->fd_out);
 			else if (i == 1 && exec->fd_in != -1 && exec->fd_out != -1)
 			{
-				child_signal();
 				ft_executing_solo_cmds(mini->env, exec);
 				i = 0;
 			}
