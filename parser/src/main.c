@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:02 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/18 16:54:12 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/19 13:09:54 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ char	*create_prompt(void)
 		exit (1);
 	tmp = ft_strjoin(mini, (const char *)pwd);
 	prompt = ft_strjoin(tmp, " $\002 "OFF);
+	if (prompt == NULL)
+		exit (1);
 	free(tmp);
 	return (prompt);
 }
