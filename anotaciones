@@ -11,3 +11,10 @@ Nacho
 	3               anotaciones     parser
 	4               archivoediaz--c redirect
 	Minishell> 
+
+
+	Arreglado	leak en ./minishell?
+	Arreglado 	./minishell funciona y devuelve el valor que toca con el exit 
+	Arregldo	exit
+	Arreglado	mensaje de no hay perms en el archivo, probar con access
+	cambiar el path del env _: con cada cmd

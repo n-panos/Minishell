@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/20 10:35:06 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/20 13:00:39 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_exec
 {
 	char	*path;
 	char	**cmd_mtx;
+	char	*no_in_out;
 	int		fd_in;
 	int		fd_out;
 }	t_exec;
@@ -95,8 +96,8 @@ int			ft_no_cmd(t_mini *mini);
 
 //			PIPE
 
-int			ft_preprocess_pipe(t_mini *mini);
-int			ft_forking_pipe(t_mini *mini, int in, int n);
+int			ft_preprocess_pipe(t_mini *mini, int in);
+int			ft_forking_pipe(t_mini *mini, t_exec *exec, int *fd, t_tokens *aux);
 int			ft_pipe_no_child(t_mini *mini, t_exec *exec, int *fd);
 void		ft_executing_pipe_cmds(t_exec *exec, int *fd, char **env);
 
@@ -106,7 +107,7 @@ int			ft_is_exit(t_tokens *lst);
 //			SOLO
 
 int			ft_preprocess_solo(t_mini *mini);
-int			ft_forking_solo(t_mini *mini);
+int			ft_forking_solo(t_mini *mini, t_exec *exec);
 int			ft_solo_no_child(t_mini *mini, t_exec *exec);
 void		ft_executing_solo_cmds(char **env, t_exec *exec);
 int			ft_is_minishell(t_mini *mini, t_exec *exec);
@@ -114,7 +115,7 @@ void		ft_minishell_exec(t_mini *mini, t_exec *exec);
 
 //			EXEC-UTILS
 
-void		ft_solo_wait(t_mini *mini, t_exec *exec);
+void		ft_solo_wait(t_mini *mini);
 void		ft_pipe_wait(t_mini *mini);
 int			ft_wait_status(int i);
 char		*ft_join_n(char *ret, char *add, char *s_add);
@@ -137,5 +138,6 @@ char		*ft_no_path(char *cmd, char **pos_paths);
 
 int			check_out(t_mini *mini, t_tokens *tkn);
 int			check_in(t_mini *mini, t_tokens *tkn, int in);
+int			ft_file_exists(t_mini *mini, char *file);
 
 #endif
