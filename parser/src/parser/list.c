@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 11:41:57 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/18 16:41:01 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/20 13:18:15 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,29 @@ static t_tokens	*ft_create(t_parser *tools)
 		if (value == NULL)
 			break ;
 		node = ft_new_token(value);
+		node->quote = current_list->quote;
 		ft_add_back_token(&list, node);
 		current_list = current_list->next;
 	}
 	if (current_list != NULL)
 		ft_free_all_tokens(&list, free);
 	return (list);
+}
+
+void	check_quotes(t_tokens *lst)
+{
+	t_tokens	*current;
+
+	current = lst;
+	while (current)
+	{
+		if (current->quote)
+		{
+			current->value = ft_del_quote(current->value, 0);
+			current->value = ft_del_quote(current->value, ft_strlen(current->value) - 1);
+		}
+		current = current->next;
+	}
 }
 
 t_tokens	*create_list(t_parser *tools)
@@ -109,5 +126,6 @@ t_tokens	*create_list(t_parser *tools)
 	if (lst == NULL)
 		return (NULL);
 	ft_add_type(lst);
+	check_quotes(lst);
 	return (lst);
 }
