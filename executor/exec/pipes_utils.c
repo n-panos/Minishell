@@ -22,6 +22,8 @@ int	ft_is_exit(t_tokens *lst)
 	tkn = lst;
 	while (tkn)
 	{
+		if (tkn->type == PIPE)
+			break ;
 		if (tkn->type == COMMAND && ft_strncmp(tkn->value, "exit", 4) == 0 && \
 		ft_strlen(tkn->value) == 4)
 			return (1);

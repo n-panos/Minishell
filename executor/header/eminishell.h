@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/19 20:02:13 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/20 10:35:06 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int			ft_env_args(char **cmd);
 
 //			EXIT
 
-int			ft_exit(t_mini *mini, char **cmd_mtx);
+int			ft_exit(t_mini *mini, t_exec *exec);
 int			ft_exit_more_args(char *arg, int flag);
 int			ft_status_return(char *arg);
 char		*ft_get_shlvl(char **env, int flag);
@@ -110,10 +110,13 @@ int			ft_forking_solo(t_mini *mini);
 int			ft_solo_no_child(t_mini *mini, t_exec *exec);
 void		ft_executing_solo_cmds(char **env, t_exec *exec);
 int			ft_is_minishell(t_mini *mini, t_exec *exec);
+void		ft_minishell_exec(t_mini *mini, t_exec *exec);
 
 //			EXEC-UTILS
 
-void		ft_waiting(t_mini *mini);
+void		ft_solo_wait(t_mini *mini, t_exec *exec);
+void		ft_pipe_wait(t_mini *mini);
+int			ft_wait_status(int i);
 char		*ft_join_n(char *ret, char *add, char *s_add);
 int			ft_error_cmd(t_mini *mini, char *str, int in, int out);
 

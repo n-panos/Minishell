@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 12:49:01 by nacho             #+#    #+#             */
-/*   Updated: 2023/11/13 13:55:08 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/20 09:34:51 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	ft_var_exists(char *env, char *add, int flag)
 	if (flag > 0)
 		return (2);
 	len = ft_search_c(env, '=');
-	if (ft_strncmp(env, add, len) == 0 && len == ft_search_c(add, '='))
+	if (add && ft_strncmp(env, add, len) == 0 && len == ft_search_c(add, '='))
 		return (1);
 	return (0);
 }

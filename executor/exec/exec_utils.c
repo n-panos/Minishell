@@ -6,13 +6,22 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/19 12:41:05 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/20 10:34:48 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/eminishell.h"
 
-void	ft_waiting(t_mini *mini)
+void	ft_solo_wait(t_mini *mini, t_exec *exec)
+{
+	int	status;
+
+	wait(&status);
+	mini->status = status;
+	ft_free_exec(exec);
+}
+
+void	ft_pipe_wait(t_mini *mini)
 {
 	int	status;
 	int	n;
@@ -29,6 +38,15 @@ void	ft_waiting(t_mini *mini)
 		wait(&status);
 		n--;
 	}
+}
+
+int	ft_wait_status(int i)
+{
+	if (i > 255)
+		i = i / 256;
+	while (i < 0)
+		i = i + 256;
+	return (i);
 }
 
 char	*ft_join_n(char *ret, char *add, char *s_add)

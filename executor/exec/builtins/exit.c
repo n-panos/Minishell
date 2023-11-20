@@ -6,33 +6,33 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:19:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/19 12:40:28 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/20 10:32:23 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/eminishell.h"
 
-int	ft_exit(t_mini *mini, char **cmd_mtx)
+int	ft_exit(t_mini *mini, t_exec *exec)
 {
 	int	i;
 
 	i = 1;
-	if (ft_strlen(cmd_mtx[0]) != 4)
+	if (ft_strlen(exec->cmd_mtx[0]) != 4)
 		return (2);
-	while (cmd_mtx[i])
+	while (exec->cmd_mtx[i])
 		i++;
 	printf("exit\n");
 	mini->status = 0;
 	if (i == 1)
-		return (1);
+		return (ft_free_exec(exec), 1);
 	if (i > 1)
-		mini->status = ft_exit_more_args(cmd_mtx[1], i);
+		mini->status = ft_exit_more_args(exec->cmd_mtx[1], i);
 	if (mini->status == -2)
 	{
 		mini->status = 1;
-		return (0);
+		return (ft_free_exec(exec), 0);
 	}
-	return (1);
+	return (ft_free_exec(exec), 1);
 }
 
 int	ft_exit_more_args(char *arg, int flag)
