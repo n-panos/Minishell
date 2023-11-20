@@ -6,40 +6,33 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:20:35 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/20 14:25:39 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/20 15:54:34 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/eminishell.h"
 
-int	ft_env(char **env, char **cmd_mtx)
+int	ft_env(t_exec *exec, char **env)
 {
 	int		i;
 	char	**aux_mtx;
 
 	i = 0;
-	if (ft_strlen(cmd_mtx[0]) != 3)
+	if (ft_strlen(exec->cmd_mtx[0]) != 3)
 		return (2);
-	if (ft_env_args(cmd_mtx) == 1)
+	if (ft_env_args(exec->cmd_mtx) == 1)
 		return (-1);
-	if (!cmd_mtx[1])
+	if (!exec->cmd_mtx[1])
 	{
 		return (0);
 	}
-	aux_mtx = ft_mtx_cpy(cmd_mtx);
+	aux_mtx = ft_mtx_cpy(exec->cmd_mtx);
 	while (env[i])
 	{
 		aux_mtx = ft_env_compare(aux_mtx, env[i]);
 		i++;
 	}
-	i = 1;
-	while (aux_mtx[i])
-	{
-		if (ft_strchr(aux_mtx[i], '=') != aux_mtx[i])
-			printf("%s\n", aux_mtx[i]);
-		i++;
-	}
-	ft_mtx_free(aux_mtx);
+	ft_env_print(aux_mtx, exec->fd_out);
 	return (0);
 }
 
@@ -87,4 +80,21 @@ char	**ft_env_compare(char **cmd_mtx, char *env)
 	if (ft_strchr(env, '='))
 		printf("%s\n", env);
 	return (cmd_mtx);
+}
+
+void	ft_env_print(char **mtx, int out_fd)
+{
+	int	i;
+
+	i = 1;
+	while (mtx[i])
+	{
+		if (ft_strchr(mtx[i], '=') != mtx[i])
+		{
+			ft_putstr_fd(mtx[i], out_fd);
+			ft_putchar_fd('\n', out_fd);
+		}
+		i++;
+	}
+	ft_mtx_free(mtx);
 }

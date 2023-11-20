@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/20 14:12:55 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/20 15:56:19 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,11 @@ int			ft_var_exists(char *env, char *add, int flag);
 int			ft_search_c(char *str, char c);
 
 //			CD
-int			ft_cd(char **cmd_mtx, t_mini *mini);
-char		*ft_get_env_var(char **env, char *str);
+int			ft_cd(t_exec *exec, t_mini *mini);
 int			ft_cd_standard_dir(char *dir);
+int			ft_cd_old(t_mini *mini, t_exec *exc);
 int			ft_cd_env_var(char **env, char *str);
+char		*ft_get_env_var(char **env, char *str);
 void		ft_change_old_pwd(t_mini *mini, char *prev_dir);
 
 //			ECHO
@@ -51,9 +52,10 @@ void		ft_echo_print(int f, int i, t_exec *exec, char *dir);
 
 //			ENV
 
-int			ft_env(char **env, char **cmd_mtx);
+int			ft_env(t_exec *exec, char **env);
 char		**ft_env_compare(char **cmd_mtx, char *env);
 int			ft_env_args(char **cmd);
+void		ft_env_print(char **mtx, int out_fd);
 
 //			EXIT
 
@@ -65,9 +67,9 @@ void		ft_change_shlvl(t_mini *mini, int flag);
 
 //			EXPORT
 
-int			ft_export(t_mini *mini, char **cmd_mtx);
+int			ft_export(t_mini *mini, t_exec *exec);
 int			ft_export_more_args(t_mini *mini, char *cmd_mtx);
-int			ft_print_export(t_mini *mini);
+int			ft_print_export(t_mini *mini, int out_fd);
 
 char		*ft_orden(char **env, int env_len, char *str_exp, int *used);
 char		*ft_str_construct(int ref, char **env, char *str_exp);
@@ -77,7 +79,7 @@ int			ft_check_list(int *list, int n);
 
 //			PWD
 
-int			ft_pwd(char **cmd_mtx);
+int			ft_pwd(t_exec *exec);
 
 //			UNSET
 

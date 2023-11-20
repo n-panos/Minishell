@@ -33,6 +33,10 @@ t_exec	*ft_init_exec(t_tokens *token, t_mini *mini, int in, int out)
 		return (NULL);
 	exec->fd_in = in;
 	exec->fd_out = out;
+	if (ft_builtin_path(token->value) == 0)
+		exec->path = ft_find_path(mini->env, token->value, mini->flag_path);
+	else
+		exec->path = NULL;
 	aux = token;
 	aux_cmd = ft_strdup("");
 	while (aux && (aux->type == COMMAND || aux->type == ARGUMENT))
@@ -42,10 +46,6 @@ t_exec	*ft_init_exec(t_tokens *token, t_mini *mini, int in, int out)
 	}
 	exec->cmd_mtx = ft_split(aux_cmd, ' ');
 	free(aux_cmd);
-	if (ft_builtin_path(exec->cmd_mtx[0]) == 0)
-		exec->path = ft_find_path(mini->env, token->value, mini->flag_path);
-	else
-		exec->path = NULL;
 	return (exec);
 }
 
