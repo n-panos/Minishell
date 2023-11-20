@@ -88,11 +88,11 @@ print:
 
 debug: CFLAGS 			+= 	$(DEBUG) $(SANITIZE)
 debug: LDFLAGS			+=	$(SANITIZE)
-debug: re
+debug: all
 
 erick: READLINE_LIB		=	-L/usr/local/opt/readline/lib -lreadline
 erick: READLINE_INC		=	-I/usr/local/opt/readline/include/
-erick: all
+erick: debug
 
 nacho: READLINE_LIB		=	-L/usr/local/opt/readline/lib -lreadline
 nacho: READLINE_INC		=	-I/usr/local/opt/readline/include/

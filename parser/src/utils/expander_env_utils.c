@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:46:09 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/20 13:07:38 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/20 17:21:27 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,21 @@
 char	*fisrt_arg(char *str, char **cmd)
 {
 	size_t	len;
+	int		i;
 
-	len = ft_strlen(str) + 2;
+	i = -1;
+	len = ft_strlen(str) + 3;
 	*cmd = malloc(sizeof(char) * len);
 	if (*cmd == NULL)
 		return (NULL);
 	(*cmd)[0] = '"';
-	ft_strlcpy(*cmd + 1, str, len);
-	(*cmd)[len - 1] = '"';
-	(*cmd)[len] = '\0';
+	while (str[++i])
+	{
+		(*cmd)[i + 1] = str[i];
+	}
+	
+	(*cmd)[i + 1] = '"';
+	(*cmd)[i + 2] = '\0';
 	return (*cmd);
 }
 
