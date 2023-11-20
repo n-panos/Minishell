@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:20:40 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/19 17:36:12 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/20 12:59:19 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	tokenizer(t_parser *tools)
 
 	while (1)
 	{
+		tools->quote = 0;
 		node = get_token(tools);
 		if (node == NULL)
 			break ;
@@ -25,6 +26,8 @@ void	tokenizer(t_parser *tools)
 			ft_lstdelone(node, free);
 		else
 			ft_lstadd_back(&tools->tokenlst, node);
+		if (tools->quote)
+			node->quote = 1;
 	}
 	free(tools->input);
 }

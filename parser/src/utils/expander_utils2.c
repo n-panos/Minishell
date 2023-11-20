@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 17:45:59 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/17 19:22:18 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/20 13:22:39 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,30 @@ char	*get_env(char *env, t_parser *tools, int *v2)
 	return (result);
 }
 
-int	ft_three_str(t_truncate *tr)
+int	ft_three_str(t_truncate *tr, t_parser *tools)
 {
-	int	sum;
+	int		sum;
+	char	**split;
 
+	split = ft_split(tr->var2, ' ');
+	if (split == NULL)
+		return (-1);
+	if (split[1] != NULL)
+	{
+		free(tr->var2);
+		tr->var2 = ft_expand_multi(split);
+		if (tr->var2 == NULL)
+			return (-1);
+		sum = ft_strlen(split[0]) + 1;
+		ft_free_split(split);
+		tools->quote = 1;
+	}
+	else
+	{
+		ft_free_split(split);
+		sum = ft_strlen(tr->var2) - 1;
+	}
 	tr->tmp = ft_strjoin(tr->str1, tr->var2);
 	tr->result = ft_strjoin(tr->tmp, tr->str2);
-	sum = ft_strlen(tr->var2) - 1;
 	return (sum);
 }

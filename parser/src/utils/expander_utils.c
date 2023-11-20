@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 14:16:31 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/17 19:22:35 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/20 13:05:00 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	ft_tr_env(t_parser *tools, int index)
 	if (tr->var2 == NULL)
 		tr->result = ft_strjoin(tr->str1, tr->str2);
 	else
-		sum = ft_three_str(tr);
+		sum = ft_three_str(tr, tools);
 	if (tr->result == NULL)
 		return (ft_free_tr(tr), -1);
 	free(tools->input);

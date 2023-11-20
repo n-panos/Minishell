@@ -27,7 +27,7 @@ PARSER			=	loop.c list.c mini.c
 PARSER_PATH		=	$(addprefix parser/src/parser/, $(PARSER))
 SRCS			+=	$(PARSER_PATH)
 
-UTILS			=	input.c tokenizer_utils.c expander.c expander_utils.c inquote.c expander_utils2.c typed.c tokenizer.c free.c env_create.c
+UTILS			=	input.c tokenizer_utils.c expander.c expander_utils.c inquote.c expander_utils2.c typed.c tokenizer.c free.c env_create.c expander_env_utils.c
 UTILS_PATH		=	$(addprefix parser/src/utils/, $(UTILS))
 SRCS			+=	$(UTILS_PATH)
 

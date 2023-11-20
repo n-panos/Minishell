@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 15:37:31 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/09 13:52:54 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/20 12:59:14 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 typedef struct s_list
 {
 	void			*content;
+	int				quote;
 	struct s_list	*next;
 }	t_list;
 

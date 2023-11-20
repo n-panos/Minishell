@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 09:25:43 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/17 19:23:48 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/20 13:17:31 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_parser
 	int					end;
 	int					status;
 	int					error;
+	int					quote;
 }	t_parser;
 /*
 *	PARSER
@@ -72,7 +73,7 @@ char	*ft_createpid(char *str, int index);
 void	ft_free_tr(t_truncate *tr);
 int		ft_tr_status(t_parser *tools, int index);
 int		ft_tr_env(t_parser *tools, int index);
-int		ft_three_str(t_truncate *tr);
+int		ft_three_str(t_truncate *tr, t_parser *tools);
 /* expander.c */
 int		ft_getpid(t_parser *tools, int index);
 int		ft_expand_env(t_parser *tools, int index);
@@ -80,10 +81,12 @@ int		ft_expander(t_parser *tools, int index);
 int		ft_getstatus(t_parser *tools, int index);
 /* inquote.c */
 int		ft_in_quote(t_parser *tools, int index);
+char	*ft_del_quote(char *str, int index);
 /* expander_utils2.c */
 int		ft_is_operator(t_parser *tools, int index);
 int		ft_not_expand(t_parser *tools, int index);
 char	*get_env(char *env, t_parser *tools, int *v2);
+char	*ft_expand_multi(char **split);
 /* tokenizer.c */
 t_list	*get_token(t_parser *tools);
 
