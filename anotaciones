@@ -1,6 +1,11 @@
 Erick
 	
 Nacho
+	-cat parser/includes/minishell.h | grep ");" $
+		exit status en bash es 2, pero creo que te lo tiene que dar el wait
+	
+	-
+	
 	(parece ARREGLADO)		En este caso, no deberia imprimir nada, la salida del ls no se guarda en ninguna archivo, y el error es "Permission denied"
 	Minishell> touch 1 2 3 4
 	Minishell> chmod 000 3
