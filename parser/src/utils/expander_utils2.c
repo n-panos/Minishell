@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 17:45:59 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/20 13:22:39 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/20 16:35:52 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	ft_three_str(t_truncate *tr, t_parser *tools)
 			return (-1);
 		sum = ft_strlen(split[0]) + 1;
 		ft_free_split(split);
-		tools->quote = 1;
+		(*tools).quote = 1;
 	}
 	else
 	{

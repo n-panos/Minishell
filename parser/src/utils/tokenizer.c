@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 18:09:23 by erick             #+#    #+#             */
-/*   Updated: 2023/11/07 15:13:02 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/20 16:38:58 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ t_list	*create_token(t_parser *tools, int index)
 		return (NULL);
 	}
 	node = ft_lstnew(substr);
+	(*node).quote = 0;
 	if (node == NULL)
 	{
 		tools->error = 1;
