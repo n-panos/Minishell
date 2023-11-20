@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/20 10:51:57 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/20 13:22:22 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 
 int	ft_preprocess_solo(t_mini *mini)
 {
-	int			ret;
+	int		ret;
+	t_exec	*exec;
 
-	ret = ft_forking_solo(mini);
+	ret = 0;
+	exec = ft_add_cmd(mini->tk_lst, mini, 0);
+	if (ft_strncmp(exec->cmd_mtx[0], "exit", 4) == 0)
+			return (ft_exit(mini, exec));
+	if (exec)
+		ret = ft_forking_solo(mini, exec);
 	signal_handler(ITERATIVE);
 	return (ret);
 }
 
-int	ft_forking_solo(t_mini *mini)
+int	ft_forking_solo(t_mini *mini, t_exec *exec)
 {
 	pid_t	pidc;
-	t_exec	*exec;
 
-	exec = ft_add_cmd(mini->tk_lst, mini, 0);
-	if (exec == NULL)
-		return (-1);
 	if (g_signal != 1)
 	{
-		if (ft_strncmp(exec->cmd_mtx[0], "exit", 4) == 0)
-			return (ft_exit(mini, exec));
 		if (ft_solo_no_child(mini, exec) != 2)
 			return (0);
 		pidc = fork();
@@ -42,7 +42,8 @@ int	ft_forking_solo(t_mini *mini)
 		if (pidc == 0)
 			ft_executing_solo_cmds(mini->env, exec);
 	}
-	ft_solo_wait(mini, exec);
+	ft_free_exec(exec);
+	ft_solo_wait(mini);
 	return (0);
 }
 
@@ -50,13 +51,13 @@ int	ft_solo_no_child(t_mini *mini, t_exec *exec)
 {
 	int	i;
 
+	if (exec->fd_in <= -1 || exec->fd_out <= -1)
+		return (ft_free_exec(exec), 0);
 	i = ft_builtin_check(exec, mini);
 	if (i == 2)
-		{
 			i = ft_is_minishell(mini, exec);
-			if (i == 2 && exec->path == NULL)
-				i = ft_error_cmd(mini, exec->cmd_mtx[0], exec->fd_in, exec->fd_out);
-		}
+	if (i == 2 && exec->path == NULL)
+		i = ft_error_cmd(mini, exec->cmd_mtx[0], exec->fd_in, exec->fd_out);
 	if (i != 2)
 		ft_free_exec(exec);
 	return (i);
@@ -64,8 +65,6 @@ int	ft_solo_no_child(t_mini *mini, t_exec *exec)
 
 void	ft_executing_solo_cmds(char **env, t_exec *exec)
 {
-	if (exec->fd_out == -1 || exec->fd_in == -1)
-		exit(EXIT_FAILURE);
 	if (exec->fd_in > 0)
 	{
 		dup2(exec->fd_in, 0);
