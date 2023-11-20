@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/20 13:00:39 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/20 14:12:55 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ typedef struct s_exec
 {
 	char	*path;
 	char	**cmd_mtx;
-	char	*no_in_out;
 	int		fd_in;
 	int		fd_out;
 }	t_exec;
@@ -88,7 +87,7 @@ int			ft_env_delete(t_mini *mini, int erase);
 
 //					FREE
 
-void		ft_free_exec(t_exec *exec);
+void		ft_free_exec(t_mini *mini, t_exec *exec);
 
 //					**EXECUTE**
 
@@ -128,6 +127,7 @@ int			here_doc(char *limiter);
 
 t_exec		*ft_add_cmd(t_tokens *tkn, t_mini *mini, int in);
 t_exec		*ft_init_exec(t_tokens *token, t_mini *mini, int in, int out);
+int			ft_builtin_path(char *cmd);
 
 //					**FIND-PATH**
 

@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 11:49:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/20 13:05:02 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/20 13:56:47 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_preprocess_pipe(t_mini *mini, int in)
 		close(fd[1]);
 		in = fd[0];
 		aux = ft_return_pipe(aux);
-		ft_free_exec(exec);
+		ft_free_exec(mini, exec);
 		--i;
 	}
 	close(in);
@@ -62,18 +62,18 @@ int	ft_forking_pipe(t_mini *mini, t_exec *exec, int *fd, t_tokens *aux)
 
 int	ft_pipe_no_child(t_mini *mini, t_exec *exec, int *fd)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	if (exec->fd_out == -2)
 		exec->fd_out = fd[1];
 	if (exec->fd_in <= -1 || exec->fd_out <= -1)
-		return (ft_free_exec(exec), 0);
+		return (ft_free_exec(mini, exec), 0);
 	i = ft_builtin_check(exec, mini);
 	if (i == 2 && exec->path == NULL)
 		i = ft_error_cmd(mini, exec->cmd_mtx[0], exec->fd_in, exec->fd_out);
 	if (i != 2)
-		ft_free_exec(exec);
+		ft_free_exec(mini, exec);
 	return (i);
 }
 

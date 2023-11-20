@@ -17,4 +17,5 @@ Nacho
 	Arreglado 	./minishell funciona y devuelve el valor que toca con el exit 
 	Arregldo	exit
 	Arreglado	mensaje de no hay perms en el archivo, probar con access
-	cambiar el path del env _: con cada cmd
+	Arreglado 	cambiar el path del env _: con cada cmd
+	output de los builtins.

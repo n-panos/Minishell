@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:20:35 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/13 13:48:50 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/20 14:25:39 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ int	ft_env(char **env, char **cmd_mtx)
 		return (2);
 	if (ft_env_args(cmd_mtx) == 1)
 		return (-1);
+	if (!cmd_mtx[1])
+	{
+		return (0);
+	}
 	aux_mtx = ft_mtx_cpy(cmd_mtx);
 	while (env[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:19:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/20 13:18:15 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/20 13:56:04 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ int	ft_exit(t_mini *mini, t_exec *exec)
 	printf("exit\n");
 	mini->status = 0;
 	if (i == 1)
-		return (ft_free_exec(exec), 1);
+		return (ft_free_exec(mini, exec), 1);
 	if (i > 1)
 		mini->status = ft_exit_more_args(exec->cmd_mtx[1], i);
 	if (mini->status == -2)
 	{
 		mini->status = 1;
-		return (ft_free_exec(exec), 0);
+		return (ft_free_exec(mini, exec), 0);
 	}
-	return (ft_free_exec(exec), 1);
+	return (ft_free_exec(mini, exec), 1);
 }
 
 int	ft_exit_more_args(char *arg, int flag)
