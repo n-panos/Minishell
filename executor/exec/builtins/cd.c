@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:18:48 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/20 15:58:44 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/21 12:45:09 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,26 @@ int	ft_cd(t_exec *exc, t_mini *mini)
 	if (ft_strlen(exc->cmd_mtx[0]) != 2)
 		return (2);
 	getcwd(str, sizeof(str));
-	if (!exc->cmd_mtx[1])
-		mini->status = ft_cd_env_var(mini->env, "HOME");
-	else if (ft_cd_old(mini, exc) == 0)
-		return (0);
-	else
-		mini->status = ft_cd_standard_dir(exc->cmd_mtx[1]);
-	if (mini->status == -1 && exc->cmd_mtx[1])
-		printf("minishell: cd: %s: No such file or directory\n", exc->cmd_mtx[1]);
+	ft_cd_select(mini, exc);
 	if (mini->status == -1)
 		mini->status = 1;
 	else
 		ft_change_old_pwd(mini, str);
+	return (0);
+}
+
+int	ft_cd_select(t_mini *mini, t_exec *exc)
+{
+	if (!exc->cmd_mtx[1])
+		mini->status = ft_cd_env_var(mini->env, "HOME", exc->fd_out);
+	else if (ft_strncmp(exc->cmd_mtx[1], "-", ft_strlen(exc->cmd_mtx[1])) == 0)
+		mini->status = ft_cd_env_var(mini->env, "OLDPWD", exc->fd_out);
+	else 
+	{
+		mini->status = ft_cd_standard_dir(exc->cmd_mtx[1]);
+		if (mini->status == -1)
+			printf("minishell: cd: %s: No such file or directory\n", exc->cmd_mtx[1]);
+	}
 	return (0);
 }
 
@@ -53,23 +61,7 @@ int	ft_cd_standard_dir(char *dir)
 	return (i);
 }
 
-int	ft_cd_old(t_mini *mini, t_exec *exc)
-{
-	if (ft_strncmp(exc->cmd_mtx[1], "-", ft_strlen(exc->cmd_mtx[1])) == 0)
-	{
-		mini->status = ft_cd_env_var(mini->env, "OLDPWD");
-		if (mini->status == 1)
-			return (0);
-		else
-		{
-			ft_putstr_fd((ft_get_env_var(mini->env, "OLDPWD") + 1), exc->fd_out);
-			ft_putchar_fd('\n', exc->fd_out);
-		}
-	}
-	return (1);
-}
-
-int	ft_cd_env_var(char **env, char *str)
+int	ft_cd_env_var(char **env, char *str, int out_fd)
 {
 	char	*dir;
 	int		i;
@@ -89,6 +81,8 @@ int	ft_cd_env_var(char **env, char *str)
 	i = chdir(dir);
 	if (i == -1)
 		printf("minishell: cd: %s: No such file or directory\n", dir);
+	else if (ft_strlen(str) == 6)
+		ft_env_print(dir, out_fd);
 	return (i);
 }
 

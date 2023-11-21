@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/21 10:43:08 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/21 12:45:30 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ int			ft_search_c(char *str, char c);
 
 //			CD
 int			ft_cd(t_exec *exec, t_mini *mini);
+int			ft_cd_select(t_mini *mini, t_exec *exc);
 int			ft_cd_standard_dir(char *dir);
-int			ft_cd_old(t_mini *mini, t_exec *exc);
-int			ft_cd_env_var(char **env, char *str);
+int			ft_cd_env_var(char **env, char *str, int out_fd);
 char		*ft_get_env_var(char **env, char *str);
 void		ft_change_old_pwd(t_mini *mini, char *prev_dir);
 
