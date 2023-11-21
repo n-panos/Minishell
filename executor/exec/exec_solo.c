@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/20 13:56:38 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/21 18:58:16 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	ft_forking_solo(t_mini *mini, t_exec *exec)
 			exit(EXIT_FAILURE);
 		if (pidc == 0)
 			ft_executing_solo_cmds(mini->env, exec);
+		mini->status = 0;
 	}
 	ft_free_exec(mini, exec);
 	ft_solo_wait(mini);

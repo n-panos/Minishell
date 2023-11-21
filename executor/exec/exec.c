@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:16:49 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/20 12:26:52 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/21 19:10:36 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	ft_execute(t_mini *mini)
 
 	ret = 0;
 	mini->status = 0;
+	mini->pipe_status = 0;
 	if (mini->cmd_n == 0)
 		ret = ft_no_cmd(mini);
 	if (mini->cmd_n == 1)

@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 11:49:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/21 13:50:53 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/21 19:24:04 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	ft_forking_pipe(t_mini *mini, t_exec *exec, int *fd, t_tokens *aux)
 				exit(EXIT_FAILURE);
 			if (pidc == 0)
 				ft_executing_pipe_cmds(exec, fd, mini->env);
+			mini->status = 0;
 		}
 	}
 	ft_free_exec(mini, exec);
@@ -72,6 +73,8 @@ int	ft_pipe_no_child(t_mini *mini, t_exec *exec, int *fd)
 	i = ft_builtin_check(exec, mini);
 	if (i == 2 && exec->path == NULL)
 		i = ft_error_cmd(mini, exec->cmd_mtx[0], exec->fd_in, exec->fd_out);
+	else
+		mini->status = 0;
 	if (i != 2)
 		ft_free_exec(mini, exec);
 	return (i);

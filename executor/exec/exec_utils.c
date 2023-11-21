@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/21 13:23:29 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/21 19:42:16 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	ft_pipe_wait(t_mini *mini)
 	while (n > 0)
 	{
 		wait(&status);
-		//mini->status = ft_wait_status(status);
+		//if (mini->pipe_status != mini->cmd_n && mini->status == 0)
+			mini->status = ft_wait_status(status);
 		--n;
 	}
 }
@@ -65,5 +66,6 @@ int	ft_error_cmd(t_mini *mini, char *str, int in, int out)
 		mini->status = 127;
 		printf("minishell: %s: command not found\n", str);
 	}
+	mini->pipe_status++;
 	return (0);
 }
