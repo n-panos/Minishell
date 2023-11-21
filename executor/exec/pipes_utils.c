@@ -15,7 +15,7 @@ t_tokens	*ft_return_pipe(t_tokens *tkn)
 	return (tkn);
 }
 
-int	ft_is_exit(t_tokens *lst)
+int	ft_is_exit(t_mini *mini, t_tokens *lst)
 {
 	t_tokens	*tkn;
 
@@ -26,13 +26,16 @@ int	ft_is_exit(t_tokens *lst)
 			break ;
 		if (tkn->type == COMMAND && ft_strncmp(tkn->value, "exit", 4) == 0 && \
 		ft_strlen(tkn->value) == 4)
-			return (1);
+			return (mini->status = 1, 1);
 		if (tkn->type == COMMAND && ft_strncmp(tkn->value, "bash", 4) == 0 && \
 		ft_strlen(tkn->value) == 4)
-			return (1);
+			return (mini->status = 1, 1);
 		if (tkn->type == COMMAND && ft_strncmp(tkn->value, "./minishell", 11) \
 		== 0 && ft_strlen(tkn->value) == 11)
-			return (1);
+			return (mini->status = 1, 1);
+		if (tkn->type == COMMAND && ft_strncmp(tkn->value, "export", 6) \
+		== 0 && ft_strlen(tkn->value) == 6)
+			return (mini->status = 1, 1);
 		tkn = tkn->next;
 	}
 	return (0);

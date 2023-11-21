@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/21 12:45:30 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/21 13:54:33 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int			ft_pipe_no_child(t_mini *mini, t_exec *exec, int *fd);
 void		ft_executing_pipe_cmds(t_exec *exec, int *fd, char **env);
 
 t_tokens	*ft_return_pipe(t_tokens *tkn);
-int			ft_is_exit(t_tokens *lst);
+int			ft_is_exit(t_mini *mini, t_tokens *lst);
 
 //			SOLO
 
