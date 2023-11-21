@@ -55,8 +55,6 @@ int	ft_builtin_path(char *cmd)
 		return (1);
 	if (ft_strncmp(cmd, "cd", 2) == 0 && ft_strlen(cmd) == 2)
 		return (1);
-	if (ft_strncmp(cmd, "env", 3) == 0 && ft_strlen(cmd) == 3)
-		return (1);
 	if (ft_strncmp(cmd, "exit", 4) == 0 && ft_strlen(cmd) == 4)
 		return (1);
 	if (ft_strncmp(cmd, "export", 6) == 0 && ft_strlen(cmd) == 6)

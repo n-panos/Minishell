@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/20 18:38:31 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/21 10:43:08 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void		ft_echo_print(int f, int i, t_exec *exec, char *dir);
 
 //			ENV
 
-int			ft_env(t_exec *exec, char **env);
+int			ft_env(t_mini *mini, t_exec *exec);
 char		**ft_env_compare(char **cmd_mtx, char *env, int out_fd);
-int			ft_env_args(char **cmd);
+int			ft_env_args(t_exec *exec, t_mini *mini);
 void		ft_env_print(char *str, int out_fd);
 
 //			EXIT

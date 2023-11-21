@@ -6,13 +6,13 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:20:35 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/20 18:43:46 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/21 10:42:36 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/eminishell.h"
 
-int	ft_env(t_exec *exec, char **env)
+int	ft_env(t_mini *mini, t_exec *exec)
 {
 	int		i;
 	char	**aux_mtx;
@@ -20,12 +20,12 @@ int	ft_env(t_exec *exec, char **env)
 	i = 0;
 	if (ft_strlen(exec->cmd_mtx[0]) != 3)
 		return (2);
-	if (ft_env_args(exec->cmd_mtx) == 1)
+	if (ft_env_args(exec, mini) == 1)
 		return (-1);
 	aux_mtx = ft_mtx_cpy(exec->cmd_mtx);
-	while (env[i])
+	while (mini->env[i])
 	{
-		aux_mtx = ft_env_compare(aux_mtx, env[i], exec->fd_out);
+		aux_mtx = ft_env_compare(aux_mtx, mini->env[i], exec->fd_out);
 		i++;
 	}
 	i = 1;
@@ -39,20 +39,24 @@ int	ft_env(t_exec *exec, char **env)
 	return (0);
 }
 
-int	ft_env_args(char **cmd)
+int	ft_env_args(t_exec *exec, t_mini *mini)
 {
 	int		i;
+	char	*aux;
 
 	i = 1;
-	while (cmd[i])
+	while (exec->cmd_mtx[i])
 	{
-		if (!ft_strchr(cmd[i], '='))
+		if (!ft_strchr(exec->cmd_mtx[i], '='))
 		{
-			printf("env: %s: No such file or directory\n", cmd[i]);
+			printf("env: %s: No such file or directory\n", exec->cmd_mtx[i]);
 			return (1);
 		}
 		i++;
 	}
+	aux = ft_strjoin("_=", exec->path);
+	ft_change_env_var(mini, aux);
+	free(aux);
 	return (0);
 }
 
