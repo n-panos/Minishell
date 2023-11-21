@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:37:50 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/20 15:47:21 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/21 13:03:34 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_env_rm(t_mini *mini, char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (ft_isalpha(str[i]) == 0)
+		if (ft_isalnum(str[i]) == 0)
 		{
 			printf("minishell: unset: `%s': not a valid identifier", str);
 			return (0);
