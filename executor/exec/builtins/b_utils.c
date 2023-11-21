@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 12:49:01 by nacho             #+#    #+#             */
-/*   Updated: 2023/11/20 09:34:51 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/21 10:07:23 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*ft_add_to_env(char **env, char *add)
 	aux = ft_strdup("");
 	while (env[i])
 	{
-		if (ft_strncmp(env[i], "_=/", 3) == 0)
+		if (ft_strncmp(env[i], "_=", 3) == 0)
 			break ;
 		flag = ft_var_exists(env[i], add, flag);
 		if (flag == 1)
@@ -54,7 +54,9 @@ int	ft_var_exists(char *env, char *add, int flag)
 
 	if (flag > 0)
 		return (2);
-	len = ft_search_c(env, '=');
+	len = (ft_search_c(env, '='));
+	if (len == -1)
+		len = ft_strlen(env);
 	if (add && ft_strncmp(env, add, len) == 0 && len == ft_search_c(add, '='))
 		return (1);
 	return (0);
