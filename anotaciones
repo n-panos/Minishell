@@ -1,26 +1,6 @@
 Erick
-	
+	echo "$"
 Nacho
-	-cat parser/includes/minishell.h | grep ");" $
-		exit status en bash es 2, pero creo que te lo tiene que dar el wait
-	
-	-
-	
-	(parece ARREGLADO)		En este caso, no deberia imprimir nada, la salida del ls no se guarda en ninguna archivo, y el error es "Permission denied"
-	Minishell> touch 1 2 3 4
-	Minishell> chmod 000 3
-	Minishell> ls >1 >2 >3 >4
-	minishell: 3: No such file or directory
-	1               Makefile        executor        signal
-	2               README.md       minishell
-	3               anotaciones     parser
-	4               archivoediaz--c redirect
-	Minishell> 
-
-
-	Arreglado	leak en ./minishell?
-	Arreglado 	./minishell funciona y devuelve el valor que toca con el exit 
-	Arregldo	exit
-	Arreglado	mensaje de no hay perms en el archivo, probar con access
-	Arreglado 	cambiar el path del env _: con cada cmd
-	output de los builtins.
+	- Al exportar una variable con un identificador no permitido, cambiar el exit status a 1
+	- Al hacer unset, no admite "HOLA1" y bash si, lo interpreta como un identificador invalido.
+	- Al poner "exit 42 world", sale el error de muchos argumentos, pero también pinta el "exit", no se si haría falta cambiarlo.

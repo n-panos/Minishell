@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 09:25:43 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/20 13:17:31 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/21 11:45:13 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_truncate
 
 // UTILS
 /* input .c */
-int		ft_check_input(char *input);
+int		ft_check_input(char *input, int *status);
 int		find_quote_close(char *input, int index, char quote_char);
 /* tokenizer_utils.c */
 int		ft_space_char(t_parser *tools, int index);

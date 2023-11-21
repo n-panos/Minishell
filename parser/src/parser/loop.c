@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:20:40 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/20 16:34:53 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/21 11:45:22 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	minishell_loop(t_mini *mini, t_parser *tools)
 		check_status(mini);
 		if (get_input(&tools->input, &original) == NULL)
 			exit(ft_parser_error("Error", STDERR_FILENO));
-		if (ft_check_input(tools->input) != 0)
+		if (ft_check_input(tools->input, &mini->status) != 0)
 			continue ;
 		parser(mini);
 		if (tools->error)

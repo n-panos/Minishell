@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:05:52 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/11 15:31:43 by erick            ###   ########.fr       */
+/*   Updated: 2023/11/21 11:48:12 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../executor/header/eminishell.h"
+
+void	ft_status_parse_error(int *status)
+{
+	*status = 2;
+}
 
 int	ft_extra_chars(char *input, int index, char specialChar)
 {
@@ -62,7 +67,7 @@ int	ft_check_op(char *input)
 }
 
 /*TODO << >>*/
-int	ft_check_input(char *input)
+int	ft_check_input(char *input, int *status)
 {
 	int		i;
 	char	quote_char;
@@ -71,8 +76,8 @@ int	ft_check_input(char *input)
 	while (input[++i])
 	{
 		if (i == 0 && input[i] == '|')
-			return (free(input),
-				ft_parser_error("parse error near ", input[i]));
+			return (ft_parser_error("parse error near ", input[i]),
+				free(input), ft_status_parse_error(status), 1);
 		if (input[i] == '"' || input[i] == '\'')
 		{
 			quote_char = input[i++];
@@ -83,10 +88,10 @@ int	ft_check_input(char *input)
 		}
 		if (ft_extra_chars(input, i, input[i]) == 0)
 			return (ft_parser_error("parse error near ", input[i + 1]),
-				free(input), 1);
+				free(input), ft_status_parse_error(status), 1);
 	}
 	if (ft_check_op(input))
-		return (free(input), 1);
+		return (free(input), ft_status_parse_error(status), 1);
 	return (0);
 }
 
