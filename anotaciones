@@ -4,3 +4,5 @@ Nacho
 	- Al exportar una variable con un identificador no permitido, cambiar el exit status a 1
 	- Al hacer unset, no admite "HOLA1" y bash si, lo interpreta como un identificador invalido.
 	- Al poner "exit 42 world", sale el error de muchos argumentos, pero también pinta el "exit", no se si haría falta cambiarlo.
+	- "export GHOST=123 | env | grep GHOST" Coge los pipes como argumentos para exportar, y sale el mensaje de error por se un identificador invalido.
+	- "cat <"archivo que no existe" | echo hola", funciona pero como echo se ejecuta bien el exit status debe ser 0, y sale 127
