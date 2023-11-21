@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/20 13:23:21 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/21 11:36:11 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,27 @@ void	ft_solo_wait(t_mini *mini)
 	int	status;
 
 	wait(&status);
-	mini->status = ft_wait_status(status);
+	if (mini->status == 0)
+		mini->status = ft_wait_status(status);
 }
 
 void	ft_pipe_wait(t_mini *mini)
 {
 	int	status;
 	int	n;
-	int	flag;
 
 	n = mini->cmd_n;
-	flag = 0;
-	if (mini->status == 0)
-		flag = 1;
 	while (n > 0)
 	{
-		if (flag == 1)
-			mini->status = ft_wait_status(status);
 		wait(&status);
-		n--;
+		mini->status = ft_wait_status(status);
+		--n;
 	}
 }
 
 int	ft_wait_status(int i)
 {
-	if (i > 255)
+	while (i > 255)
 		i = i / 256;
 	while (i < 0)
 		i = i + 256;
