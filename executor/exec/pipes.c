@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 11:49:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/20 13:56:47 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/21 09:17:31 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	ft_preprocess_pipe(t_mini *mini, int in)
 		close(fd[1]);
 		in = fd[0];
 		aux = ft_return_pipe(aux);
-		ft_free_exec(mini, exec);
 		--i;
 	}
 	close(in);
@@ -57,6 +56,7 @@ int	ft_forking_pipe(t_mini *mini, t_exec *exec, int *fd, t_tokens *aux)
 				ft_executing_pipe_cmds(exec, fd, mini->env);
 		}
 	}
+	ft_free_exec(mini, exec);
 	return (0);
 }
 
