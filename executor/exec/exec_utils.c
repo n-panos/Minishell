@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/21 19:42:16 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/22 12:32:51 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_pipe_wait(t_mini *mini)
 	while (n > 0)
 	{
 		wait(&status);
-		//if (mini->pipe_status != mini->cmd_n && mini->status == 0)
+		if (mini->pipe_status == 0 && mini->status == 0)
 			mini->status = ft_wait_status(status);
 		--n;
 	}
