@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/21 18:49:32 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/21 20:15:17 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-#include <sys/ioctl.h>
+# include <sys/ioctl.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -41,7 +41,11 @@ int	g_signal;
 # define ITERATIVE	1
 # define PROCESS	2
 # define HERE_DOC	3
-# define PATH_VAR	"=/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin"
+# define PATH_VAR	"=/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bi\
+n:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/u\
+sr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bi\
+n:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/\
+bin:/Library/Apple/usr/bin"
 // # include "../../executor/header/eminishell.h"
 
 /*
@@ -105,7 +109,7 @@ int			ft_parser_error(char *err, char c);
 
 // PARSER
 /**/
-char	*create_prompt(void);
+char		*create_prompt(void);
 int			minishell_loop(t_mini *mini, t_parser *tools);
 /**/
 t_tokens	*create_list(t_parser *tools);
