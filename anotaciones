@@ -8,3 +8,5 @@ Nacho
 	- "cat <"archivo que no existe" | echo hola", funciona pero como echo se ejecuta bien el exit status debe ser 0, y sale 127
 	Funciona	"export A-" el exit status tiene que ser 1
 	
+	Funciona dentro de ./minishell ejecutar "env -i ./minishell"
+		hay que ver alguna manera de gestionarlo

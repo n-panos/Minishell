@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:02 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/21 20:20:00 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/22 10:30:48 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	main(int argc, char **argv, char **envp)
 	t_mini			mini;
 	int				exit_status;
 
-	atexit(leaks);
+	//atexit(leaks);
 	g_signal = 0;
 	mini.tools = malloc(sizeof(t_parser));
 	if (mini.tools == NULL)

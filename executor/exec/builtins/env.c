@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:20:35 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/21 10:42:36 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/22 11:17:14 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	ft_env_args(t_exec *exec, t_mini *mini)
 	char	*aux;
 
 	i = 1;
+	if (mini->flag_path == -1)
+		return (printf("minishell: env: No such file or directory\n"), 1);
 	while (exec->cmd_mtx[i])
 	{
 		if (!ft_strchr(exec->cmd_mtx[i], '='))

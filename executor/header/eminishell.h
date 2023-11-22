@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eminishell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/21 13:54:33 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/22 11:59:10 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,9 @@ void		ft_free_exec(t_mini *mini, t_exec *exec);
 //					**EXECUTE**
 
 int			ft_no_cmd(t_mini *mini);
+int			ft_is_env_i_mini(t_mini *mini);
+int			ft_cmp_mini(t_tokens *tkn);
+t_exec		*ft_i_mini_util(t_mini *mini, t_tokens *tkn);
 
 //			PIPE
 
@@ -112,7 +115,7 @@ int			ft_forking_solo(t_mini *mini, t_exec *exec);
 int			ft_solo_no_child(t_mini *mini, t_exec *exec);
 void		ft_executing_solo_cmds(char **env, t_exec *exec);
 int			ft_is_minishell(t_mini *mini, t_exec *exec);
-void		ft_minishell_exec(t_mini *mini, t_exec *exec);
+void		ft_minishell_exec(char **env, t_exec *exec);
 
 //			EXEC-UTILS
 

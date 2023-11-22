@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_solo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/21 18:58:16 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/22 12:12:18 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_preprocess_solo(t_mini *mini)
 	ret = 0;
 	exec = ft_add_cmd(mini->tk_lst, mini, 0);
 	if (ft_strncmp(exec->cmd_mtx[0], "exit", 4) == 0)
-			return (ft_exit(mini, exec));
+		return (ft_exit(mini, exec));
 	if (exec)
 		ret = ft_forking_solo(mini, exec);
 	signal_handler(ITERATIVE);
@@ -90,14 +90,13 @@ int	ft_is_minishell(t_mini *mini, t_exec *exec)
 	if (ft_strncmp(exec->cmd_mtx[0], "./minishell", 11) != 0  \
 	|| ft_strlen(exec->cmd_mtx[0]) != 11)
 		return (2);
-	//ft_change_env_var(mini, "SHLVL=1");	//para debuger solo
 	prev_shlvl = ft_strjoin("SHLVL", ft_get_env_var(mini->env, "SHLVL"));
 	ft_change_shlvl(mini, 1);
 	free(exec->path);
 	getcwd(str, sizeof(str));
 	exec->path = ft_strjoin(str, "/minishell");
 	signal_off();
-	ft_minishell_exec(mini, exec);
+	ft_minishell_exec(mini->env, exec);
 	wait(&status);
 	mini->status = ft_wait_status(status);
 	ft_change_env_var(mini, prev_shlvl);
@@ -105,7 +104,7 @@ int	ft_is_minishell(t_mini *mini, t_exec *exec)
 	return (0);
 }
 
-void	ft_minishell_exec(t_mini *mini, t_exec *exec)
+void	ft_minishell_exec(char **env, t_exec *exec)
 {
 	pid_t	pidc;
 
@@ -113,5 +112,5 @@ void	ft_minishell_exec(t_mini *mini, t_exec *exec)
 	if (pidc == -1)
 		exit(EXIT_FAILURE);
 	if (pidc == 0)
-		ft_executing_solo_cmds(mini->env, exec);
+		ft_executing_solo_cmds(env, exec);
 }
