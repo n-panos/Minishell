@@ -6,48 +6,48 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 11:41:57 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/23 10:36:56 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/23 10:47:30 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../executor/header/eminishell.h"
 
 /*pinta la información de los tokens*/
-void	print_lst_doble(t_tokens *lst)
-{
-	t_tokens	*current;
-	int			i;
+// void	print_lst_doble(t_tokens *lst)
+// {
+// 	t_tokens	*current;
+// 	int			i;
 
-	current = lst;
-	i = 0;
-	while (current)
-	{
-		printf("Token %d\n", ++i);
-		printf("NEXT: %p\n", current->next);
-		printf("PREV: %p\n", current->prev);
-		printf("VALUE: %s LEN: %zu\n", current->value,
-			ft_strlen(current->value));
-		printf("TOOLS: %d\n", current->quote);
-		if (current->type == ARGUMENT)
-			printf("TYPE: ARGUMENT\n");
-		else if (current->type == COMMAND)
-			printf("TYPE: COMMAND\n");
-		else if (current->type == DELIMITER)
-			printf("TYPE: DELIMITIER\n");
-		else if (current->type == HEREDOC)
-			printf("TYPE: HEREDOC\n");
-		else if (current->type == PIPE)
-			printf("TYPE: PIPE\n");
-		else if (current->type == REDIRECT_APPEND)
-			printf("TYPE: APPEND\n");
-		else if (current->type == REDIRECT_INPUT)
-			printf("TYPE: INPUT\n");
-		else if (current->type == REDIRECT_OUTPUT)
-			printf("TYPE: OUTPUT\n");
-		printf("\n");
-		current = current->next;
-	}
-}
+// 	current = lst;
+// 	i = 0;
+// 	while (current)
+// 	{
+// 		printf("Token %d\n", ++i);
+// 		printf("NEXT: %p\n", current->next);
+// 		printf("PREV: %p\n", current->prev);
+// 		printf("VALUE: %s LEN: %zu\n", current->value,
+// 			ft_strlen(current->value));
+// 		printf("TOOLS: %d\n", current->quote);
+// 		if (current->type == ARGUMENT)
+// 			printf("TYPE: ARGUMENT\n");
+// 		else if (current->type == COMMAND)
+// 			printf("TYPE: COMMAND\n");
+// 		else if (current->type == DELIMITER)
+// 			printf("TYPE: DELIMITIER\n");
+// 		else if (current->type == HEREDOC)
+// 			printf("TYPE: HEREDOC\n");
+// 		else if (current->type == PIPE)
+// 			printf("TYPE: PIPE\n");
+// 		else if (current->type == REDIRECT_APPEND)
+// 			printf("TYPE: APPEND\n");
+// 		else if (current->type == REDIRECT_INPUT)
+// 			printf("TYPE: INPUT\n");
+// 		else if (current->type == REDIRECT_OUTPUT)
+// 			printf("TYPE: OUTPUT\n");
+// 		printf("\n");
+// 		current = current->next;
+// 	}
+// }
 
 static void	ft_add_type(t_tokens *lst)
 {
@@ -127,6 +127,6 @@ t_tokens	*create_list(t_parser *tools)
 		return (NULL);
 	ft_add_type(lst);
 	check_quotes(&lst);
-	print_lst_doble(lst);
+	// print_lst_doble(lst);
 	return (lst);
 }
