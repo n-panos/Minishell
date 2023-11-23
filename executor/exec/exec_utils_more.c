@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_more.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:09:25 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/23 13:23:48 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/23 16:36:20 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,25 @@ int	ft_builtin_check(t_exec *exec, t_mini *mini)
 	if (ft_strncmp(exec->cmd_mtx[0], "cd", 2) == 0)
 		i = ft_cd(exec, mini);
 	return (i);
+}
+
+int	ft_builtin_path(char *cmd)
+{
+	if (cmd[0] == '\0')
+		return (1);
+	if (ft_strncmp(cmd, "echo", 4) == 0 && ft_strlen(cmd) == 4)
+		return (1);
+	if (ft_strncmp(cmd, "cd", 2) == 0 && ft_strlen(cmd) == 2)
+		return (1);
+	if (ft_strncmp(cmd, "exit", 4) == 0 && ft_strlen(cmd) == 4)
+		return (1);
+	if (ft_strncmp(cmd, "export", 6) == 0 && ft_strlen(cmd) == 6)
+		return (1);
+	if (ft_strncmp(cmd, "pwd", 3) == 0 && ft_strlen(cmd) == 3)
+		return (1);
+	if (ft_strncmp(cmd, "unset", 5) == 0 && ft_strlen(cmd) == 5)
+		return (1);
+	return (0);
 }
 
 int	here_doc(char *limiter)
