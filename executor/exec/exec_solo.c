@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/23 09:56:07 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:14:02 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_preprocess_solo(t_mini *mini)
 
 	ret = 0;
 	exec = ft_add_cmd(mini->tk_lst, mini, 0);
-	if (ft_strncmp(exec->cmd_mtx[0], "exit", 4) == 0)
+	if (exec->cmd_mtx[0] && ft_strncmp(exec->cmd_mtx[0], "exit", 4) == 0)
 		return (ft_exit(mini, exec));
 	if (exec)
 		ret = ft_forking_solo(mini, exec);
@@ -87,8 +87,8 @@ int	ft_is_minishell(t_mini *mini, t_exec *exec)
 	char	*prev_shlvl;
 	int		status;
 
-	if (ft_strncmp(exec->cmd_mtx[0], "./minishell", 11) != 0  \
-	|| ft_strlen(exec->cmd_mtx[0]) != 11)
+	if (!exec->cmd_mtx[0] || ft_strncmp(exec->cmd_mtx[0], "./minishell", 11) \
+	!= 0 || ft_strlen(exec->cmd_mtx[0]) != 11)
 		return (2);
 	prev_shlvl = ft_strjoin("SHLVL", ft_get_env_var(mini->env, "SHLVL"));
 	ft_change_shlvl(mini, 1);

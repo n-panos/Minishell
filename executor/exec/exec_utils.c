@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/23 10:24:50 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:18:51 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ int	ft_error_cmd(t_mini *mini, char *str, int in, int out)
 	else
 	{
 		mini->status = 127;
-		printf("minishell: %s: command not found\n", str);
+		if (!str)
+			printf("minishell: : command not found\n");
+		else
+			printf("minishell: %s: command not found\n", str);
 	}
 	mini->pipe_status++;
 	return (0);

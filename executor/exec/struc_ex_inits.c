@@ -60,7 +60,7 @@ char	**ft_has_empty(t_tokens *minitkn, char **mtx)
 	i = ft_mtx_line_cnt(mtx);
 	while (tkn)
 	{
-		if (tkn->value[0] == '\0')
+		if (tkn->value[0] == '\0' && i > 0)
 		{
 			aux_mtx = (char **)malloc((i + 2) * sizeof(char *));
 			aux_mtx[0] = ft_strdup(mtx[0]);
@@ -81,6 +81,8 @@ char	**ft_has_empty(t_tokens *minitkn, char **mtx)
 
 int	ft_builtin_path(char *cmd)
 {
+	if (cmd[0] == '\0')
+		return (1);
 	if (ft_strncmp(cmd, "echo", 4) == 0 && ft_strlen(cmd) == 4)
 		return (1);
 	if (ft_strncmp(cmd, "cd", 2) == 0 && ft_strlen(cmd) == 2)

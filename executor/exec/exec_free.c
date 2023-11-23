@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_free.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:24 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/21 10:36:13 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/23 13:16:33 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_free_exec(t_mini *mini, t_exec *exec)
 {
 	char	*aux;
 
-	if (ft_strncmp(exec->cmd_mtx[0], "env", 3) != 0)
+	if (exec->cmd_mtx[0] && ft_strncmp(exec->cmd_mtx[0], "env", 3) != 0)
 	{
 		aux = ft_strjoin("_=", exec->cmd_mtx[0]);
 		ft_change_env_var(mini, aux);
