@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:20:40 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/21 11:45:22 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/23 10:30:06 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,12 @@ void	tokenizer(t_parser *tools)
 		if (node == NULL)
 			break ;
 		if (ft_is_empty((char *)node->content))
-			ft_lstdelone(node, free);
-		else
+		{
+			free(node->content);
+			node->content = ft_strdup("");
+		}
+			// ft_lstdelone(node, free);
+		// else
 			ft_lstadd_back(&tools->tokenlst, node);
 		if ((*tools).quote)
 			(*node).quote = 1;
@@ -63,7 +67,8 @@ char	*get_input(char	**input_ptr, struct termios *original)
 	while (1)
 	{
 		// prompt = create_prompt();
-		input = readline(PROMPT);
+		if (isatty(STDIN_FILENO))
+			input = readline(PROMPT);
 		// free(prompt);
 		if (input == NULL)
 		{

@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:47:21 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/07/11 14:10:49 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/23 10:28:59 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_strdup(const char *s)
 	char	*cpy;
 
 	str = (char *)s;
+	if (str == NULL)
+		return (NULL);
 	i = ft_strlen(str) + 1;
 	cpy = (char *)malloc (sizeof(char) * i);
 	if (cpy == NULL)

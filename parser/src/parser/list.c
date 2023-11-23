@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 11:41:57 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/20 16:35:35 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/23 10:33:47 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 // 		printf("PREV: %p\n", current->prev);
 // 		printf("VALUE: %s LEN: %zu\n", current->value,
 // 			ft_strlen(current->value));
-// 		printf("TOOLS: %s\n", current->tool);
+// 		printf("TOOLS: %d\n", current->quote);
 // 		if (current->type == ARGUMENT)
 // 			printf("TYPE: ARGUMENT\n");
 // 		else if (current->type == COMMAND)
@@ -127,5 +127,6 @@ t_tokens	*create_list(t_parser *tools)
 		return (NULL);
 	ft_add_type(lst);
 	check_quotes(&lst);
+	// print_lst_doble(lst);
 	return (lst);
 }
