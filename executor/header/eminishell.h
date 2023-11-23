@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eminishell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/23 12:42:40 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/23 16:44:53 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,16 @@ int			ft_unset_invalid(t_mini *mini, char *str);
 
 void		ft_free_exec(t_mini *mini, t_exec *exec);
 
+//					MINI
+
+int			ft_is_minishell(t_mini *mini, t_exec *exec);
+int			ft_is_env_i_mini(t_mini *mini);
+int			ft_cmp_mini(t_tokens *tkn);
+void		ft_minishell_exec(char **env, t_exec *exec);
+
 //					**EXECUTE**
 
 int			ft_no_cmd(t_mini *mini);
-int			ft_is_env_i_mini(t_mini *mini);
-int			ft_cmp_mini(t_tokens *tkn);
-t_exec		*ft_i_mini_util(t_mini *mini, t_tokens *tkn);
 
 //			PIPE
 
@@ -115,8 +119,6 @@ int			ft_preprocess_solo(t_mini *mini);
 int			ft_forking_solo(t_mini *mini, t_exec *exec);
 int			ft_solo_no_child(t_mini *mini, t_exec *exec);
 void		ft_executing_solo_cmds(char **env, t_exec *exec);
-int			ft_is_minishell(t_mini *mini, t_exec *exec);
-void		ft_minishell_exec(char **env, t_exec *exec);
 
 //			EXEC-UTILS
 
@@ -127,6 +129,7 @@ char		*ft_join_n(char *ret, char *add, char *s_add);
 int			ft_error_cmd(t_mini *mini, char *str, int in, int out);
 
 int			ft_builtin_check(t_exec *exec, t_mini *mini);
+int			ft_builtin_path(char *cmd);
 int			here_doc(char *limiter);
 
 //			STRUCT-INITS
@@ -134,7 +137,7 @@ int			here_doc(char *limiter);
 t_exec		*ft_add_cmd(t_tokens *tkn, t_mini *mini, int in);
 t_exec		*ft_init_exec(t_tokens *token, t_mini *mini, int in, int out);
 char		**ft_has_empty(t_tokens *minitkn, char **mtx);
-int			ft_builtin_path(char *cmd);
+t_exec		*ft_i_mini_util(t_mini *mini, t_tokens *tkn);
 
 //					**FIND-PATH**
 

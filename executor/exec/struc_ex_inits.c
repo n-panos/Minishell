@@ -81,21 +81,18 @@ char	**ft_has_empty(t_tokens *minitkn, char **mtx)
 	return (mtx);
 }
 
-int	ft_builtin_path(char *cmd)
+t_exec	*ft_i_mini_util(t_mini *mini, t_tokens *tkn)
 {
-	if (cmd[0] == '\0')
-		return (1);
-	if (ft_strncmp(cmd, "echo", 4) == 0 && ft_strlen(cmd) == 4)
-		return (1);
-	if (ft_strncmp(cmd, "cd", 2) == 0 && ft_strlen(cmd) == 2)
-		return (1);
-	if (ft_strncmp(cmd, "exit", 4) == 0 && ft_strlen(cmd) == 4)
-		return (1);
-	if (ft_strncmp(cmd, "export", 6) == 0 && ft_strlen(cmd) == 6)
-		return (1);
-	if (ft_strncmp(cmd, "pwd", 3) == 0 && ft_strlen(cmd) == 3)
-		return (1);
-	if (ft_strncmp(cmd, "unset", 5) == 0 && ft_strlen(cmd) == 5)
-		return (1);
-	return (0);
+	char	str[FILENAME_MAX];
+	t_exec	*exec;
+
+	exec = ft_add_cmd(tkn, mini, 0);
+	if (!exec)
+		return (NULL);
+	free(exec->path);
+	getcwd(str, sizeof(str));
+	exec->path = ft_strjoin(str, "/minishell");
+	ft_mtx_free(exec->cmd_mtx);
+	exec->cmd_mtx = ft_split("./minishell", ' ');
+	return (exec);
 }
