@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/22 12:12:18 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/23 09:56:07 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	ft_solo_no_child(t_mini *mini, t_exec *exec)
 		return (ft_free_exec(mini, exec), 0);
 	i = ft_builtin_check(exec, mini);
 	if (i == 2)
-			i = ft_is_minishell(mini, exec);
+		i = ft_is_minishell(mini, exec);
 	if (i == 2 && exec->path == NULL)
 		i = ft_error_cmd(mini, exec->cmd_mtx[0], exec->fd_in, exec->fd_out);
 	if (i != 2)
@@ -77,7 +77,7 @@ void	ft_executing_solo_cmds(char **env, t_exec *exec)
 		close(exec->fd_out);
 	}
 	execve(exec->path, exec->cmd_mtx, env);
-	printf("minishell: executing error\n");
+	printf("minishell: %s: Permission denied\n", exec->cmd_mtx[0]);
 	exit(EXIT_FAILURE);
 }
 

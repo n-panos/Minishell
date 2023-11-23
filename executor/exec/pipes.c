@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 11:49:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/21 19:24:04 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/23 09:56:52 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,5 @@ void	ft_executing_pipe_cmds(t_exec *exec, int *fd, char **env)
 	dup2(exec->fd_out, 1);
 	close(fd[1]);
 	execve(exec->path, exec->cmd_mtx, env);
-	printf("minishell: executing error\n");
+	printf("minishell: %s: Permission denied\n", exec->cmd_mtx[0]);
 }
