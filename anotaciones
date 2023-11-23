@@ -1,7 +1,7 @@
 Erick
 	(Arreglado) export "" no parsea "" como un elemento vacio por lo tanto al ejecutar export hace como si no hubiera argumento(y si lo hay)
 Nacho
-	- "cat <"archivo que no existe" | echo hola", funciona pero como echo se ejecuta bien el exit status debe ser 0, y sale 127
+	- a mi me sale 0 ya"cat <"archivo que no existe" | echo hola", funciona pero como echo se ejecuta bien el exit status debe ser 0, y sale 127
 	
 	Funciona dentro de ./minishell ejecutar "env -i ./minishell"
 		hay que ver alguna manera de gestionarlo
@@ -13,5 +13,5 @@ Nacho
 	Minishell> cat |cat | << eof| cat| cat| ls
 	> eof (al cerrar el heredoc, se debe ejecutar el ls, y dejas los dos cats abiertos, se pueden cerrar dando al enter dos veces)
 
-	Dentro de la minishell, al entrar a otra minishell, el export no se envia a la nueva minishell. El env si, pero el export no.
+	ARREGLADO Dentro de la minishell, al entrar a otra minishell, el export no se envia a la nueva minishell. El env si, pero el export no.
 	Al hacer export a, se guarda, pero al ahcer export a=, no cambia en export. Deberia aparecer " a='' "

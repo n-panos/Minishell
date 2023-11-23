@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/23 16:44:53 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/23 20:15:06 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void		ft_free_exec(t_mini *mini, t_exec *exec);
 //					MINI
 
 int			ft_is_minishell(t_mini *mini, t_exec *exec);
+void		ft_mini_no_exp(t_mini *mini);
 int			ft_is_env_i_mini(t_mini *mini);
 int			ft_cmp_mini(t_tokens *tkn);
 void		ft_minishell_exec(char **env, t_exec *exec);

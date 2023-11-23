@@ -3,12 +3,15 @@
 int	ft_is_minishell(t_mini *mini, t_exec *exec)
 {
 	char	str[FILENAME_MAX];
+	char	**env;
 	// char	*prev_shlvl;
 	int		status;
 
 	if (!exec->cmd_mtx[0] || ft_strncmp(exec->cmd_mtx[0], "./minishell", 11) \
 	!= 0 || ft_strlen(exec->cmd_mtx[0]) != 11)
 		return (2);
+	env = ft_mtx_cpy(mini->env);
+	ft_mini_no_exp(mini);
 	// prev_shlvl = ft_strjoin("SHLVL", ft_get_env_var(mini->env, "SHLVL"));
 	// ft_change_shlvl(mini, 1);
 	free(exec->path);
@@ -18,9 +21,25 @@ int	ft_is_minishell(t_mini *mini, t_exec *exec)
 	ft_minishell_exec(mini->env, exec);
 	wait(&status);
 	mini->status = ft_wait_status(status);
+	ft_mtx_free(mini->env);
+	mini->env = env;
 	// ft_change_env_var(mini, prev_shlvl);
 	// free(prev_shlvl);
 	return (0);
+}
+
+void	ft_mini_no_exp(t_mini *mini)
+{
+	int		i;
+
+	i = 0;
+	while (mini->env[i])
+	{
+		if (ft_search_c(mini->env[i], '=') == -1)
+			ft_env_rm(mini, mini->env[i]);
+		else
+			++i;
+	}
 }
 
 int	ft_is_env_i_mini(t_mini *mini)
