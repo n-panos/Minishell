@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:19:04 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/13 13:48:20 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/23 11:56:53 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_echo(t_exec *exec, char *dir)
 		return (2);
 	while (exec->cmd_mtx[i])
 		i++;
-	if (i == 1)
+	if (i == 1 || exec->cmd_mtx[1][0] == '\0')
 	{
 		printf("\n");
 		return (0);

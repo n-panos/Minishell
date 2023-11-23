@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:50:28 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/21 13:10:00 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/23 10:56:42 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@ int	ft_export_more_args(t_mini *mini, char *arg)
 	int		i;
 
 	i = 0;
+	if (!arg[i])
+	{
+		mini->status = 1;
+		printf("minishell: export: `%s': not a valid identifier\n", arg);
+		return (0);
+	}
 	while (arg[i])
 	{
 		if (i > 0 && arg[i] == '=')

@@ -1,5 +1,6 @@
 Erick
 	echo "$"
+	export "" no parsea "" como un elemento vacio por lo tanto al ejecutar export hace como si no hubiera argumento(y si lo hay)
 Nacho
 	- Arreglado 	Al exportar una variable con un identificador no permitido, cambiar el exit status a 1
 	- Arreglado 	Al hacer unset, no admite "HOLA1" y bash si, lo interpreta como un identificador invalido.
@@ -10,3 +11,7 @@ Nacho
 	
 	Funciona dentro de ./minishell ejecutar "env -i ./minishell"
 		hay que ver alguna manera de gestionarlo
+
+		caso env -i ./minishell
+		./minishell
+		env

@@ -46,7 +46,37 @@ t_exec	*ft_init_exec(t_tokens *token, t_mini *mini, int in, int out)
 	}
 	exec->cmd_mtx = ft_split(aux_cmd, ' ');
 	free(aux_cmd);
+	exec->cmd_mtx = ft_has_empty(mini->tk_lst, exec->cmd_mtx);
 	return (exec);
+}
+
+char	**ft_has_empty(t_tokens *minitkn, char **mtx)
+{
+	t_tokens	*tkn;
+	char		**aux_mtx;
+	int			i;
+
+	tkn = minitkn;
+	i = ft_mtx_line_cnt(mtx);
+	while (tkn)
+	{
+		if (tkn->value[0] == '\0')
+		{
+			aux_mtx = (char **)malloc((i + 2) * sizeof(char *));
+			aux_mtx[0] = ft_strdup(mtx[0]);
+			aux_mtx[1] = ft_strdup("");
+			i = 2;
+			while (mtx[i - 1])
+			{
+				aux_mtx[i] = ft_strdup(mtx[i - 1]);
+				++i;
+			}
+			aux_mtx[i] = NULL;
+			return (ft_mtx_free(mtx), aux_mtx);
+		}
+		tkn = tkn->next;
+	}
+	return (mtx);
 }
 
 int	ft_builtin_path(char *cmd)

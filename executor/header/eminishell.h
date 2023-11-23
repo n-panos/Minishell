@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/22 11:59:10 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:42:40 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void		ft_env_print(char *str, int out_fd);
 //			EXIT
 
 int			ft_exit(t_mini *mini, t_exec *exec);
-int			ft_exit_more_args(char *arg, int flag);
+int			ft_exit_more_args(char *arg);
 int			ft_status_return(char *arg);
 char		*ft_get_shlvl(char **env, int flag);
 void		ft_change_shlvl(t_mini *mini, int flag);
@@ -86,6 +86,7 @@ int			ft_pwd(t_exec *exec);
 int			ft_unset(t_mini *mini, char **cmd_mtx);
 int			ft_env_rm(t_mini *mini, char *str);
 int			ft_env_delete(t_mini *mini, int erase);
+int			ft_unset_invalid(t_mini *mini, char *str);
 
 //					FREE
 
@@ -132,6 +133,7 @@ int			here_doc(char *limiter);
 
 t_exec		*ft_add_cmd(t_tokens *tkn, t_mini *mini, int in);
 t_exec		*ft_init_exec(t_tokens *token, t_mini *mini, int in, int out);
+char		**ft_has_empty(t_tokens *minitkn, char **mtx);
 int			ft_builtin_path(char *cmd);
 
 //					**FIND-PATH**

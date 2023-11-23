@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:20:35 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/22 11:17:14 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:02:05 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_env(t_mini *mini, t_exec *exec)
 	if (ft_strlen(exec->cmd_mtx[0]) != 3)
 		return (2);
 	if (ft_env_args(exec, mini) == 1)
-		return (-1);
+		return (127);
 	aux_mtx = ft_mtx_cpy(exec->cmd_mtx);
 	while (mini->env[i])
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:19:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/21 14:53:40 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/23 12:15:07 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,29 @@ int	ft_exit(t_mini *mini, t_exec *exec)
 	mini->status = 0;
 	if (i == 1)
 		return (ft_free_exec(mini, exec), 1);
-	if (i > 1)
-		mini->status = ft_exit_more_args(exec->cmd_mtx[1], i);
-	if (mini->status == -2)
+	if (i > 2)
 	{
+		printf("minishell: exit: too many arguments\n");
 		mini->status = 1;
 		return (ft_free_exec(mini, exec), 0);
 	}
+	if (i > 1)
+		mini->status = ft_exit_more_args(exec->cmd_mtx[1]);
 	return (ft_free_exec(mini, exec), 1);
 }
 
-int	ft_exit_more_args(char *arg, int flag)
+int	ft_exit_more_args(char *arg)
 {
 	int	i;
 
 	i = 0;
+	if (arg[0] == '\0')
+	{
+		printf("minishell: exit: %s: numeric argument required\n", arg);
+		return (255);
+	}
 	if (arg[0] == '-' || arg[0] == '+')
-		i++;
+		++i;
 	while (arg[i])
 	{
 		if (ft_isdigit(arg[i]) == 0)
@@ -49,15 +55,10 @@ int	ft_exit_more_args(char *arg, int flag)
 			printf("minishell: exit: %s: numeric argument required\n", arg);
 			return (255);
 		}
-		i++;
+		++i;
 	}
-	if (flag == 2)
-	{
-		i = ft_status_return(arg);
-		return (i);
-	}
-	printf("minishell: exit: too many arguments\n");
-	return (-2);
+	i = ft_status_return(arg);
+	return (i);
 }
 
 int	ft_status_return(char *arg)

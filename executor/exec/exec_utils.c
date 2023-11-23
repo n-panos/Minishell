@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/22 12:32:51 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/23 10:24:50 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	ft_error_cmd(t_mini *mini, char *str, int in, int out)
 		printf("minishell: %s: Permission denied\n", str);
 	else if (in == -1 || out == -1)
 		printf("minishell: %s: No such file or directory\n", str);
-	else if (mini->flag_path == -1)	
+	else if (mini->flag_path == -1)
 		printf("minishell: %s: No such file or directory\n", str);
 	else
 	{

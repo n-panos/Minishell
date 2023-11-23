@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:18:48 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/23 09:37:32 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/23 11:51:48 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,16 @@ int	ft_cd_select(t_mini *mini, t_exec *exc)
 {
 	if (!exc->cmd_mtx[1])
 		mini->status = ft_cd_env_var(mini->env, "HOME", exc->fd_out);
+	else if (exc->cmd_mtx[1][0] == '\0')
+		mini->status = 0;
 	else if (ft_strncmp(exc->cmd_mtx[1], "-", ft_strlen(exc->cmd_mtx[1])) == 0)
 		mini->status = ft_cd_env_var(mini->env, "OLDPWD", exc->fd_out);
-	else 
+	else
 	{
 		mini->status = ft_cd_standard_dir(exc->cmd_mtx[1]);
 		if (mini->status == -1)
-			printf("minishell: cd: %s: No such file or directory\n", exc->cmd_mtx[1]);
+			printf("minishell: cd: %s: No such file or directory\n", \
+			exc->cmd_mtx[1]);
 	}
 	return (0);
 }

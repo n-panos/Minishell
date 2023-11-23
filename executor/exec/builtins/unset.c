@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:37:50 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/21 13:03:34 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/23 12:43:42 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,8 @@ int	ft_env_rm(t_mini *mini, char *str)
 	int		i;
 	int		len;
 
-	i = 0;
-	while (str[i])
-	{
-		if (ft_isalnum(str[i]) == 0)
-		{
-			printf("minishell: unset: `%s': not a valid identifier", str);
-			return (0);
-		}
-		i++;
-	}
+	if (ft_unset_invalid(mini, str) == 0)
+		return (0);
 	i = 0;
 	while (mini->env[i])
 	{
@@ -74,4 +66,28 @@ int	ft_env_delete(t_mini *mini, int erase)
 	mini->env = ft_split(aux, '\n');
 	free(aux);
 	return (0);
+}
+
+int	ft_unset_invalid(t_mini *mini, char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[0] == '\0')
+	{
+		mini->status = 1;
+		printf("minishell: unset: `%s': not a valid identifier\n", str);
+		return (0);
+	}
+	while (str[i])
+	{
+		if (ft_isalnum(str[i]) == 0)
+		{
+			mini->status = 1;
+			printf("minishell: unset: `%s': not a valid identifier\n", str);
+			return (0);
+		}
+		i++;
+	}
+	return (1);
 }
