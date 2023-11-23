@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 09:25:43 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/21 11:45:13 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/23 10:38:42 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_parser
 	int					status;
 	int					error;
 	int					quote;
+	int					expander;
 }	t_parser;
 /*
 *	PARSER

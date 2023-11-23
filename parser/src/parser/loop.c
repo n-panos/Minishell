@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:20:40 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/23 10:30:06 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/23 10:43:53 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,22 @@ void	tokenizer(t_parser *tools)
 
 	while (1)
 	{
+		(*tools).expander = 0;
 		(*tools).quote = 0;
 		node = get_token(tools);
 		if (node == NULL)
 			break ;
-		if (ft_is_empty((char *)node->content))
+		if (ft_is_empty((char *)node->content) && tools->expander == 1)
+			ft_lstdelone(node, free);
+		else
 		{
-			free(node->content);
-			node->content = ft_strdup("");
-		}
-			// ft_lstdelone(node, free);
-		// else
+			if (ft_is_empty((char *)node->content))
+			{
+				free(node->content);
+				node->content = ft_strdup("");
+			}
 			ft_lstadd_back(&tools->tokenlst, node);
+		}
 		if ((*tools).quote)
 			(*node).quote = 1;
 	}
