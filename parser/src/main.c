@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:02 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/22 17:03:43 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:45:55 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,14 @@ static void	check_argv(int argc, char **argv, char **envp, t_mini *mini)
 		mini->env = ft_create_env();
 	}
 	else
+	{
+		if (getenv("PATH") == NULL)
+			mini->flag_path = 0;
 		mini->env = ft_mtx_cpy(envp);
+	}
 	if (mini->env == NULL)
+		exit(EXIT_FAILURE);
+	if (envp[0] && ft_increment_shlvl(mini->env) == NULL)
 		exit(EXIT_FAILURE);
 	ft_env_rm(mini, "OLDPWD");
 }
@@ -100,7 +106,7 @@ int	main(int argc, char **argv, char **envp)
 	t_mini			mini;
 	int				exit_status;
 
-	//atexit(leaks);
+	// atexit(leaks);
 	g_signal = 0;
 	mini.tools = malloc(sizeof(t_parser));
 	if (mini.tools == NULL)

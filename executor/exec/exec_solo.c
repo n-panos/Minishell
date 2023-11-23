@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_solo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/23 13:14:02 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:27:35 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,14 @@ void	ft_executing_solo_cmds(char **env, t_exec *exec)
 int	ft_is_minishell(t_mini *mini, t_exec *exec)
 {
 	char	str[FILENAME_MAX];
-	char	*prev_shlvl;
+	// char	*prev_shlvl;
 	int		status;
 
 	if (!exec->cmd_mtx[0] || ft_strncmp(exec->cmd_mtx[0], "./minishell", 11) \
 	!= 0 || ft_strlen(exec->cmd_mtx[0]) != 11)
 		return (2);
-	prev_shlvl = ft_strjoin("SHLVL", ft_get_env_var(mini->env, "SHLVL"));
-	ft_change_shlvl(mini, 1);
+	// prev_shlvl = ft_strjoin("SHLVL", ft_get_env_var(mini->env, "SHLVL"));
+	// ft_change_shlvl(mini, 1);
 	free(exec->path);
 	getcwd(str, sizeof(str));
 	exec->path = ft_strjoin(str, "/minishell");
@@ -99,8 +99,8 @@ int	ft_is_minishell(t_mini *mini, t_exec *exec)
 	ft_minishell_exec(mini->env, exec);
 	wait(&status);
 	mini->status = ft_wait_status(status);
-	ft_change_env_var(mini, prev_shlvl);
-	free(prev_shlvl);
+	// ft_change_env_var(mini, prev_shlvl);
+	// free(prev_shlvl);
 	return (0);
 }
 

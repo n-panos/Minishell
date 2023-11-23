@@ -9,3 +9,6 @@ Nacho
 		caso env -i ./minishell
 		./minishell
 		env
+	Minishell> cat "" | ls
+	cat: : No such file or directory
+	ls: : No such file or directory

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_more.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:09:25 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/23 13:11:40 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:23:48 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_builtin_check(t_exec *exec, t_mini *mini)
 	i = 2;
 	if (exec->fd_in == -1 || exec->fd_out == -1)
 		return (-1);
-	if (exec->cmd_mtx[0] == '\0')
+	if (exec->cmd_mtx[0] == NULL)
 		return (2);
 	if (ft_strncmp(exec->cmd_mtx[0], "echo", 4) == 0)
 		i = ft_echo(exec, ft_get_env_var(mini->env, "HOME") + 1);

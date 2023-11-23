@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 09:25:43 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/23 10:38:42 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:46:09 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ typedef struct s_truncate
 }	t_truncate;
 
 // UTILS
+/* main_utils.c */
+char	*ft_increment_shlvl(char **env);
 /* input .c */
 int		ft_check_input(char *input, int *status);
 int		find_quote_close(char *input, int index, char quote_char);

@@ -27,7 +27,7 @@ PARSER			=	loop.c list.c mini.c
 PARSER_PATH		=	$(addprefix parser/src/parser/, $(PARSER))
 SRCS			+=	$(PARSER_PATH)
 
-UTILS			=	input.c tokenizer_utils.c expander.c expander_utils.c inquote.c expander_utils2.c typed.c tokenizer.c free.c env_create.c expander_env_utils.c
+UTILS			=	input.c tokenizer_utils.c expander.c expander_utils.c inquote.c expander_utils2.c typed.c tokenizer.c free.c env_create.c expander_env_utils.c main_utils.c
 UTILS_PATH		=	$(addprefix parser/src/utils/, $(UTILS))
 SRCS			+=	$(UTILS_PATH)
 
@@ -92,7 +92,7 @@ debug: all
 
 erick: READLINE_LIB		=	-L/usr/local/opt/readline/lib -lreadline
 erick: READLINE_INC		=	-I/usr/local/opt/readline/include/
-erick: debug
+erick: all
 
 nacho: READLINE_LIB		=	-L/usr/local/opt/readline/lib -lreadline
 nacho: READLINE_INC		=	-I/usr/local/opt/readline/include/
