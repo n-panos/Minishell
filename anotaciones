@@ -9,6 +9,9 @@ Nacho
 		caso env -i ./minishell
 		./minishell
 		env
-	Minishell> cat "" | ls
-	cat: : No such file or directory
-	ls: : No such file or directory
+
+	Minishell> cat |cat | << eof| cat| cat| ls
+	> eof (al cerrar el heredoc, se debe ejecutar el ls, y dejas los dos cats abiertos, se pueden cerrar dando al enter dos veces)
+
+	Dentro de la minishell, al entrar a otra minishell, el export no se envia a la nueva minishell. El env si, pero el export no.
+	Al hacer export a, se guarda, pero al ahcer export a=, no cambia en export. Deberia aparecer " a='' "
