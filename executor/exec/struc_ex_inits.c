@@ -46,7 +46,7 @@ t_exec	*ft_init_exec(t_tokens *token, t_mini *mini, int in, int out)
 	}
 	exec->cmd_mtx = ft_split(aux_cmd, ' ');
 	free(aux_cmd);
-	exec->cmd_mtx = ft_has_empty(mini->tk_lst, exec->cmd_mtx);
+	exec->cmd_mtx = ft_has_empty(token, exec->cmd_mtx);
 	return (exec);
 }
 
@@ -60,6 +60,8 @@ char	**ft_has_empty(t_tokens *minitkn, char **mtx)
 	i = ft_mtx_line_cnt(mtx);
 	while (tkn)
 	{
+		if (tkn->type == PIPE)
+			break ;
 		if (tkn->value[0] == '\0' && i > 0)
 		{
 			aux_mtx = (char **)malloc((i + 2) * sizeof(char *));
