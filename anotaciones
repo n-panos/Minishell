@@ -10,7 +10,7 @@ Nacho
 		./minishell
 		env
 
-	Minishell> cat |cat | << eof| cat| cat| ls
+	ARREGLADO Minishell> cat |cat | << eof| cat| cat| ls
 	> eof (al cerrar el heredoc, se debe ejecutar el ls, y dejas los dos cats abiertos, se pueden cerrar dando al enter dos veces)
 
 	ARREGLADO Dentro de la minishell, al entrar a otra minishell, el export no se envia a la nueva minishell. El env si, pero el export no.
