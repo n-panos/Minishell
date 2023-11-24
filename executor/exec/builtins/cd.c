@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:18:48 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/23 11:51:48 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:44:50 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,29 +87,6 @@ int	ft_cd_env_var(char **env, char *str, int out_fd)
 	else if (ft_strlen(str) == 6)
 		ft_env_print(dir, out_fd);
 	return (i);
-}
-
-char	*ft_get_env_var(char **env, char *str)
-{
-	char	*dir;
-	int		i;
-	int		len;
-
-	i = 0;
-	dir = NULL;
-	len = ft_strlen(str);
-	while (env[i])
-	{
-		if (ft_strncmp(env[i], str, len) == 0)
-		{
-			dir = ft_strchr(env[i], '=');
-			if (ft_strlen(env[i]) <= (size_t)len + 1)
-				return (dir);
-			break ;
-		}
-		i++;
-	}
-	return (dir);
 }
 
 void	ft_change_old_pwd(t_mini *mini, char *prev_dir)

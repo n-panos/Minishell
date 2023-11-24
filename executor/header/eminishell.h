@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/24 11:59:21 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:58:24 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void		ft_change_env_var(t_mini *mini, char *arg);
 char		*ft_add_to_env(char **env, char *add);
 int			ft_var_exists(char *env, char *add, int flag);
 int			ft_search_c(char *str, char c);
+char		*ft_get_env_var(char **env, char *str);
 
 //			CD
 int			ft_cd(t_exec *exec, t_mini *mini);
@@ -53,8 +54,8 @@ void		ft_echo_print(int f, int i, t_exec *exec, char *dir);
 //			ENV
 
 int			ft_env(t_mini *mini, t_exec *exec);
-char		**ft_env_compare(char **cmd_mtx, char *env, int out_fd);
 int			ft_env_args(t_exec *exec, t_mini *mini);
+char		**ft_env_compare(char **cmd_mtx, char *env, int out_fd);
 void		ft_env_print(char *str, int out_fd);
 
 //			EXIT
@@ -149,6 +150,7 @@ char		*ft_no_path(char *cmd, char **pos_paths);
 //					**REDIRECT**
 
 int			check_out(t_mini *mini, t_tokens *tkn);
+int			ft_out_open(t_type type, char *value, int ret, t_type prev_type);
 int			check_in(t_mini *mini, t_tokens *tkn, int in);
 int			ft_only_redi(t_tokens *tkn);
 int			ft_file_exists(t_mini *mini, char *file);

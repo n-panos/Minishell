@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:00:56 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/24 11:59:53 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:57:51 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,7 @@ int	check_out(t_mini *mini, t_tokens *tkn)
 				return (-2);
 			break ;
 		}
-		if (ret > 1 && (atkn->type == REDIRECT_OUTPUT \
-		|| atkn->type == REDIRECT_APPEND))
-			close(ret);
-		if (atkn->type == REDIRECT_OUTPUT)
-		{
-			ret = open(atkn->next->value, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-			if (atkn->prev->type == REDIRECT_INPUT)
-				close(ret);
-		}
-		else if (atkn->type == REDIRECT_APPEND)
-			ret = open(atkn->next->value, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		ret = ft_out_open(atkn->type, atkn->next->value, ret, atkn->prev->type);
 		if (ret == -1)
 			return (ft_file_exists(mini, atkn->next->value), ret);
 		atkn = atkn->next;
@@ -45,34 +35,20 @@ int	check_out(t_mini *mini, t_tokens *tkn)
 	return (ret);
 }
 
-/*int	check_out(t_mini *mini, t_tokens *tkn)
+int	ft_out_open(t_type type, char *value, int ret, t_type prev_type)
 {
-	t_tokens	*atkn;
-	int			ret;
-
-	atkn = tkn;
-	ret = 1;
-	while (atkn)
+	if (ret > 1 && (type == REDIRECT_OUTPUT || type == REDIRECT_APPEND))
+		close(ret);
+	if (type == REDIRECT_OUTPUT)
 	{
-		if (atkn->type == PIPE)
-		{
-			if (ret == 1)
-				return (-2);
-			break ;
-		}
-		if (ret > 1 && (atkn->type == REDIRECT_OUTPUT \
-		|| atkn->type == REDIRECT_APPEND))
+		ret = open(value, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (prev_type == REDIRECT_INPUT)
 			close(ret);
-		if (atkn->type == REDIRECT_OUTPUT)
-			ret = open(atkn->next->value, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		else if (atkn->type == REDIRECT_APPEND)
-			ret = open(atkn->next->value, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		if (ret == -1)
-			return (ft_error_cmd(mini, atkn->next->value, 0, -1));
-		atkn = atkn->next;
 	}
+	else if (type == REDIRECT_APPEND)
+		ret = open(value, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	return (ret);
-}*/
+}
 
 int	check_in(t_mini *mini, t_tokens *tkn, int in)
 {
@@ -136,6 +112,3 @@ int	ft_file_exists(t_mini *mini, char *file)
 	free(aux);
 	return (0);
 }
-
-//devuelve -1 si no existe
-//devuelve 0 si existe

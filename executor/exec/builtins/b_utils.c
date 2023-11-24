@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_utils.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 12:49:01 by nacho             #+#    #+#             */
-/*   Updated: 2023/11/21 10:56:17 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/24 12:44:57 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,27 @@ int	ft_search_c(char *str, char c)
 		i++;
 	}
 	return (-1);
+}
+
+char	*ft_get_env_var(char **env, char *str)
+{
+	char	*dir;
+	int		i;
+	int		len;
+
+	i = 0;
+	dir = NULL;
+	len = ft_strlen(str);
+	while (env[i])
+	{
+		if (ft_strncmp(env[i], str, len) == 0)
+		{
+			dir = ft_strchr(env[i], '=');
+			if (ft_strlen(env[i]) <= (size_t)len + 1)
+				return (dir);
+			break ;
+		}
+		i++;
+	}
+	return (dir);
 }

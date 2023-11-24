@@ -6,12 +6,11 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:09:25 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/24 12:07:18 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:59:31 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/eminishell.h"
-
 
 int	ft_builtin_check(t_exec *exec, t_mini *mini)
 {
