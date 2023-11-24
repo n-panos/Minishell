@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 11:41:57 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/23 13:51:22 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:02:45 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,8 @@ void	check_quotes(t_tokens **lst)
 		if (current->quote)
 		{
 			current->value = ft_del_quote(current->value, 0);
-			current->value = ft_del_quote(current->value, ft_strlen(current->value) - 1);
+			current->value = ft_del_quote(current->value, \
+			ft_strlen(current->value) - 1);
 		}
 		current = current->next;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_env_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:46:09 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/20 17:21:27 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:04:06 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ char	*fisrt_arg(char *str, char **cmd)
 		return (NULL);
 	(*cmd)[0] = '"';
 	while (str[++i])
-	{
 		(*cmd)[i + 1] = str[i];
-	}
-	
 	(*cmd)[i + 1] = '"';
 	(*cmd)[i + 2] = '\0';
 	return (*cmd);

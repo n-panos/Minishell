@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:05:17 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/23 13:46:05 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:05:10 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,3 @@ char	*ft_increment_shlvl(char **env)
 	free(new_shlvl);
 	return (env[i]);
 }
-
