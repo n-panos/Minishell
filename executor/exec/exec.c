@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:16:49 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/24 12:00:34 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:23:53 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	ft_execute(t_mini *mini)
 		return (ret);
 	else if (mini->cmd_n == 0)
 		ret = ft_no_cmd(mini->tk_lst, STDIN_FILENO);
-	else if (mini->cmd_n == 1)
+	else if (mini->pipe_n == 0)
 		ret = ft_preprocess_solo(mini);
-	else if (mini->cmd_n > 1)
+	else if (mini->pipe_n >= 1)
 		ret = ft_preprocess_pipe(mini, 0);
 	return (ret);
 }
