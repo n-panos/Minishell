@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:05:52 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/21 11:48:12 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:27:24 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_check_op(char *input)
 			return (ft_parser_error("parse error near ", input[i]));
 		if (input[i] == '>' && input[i + 1] == '|')
 			return (ft_parser_error("parse error near ", input[i]));
-		if (input[i] == '|' && input[i + 1] == '<')
+		if (input[i] == '|' && input[i + 1] == '<' && input[i + 2] != '<')
 			return (ft_parser_error("parse error near ", input[i]));
 		if (input[i] == '<' && input[i + 1] == '|')
 			return (ft_parser_error("parse error near ", input[i]));
