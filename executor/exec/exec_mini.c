@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_mini.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/24 09:39:50 by ipanos-o          #+#    #+#             */
+/*   Updated: 2023/11/24 09:40:01 by ipanos-o         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header/eminishell.h"
 
 int	ft_is_minishell(t_mini *mini, t_exec *exec)
 {
 	char	str[FILENAME_MAX];
 	char	**env;
-	// char	*prev_shlvl;
 	int		status;
 
 	if (!exec->cmd_mtx[0] || ft_strncmp(exec->cmd_mtx[0], "./minishell", 11) \
@@ -12,8 +23,6 @@ int	ft_is_minishell(t_mini *mini, t_exec *exec)
 		return (2);
 	env = ft_mtx_cpy(mini->env);
 	ft_mini_no_exp(mini);
-	// prev_shlvl = ft_strjoin("SHLVL", ft_get_env_var(mini->env, "SHLVL"));
-	// ft_change_shlvl(mini, 1);
 	free(exec->path);
 	getcwd(str, sizeof(str));
 	exec->path = ft_strjoin(str, "/minishell");
@@ -23,8 +32,6 @@ int	ft_is_minishell(t_mini *mini, t_exec *exec)
 	mini->status = ft_wait_status(status);
 	ft_mtx_free(mini->env);
 	mini->env = env;
-	// ft_change_env_var(mini, prev_shlvl);
-	// free(prev_shlvl);
 	return (0);
 }
 

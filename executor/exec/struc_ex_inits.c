@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   struc_ex_inits.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/24 09:39:40 by ipanos-o          #+#    #+#             */
+/*   Updated: 2023/11/24 11:01:54 by ipanos-o         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header/eminishell.h"
 
 t_exec	*ft_add_cmd(t_tokens *tkn, t_mini *mini, int in)
@@ -10,6 +22,8 @@ t_exec	*ft_add_cmd(t_tokens *tkn, t_mini *mini, int in)
 	out = check_out(mini, tkn);
 	while (tkn)
 	{
+		if (tkn->type == PIPE)
+			break ;
 		if (tkn->type == COMMAND)
 		{
 			ret = ft_init_exec(tkn, mini, in, out);
@@ -53,32 +67,36 @@ t_exec	*ft_init_exec(t_tokens *token, t_mini *mini, int in, int out)
 char	**ft_has_empty(t_tokens *minitkn, char **mtx)
 {
 	t_tokens	*tkn;
-	char		**aux_mtx;
-	int			i;
 
 	tkn = minitkn;
-	i = ft_mtx_line_cnt(mtx);
 	while (tkn)
 	{
 		if (tkn->type == PIPE)
 			break ;
-		if (tkn->value[0] == '\0' && i > 0)
-		{
-			aux_mtx = (char **)malloc((i + 2) * sizeof(char *));
-			aux_mtx[0] = ft_strdup(mtx[0]);
-			aux_mtx[1] = ft_strdup("");
-			i = 2;
-			while (mtx[i - 1])
-			{
-				aux_mtx[i] = ft_strdup(mtx[i - 1]);
-				++i;
-			}
-			aux_mtx[i] = NULL;
-			return (ft_mtx_free(mtx), aux_mtx);
-		}
+		if (tkn->value[0] == '\0' && ft_mtx_line_cnt(mtx) > 0)
+			return (ft_remove_empty(mtx));
 		tkn = tkn->next;
 	}
 	return (mtx);
+}
+
+char	**ft_remove_empty(char **mtx)
+{
+	char	**new_mtx;
+	int		i;
+
+	new_mtx = (char **)malloc((ft_mtx_line_cnt(mtx) + 2) * sizeof(char));
+	new_mtx[0] = ft_strdup(mtx[0]);
+	new_mtx[1] = ft_strdup("");
+	i = 2;
+	while (mtx[i - 1])
+	{
+		new_mtx[i] = ft_strdup(mtx[i - 1]);
+		++i;
+	}
+	new_mtx[i] = NULL;
+	ft_mtx_free(mtx);
+	return (new_mtx);
 }
 
 t_exec	*ft_i_mini_util(t_mini *mini, t_tokens *tkn)

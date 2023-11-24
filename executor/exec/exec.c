@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:16:49 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/23 16:39:55 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/24 12:00:34 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_execute(t_mini *mini)
 	if (ft_is_env_i_mini(mini) == 0)
 		return (ret);
 	else if (mini->cmd_n == 0)
-		ret = ft_no_cmd(mini);
+		ret = ft_no_cmd(mini->tk_lst, STDIN_FILENO);
 	else if (mini->cmd_n == 1)
 		ret = ft_preprocess_solo(mini);
 	else if (mini->cmd_n > 1)
@@ -36,21 +36,19 @@ int	ft_execute(t_mini *mini)
 // return 2 si no ha hecho nada, return 0 sin problema, 
 // 1 es exit, -1 error
 
-int	ft_no_cmd(t_mini *mini)
+int	ft_no_cmd(t_tokens *tkn, int in)
 {
 	t_tokens	*atkn;
-	int			i;
 
-	i = 0;
-	atkn = mini->tk_lst;
+	atkn = tkn;
 	while (atkn->next)
 	{
+		if (atkn->type == PIPE)
+			break ;
 		if (atkn->type == HEREDOC)
-			close(here_doc(atkn->next->value));
+			close(here_doc(atkn->next->value, in));
 		if (atkn->type == REDIRECT_OUTPUT)
-			open(atkn->next->value, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (i > 1)
-			close (i);
+			close(open(atkn->next->value, O_WRONLY | O_CREAT | O_TRUNC, 0644));
 		atkn = atkn->next;
 	}
 	return (0);

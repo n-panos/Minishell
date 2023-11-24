@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:00:56 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/20 13:00:51 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/24 11:59:53 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ int	check_in(t_mini *mini, t_tokens *tkn, int in)
 
 	atkn = tkn;
 	ret = in;
+	if (ft_only_redi(atkn) == 1)
+		return (-2);
 	while (atkn)
 	{
 		if (atkn->type == PIPE)
@@ -93,12 +95,28 @@ int	check_in(t_mini *mini, t_tokens *tkn, int in)
 		else if (atkn->type == REDIRECT_INPUT)
 			ret = open(atkn->next->value, O_RDONLY);
 		else if (atkn->type == HEREDOC)
-			ret = here_doc(atkn->next->value);
+			ret = here_doc(atkn->next->value, STDIN_FILENO);
 		if (ret == -1)
 			return (ft_file_exists(mini, atkn->next->value), ret);
 		atkn = atkn->next;
 	}
 	return (ret);
+}
+
+int	ft_only_redi(t_tokens *tkn)
+{
+	t_tokens	*aux;
+
+	aux = tkn;
+	while (aux)
+	{
+		if (aux->type == PIPE)
+			break ;
+		if (aux->type == COMMAND)
+			return (0);
+		aux = aux->next;
+	}
+	return (1);
 }
 
 int	ft_file_exists(t_mini *mini, char *file)

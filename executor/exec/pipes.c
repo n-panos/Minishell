@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 11:49:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/23 09:56:52 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:10:30 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,16 @@ int	ft_preprocess_pipe(t_mini *mini, int in)
 	int			fd[2];
 	int			i;
 
-	i = mini->cmd_n;
+	i = mini->pipe_n;
 	aux = mini->tk_lst;
-	while (i > 0)
+	while (i >= 0)
 	{
 		exec = ft_add_cmd(aux, mini, in);
 		pipe(fd);
 		if (exec)
 			ft_forking_pipe(mini, exec, fd, aux);
+		else
+			ft_no_cmd(aux, in);
 		close(fd[1]);
 		in = fd[0];
 		aux = ft_return_pipe(aux);

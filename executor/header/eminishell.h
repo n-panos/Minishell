@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eminishell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/23 20:15:06 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/24 11:59:21 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void		ft_minishell_exec(char **env, t_exec *exec);
 
 //					**EXECUTE**
 
-int			ft_no_cmd(t_mini *mini);
+int			ft_no_cmd(t_tokens *tkn, int in);
 
 //			PIPE
 
@@ -131,13 +131,14 @@ int			ft_error_cmd(t_mini *mini, char *str, int in, int out);
 
 int			ft_builtin_check(t_exec *exec, t_mini *mini);
 int			ft_builtin_path(char *cmd);
-int			here_doc(char *limiter);
+int			here_doc(char *limiter, int in);
 
 //			STRUCT-INITS
 
 t_exec		*ft_add_cmd(t_tokens *tkn, t_mini *mini, int in);
 t_exec		*ft_init_exec(t_tokens *token, t_mini *mini, int in, int out);
 char		**ft_has_empty(t_tokens *minitkn, char **mtx);
+char		**ft_remove_empty(char **mtx);
 t_exec		*ft_i_mini_util(t_mini *mini, t_tokens *tkn);
 
 //					**FIND-PATH**
@@ -149,6 +150,7 @@ char		*ft_no_path(char *cmd, char **pos_paths);
 
 int			check_out(t_mini *mini, t_tokens *tkn);
 int			check_in(t_mini *mini, t_tokens *tkn, int in);
+int			ft_only_redi(t_tokens *tkn);
 int			ft_file_exists(t_mini *mini, char *file);
 
 #endif
