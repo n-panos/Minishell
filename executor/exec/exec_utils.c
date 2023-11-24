@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/24 10:41:57 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:33:36 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_pipe_wait(t_mini *mini)
 	while (n >= 0)
 	{
 		wait(&status);
-		if (mini->pipe_status == 0 && mini->status == 0)
+		if (mini->pipe_status == 0 && mini->status == 0 && status != 13)
 			mini->status = ft_wait_status(status);
 		--n;
 	}
