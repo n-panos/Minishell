@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/24 12:58:24 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/29 09:42:36 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ char		*ft_no_path(char *cmd, char **pos_paths);
 //					**REDIRECT**
 
 int			check_out(t_mini *mini, t_tokens *tkn);
-int			ft_out_open(t_type type, char *value, int ret, t_type prev_type);
+int			ft_out_open(t_type type, int ret, t_tokens *tkn);
 int			check_in(t_mini *mini, t_tokens *tkn, int in);
 int			ft_only_redi(t_tokens *tkn);
 int			ft_file_exists(t_mini *mini, char *file);

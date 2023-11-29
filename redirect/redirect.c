@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:00:56 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/24 12:57:51 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/29 09:42:27 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	check_out(t_mini *mini, t_tokens *tkn)
 				return (-2);
 			break ;
 		}
-		ret = ft_out_open(atkn->type, atkn->next->value, ret, atkn->prev->type);
+		ret = ft_out_open(atkn->type, ret, atkn);
 		if (ret == -1)
 			return (ft_file_exists(mini, atkn->next->value), ret);
 		atkn = atkn->next;
@@ -35,18 +35,18 @@ int	check_out(t_mini *mini, t_tokens *tkn)
 	return (ret);
 }
 
-int	ft_out_open(t_type type, char *value, int ret, t_type prev_type)
+int	ft_out_open(t_type type, int ret, t_tokens *tkn)
 {
 	if (ret > 1 && (type == REDIRECT_OUTPUT || type == REDIRECT_APPEND))
 		close(ret);
 	if (type == REDIRECT_OUTPUT)
 	{
-		ret = open(value, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (prev_type == REDIRECT_INPUT)
+		ret = open(tkn->next->value, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (tkn->prev && tkn->prev->type == REDIRECT_INPUT)
 			close(ret);
 	}
 	else if (type == REDIRECT_APPEND)
-		ret = open(value, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		ret = open(tkn->next->value, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	return (ret);
 }
 
