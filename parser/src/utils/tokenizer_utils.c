@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 20:08:07 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/10/22 12:19:43 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/29 13:20:11 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	ft_arguments(t_parser *tools, int index)
 	str = tools->input;
 	while (str[index])
 	{
+		tools->not_increment = 0;
 		if (index > -1 && (str[index] == '"' || str[index] == '\''))
 		{
 			index = ft_in_quote(tools, index);
@@ -54,14 +55,14 @@ int	ft_arguments(t_parser *tools, int index)
 		}
 		if (index > -1 && str[index] == '$')
 		{
-			index = ft_expander(tools, index);
-			str = tools->input;
+			index = ft_expander(tools, index, &str);
 		}
 		if (index > -1 && (str[index] == ' ' || str[index] == '\t'))
 			break ;
 		if (index == -1 || (ft_strchr(DELIMITERS, str[index])))
 			break ;
-		index++;
+		if (tools->not_increment == 0)
+			index++;
 	}
 	if (index == -1)
 		tools->error = 1;

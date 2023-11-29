@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 09:25:43 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/23 13:46:09 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/29 13:21:03 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_parser
 	int					error;
 	int					quote;
 	int					expander;
+	int					not_increment;
 }	t_parser;
 /*
 *	PARSER
@@ -80,7 +81,7 @@ int		ft_three_str(t_truncate *tr, t_parser *tools);
 /* expander.c */
 int		ft_getpid(t_parser *tools, int index);
 int		ft_expand_env(t_parser *tools, int index);
-int		ft_expander(t_parser *tools, int index);
+int		ft_expander(t_parser *tools, int index, char **str_iter);
 int		ft_getstatus(t_parser *tools, int index);
 /* inquote.c */
 int		ft_in_quote(t_parser *tools, int index);

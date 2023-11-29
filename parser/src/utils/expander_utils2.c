@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 17:45:59 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/20 17:30:44 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/29 13:12:11 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ int	ft_is_operator(t_parser *tools, int index)
 	str = tools->input;
 	while (i >= 0 && (str[i] == ' ' || str[i] == '\t'))
 		i--;
-	if (str[i] == '<')
+	if (i >= 0 && str[i] == '<')
 	{
 		i--;
 		if (i >= 0 && str[i] == '<')
 			return (1);
+		return (1);
 	}
 	return (0);
 }

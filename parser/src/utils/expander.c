@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:37:30 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/23 17:00:58 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/29 13:21:29 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 *	Retorna -1 en caso de error
 */
-int	ft_expander(t_parser *tools, int index)
+int	ft_expander(t_parser *tools, int index, char **str_iter)
 {
 	char	*str;
 
@@ -32,6 +32,7 @@ int	ft_expander(t_parser *tools, int index)
 	}
 	else
 		index = ft_not_expand(tools, index);
+	*str_iter = tools->input;
 	return (index);
 }
 
@@ -91,5 +92,9 @@ int	ft_expand_env(t_parser *tools, int index)
 		tools->input = NULL;
 		return (-1);
 	}
+	if (i_env == 0)
+		tools->not_increment = 1;
+	else
+		tools->not_increment = 0;
 	return (index + i_env);
 }
