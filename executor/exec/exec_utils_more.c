@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:09:25 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/24 12:59:31 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:29:00 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_builtin_check(t_exec *exec, t_mini *mini)
 	else if (ft_strncmp(exec->cmd_mtx[0], "export", 6) == 0)
 		i = ft_export(mini, exec);
 	else if (ft_strncmp(exec->cmd_mtx[0], "pwd", 3) == 0)
-		i = ft_pwd(exec);
+		i = ft_pwd(exec, mini->env);
 	else if (ft_strncmp(exec->cmd_mtx[0], "unset", 5) == 0)
 		i = ft_unset(mini, exec->cmd_mtx);
 	if (i != 2 && mini->status == 0)

@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:18:48 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/24 12:44:50 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/29 13:04:02 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,22 @@
 int	ft_cd(t_exec *exc, t_mini *mini)
 {
 	char	str[FILENAME_MAX];
+	char	*aux;
 
 	if (ft_strlen(exc->cmd_mtx[0]) != 2)
 		return (2);
-	getcwd(str, sizeof(str));
-	ft_cd_select(mini, exc);
+	if (getcwd(str, sizeof(str)) == NULL)
+	{
+		aux = ft_get_env_var(mini->env, "PWD");
+		aux = ft_strjoin("PWD", aux);
+		aux = ft_strfjoin(aux, "..");
+		ft_change_env_var(mini, aux);
+		printf("cd: error retrieving current directory: getcwd: cannot ");
+		printf("access parent directories: No such file or directory\n");
+		return (free(aux), 0);
+	}
+	else
+		ft_cd_select(mini, exc);
 	if (mini->status == -1)
 		mini->status = 1;
 	else

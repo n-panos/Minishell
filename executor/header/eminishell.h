@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/29 09:42:36 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:45:26 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int			ft_cd(t_exec *exec, t_mini *mini);
 int			ft_cd_select(t_mini *mini, t_exec *exc);
 int			ft_cd_standard_dir(char *dir);
 int			ft_cd_env_var(char **env, char *str, int out_fd);
-char		*ft_get_env_var(char **env, char *str);
 void		ft_change_old_pwd(t_mini *mini, char *prev_dir);
 
 //			ECHO
@@ -80,7 +79,7 @@ int			ft_check_list(int *list, int n);
 
 //			PWD
 
-int			ft_pwd(t_exec *exec);
+int			ft_pwd(t_exec *exec, char **env);
 
 //			UNSET
 
