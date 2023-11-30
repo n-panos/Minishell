@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:19:04 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/23 11:56:53 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/30 12:28:35 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,23 @@ int	ft_echo(t_exec *exec, char *dir)
 int	ft_echo_args(char *arg)
 {
 	int	flag;
+	int	i;
 
 	flag = ft_strncmp(arg, "-n", 2);
-	if (flag == 0 && ft_strlen(arg) == 2)
+	if (flag == 0)
+	{
+		i = 2;
+		while (arg[i])
+		{
+			if (arg[i] != 'n')
+			{
+				flag = 1;
+				break ;
+			}
+			++i;
+		}
+	}
+	if (flag == 0)
 		return (1);
 	return (0);
 }
@@ -56,7 +70,7 @@ void	ft_echo_print(int f, int i, t_exec *exec, char *dir)
 			ft_putstr_fd(dir++, exec->fd_out);
 			ft_putchar_fd(' ', exec->fd_out);
 		}
-		else if (ft_strncmp(exec->cmd_mtx[j], "-n", 2) != 0)
+		else if (ft_echo_args(exec->cmd_mtx[j]) == 0 || f == 0)
 		{
 			ft_putstr_fd(exec->cmd_mtx[j], exec->fd_out);
 			ft_putchar_fd(' ', exec->fd_out);

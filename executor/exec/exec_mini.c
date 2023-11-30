@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 09:39:50 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/24 09:40:01 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/30 11:51:06 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_is_minishell(t_mini *mini, t_exec *exec)
 	mini->status = ft_wait_status(status);
 	ft_mtx_free(mini->env);
 	mini->env = env;
-	return (0);
+	return (5);
 }
 
 void	ft_mini_no_exp(t_mini *mini)

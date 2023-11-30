@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_solo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/23 16:38:55 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/30 11:51:36 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	ft_solo_no_child(t_mini *mini, t_exec *exec)
 		i = ft_is_minishell(mini, exec);
 	if (i == 2 && exec->path == NULL)
 		i = ft_error_cmd(mini, exec->cmd_mtx[0], exec->fd_in, exec->fd_out);
-	else
+	else if (i != 5)
 		mini->status = 0;
 	if (i != 2)
 		ft_free_exec(mini, exec);

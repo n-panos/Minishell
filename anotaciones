@@ -2,5 +2,3 @@ Erick	 ¿ARREGLADO? echo $PWD$HHH$HOME ($HHH no existe, deberia deshecharlo y vo
 
 Nacho
 		echo $()
-		echo -nnnnnnnnnn hola
-		return exit 5 mini dentro de mini
