@@ -1,7 +1,6 @@
-Erick	 echo $PWD$HHH$HOME ($HHH no existe, deberia deshecharlo y volver con home)
+Erick	 ¿ARREGLADO? echo $PWD$HHH$HOME ($HHH no existe, deberia deshecharlo y volver con home)
 
 Nacho
 		echo $()
 		echo -nnnnnnnnnn hola
 		return exit 5 mini dentro de mini
-		ruta no existe

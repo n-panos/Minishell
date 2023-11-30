@@ -47,7 +47,7 @@ EXEC			=	exec.c exec_mini.c exec_solo.c pipes.c pipes_utils.c exec_utils.c find_
 EXEC_PATH		=	$(addprefix executor/exec/, $(EXEC))
 SRCS			+=	$(EXEC_PATH)
 
-BUILTINS		=	pwd.c echo.c env.c cd.c unset.c exit.c b_utils.c export.c export_utils.c
+BUILTINS		=	pwd.c echo.c env.c cd.c cd_utils.c unset.c exit.c b_utils.c export.c export_utils.c
 BUILTINS_PATH	=	$(addprefix executor/exec/builtins/, $(BUILTINS))
 SRCS			+=	$(BUILTINS_PATH)
 
