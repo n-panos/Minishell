@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:02 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/24 13:01:08 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/29 13:25:22 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,24 +81,6 @@ static void	check_argv(int argc, char **argv, char **envp, t_mini *mini)
 	if (envp[0] && ft_increment_shlvl(mini->env) == NULL)
 		exit(EXIT_FAILURE);
 	ft_env_rm(mini, "OLDPWD");
-}
-
-char	*create_prompt(void)
-{
-	char	pwd[1024];
-	char	*mini;
-	char	*tmp;
-	char	*prompt;
-
-	mini = "\001"GREEN"[Minishell]"YELLOW" in ";
-	if (getcwd(pwd, sizeof(pwd)) == NULL)
-		exit (1);
-	tmp = ft_strjoin(mini, (const char *)pwd);
-	prompt = ft_strjoin(tmp, " $\002 "OFF);
-	if (prompt == NULL)
-		exit (1);
-	free(tmp);
-	return (prompt);
 }
 
 int	main(int argc, char **argv, char **envp)

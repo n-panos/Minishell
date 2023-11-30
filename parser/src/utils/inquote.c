@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inquote.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 13:27:26 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/24 13:04:36 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/29 13:20:00 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,9 @@ int	ft_in_quote(t_parser *tools, int index)
 		if (quote_char == '"' && str[index] == '$' && \
 		(str[index + 1] != '"' && str[index + 1] != '\''))
 		{
-			index = ft_expander(tools, index);
+			index = ft_expander(tools, index, &str);
 			if (index == -1)
 				return (-1);
-			str = tools->input;
 		}
 		else
 			index++;

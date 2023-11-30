@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/24 10:00:20 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/29 13:25:14 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ int			ft_parser_error(char *err, char c);
 
 // PARSER
 /**/
-char		*create_prompt(void);
 int			minishell_loop(t_mini *mini, t_parser *tools);
 /**/
 t_tokens	*create_list(t_parser *tools);

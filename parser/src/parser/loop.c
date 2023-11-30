@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:20:40 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/23 10:43:53 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/11/29 13:25:04 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,12 @@ char	*get_input(char	**input_ptr, struct termios *original)
 {
 	char	*input;
 	char	*input_tmp;
-	// char	*prompt;
 
 	tcsetattr(STDIN_FILENO, TCSANOW, original);
 	while (1)
 	{
-		// prompt = create_prompt();
 		if (isatty(STDIN_FILENO))
 			input = readline(PROMPT);
-		// free(prompt);
 		if (input == NULL)
 		{
 			ft_putendl_fd("exit", 1);
