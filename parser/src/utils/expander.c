@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:37:30 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/29 13:21:29 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/12/04 16:31:42 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	ft_expander(t_parser *tools, int index, char **str_iter)
 			index = ft_getstatus(tools, index);
 		else if (ft_isalnum(str[index + 1]) || str[index + 1] == '_')
 			index = ft_expand_env(tools, index);
+		index++;
 	}
 	else
 		index = ft_not_expand(tools, index);
