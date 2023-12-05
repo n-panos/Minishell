@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:19:43 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/29 12:38:55 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:30:07 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ int	ft_pwd(t_exec *exec, char **env)
 	if (exec->cmd_mtx[1] && exec->cmd_mtx[1][0] == '-' && \
 	exec->cmd_mtx[1][1] != '\0' && exec->cmd_mtx[1][1] != '-')
 	{
-		printf("minishell: pwd: -%c", exec->cmd_mtx[1][1]);
-		printf(": invalid option\npwd: usage: pwd [-LP]\n");
+		ft_putstr_fd("minishell: pwd: -", 2);
+		ft_putchar_fd(exec->cmd_mtx[1][1], 2);
+		ft_putendl_fd(": invalid option\npwd: usage: pwd [-LP]", 2);
 	}
 	if (getcwd(str, sizeof(str)) != NULL)
 	{

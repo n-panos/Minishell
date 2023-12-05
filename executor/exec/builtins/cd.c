@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:18:48 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/30 11:27:52 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:26:38 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int	ft_cd_select(t_mini *mini, t_exec *exc)
 	{
 		mini->status = ft_cd_standard_dir(exc->cmd_mtx[1]);
 		if (mini->status == -1)
-			printf("minishell: cd: %s: No such file or directory\n", \
-			exc->cmd_mtx[1]);
+			ft_print_err("minishell: cd: ", exc->cmd_mtx[1], \
+			": No such file or directory");
 	}
 	return (0);
 }
@@ -78,9 +78,9 @@ int	ft_cd_env_var(char **env, char *str, int out_fd)
 	if (dir == NULL)
 	{
 		if (ft_strlen(str) == 6)
-			printf("minishell: cd: OLDPWD not set\n");
+			ft_print_err("minishell: cd: OLDPWD not set", NULL, NULL);
 		if (ft_strlen(str) == 4)
-			printf("minishell: cd: HOME not set\n");
+			ft_print_err("minishell: cd: HOME not set", NULL, NULL);
 		return (1);
 	}
 	if (ft_strlen(dir) == 1)
@@ -88,7 +88,7 @@ int	ft_cd_env_var(char **env, char *str, int out_fd)
 	dir++;
 	i = chdir(dir);
 	if (i == -1)
-		printf("minishell: cd: %s: No such file or directory\n", dir);
+		ft_print_err("minishell: cd: ", dir, ": No such file or directory");
 	else if (ft_strlen(str) == 6)
 		ft_env_print(dir, out_fd);
 	return (i);

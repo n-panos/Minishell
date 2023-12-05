@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:20:35 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/23 13:06:41 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:26:38 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,16 @@ int	ft_env_args(t_exec *exec, t_mini *mini)
 
 	i = 1;
 	if (!exec->path)
-		return (printf("minishell: env: command not found\n"), 1);
+		return (ft_print_err("minishell: env: command not found", NULL, \
+		NULL), 1);
 	if (mini->flag_path == -1)
-		return (printf("minishell: env: No such file or directory\n"), 1);
+		return (ft_print_err("minishell: env: No such file or directory", \
+		NULL, NULL), 1);
 	while (exec->cmd_mtx[i])
 	{
 		if (!ft_strchr(exec->cmd_mtx[i], '='))
 		{
-			printf("env: %s: No such file or directory\n", exec->cmd_mtx[i]);
+			ft_print_err("env: ", exec->cmd_mtx[i], ": No such file or directory");
 			return (1);
 		}
 		i++;

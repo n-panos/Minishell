@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:56:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/30 11:51:36 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:26:38 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@ void	ft_executing_solo_cmds(char **env, t_exec *exec)
 		close(exec->fd_out);
 	}
 	execve(exec->path, exec->cmd_mtx, env);
-	printf("minishell: %s: Permission denied\n", exec->cmd_mtx[0]);
+	ft_print_err("minishell: ", exec->cmd_mtx[0], ": Permission denied");
 	exit(EXIT_FAILURE);
 }

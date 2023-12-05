@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:19:23 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/23 12:15:07 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:26:38 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_exit(t_mini *mini, t_exec *exec)
 		return (ft_free_exec(mini, exec), 1);
 	if (i > 2)
 	{
-		printf("minishell: exit: too many arguments\n");
+		ft_print_err("minishell: exit: too many arguments", NULL, NULL);
 		mini->status = 1;
 		return (ft_free_exec(mini, exec), 0);
 	}
@@ -43,7 +43,7 @@ int	ft_exit_more_args(char *arg)
 	i = 0;
 	if (arg[0] == '\0')
 	{
-		printf("minishell: exit: %s: numeric argument required\n", arg);
+		ft_print_err("minishell: exit: ", arg, ": numeric argument required");
 		return (255);
 	}
 	if (arg[0] == '-' || arg[0] == '+')
@@ -52,7 +52,8 @@ int	ft_exit_more_args(char *arg)
 	{
 		if (ft_isdigit(arg[i]) == 0)
 		{
-			printf("minishell: exit: %s: numeric argument required\n", arg);
+			ft_print_err("minishell: exit: ", arg, \
+			": numeric argument required");
 			return (255);
 		}
 		++i;

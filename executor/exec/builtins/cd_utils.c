@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 09:50:11 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/30 11:39:37 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:26:38 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_null_getcwd(t_mini *mini)
 	aux = ft_strjoin("PWD", aux);
 	aux = ft_strfjoin(aux, "/..");
 	ft_change_env_var(mini, aux);
-	printf("cd: error retrieving current directory: getcwd: cannot ");
-	printf("access parent directories: No such file or directory\n");
+	ft_print_err("cd: error retrieving current directory: getcwd: cannot \
+	access parent directories: No such file or directory", NULL, NULL);
 	return (free(aux), 0);
 }

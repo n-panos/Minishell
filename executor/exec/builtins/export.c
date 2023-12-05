@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:50:28 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/23 10:56:42 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:26:46 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_export_more_args(t_mini *mini, char *arg)
 	if (!arg[i])
 	{
 		mini->status = 1;
-		printf("minishell: export: `%s': not a valid identifier\n", arg);
+		ft_print_err("minishell: export: `", arg, "': not a valid identifier");
 		return (0);
 	}
 	while (arg[i])
@@ -56,7 +56,8 @@ int	ft_export_more_args(t_mini *mini, char *arg)
 		(i == 0 && ft_isalpha(arg[i]) == 0)))
 		{
 			mini->status = 1;
-			printf("minishell: export: `%s': not a valid identifier\n", arg);
+			ft_print_err("minishell: export: `", arg, \
+			"': not a valid identifier");
 			return (0);
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:09:25 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/29 12:29:00 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:26:38 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,16 @@ int	here_doc(char *limiter, int in)
 		free(line);
 	close(fd[1]);
 	return (fd[0]);
+}
+
+void	ft_print_err(char *a, char *b, char *c)
+{
+	if (a)
+		ft_putstr_fd(a, 2);
+	if (b)
+		ft_putstr_fd(b, 2);
+	if (c)
+		ft_putendl_fd(c, 2);
+	if (!b && !c)
+		ft_putchar_fd('\n', 2);
 }

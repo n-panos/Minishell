@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/30 10:03:12 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:25:05 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ int			ft_error_cmd(t_mini *mini, char *str, int in, int out);
 int			ft_builtin_check(t_exec *exec, t_mini *mini);
 int			ft_builtin_path(char *cmd);
 int			here_doc(char *limiter, int in);
+void		ft_print_err(char *a, char *b, char *c);
 
 //			STRUCT-INITS
 

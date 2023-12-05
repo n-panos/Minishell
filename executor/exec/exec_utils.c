@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:17:59 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/24 12:33:36 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:26:38 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,16 @@ int	ft_error_cmd(t_mini *mini, char *str, int in, int out)
 {
 	mini->status = 1;
 	if (in == -2 || out == -2)
-		printf("minishell: %s: Permission denied\n", str);
-	else if (in == -1 || out == -1)
-		printf("minishell: %s: No such file or directory\n", str);
-	else if (mini->flag_path == -1)
-		printf("minishell: %s: No such file or directory\n", str);
+		ft_print_err("minishell: ", str, ": Permission denied");
+	else if (in == -1 || out == -1 || mini->flag_path == -1)
+		ft_print_err("minishell: ", str, ": No such file or directory");
 	else
 	{
 		mini->status = 127;
 		if (!str)
-			printf("minishell: : command not found\n");
+			ft_print_err("minishell: : command not found", NULL, NULL);
 		else
-			printf("minishell: %s: command not found\n", str);
+			ft_print_err("minishell: ", str, ": command not found");
 	}
 	mini->pipe_status++;
 	return (0);
