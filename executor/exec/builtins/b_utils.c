@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 12:49:01 by nacho             #+#    #+#             */
-/*   Updated: 2023/11/24 12:44:57 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:40:22 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,18 @@ char	*ft_add_to_env(char **env, char *add)
 
 int	ft_var_exists(char *env, char *add, int flag)
 {
-	int	len;
+	int	len_env;
+	int	len_add;
 
 	if (flag > 0)
 		return (2);
-	len = (ft_search_c(env, '='));
-	if (len == -1)
-		len = ft_strlen(env);
-	if (add && ft_strncmp(env, add, len) == 0 && len == ft_search_c(add, '='))
+	len_env = (ft_search_c(env, '='));
+	len_add = ft_search_c(add, '=');
+	if (len_env == -1)
+		len_env = ft_strlen(env);
+	if (len_add == -1)
+		len_add = ft_strlen(add);
+	if (add && ft_strncmp(env, add, len_env) == 0 && len_env == len_add)
 		return (1);
 	return (0);
 }
