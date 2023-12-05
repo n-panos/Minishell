@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:35:34 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/05 18:45:19 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:54:36 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ char	*ft_str_construct(int ref, char **env, char *str_exp)
 		aux = ft_strfjoin(aux, "='");
 		aux = ft_join_n(aux, comillas[1], "'\n");
 	}
-	else
+	else if (ft_search_c(env[ref], '=') != -1)
 		aux = ft_join_n(aux, "='", "'\n");
+	else
+		aux = ft_strfjoin(aux, "\n");
 	ft_mtx_free(comillas);
 	return (aux);
 }
