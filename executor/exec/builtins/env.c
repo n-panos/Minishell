@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:20:35 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/05 18:26:38 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/05 19:06:23 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ int	ft_env_args(t_exec *exec, t_mini *mini)
 	{
 		if (!ft_strchr(exec->cmd_mtx[i], '='))
 		{
-			ft_print_err("env: ", exec->cmd_mtx[i], ": No such file or directory");
+			ft_print_err("env: ", exec->cmd_mtx[i],
+				": No such file or directory");
 			return (1);
 		}
 		i++;
