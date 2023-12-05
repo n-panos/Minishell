@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:18:48 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/05 18:26:38 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/05 20:32:42 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_cd(t_exec *exc, t_mini *mini)
 	else
 		ft_cd_select(mini, exc);
 	if (mini->status == -1)
-		mini->status = 1;
+		return (mini->status = 1, 5);
 	else
 		ft_change_old_pwd(mini, str);
 	return (0);
