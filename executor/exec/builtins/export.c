@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:50:28 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/05 18:26:46 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/12 14:49:04 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	ft_export(t_mini *mini, t_exec *exec)
 		if (tkn->type == PIPE)
 			break ;
 		if (tkn->type == ARGUMENT)
-			ft_export_more_args(mini, tkn->value);
+			if (ft_export_more_args(mini, tkn->value) == 5)
+				return (5);
 		tkn = tkn->next;
 		i = 1;
 	}
@@ -46,7 +47,7 @@ int	ft_export_more_args(t_mini *mini, char *arg)
 	{
 		mini->status = 1;
 		ft_print_err("minishell: export: `", arg, "': not a valid identifier");
-		return (0);
+		return (5);
 	}
 	while (arg[i])
 	{
