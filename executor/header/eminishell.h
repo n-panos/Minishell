@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/05 18:25:05 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/12 12:04:20 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,6 @@ void		ft_print_err(char *a, char *b, char *c);
 
 t_exec		*ft_add_cmd(t_tokens *tkn, t_mini *mini, int in);
 t_exec		*ft_init_exec(t_tokens *token, t_mini *mini, int in, int out);
-char		**ft_has_empty(t_tokens *minitkn, char **mtx);
-char		**ft_remove_empty(char **mtx);
 t_exec		*ft_i_mini_util(t_mini *mini, t_tokens *tkn);
 
 //					**FIND-PATH**

@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 09:39:40 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/24 11:01:54 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/12 12:03:56 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,43 +60,7 @@ t_exec	*ft_init_exec(t_tokens *token, t_mini *mini, int in, int out)
 	}
 	exec->cmd_mtx = ft_split(aux_cmd, ' ');
 	free(aux_cmd);
-	exec->cmd_mtx = ft_has_empty(token, exec->cmd_mtx);
 	return (exec);
-}
-
-char	**ft_has_empty(t_tokens *minitkn, char **mtx)
-{
-	t_tokens	*tkn;
-
-	tkn = minitkn;
-	while (tkn)
-	{
-		if (tkn->type == PIPE)
-			break ;
-		if (tkn->value[0] == '\0' && ft_mtx_line_cnt(mtx) > 0)
-			return (ft_remove_empty(mtx));
-		tkn = tkn->next;
-	}
-	return (mtx);
-}
-
-char	**ft_remove_empty(char **mtx)
-{
-	char	**new_mtx;
-	int		i;
-
-	new_mtx = (char **)malloc((ft_mtx_line_cnt(mtx) + 2) * sizeof(char));
-	new_mtx[0] = ft_strdup(mtx[0]);
-	new_mtx[1] = ft_strdup("");
-	i = 2;
-	while (mtx[i - 1])
-	{
-		new_mtx[i] = ft_strdup(mtx[i - 1]);
-		++i;
-	}
-	new_mtx[i] = NULL;
-	ft_mtx_free(mtx);
-	return (new_mtx);
 }
 
 t_exec	*ft_i_mini_util(t_mini *mini, t_tokens *tkn)
