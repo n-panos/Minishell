@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 13:27:26 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/12/04 16:31:45 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/12/12 12:39:35 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int	ft_in_quote(t_parser *tools, int index)
 	char	quote_char;
 
 	quote_char = tools->input[index];
-	tools->input = ft_del_quote(tools->input, index);
-	str = tools->input;
+	str = ft_del_quote(tools->input, index);
+	// str = tools->input;
 	if (str == NULL)
 		return (-1);
 	while (str[index] && str[index] != quote_char)
@@ -62,5 +62,7 @@ int	ft_in_quote(t_parser *tools, int index)
 	tools->input = ft_del_quote(str, index);
 	if (tools->input == NULL)
 		return (-1);
+	if (tools->input[index] == '"' || tools->input[index] == '\'')
+		tools->not_increment = 1;
 	return (index);
 }
