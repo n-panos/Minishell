@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/12 12:04:20 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/12 14:25:55 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int			ft_null_getcwd(t_mini *mini);
 int			ft_echo(t_exec *exec, char *dir);
 int			ft_echo_args(char *arg);
 void		ft_echo_print(int f, int i, t_exec *exec, char *dir);
+void		ft_echo_to_print(char *arg, int fd, char *dir, int f);
 
 //			ENV
 
@@ -140,6 +141,7 @@ void		ft_print_err(char *a, char *b, char *c);
 
 t_exec		*ft_add_cmd(t_tokens *tkn, t_mini *mini, int in);
 t_exec		*ft_init_exec(t_tokens *token, t_mini *mini, int in, int out);
+char		**ft_mini_split(t_tokens *minitkn);
 t_exec		*ft_i_mini_util(t_mini *mini, t_tokens *tkn);
 
 //					**FIND-PATH**

@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:19:04 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/05 18:06:18 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/12 14:25:30 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_echo(t_exec *exec, char *dir)
 		return (2);
 	while (exec->cmd_mtx[i])
 		i++;
-	if (i == 1 || exec->cmd_mtx[1][0] == '\0')
+	if (i == 1 || (i == 2 && exec->cmd_mtx[1][0] == '\0'))
 	{
 		printf("\n");
 		return (0);
@@ -65,16 +65,7 @@ void	ft_echo_print(int f, int i, t_exec *exec, char *dir)
 	j = 1 + f;
 	while (j < i - 1)
 	{
-		if (ft_strncmp(exec->cmd_mtx[j], "~", ft_strlen(exec->cmd_mtx[j])) == 0)
-		{
-			ft_putstr_fd(dir++, exec->fd_out);
-			ft_putchar_fd(' ', exec->fd_out);
-		}
-		else if (ft_echo_args(exec->cmd_mtx[j]) == 0 || f == 0)
-		{
-			ft_putstr_fd(exec->cmd_mtx[j], exec->fd_out);
-			ft_putchar_fd(' ', exec->fd_out);
-		}
+		ft_echo_to_print(exec->cmd_mtx[j], exec->fd_out, dir, f);
 		j++;
 	}
 	if (ft_strncmp(exec->cmd_mtx[j], "~", ft_strlen(exec->cmd_mtx[j])) == 0)
@@ -83,4 +74,20 @@ void	ft_echo_print(int f, int i, t_exec *exec, char *dir)
 		ft_putstr_fd(exec->cmd_mtx[j], exec->fd_out);
 	if (f == 0)
 		ft_putchar_fd('\n', exec->fd_out);
+}
+
+void	ft_echo_to_print(char *arg, int fd, char *dir, int f)
+{
+	if (arg[0] == '\0')
+		ft_putchar_fd(' ', fd);
+	else if (ft_strncmp(arg, "~", ft_strlen(arg)) == 0)
+	{
+		ft_putstr_fd(dir++, fd);
+		ft_putchar_fd(' ', fd);
+	}
+	else if (ft_echo_args(arg) == 0 || f == 0)
+	{
+		ft_putstr_fd(arg, fd);
+		ft_putchar_fd(' ', fd);
+	}
 }
