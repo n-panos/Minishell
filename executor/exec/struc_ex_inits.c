@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struc_ex_inits.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 09:39:40 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/12 14:06:45 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/14 10:24:57 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ char	**ft_mini_split(t_tokens *minitkn)
 
 	tkn = minitkn;
 	i = 1;
-	while (tkn && (tkn->type == COMMAND || tkn->type == ARGUMENT \
-	|| tkn->type == PIPE))
+	while (tkn && (tkn->type == COMMAND || tkn->type == ARGUMENT))
 	{
 		tkn = tkn->next;
 		++i;
@@ -70,8 +69,7 @@ char	**ft_mini_split(t_tokens *minitkn)
 	mtx = malloc(i * sizeof(char **));
 	i = 0;
 	tkn = minitkn;
-	while (tkn && (tkn->type == COMMAND || tkn->type == ARGUMENT \
-	|| tkn->type == PIPE))
+	while (tkn && (tkn->type == COMMAND || tkn->type == ARGUMENT))
 	{
 		mtx[i] = ft_strdup(tkn->value);
 		tkn = tkn->next;
