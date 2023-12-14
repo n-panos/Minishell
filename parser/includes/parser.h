@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 09:25:43 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/29 13:21:03 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/12/12 18:48:23 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int		ft_expander(t_parser *tools, int index, char **str_iter);
 int		ft_getstatus(t_parser *tools, int index);
 /* inquote.c */
 int		ft_in_quote(t_parser *tools, int index);
-char	*ft_del_quote(char *str, int index);
+char	*ft_del_quote(char **str, int index);
 /* expander_utils2.c */
 int		ft_is_operator(t_parser *tools, int index);
 int		ft_not_expand(t_parser *tools, int index);

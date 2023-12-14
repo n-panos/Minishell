@@ -3,34 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   inquote.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 13:27:26 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/12/12 12:41:17 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/12/12 18:49:12 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../executor/header/eminishell.h"
 
-char	*ft_del_quote(char *str, int index)
+char	*ft_del_quote(char **str, int index)
 {
 	char	*result;
+	char	*str_ptr;
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 0;
-	result = malloc(sizeof(char) * ft_strlen(str));
+	str_ptr = *str;
+	result = malloc(sizeof(char) * ft_strlen(str_ptr));
 	if (result == NULL)
 		return (NULL);
-	while (str[i])
+	while (str_ptr[i])
 	{
 		if (i != index)
-			result[j++] = str[i];
+			result[j++] = str_ptr[i];
 		i++;
 	}
 	result[j] = '\0';
-	free(str);
+	free(*str);
+	*str = result;
 	return (result);
 }
 
@@ -43,9 +46,9 @@ int	ft_in_quote(t_parser *tools, int index)
 	char	quote_char;
 
 	quote_char = tools->input[index];
-	str = ft_del_quote(tools->input, index);
-	if (str == NULL)
+	if (ft_del_quote(&tools->input, index) == NULL)
 		return (-1);
+	str = tools->input;
 	while (str[index] && str[index] != quote_char)
 	{
 		if (quote_char == '"' && str[index] == '$' && \
@@ -58,8 +61,8 @@ int	ft_in_quote(t_parser *tools, int index)
 		else
 			index++;
 	}
-	tools->input = ft_del_quote(str, index);
-	if (tools->input == NULL)
+	tools->input = str;
+	if (ft_del_quote(&tools->input, index) == NULL)
 		return (-1);
 	if (tools->input[index] == '"' || tools->input[index] == '\'')
 		tools->not_increment = 1;
