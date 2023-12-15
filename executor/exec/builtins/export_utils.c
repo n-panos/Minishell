@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:35:34 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/05 18:54:36 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/15 12:53:15 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int	*ft_add_used(int *prev_used, int new_used)
 
 int	ft_check_ref(int *used, int i, int ref, char **env)
 {
+	if (ref == 1 && !env[ref])
+		ref = 0;
 	if (ft_check_list(used, i) == 0)
 	{
 		if (ft_check_list(used, -1) == 1 && ref == 0)

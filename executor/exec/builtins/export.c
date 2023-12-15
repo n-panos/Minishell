@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:50:28 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/12 14:49:04 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/15 13:00:25 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,9 @@ int	ft_print_export(t_mini *mini, int out_fd)
 	if (!used)
 		return (-1);
 	used[0] = '\0';
-	str_exp = ft_strdup(" ");
-	str_exp = ft_orden(mini->env, 0, str_exp, used);
+	str_exp = ft_strdup("");
+	if (mini->env[1])
+		str_exp = ft_orden(mini->env, 0, str_exp, used);
 	ft_putstr_fd(str_exp, out_fd);
 	free(str_exp);
 	return (0);
