@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 20:08:07 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/29 13:20:11 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/12/15 14:55:13 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	ft_arguments(t_parser *tools, int index)
 		}
 		if (index > -1 && str[index] == '$')
 		{
-			index = ft_expander(tools, index, &str);
+			index = ft_expander(tools, index, &str, OUT_QUOTE);
 		}
 		if (index > -1 && (str[index] == ' ' || str[index] == '\t'))
 			break ;

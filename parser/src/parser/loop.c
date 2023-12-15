@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:20:40 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/12/14 01:49:25 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/12/15 15:07:27 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	tokenizer(t_parser *tools)
 			ft_lstadd_back(&tools->tokenlst, node);
 		}
 		if ((*tools).quote)
-			(*node).quote = 1;
+			(*node).quote = (*tools).quote;
 	}
 	free(tools->input);
 }

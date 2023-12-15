@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 09:25:43 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/12/12 18:48:23 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/12/15 14:56:36 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,12 @@ char	*ft_get_env(char *str, int index);
 char	*ft_createpid(char *str, int index);
 void	ft_free_tr(t_truncate *tr);
 int		ft_tr_status(t_parser *tools, int index);
-int		ft_tr_env(t_parser *tools, int index);
-int		ft_three_str(t_truncate *tr, t_parser *tools);
+int		ft_tr_env(t_parser *tools, int index, int state);
+int		ft_three_str(t_truncate *tr, t_parser *tools, int state);
 /* expander.c */
 int		ft_getpid(t_parser *tools, int index);
-int		ft_expand_env(t_parser *tools, int index);
-int		ft_expander(t_parser *tools, int index, char **str_iter);
+int		ft_expand_env(t_parser *tools, int index, int state);
+int		ft_expander(t_parser *tools, int index, char **str_iter, int state);
 int		ft_getstatus(t_parser *tools, int index);
 /* inquote.c */
 int		ft_in_quote(t_parser *tools, int index);

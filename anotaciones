@@ -1,4 +1,0 @@
-Erick	 ¿ARREGLADO? echo $PWD$HHH$HOME ($HHH no existe, deberia deshecharlo y volver con home)
-
-Nacho
-		echo $()

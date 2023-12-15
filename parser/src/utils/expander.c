@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:37:30 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/12/04 17:25:30 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/12/15 14:55:47 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 *	Retorna -1 en caso de error
 */
-int	ft_expander(t_parser *tools, int index, char **str_iter)
+int	ft_expander(t_parser *tools, int index, char **str_iter, int state)
 {
 	char	*str;
 
@@ -28,7 +28,7 @@ int	ft_expander(t_parser *tools, int index, char **str_iter)
 		else if (str[index + 1] == '?')
 			index = ft_getstatus(tools, index);
 		else if (ft_isalnum(str[index + 1]) || str[index + 1] == '_')
-			index = ft_expand_env(tools, index);
+			index = ft_expand_env(tools, index, state);
 		else
 			index++;
 	}
@@ -83,11 +83,11 @@ int	ft_getpid(t_parser *tools, int index)
 /*
 *	Retorna -1 en caso de error
 */
-int	ft_expand_env(t_parser *tools, int index)
+int	ft_expand_env(t_parser *tools, int index, int state)
 {
 	int	i_env;
 
-	i_env = ft_tr_env(tools, index);
+	i_env = ft_tr_env(tools, index, state);
 	if (i_env == -1)
 	{
 		free(tools->input);

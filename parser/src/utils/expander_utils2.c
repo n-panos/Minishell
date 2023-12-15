@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 17:45:59 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/12/15 12:29:27 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/12/15 16:23:36 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,31 +94,15 @@ char	*get_env(char *env, t_parser *tools, int *v2)
 	return (result);
 }
 
-int	ft_three_str(t_truncate *tr, t_parser *tools)
+int	ft_three_str(t_truncate *tr, t_parser *tools, int state)
 {
 	int		sum;
-	char	**split;
 
-	split = ft_split(tr->var2, ' ');
-	if (split == NULL)
-		return (-1);
-	if (split[1] != NULL)
-	{
-		free(tr->var2);
-		tr->var2 = ft_expand_multi(split);
-		tools->not_increment = -1;
-		if (tr->var2 == NULL)
-			return (-1);
-		sum = ft_strlen(split[0]) + 1;
-		ft_free_split(split);
-		(*tools).quote = 1;
-	}
-	else
-	{
-		ft_free_split(split);
-		sum = ft_strlen(tr->var2) - 1;
-	}
+	sum = ft_strlen(tr->var2) - 1;
 	tr->tmp = ft_strjoin(tr->str1, tr->var2);
 	tr->result = ft_strjoin(tr->tmp, tr->str2);
+	free(tr->var2);
+	tr->var2 = NULL;
+	(*tools).quote = state;
 	return (sum);
 }

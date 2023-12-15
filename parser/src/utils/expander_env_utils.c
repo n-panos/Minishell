@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_env_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:46:09 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/12/15 13:26:57 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/12/15 15:52:03 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ char	*ft_expand_multi(char **split)
 		return (NULL);
 	cmd = ft_strfjoin(cmd, other);
 	free(other);
-	
 	if (cmd == NULL)
 		return (NULL);
 	return (cmd);

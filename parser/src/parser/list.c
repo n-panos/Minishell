@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 11:41:57 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/12/15 12:53:01 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/12/15 16:28:35 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,45 @@ static t_tokens	*ft_create(t_parser *tools)
 	return (list);
 }
 
+void	ft_token_tokenizer(t_tokens **current)
+{
+	t_tokens	*current_ptr;
+	t_tokens	*next;
+	t_tokens	*prev;
+	char		**split;
+	int			i;
+
+	i = -1;
+	current_ptr = *current;
+	next = current_ptr->next;
+	split = ft_split(current_ptr->value, ' ');
+	if (split[1] == NULL)
+	{
+		while (split[++i])
+			free(split[i]);
+		free(split);
+		return ;
+	}
+	free(current_ptr->value);
+	current_ptr->value = ft_strdup(split[++i]);
+	prev = current_ptr;
+	current_ptr = current_ptr->next;
+	while (split[++i])
+	{
+		current_ptr = ft_new_token(ft_strdup(split[i]));
+		current_ptr->prev = prev;
+		prev->next = current_ptr;
+		current_ptr->type = ARGUMENT;
+		prev = current_ptr;
+		current_ptr = current_ptr->next;
+	}
+	current_ptr = next;
+	i = -1;
+	while (split[++i])
+		free(split[i]);
+	free(split);
+}
+
 void	check_quotes(t_tokens **lst)
 {
 	t_tokens	*current;
@@ -72,12 +111,8 @@ void	check_quotes(t_tokens **lst)
 	current = *lst;
 	while (current)
 	{
-		if (current->quote)
-		{
-			current->value = ft_del_quote(&current->value, 0);
-			current->value = ft_del_quote(&current->value, \
-			ft_strlen(current->value) - 1);
-		}
+		if (current->quote == OUT_QUOTE)
+			ft_token_tokenizer(&current);
 		current = current->next;
 	}
 }
