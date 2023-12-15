@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_utils.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 12:49:01 by nacho             #+#    #+#             */
-/*   Updated: 2023/12/05 18:40:22 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/15 21:07:21 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	ft_change_env_var(t_mini *mini, char *arg)
 {
 	char	*add;
 
+	if (arg[0] == '_' && arg[1] == '=')
+		ft_env_rm(mini, "_");
 	add = ft_add_to_env(mini->env, arg);
 	ft_mtx_free(mini->env);
 	mini->env = ft_split(add, '\n');

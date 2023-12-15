@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:37:50 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/05 18:31:22 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/15 21:10:22 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ int	ft_unset_invalid(t_mini *mini, char *str)
 		ft_print_err("minishell: unset: `", str, "': not a valid identifier");
 		return (0);
 	}
+	if (str[0] == '_' && str[1] == '\0')
+		return (1);
 	while (str[i])
 	{
 		if (ft_isalnum(str[i]) == 0)
