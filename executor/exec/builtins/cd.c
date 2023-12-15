@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:18:48 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/12 14:38:40 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/15 19:04:37 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	ft_cd_env_var(char **env, char *str, int out_fd)
 			ft_print_err("minishell: cd: OLDPWD not set", NULL, NULL);
 		if (ft_strlen(str) == 4)
 			ft_print_err("minishell: cd: HOME not set", NULL, NULL);
-		return (1);
+		return (-1);
 	}
 	if (ft_strlen(dir) == 1)
 		return (0);
