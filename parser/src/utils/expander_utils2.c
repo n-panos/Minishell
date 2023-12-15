@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 17:45:59 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/29 13:12:11 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/12/15 12:29:27 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ int	ft_three_str(t_truncate *tr, t_parser *tools)
 	{
 		free(tr->var2);
 		tr->var2 = ft_expand_multi(split);
+		tools->not_increment = -1;
 		if (tr->var2 == NULL)
 			return (-1);
 		sum = ft_strlen(split[0]) + 1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_env_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:46:09 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/24 13:04:06 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/15 13:26:57 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char	*other_arg(char **split, char **other)
 	ft_strlcat(*other, split[i++], len);
 	while (split[i])
 	{
+		printf("%s\n", split[i]);
 		ft_strlcat(*other, " ", len);
 		ft_strlcat(*other, split[i++], len);
 	}
@@ -64,6 +65,7 @@ char	*ft_expand_multi(char **split)
 		return (NULL);
 	cmd = ft_strfjoin(cmd, other);
 	free(other);
+	
 	if (cmd == NULL)
 		return (NULL);
 	return (cmd);
