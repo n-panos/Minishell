@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 11:41:57 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/12/15 16:28:35 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/12/15 16:46:03 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	ft_token_tokenizer(t_tokens **current)
 	}
 	free(current_ptr->value);
 	current_ptr->value = ft_strdup(split[++i]);
+	if (current_ptr->prev == NULL || current_ptr->prev->type == PIPE)
+		current_ptr->type = COMMAND;
 	prev = current_ptr;
 	current_ptr = current_ptr->next;
 	while (split[++i])

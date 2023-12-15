@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   typed.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erick <erick@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:56:01 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/11/09 12:00:36 by erick            ###   ########.fr       */
+/*   Updated: 2023/12/15 16:47:11 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ int	ft_is_op(t_tokens *token)
 		else if (token->value[0] == '>')
 			return (REDIRECT_OUTPUT);
 	}
-	else
+	else if (len == 2)
 	{
-		if (token->value[0] == '<')
+		if (token->value[0] == '<' && token->value[1] == '<')
 			return (HEREDOC);
-		else if (token->value[0] == '>')
+		else if (token->value[0] == '>' && token->value[1] == '>')
 			return (REDIRECT_APPEND);
 	}
 	return (0);
