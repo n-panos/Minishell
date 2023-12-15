@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:56:01 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/12/15 16:47:11 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/12/15 17:57:09 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	ft_is_op(t_tokens *token)
 
 int	ft_is_delimiter(t_tokens *token)
 {
-	if (token->prev->type == HEREDOC)
+	if (token->prev && token->prev->type == HEREDOC)
 		return (1);
 	return (0);
 }

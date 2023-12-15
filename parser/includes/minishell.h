@@ -6,7 +6,7 @@
 /*   By: ediaz--c <ediaz--c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:14:28 by ediaz--c          #+#    #+#             */
-/*   Updated: 2023/12/15 14:56:59 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/12/15 18:26:55 by ediaz--c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,8 @@ int			minishell_loop(t_mini *mini, t_parser *tools);
 t_tokens	*create_list(t_parser *tools);
 /* mini.c */
 void		ft_cmd_nmb(t_mini	*mini);
-
+/* list_utils.c */
+void		ft_token_tokenizer(t_tokens **current);
 /* typed.c */
 int			ft_is_command(t_tokens *token);
 int			ft_is_op(t_tokens *token);
