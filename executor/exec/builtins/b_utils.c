@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   b_utils.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 12:49:01 by nacho             #+#    #+#             */
-/*   Updated: 2023/12/15 21:07:21 by nacho            ###   ########.fr       */
+/*   Updated: 2023/12/16 11:08:20 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/eminishell.h"
 
-void	ft_change_env_var(t_mini *mini, char *arg)
+void	ft_change_env_var(t_mini *mini, char *arg, int flag)
 {
 	char	*add;
 
-	if (arg[0] == '_' && arg[1] == '=')
+	if (flag == 1 && mini->env[1])
 		ft_env_rm(mini, "_");
 	add = ft_add_to_env(mini->env, arg);
 	ft_mtx_free(mini->env);
@@ -56,6 +56,9 @@ int	ft_var_exists(char *env, char *add, int flag)
 		return (2);
 	len_env = (ft_search_c(env, '='));
 	len_add = ft_search_c(add, '=');
+	if (add && ft_strncmp(env, add, len_env) == 0 && \
+	len_env != -1 && len_add == -1)
+		return (2);
 	if (len_env == -1)
 		len_env = ft_strlen(env);
 	if (len_add == -1)

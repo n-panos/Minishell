@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediaz--c <ediaz--c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:20:35 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/05 19:06:23 by ediaz--c         ###   ########.fr       */
+/*   Updated: 2023/12/16 10:34:00 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	ft_env_args(t_exec *exec, t_mini *mini)
 		i++;
 	}
 	aux = ft_strjoin("_=", exec->path);
-	ft_change_env_var(mini, aux);
+	ft_change_env_var(mini, aux, 0);
 	free(aux);
 	return (0);
 }

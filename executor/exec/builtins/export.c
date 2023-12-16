@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:50:28 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/15 13:00:25 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/16 11:23:48 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	ft_export_more_args(t_mini *mini, char *arg)
 		}
 		i++;
 	}
-	ft_change_env_var(mini, arg);
+	ft_change_env_var(mini, arg, 0);
 	return (0);
 }
 
@@ -77,7 +77,9 @@ int	ft_print_export(t_mini *mini, int out_fd)
 		return (-1);
 	used[0] = '\0';
 	str_exp = ft_strdup("");
-	if (mini->env[1])
+	if (mini->env[1] && !mini->env[2])
+		str_exp = ft_str_construct(0, mini->env, str_exp);
+	else if (mini->env[1])
 		str_exp = ft_orden(mini->env, 0, str_exp, used);
 	ft_putstr_fd(str_exp, out_fd);
 	free(str_exp);

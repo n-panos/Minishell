@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:37:22 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/12 14:25:55 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/16 10:33:11 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_exec
 
 //			UTILS
 
-void		ft_change_env_var(t_mini *mini, char *arg);
+void		ft_change_env_var(t_mini *mini, char *arg, int flag);
 char		*ft_add_to_env(char **env, char *add);
 int			ft_var_exists(char *env, char *add, int flag);
 int			ft_search_c(char *str, char c);

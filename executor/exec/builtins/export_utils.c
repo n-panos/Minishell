@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:35:34 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/15 12:53:15 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/16 10:46:26 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_str_construct(int ref, char **env, char *str_exp)
 	char	*aux;
 	char	**comillas;
 
-	if (ft_strncmp(env[ref], "_=/", 3) == 0)
+	if (ft_strncmp(env[ref], "_=", 2) == 0)
 		return (str_exp);
 	comillas = ft_split(env[ref], '=');
 	aux = ft_strfjoin(str_exp, "declare -x ");

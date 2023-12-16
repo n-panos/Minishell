@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 09:18:48 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/15 19:04:37 by nacho            ###   ########.fr       */
+/*   Updated: 2023/12/16 10:33:51 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,10 @@ void	ft_change_old_pwd(t_mini *mini, char *prev_dir)
 	char	str[FILENAME_MAX];
 
 	aux = ft_strjoin("OLDPWD=", prev_dir);
-	ft_change_env_var(mini, aux);
+	ft_change_env_var(mini, aux, 0);
 	free(aux);
 	getcwd(str, sizeof(str));
 	aux = ft_strjoin("PWD=", str);
-	ft_change_env_var(mini, aux);
+	ft_change_env_var(mini, aux, 0);
 	free(aux);
 }
