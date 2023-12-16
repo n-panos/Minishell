@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 12:49:01 by nacho             #+#    #+#             */
-/*   Updated: 2023/12/16 11:08:20 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/16 12:14:52 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@ void	ft_change_env_var(t_mini *mini, char *arg, int flag)
 {
 	char	*add;
 
-	if (flag == 1 && mini->env[1])
-		ft_env_rm(mini, "_");
-	add = ft_add_to_env(mini->env, arg);
-	ft_mtx_free(mini->env);
-	mini->env = ft_split(add, '\n');
-	free(add);
+	if (mini->env[0])
+	{
+		if (flag == 1 && mini->env[1])
+			ft_env_rm(mini, "_");
+		add = ft_add_to_env(mini->env, arg);
+		ft_mtx_free(mini->env);
+		mini->env = ft_split(add, '\n');
+		free(add);
+	}
 }
 
 char	*ft_add_to_env(char **env, char *add)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:37:50 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/15 21:10:22 by nacho            ###   ########.fr       */
+/*   Updated: 2023/12/16 11:45:15 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	ft_env_delete(t_mini *mini, int erase)
 	{
 		if (i != erase)
 			aux = ft_join_n(aux, mini->env[i], "\n");
+		if (i == erase && ft_strncmp(mini->env[i], "_=", 2) == 0)
+			aux = ft_join_n(aux, "_", "\n");
 		++i;
 	}
 	ft_mtx_free(mini->env);
