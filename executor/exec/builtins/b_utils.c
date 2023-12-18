@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 12:49:01 by nacho             #+#    #+#             */
-/*   Updated: 2023/12/16 12:14:52 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/18 10:36:46 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	ft_var_exists(char *env, char *add, int flag)
 	len_env = (ft_search_c(env, '='));
 	len_add = ft_search_c(add, '=');
 	if (add && ft_strncmp(env, add, len_env) == 0 && \
-	len_env != -1 && len_add == -1)
+	len_env != -1 && len_add == -1 && len_env == (int)ft_strlen(add))
 		return (2);
 	if (len_env == -1)
 		len_env = ft_strlen(env);
